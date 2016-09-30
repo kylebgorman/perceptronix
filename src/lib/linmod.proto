@@ -1,0 +1,76 @@
+// Copyright (c) 2015 Kyle Gorman
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to
+// permit persons to whom the Software is furnished to do so, subject to
+// the following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+// SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+// linmod.proto: Protocol buffer definitions for linear models.
+//
+// As elsewhere in the library, for multinomial models the outer key is a
+// feature and the inner key is a label. So, e.g., the PB message called
+// SparseDenseMultinomialPerceptron has sparse features and dense labels.
+
+syntax = "proto2";
+
+package perceptronix;
+
+// Binomial models.
+
+// Dense in features (rare).
+message DenseBinomialPerceptron_pb {
+  optional string metadata = 1 [default = ""];
+  repeated float table = 2;
+}
+
+// Sparse in features (common).
+message SparseBinomialPerceptron_pb {
+  optional string metadata = 1 [default = ""];
+  map<string, float> table = 2;
+}
+
+// Multinomial models.
+
+message DenseInnerTable_pb {
+  repeated float table = 1;
+}
+
+message SparseInnerTable_pb {
+  map<string, float> table = 1;
+}
+
+// Dense in both features and labels (rare).
+message DenseMultinomialPerceptron_pb {
+  optional string metadata = 1 [default = ""];
+  required uint32 inner_size = 2;
+  repeated DenseInnerTable_pb table = 3;
+}
+
+// Sparse in both features and labels (common).
+message SparseMultinomialPerceptron_pb {
+  optional string metadata = 1 [default = ""];
+  required uint32 inner_size = 2;
+  map<string, SparseInnerTable_pb> table = 3;
+}
+
+// Sparse in features, dense in labels (very common).
+
+message SparseDenseMultinomialPerceptron_pb {
+  optional string metadata = 1 [default = ""];
+  required uint32 inner_size = 2;
+  map<string, DenseInnerTable_pb> table = 3;
+}
