@@ -47,7 +47,7 @@ class BinomialPerceptronBaseTpl {
   using Feature = typename Table::Feature;
   using FeatureBundle = std::vector<Feature>;
 
-  explicit BinomialPerceptronBaseTpl(uint64_t nfeats) : table_(nfeats) {
+  explicit BinomialPerceptronBaseTpl(size_t nfeats) : table_(nfeats) {
     assert(nfeats > 0);
   }
 
@@ -90,7 +90,7 @@ class BinomialAveragedPerceptronTpl
 
   friend class BinomialPerceptronBaseTpl<InnerTableTpl, Weight>;
 
-  explicit BinomialAveragedPerceptronTpl(uint64_t nfeats,
+  explicit BinomialAveragedPerceptronTpl(size_t nfeats,
                                          Weight::WeightType alpha = 1.)
       : Base(nfeats), alpha_(alpha), time_(0) {}
 
@@ -142,7 +142,7 @@ class BinomialPerceptronTpl
 
   using Base::table_;
 
-  explicit BinomialPerceptronTpl(uint64_t nfeats, uint64_t nlabels)
+  explicit BinomialPerceptronTpl(size_t nfeats, size_t nlabels)
       : Base(nfeats, nlabels) {}
 
   explicit BinomialPerceptronTpl(
@@ -171,7 +171,7 @@ class BinomialPerceptronTpl
   }
 
  private:
-  explicit BinomialPerceptronTpl(uint64_t nfeats) : Base(nfeats) {}
+  explicit BinomialPerceptronTpl(size_t nfeats) : Base(nfeats) {}
 };
 
 // Specializes the classifiers to use an array.

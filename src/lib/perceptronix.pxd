@@ -1,8 +1,6 @@
 """Cython header file for perceptronix C++ symbols."""
 
 
-from libc.stdint cimport int32_t
-
 from libcpp cimport bool
 from libcpp.string cimport string
 from libcpp.vector cimport vector
@@ -12,7 +10,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
   cdef cppclass DenseBinomialAveragedPerceptron:
 
-    DenseBinomialAveragedPerceptron(int32_t, float)
+    DenseBinomialAveragedPerceptron(size_t, float)
 
     bool Predict(vector[size_t] &)
 
@@ -21,7 +19,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
   cdef cppclass DenseBinomialPerceptron:
 
-    DenseBinomialPerceptron(int32_t, float)
+    DenseBinomialPerceptron(size_t, float)
 
     DenseBinomialPerceptron(DenseBinomialAveragedPerceptron *)
 
@@ -35,7 +33,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
   cdef cppclass SparseBinomialAveragedPerceptron:
 
-    SparseBinomialAveragedPerceptron(int32_t, float)
+    SparseBinomialAveragedPerceptron(size_t, float)
 
     bool Predict(vector[string] &)
 
@@ -44,7 +42,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
   cdef cppclass SparseBinomialPerceptron:
 
-    SparseBinomialPerceptron(int32_t, float)
+    SparseBinomialPerceptron(size_t, float)
 
     SparseBinomialPerceptron(SparseBinomialAveragedPerceptron *)
 
@@ -58,7 +56,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
   cdef cppclass DenseMultinomialAveragedPerceptron:
 
-    DenseMultinomialAveragedPerceptron(int32_t, int32_t, float)
+    DenseMultinomialAveragedPerceptron(size_t, size_t, float)
 
     size_t Predict(vector[size_t])
 
@@ -67,7 +65,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
   cdef cppclass DenseMultinomialPerceptron:
 
-    DenseMultinomialPerceptron(int32_t, int32_t, float)
+    DenseMultinomialPerceptron(size_t, size_t, float)
 
     DenseMultinomialPerceptron(DenseMultinomialAveragedPerceptron *)
 
@@ -81,7 +79,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
   cdef cppclass SparseDenseMultinomialAveragedPerceptron:
 
-    SparseDenseMultinomialAveragedPerceptron(int32_t, int32_t, float)
+    SparseDenseMultinomialAveragedPerceptron(size_t, size_t, float)
 
     size_t Predict(vector[string])
 
@@ -90,7 +88,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
   cdef cppclass SparseDenseMultinomialPerceptron:
 
-    SparseDenseMultinomialPerceptron(int32_t, int32_t, float)
+    SparseDenseMultinomialPerceptron(size_t, size_t, float)
 
     SparseDenseMultinomialPerceptron(SparseDenseMultinomialAveragedPerceptron *)
 
@@ -104,7 +102,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
   cdef cppclass SparseMultinomialAveragedPerceptron:
 
-    SparseMultinomialAveragedPerceptron(int32_t, int32_t, float)
+    SparseMultinomialAveragedPerceptron(size_t, size_t, float)
 
     string Predict(vector[string])
 
@@ -113,7 +111,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
   cdef cppclass SparseMultinomialPerceptron:
 
-    SparseMultinomialPerceptron(int32_t, int32_t, float)
+    SparseMultinomialPerceptron(size_t, size_t, float)
 
     SparseMultinomialPerceptron(SparseMultinomialAveragedPerceptron *)
 

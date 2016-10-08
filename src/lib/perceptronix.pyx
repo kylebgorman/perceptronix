@@ -13,8 +13,8 @@ of the unaveraged class), disabling further training and freeing the
 averaged model's memory.
 """
 
-
 from libcpp.memory cimport unique_ptr
+from libcpp.string cimport string
 
 
 # Helper for converting strings.
@@ -24,7 +24,7 @@ cdef string tobytes(data) except *:
   if isinstance(data, bytes):
     return data
   try:
-    return data.encode("UTF-8")
+    return data.encode("utf8")
   except Exception:
     raise ValueError("Cannot encode {!r} as a bytestring".format(data))
 
@@ -70,7 +70,7 @@ cdef class DenseBinomialClassifier(object):
   cdef unique_ptr[DenseBinomialAveragedPerceptron] _amodel
   cdef unique_ptr[DenseBinomialPerceptron] _model
 
-  def __init__(self, int32_t nfeats, float alpha=1.):
+  def __init__(self, size_t nfeats, float alpha=1.):
     self._amodel.reset(new DenseBinomialAveragedPerceptron(nfeats, alpha))
 
   def __repr__(self):
@@ -178,7 +178,7 @@ cdef class DenseBinomialClassifier(object):
       raise PerceptronixOperationError("Model already averaged")
     return self._amodel.get().Train(fb, label)
 
-  cpdef bool predict(self, features) except *:
+  cpdef bool predict(self, features):
     """
     predict(features)
 
@@ -187,6 +187,9 @@ cdef class DenseBinomialClassifier(object):
     Args:
       features: An iterable of non-negative integer feature values for the
           observation.
+
+    Returns:
+       Boolean prediction.
     """
     cdef vector[size_t] fb = features
     if self._averaged():
@@ -215,7 +218,7 @@ cdef class SparseBinomialClassifier(object):
   cdef unique_ptr[SparseBinomialAveragedPerceptron] _amodel
   cdef unique_ptr[SparseBinomialPerceptron] _model
 
-  def __init__(self, int32_t nlabels, float alpha=1.):
+  def __init__(self, size_t nlabels, float alpha=1.):
     self._amodel.reset(new SparseBinomialAveragedPerceptron(nlabels, alpha))
 
   def __repr__(self):
@@ -317,7 +320,7 @@ cdef class SparseBinomialClassifier(object):
       raise PerceptronixOperationError("Model already averaged")
     return self._amodel.get().Train(fb, label)
 
-  cpdef bool predict(self, features) except *:
+  cpdef bool predict(self, features):
     """
     predict(features)
 
@@ -325,6 +328,9 @@ cdef class SparseBinomialClassifier(object):
 
     Args:
       features: An iterable of string feature values for the observation.
+
+    Returns:
+       Boolean prediction.
     """
     cdef vector[string] fb = [tobytes(feat) for feat in features]
     if self._averaged():
@@ -354,7 +360,7 @@ cdef class DenseMultinomialClassifier(object):
   cdef unique_ptr[DenseMultinomialAveragedPerceptron] _amodel
   cdef unique_ptr[DenseMultinomialPerceptron] _model
 
-  def __init__(self, int32_t nlabels, int32_t nfeats, float alpha=1.):
+  def __init__(self, size_t nlabels, size_t nfeats, float alpha=1.):
     self._amodel.reset(new DenseMultinomialAveragedPerceptron(nlabels, nfeats,
                                                               alpha))
 
@@ -464,7 +470,7 @@ cdef class DenseMultinomialClassifier(object):
       raise PerceptronixOperationError("Model already averaged")
     return self._amodel.get().Train(fb, label)
 
-  cpdef size_t predict(self, features) except *:
+  cpdef size_t predict(self, features):
     """
     predict(features)
 
@@ -473,6 +479,9 @@ cdef class DenseMultinomialClassifier(object):
     Args:
       features: An iterable of non-negative integer feature values for the
           observation.
+
+    Returns:
+       Non-negative integer prediction.
     """
     cdef vector[size_t] fb = features
     if self._averaged():
@@ -508,7 +517,7 @@ cdef class SparseDenseMultinomialClassifier(object):
   cdef unique_ptr[SparseDenseMultinomialAveragedPerceptron] _amodel
   cdef unique_ptr[SparseDenseMultinomialPerceptron] _model
 
-  def __init__(self, int32_t nlabels, int32_t nfeats, float alpha=1.):
+  def __init__(self, size_t nlabels, size_t nfeats, float alpha=1.):
     self._amodel.reset(new SparseDenseMultinomialAveragedPerceptron(nlabels,
                                                                     nfeats,
                                                                     alpha))
@@ -604,7 +613,7 @@ cdef class SparseDenseMultinomialClassifier(object):
 
     Args:
       features: An iterable of string feature values for the observation.
-      label: The string label for the observation.
+      label: The non-negative integer label for the observation.
 
     Returns:
       A boolean indicating whether the instance as already correctly labeled;
@@ -618,7 +627,19 @@ cdef class SparseDenseMultinomialClassifier(object):
       raise PerceptronixOperationError("Model already averaged")
     return self._amodel.get().Train(fb, label)
 
-  cpdef size_t predict(self, features) except *:
+  cpdef size_t predict(self, features):
+    """
+    predict(features)
+
+    Predicts the label for a feature bundle.
+
+    Args:
+      features: An iterable of non-negative integer features values for the
+          observation.
+
+    Returns:
+       Non-negative integer prediction.
+    """
     cdef vector[string] fb = [tobytes(feat) for feat in features]
     if self._averaged():
       return self._model.get().Predict(fb)
@@ -648,7 +669,7 @@ cdef class SparseMultinomialClassifier(object):
   cdef unique_ptr[SparseMultinomialAveragedPerceptron] _amodel
   cdef unique_ptr[SparseMultinomialPerceptron] _model
 
-  def __init__(self, int32_t nlabels, int32_t nfeats, float alpha=1.):
+  def __init__(self, size_t nlabels, size_t nfeats, float alpha=1.):
     self._amodel.reset(new SparseMultinomialAveragedPerceptron(nlabels, nfeats,
                                                                alpha))
 
@@ -731,7 +752,7 @@ cdef class SparseMultinomialClassifier(object):
     if not self._model.get().Write(tobytes(filename)):
       raise PerceptronixIOError("Write failed: {}".format(filename))
 
-  cpdef bool train(self, features, string label) except *:
+  cpdef bool train(self, features, label) except *:
     """
     train(features, label)
 
@@ -754,9 +775,20 @@ cdef class SparseMultinomialClassifier(object):
     cdef vector[string] fb = [tobytes(feat) for feat in features]
     if self._averaged():
       raise PerceptronixOperationError("Model already averaged")
-    return self._amodel.get().Train(fb, label)
+    return self._amodel.get().Train(fb, tobytes(label))
 
-  cpdef string predict(self, features) except *:
+  cpdef string predict(self, features):
+    """
+    predict(features)
+
+    Predicts the label for a feature bundle.
+
+    Args:
+      features: An iterable of string feature values for the observation.
+
+    Returns:
+       String prediction.
+    """
     cdef vector[string] fb = [tobytes(feat) for feat in features]
     if self._averaged():
       return self._model.get().Predict(fb)

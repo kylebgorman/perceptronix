@@ -11,7 +11,8 @@ extension = Extension("perceptronix",
                                "multinomial_perceptron.cc"],
                       libraries=["protobuf"],
                       language="c++",
-                      extra_compile_args=["-std=c++11"])
+                      extra_compile_args=["-std=c++11",
+                                          "-Wno-sign-compare"])
 
 setup(name="Perceptronix",
       version="0.1",

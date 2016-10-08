@@ -5,8 +5,9 @@ This directory contains sample applications of linear models to NLP problems. Al
 
 Included or planned applications include:
 
+* POS tagger: `pos_tagger`
 * Sentence tokenizer: `sentence_tokenizer`
 * Truecaser: `truecaser`
 * Word tokenizer: `word_tokenizer`
 
-As of 2016-09-17 only the sentence tokenizer is fully functional.
+As of 2016-10-08 only the first two are fully functional.

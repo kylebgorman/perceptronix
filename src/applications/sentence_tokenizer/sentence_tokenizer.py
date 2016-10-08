@@ -19,23 +19,20 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 import collections
 import unicodedata
 
 import regex
 import perceptronix
 
-# Default encoding and normalization scheme.
-ENCODING = "utf-8"
-NORMALIZATION = "NFC"
-NEWLINE = regex.compile(b"[\n\r]")  # That'll do for now.
 
-# How far we look to the left of the boundary when trying to match the
-# left context regex.
-LEFT_LIMIT = 32
+# Default normalization scheme.
+NORMALIZATION = "NFC"
+NEWLINE = regex.compile("[\n\r]")  # That'll do for now.
 
 # Bias feature string.
-BIAS = b"*bias*"
+BIAS = "*bias*"
 
 
 # For other (more important) defaults, see __main__.py in this directory.
@@ -56,15 +53,19 @@ class SentenceTokenizer(object):
 
   @classmethod
   def read(cls, filename, candidate_regex, max_context):
-    """Reads sentence tokenizer model from serialize model file."""
+    """Reads sentence tokenizer model from serialized model file."""
     result = cls.__new__(cls)
     result._candidate_regex = regex.compile(candidate_regex)
     result._max_context = max_context
     result._classifier = perceptronix.SparseBinomialClassifier.read(filename)
     return result
 
+  @staticmethod
+  def _normalize(string):
+    return unicodedata.normalize(NORMALIZATION, string)
+
   def candidates(self, text):
-    """Generates candidate sentence boundary string tuples."""
+    """Generates candidate sentence boundary string tuples from string."""
     for match in self._candidate_regex.finditer(text, overlapped=True):
       (left, boundary, right) = match.groups()
       left_index = match.span()[0] + len(left) + 1
@@ -72,26 +73,28 @@ class SentenceTokenizer(object):
       left_bound = min(len(left), self._max_context)
       right_bound = min(len(right), self._max_context)
       yield Candidate(left_index, right_index,
-                      SentenceTokenizer.tobytes(left)[-left_bound:],
-                      SentenceTokenizer.tobytes(boundary),
-                      SentenceTokenizer.tobytes(right)[:right_bound])
+                      SentenceTokenizer._normalize(left)[-left_bound:],
+                      SentenceTokenizer._normalize(boundary),
+                      SentenceTokenizer._normalize(right)[:right_bound])
 
-  @staticmethod
-  def tobytes(string):
-    return unicodedata.normalize(NORMALIZATION, string).encode(ENCODING)
+  def candidates_from_file(self, filename):
+    """Generates candidate sentence boundary string tuples from file."""
+    with open(filename, "r") as source:
+      text = source.read()
+    return self.candidates(text)
 
   @staticmethod
   def extract_features(candidate):
     """Generates feature vector for a candidate."""
     yield BIAS
     # All suffixes of the left context.
-    lpieces = tuple(b"L=" + candidate.left[-i:]
-                    for i in range(1, 1 + len(candidate.left)))
+    lpieces = tuple("L=" + candidate.left[-i:]
+                     for i in range(1, 1 + len(candidate.left)))
     yield from lpieces
-    rpieces = tuple(b"R=" + candidate.right[:i]
+    rpieces = tuple("R=" + candidate.right[:i]
                     for i in range(1, 1 + len(candidate.right)))
     yield from rpieces
-    yield from (lpiece + b"^" + rpiece
+    yield from (lpiece + "^" + rpiece
                 for (lpiece, rpiece) in zip(lpieces, rpieces))
 
   def tokenize(self, text):
@@ -101,7 +104,7 @@ class SentenceTokenizer(object):
       # Passes through any whitespace already present.
       if NEWLINE.match(candidate.boundary):
         continue
-      if self.predict(self.extract_features(candidate)):
+      if self.predict(SentenceTokenizer.extract_features(candidate)):
         yield text[start:candidate.left_index]
         start = candidate.right_index
     yield text[start:].rstrip()

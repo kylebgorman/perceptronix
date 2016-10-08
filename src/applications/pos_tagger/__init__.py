@@ -19,7 +19,7 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-"""Sentence tokenizer using a sparse linear model."""
+"""POS tagger using a sparse linear model."""
 
 
-from .sentence_tokenizer import SentenceTokenizer
+from .pos_tagger import POSTagger

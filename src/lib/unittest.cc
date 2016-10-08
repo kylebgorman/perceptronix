@@ -39,7 +39,7 @@ constexpr size_t F = static_cast<size_t>(DFeat::__SIZE__);
 void TestBinomial() {
   using DenseFeature = DenseBinomialAveragedPerceptron::Feature;
 
-  DenseBinomialAveragedPerceptron dba = DenseBinomialAveragedPerceptron(F);
+  DenseBinomialAveragedPerceptron dba(F);
   dba.Train({static_cast<DenseFeature>(DFeat::GREEN)}, false);
   dba.Train({static_cast<DenseFeature>(DFeat::GREEN)}, true);
   dba.Train({static_cast<DenseFeature>(DFeat::RED)}, false);
@@ -63,7 +63,7 @@ void TestBinomial() {
   assert(dbr->Predict({static_cast<DenseFeature>(DFeat::GREEN),
                        static_cast<DenseFeature>(DFeat::RED)}));
 
-  SparseBinomialAveragedPerceptron sba = SparseBinomialAveragedPerceptron(10);
+  SparseBinomialAveragedPerceptron sba(10);
   sba.Train({"green"}, true);
   sba.Train({"green"}, true);
   sba.Train({"red"}, true);

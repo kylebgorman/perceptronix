@@ -51,7 +51,7 @@ class MultinomialPerceptronBaseTpl {
   using FeatureBundle = std::vector<Feature>;
   using Label = typename Table::Label;
 
-  MultinomialPerceptronBaseTpl(uint64_t nfeats, uint64_t nlabels)
+  MultinomialPerceptronBaseTpl(size_t nfeats, size_t nlabels)
       : table_(nfeats, nlabels) {
     assert(nfeats > 0);
     assert(nlabels > 2);
@@ -102,7 +102,7 @@ class MultinomialAveragedPerceptronTpl
 
   friend class MultinomialPerceptronBaseTpl<OuterTableTpl, Weight>;
 
-  MultinomialAveragedPerceptronTpl(uint64_t nfeats, uint64_t nlabels,
+  MultinomialAveragedPerceptronTpl(size_t nfeats, size_t nlabels,
                                    typename Weight::WeightType alpha = 1.)
       : Base(nfeats, nlabels), alpha_(alpha), time_(0) {}
 
@@ -158,7 +158,7 @@ class MultinomialPerceptronTpl
   using FeatureBundle = typename Base::FeatureBundle;
   using Label = typename Base::Label;
 
-  MultinomialPerceptronTpl(uint64_t nfeats, uint64_t nlabels)
+  MultinomialPerceptronTpl(size_t nfeats, size_t nlabels)
       : Base(nfeats, nlabels) {}
 
   // Constructs model from averaged model.

@@ -51,7 +51,7 @@ class DenseInnerTableTpl {
   // DO NOT USE THIS. It's just to appease std::valarray.
   DenseInnerTableTpl() : table_(0) {}
 
-  explicit DenseInnerTableTpl(uint32_t nfeats) : table_(nfeats) {}
+  explicit DenseInnerTableTpl(size_t nfeats) : table_(nfeats) {}
 
   WeightT &operator[](Feature f) { return table_[f]; }
 
@@ -96,7 +96,7 @@ class SparseInnerTableTpl {
   SparseInnerTableTpl() : table_(0) {}
 
   // Here, this is just a hint for the initial size of the table.
-  explicit SparseInnerTableTpl(uint32_t nfeats) : table_(nfeats) {}
+  explicit SparseInnerTableTpl(size_t nfeats) : table_(nfeats) {}
 
   WeightT &operator[](Feature f) { return table_[f]; }
 
@@ -154,7 +154,7 @@ class DenseOuterTableTpl {
   using Table = std::valarray<InnerTable>;
   using Iterator = decltype(std::begin(Table()));
 
-  explicit DenseOuterTableTpl(uint32_t nfeats, uint32_t nlabels)
+  explicit DenseOuterTableTpl(size_t nfeats, size_t nlabels)
       : table_(InnerTable(nfeats), nlabels), nlabels_(nlabels) {}
 
   InnerTable &operator[](Feature f) { return table_[f]; }
@@ -175,7 +175,7 @@ class DenseOuterTableTpl {
 
  private:
   Table table_;
-  uint32_t nlabels_;
+  size_t nlabels_;
 };
 
 // Outer table using hash table with an inner table using an array.
@@ -191,7 +191,7 @@ class SparseDenseOuterTableTpl {
   using ConstIterator = typename Table::const_iterator;
 
   // Here, nfeats is just a hint for the initial sizes of the hash table.
-  explicit SparseDenseOuterTableTpl(uint32_t nfeats, uint32_t nlabels)
+  explicit SparseDenseOuterTableTpl(size_t nfeats, size_t nlabels)
       : table_(nfeats), nlabels_(nlabels) {}
 
   InnerTable &operator[](Feature f) {
@@ -223,7 +223,7 @@ class SparseDenseOuterTableTpl {
 
  private:
   Table table_;
-  uint32_t nlabels_;
+  size_t nlabels_;
 
   static const InnerTable default_inner_table_;
 };
@@ -247,7 +247,7 @@ class SparseOuterTableTpl {
   using ConstIterator = typename Table::const_iterator;
 
   // Here, these are just hints for the initial sizes of the tables.
-  explicit SparseOuterTableTpl(uint32_t nfeats, uint32_t nlabels)
+  explicit SparseOuterTableTpl(size_t nfeats, size_t nlabels)
       : table_(nfeats), nlabels_(nlabels) {}
 
   InnerTable &operator[](Feature f) {
@@ -279,7 +279,7 @@ class SparseOuterTableTpl {
 
  private:
   Table table_;
-  uint32_t nlabels_;
+  size_t nlabels_;
 
   static const InnerTable default_inner_table_;
 };
