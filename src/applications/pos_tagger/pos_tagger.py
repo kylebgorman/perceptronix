@@ -149,7 +149,7 @@ class POSTagger(object):
       if len(tokens) > 2:
         antepenultimate = tokens[-3]
         ultimate_vector.append("w_i-2=" + antepenultimate)
-        penultimate_vector.append("w_i-1" + antepenultimate)
+        penultimate_vector.append("w_i-1=" + antepenultimate)
     # And we're done!
     return vectors
 
