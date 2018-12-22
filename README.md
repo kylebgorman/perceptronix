@@ -38,8 +38,8 @@ option is to heap-allocate the averaged model, and then free it once the
 unaveraged model is constructed. E.g.:
 
     namespace perceptronix {
-      auto avgmodel = new SparseDenseMultinomialAveragedPerceptron(nfeats,
-                                                                   nlabels);
+      auto *avgmodel = new SparseDenseMultinomialAveragedPerceptron(nfeats,
+                                                                    nlabels);
       // ... training ...
       const SparseDenseMultinomialPerceptron model(avgmodel);
       delete avgmodel;
@@ -84,12 +84,10 @@ Weight averaging is done using a lazy strategy. An averaged weight consists of:
 
 * The true weight (`weight_`), used for inference _during training_, and
   updated using the perceptron learning rule
-* The averaged weight (`aweight_`), which may or may not be "fresh"
+* The summed weight (`summed_weights_`), which may or may not be "fresh"
 * A timestamp (`time_`) indicating when the averaged weight was last updated
 
-An averaged classifier holds the "true" timestamp. The averaged weight is
-"freshened" using a numerically stable online algorithm proposed by Welford
-(1962) and made famous by Knuth (TAOCP 2).
+The averaged classifier also holds a true timestamp.
 
 Tables
 ------
@@ -151,7 +149,7 @@ The library depends on C++11 and protobuf 3.0 or greater. It should compile with
 `g++` or `clang++`. Users will also need the protobuf compilation tool
 `protoc`, which is sometimes distributed separately from protobuf itself.
 
-The Python wrapper and applications are written for Python 3.5. Compiling the
+The Python wrapper and applications are written for Python 3.7. Compiling the
 wrapper requires Cython, and the applications require the `nlup` and `regex`
 Python libraries, both of which are available via pip.
 

@@ -1,4 +1,4 @@
-// Copyright (C) 2015-2016 Kyle Gorman
+// Copyright (C) 2015-2018 Kyle Gorman
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the
@@ -33,10 +33,10 @@ DenseMultinomialPerceptron::MultinomialPerceptronTpl(
     DenseMultinomialAveragedPerceptron *avg)
     : Base(avg->OuterSize(), avg->InnerSize()) {
   const auto time = avg->Time();
-  for (auto i = 0; i < avg->OuterSize(); ++i) {
+  for (size_t i = 0; i < avg->OuterSize(); ++i) {
     auto &ref = table_[i];
     auto &avg_ref = avg->table_[i];
-    for (auto j = 0; j < avg->InnerSize(); ++j) {
+    for (size_t j = 0; j < avg->InnerSize(); ++j) {
       ref[j].Set(avg_ref[j].GetAverage(time));
     }
   }
@@ -47,13 +47,13 @@ DenseMultinomialPerceptron *DenseMultinomialPerceptron::Read(
     std::istream &istrm) {
   DenseMultinomialPerceptron_pb pb;
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
-  const auto outer_size = pb.table_size();
-  const auto inner_size = pb.inner_size();
-  auto model = new DenseMultinomialPerceptron(outer_size, inner_size);
-  for (auto i = 0; i < outer_size; ++i) {
+  const size_t outer_size = pb.table_size();
+  const size_t inner_size = pb.inner_size();
+  auto *model = new DenseMultinomialPerceptron(outer_size, inner_size);
+  for (size_t i = 0; i < outer_size; ++i) {
     auto &inner_table = model->table_[i];
     const auto &inner_table_pb = pb.table(i);
-    for (auto j = 0; j < inner_size; ++j) {
+    for (size_t j = 0; j < inner_size; ++j) {
       inner_table[j].Set(inner_table_pb.table(j));
     }
   }
@@ -84,7 +84,7 @@ SparseDenseMultinomialPerceptron::MultinomialPerceptronTpl(
   const auto time = avg->Time();
   for (auto it = avg->table_.begin(); it != avg->table_.end(); ++it) {
     auto &ref = table_[it->first];
-    for (auto j = 0; j < InnerSize(); ++j) {
+    for (size_t j = 0; j < InnerSize(); ++j) {
       ref[j].Set(it->second[j].GetAverage(time));
     }
   }
@@ -95,14 +95,14 @@ SparseDenseMultinomialPerceptron *SparseDenseMultinomialPerceptron::Read(
     std::istream &istrm) {
   SparseDenseMultinomialPerceptron_pb pb;
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
-  const auto inner_size = pb.inner_size();
-  auto model = new SparseDenseMultinomialPerceptron(pb.table_size(),
-                                                    inner_size);
+  const size_t inner_size = pb.inner_size();
+  auto *model = new SparseDenseMultinomialPerceptron(pb.table_size(),
+                                                     inner_size);
   auto outer_table_pb = pb.table();
   for (auto it = outer_table_pb.cbegin(); it != outer_table_pb.cend(); ++it) {
     auto &inner_table = model->table_[it->first];
     const auto &inner_table_pb = outer_table_pb[it->first];
-    for (auto j = 0; j < inner_size; ++j) {
+    for (size_t j = 0; j < inner_size; ++j) {
       inner_table[j].Set(inner_table_pb.table(j));
     }
   }
@@ -115,10 +115,10 @@ bool SparseDenseMultinomialPerceptron::Write(std::ostream &ostrm,
   SparseDenseMultinomialPerceptron_pb pb;
   pb.set_metadata(metadata);
   pb.set_inner_size(InnerSize());
-  auto outer_table_pb = pb.mutable_table();
+  auto *outer_table_pb = pb.mutable_table();
   for (auto it = table_.cbegin(); it != table_.cend(); ++it) {
-    auto inner_table_pb = (*outer_table_pb)[it->first].mutable_table();
-    for (auto j = 0; j < InnerSize(); ++j) {
+    auto *inner_table_pb = (*outer_table_pb)[it->first].mutable_table();
+    for (size_t j = 0; j < InnerSize(); ++j) {
       inner_table_pb->Add(it->second[j].Get());
     }
   }
@@ -131,7 +131,7 @@ template <>
 SparseMultinomialPerceptron::MultinomialPerceptronTpl(
     SparseMultinomialAveragedPerceptron *avg)
     : Base(avg->OuterSize(), avg->InnerSize()) {
-  const auto time = avg->Time();
+  const size_t time = avg->Time();
   for (auto it = avg->table_.begin(); it != avg->table_.end(); ++it) {
     auto &ref = table_[it->first];
     for (auto iit = it->second.begin(); iit != it->second.end(); ++iit) {
@@ -148,8 +148,8 @@ SparseMultinomialPerceptron *SparseMultinomialPerceptron::Read(
     std::istream &istrm) {
   SparseMultinomialPerceptron_pb pb;
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
-  auto model = new SparseMultinomialPerceptron(pb.table_size(),
-                                               pb.inner_size());
+  auto *model = new SparseMultinomialPerceptron(pb.table_size(),
+                                                pb.inner_size());
   auto outer_table_pb = pb.table();
   for (auto it = outer_table_pb.cbegin(); it != outer_table_pb.cend(); ++it) {
     const auto &feature = it->first;
@@ -169,9 +169,9 @@ bool SparseMultinomialPerceptron::Write(std::ostream &ostrm,
   SparseMultinomialPerceptron_pb pb;
   pb.set_metadata(metadata);
   pb.set_inner_size(InnerSize());
-  auto outer_table_pb = pb.mutable_table();
+  auto *outer_table_pb = pb.mutable_table();
   for (auto it = table_.cbegin(); it != table_.cend(); ++it) {
-    auto inner_table_pb = (*outer_table_pb)[it->first].mutable_table();
+    auto *inner_table_pb = (*outer_table_pb)[it->first].mutable_table();
     for (auto iit = it->second.cbegin(); iit != it->second.cend(); ++iit) {
       const auto &label = iit->first;
       // Ignores the reserved empty string label.

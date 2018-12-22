@@ -1,4 +1,4 @@
-# Copyright (c) 2015-2016 Kyle Gorman <kylebgorman@gmail.com>
+# Copyright (c) 2015-2018 Kyle Gorman <kylebgorman@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the
@@ -22,4 +22,4 @@
 """Sentence tokenizer using a sparse linear model."""
 
 
-from .sentence_tokenizer import SentenceTokenizer
+from .model import SentenceTokenizer

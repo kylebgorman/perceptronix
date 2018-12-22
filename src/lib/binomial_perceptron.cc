@@ -1,4 +1,4 @@
-// Copyright (C) 2015-2016 Kyle Gorman
+// Copyright (C) 2015-2018 Kyle Gorman
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the
@@ -33,8 +33,8 @@ template <>
 DenseBinomialPerceptron::BinomialPerceptronTpl(
     DenseBinomialAveragedPerceptron *avg)
     : Base(avg->Size()) {
-  const auto size = table_.Size();
-  for (auto i = 0; i < size; ++i) {
+  const size_t size = table_.Size();
+  for (size_t i = 0; i < size; ++i) {
     table_[i].Set(avg->table_[i].GetAverage(avg->Time()));
   }
 }
@@ -43,9 +43,9 @@ template <>
 DenseBinomialPerceptron *DenseBinomialPerceptron::Read(std::istream &istrm) {
   DenseBinomialPerceptron_pb pb;
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
-  const auto size = pb.table_size();
-  auto model = new DenseBinomialPerceptron(size);
-  for (auto i = 0; i < size; ++i) model->table_[i].Set(pb.table(i));
+  const int size = pb.table_size();
+  auto *model = new DenseBinomialPerceptron(size);
+  for (int i = 0; i < size; ++i) model->table_[i].Set(pb.table(i));
   return model;
 }
 
@@ -74,7 +74,7 @@ template <>
 SparseBinomialPerceptron *SparseBinomialPerceptron::Read(std::istream &istrm) {
   SparseBinomialPerceptron_pb pb;
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
-  auto model = new SparseBinomialPerceptron(pb.table_size());
+  auto *model = new SparseBinomialPerceptron(pb.table_size());
   auto pb_table = pb.table();
   auto &table = model->table_;
   for (auto it = pb_table.cbegin(); it != pb_table.cend(); ++it) {
@@ -89,7 +89,7 @@ bool SparseBinomialPerceptron::Write(std::ostream &ostrm,
                                      const string &metadata) const {
   SparseBinomialPerceptron_pb pb;
   pb.set_metadata(metadata);
-  auto pb_table = pb.mutable_table();
+  auto *pb_table = pb.mutable_table();
   for (auto it = table_.cbegin(); it != table_.cend(); ++it) {
     (*pb_table)[it->first] = it->second.Get();
   }

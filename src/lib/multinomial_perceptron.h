@@ -1,4 +1,4 @@
-// Copyright (C) 2015-2016 Kyle Gorman
+// Copyright (C) 2015-2018 Kyle Gorman
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the
@@ -73,7 +73,7 @@ class MultinomialPerceptronBaseTpl {
   }
 
   void Score(const FeatureBundle &fb, InnerTable *inner) const {
-    for (auto it = fb.cbegin(); it != fb.cend(); ++it) Score(*it, inner);
+    for (const auto &f: fb) Score(f, inner);
   }
 
   InnerTable *Score(const FeatureBundle &fb) const {
@@ -103,19 +103,18 @@ class MultinomialAveragedPerceptronTpl
   friend class MultinomialPerceptronBaseTpl<OuterTableTpl, Weight>;
 
   MultinomialAveragedPerceptronTpl(size_t nfeats, size_t nlabels,
-                                   typename Weight::WeightType alpha = 1.)
+                                   typename Weight::WeightType alpha = 1)
       : Base(nfeats, nlabels), alpha_(alpha), time_(0) {}
 
   using Base::Predict;
-
   using Base::Score;
 
   // Predicts a single example, updates if it is incorrectly labeled; then
   // updates the timer and returns a boolean indicating success or failure
   // (which callers may safely choose to ignore).
   bool Train(const FeatureBundle &fb, Label y) {
-    Label yhat = Predict(fb);
-    bool success = (yhat == y);
+    const auto yhat = Predict(fb);
+    const bool success = (yhat == y);
     if (!success) Update(fb, y, yhat);
     Tick();
     return success;
@@ -132,8 +131,8 @@ class MultinomialAveragedPerceptronTpl
 
   // 2: Updates many features given correct and incorrect labels.
   void Update(const FeatureBundle &fb, Label y, Label yhat) {
-    for (auto it = fb.cbegin(); it != fb.end(); ++it) {
-      auto &ref = table_[*it];
+    for (const auto &f: fb) {
+      auto &ref = table_[f];
       ref[y].Update(+alpha_, time_);
       ref[yhat].Update(-alpha_, time_);
     }
@@ -158,6 +157,9 @@ class MultinomialPerceptronTpl
   using FeatureBundle = typename Base::FeatureBundle;
   using Label = typename Base::Label;
 
+  using Base::Predict;
+  using Base::Score;
+
   MultinomialPerceptronTpl(size_t nfeats, size_t nlabels)
       : Base(nfeats, nlabels) {}
 
@@ -165,10 +167,6 @@ class MultinomialPerceptronTpl
 
   explicit MultinomialPerceptronTpl(
       MultinomialAveragedPerceptronTpl<OuterTableTpl> *avg);
-
-  using Base::Predict;
-
-  using Base::Score;
 
   // Constructs model by deserializing.
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2016 Kyle Gorman
+// Copyright (c) 2015-2018 Kyle Gorman
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the
@@ -49,7 +49,7 @@ class WeightTpl {
  public:
   using WeightType = T;
 
-  explicit WeightTpl(WeightType weight = 0.) : weight_(weight) {}
+  explicit WeightTpl(WeightType weight = 0) : weight_(weight) {}
 
   WeightType Get() const { return weight_; }
 
@@ -105,10 +105,7 @@ WeightTpl<T> operator/(WeightTpl<T> lhs, WeightTpl<T> rhs) {
   return lhs /= rhs;
 }
 
-// Weight with online mean estimation using Welford's algorithm:
-//
-// B.P. Welford. 1962. Note on a method for calculating corrected sums of
-// squares and products. Technometrics 4(3): 419-420.
+// Weight with a running average.
 //
 // The inherited weight is the one to be used during training, and can be
 // accessed using Get(). GetAverage(time) applies any queued updates, then
@@ -120,9 +117,9 @@ class AveragedWeightTpl : public WeightTpl<T> {
   using WeightType = T;
 
   // Extends the base constructor. All weights are averaged as if they were
-  // initialized at 0 at time 0; time is zero-based and may not be negative.
-  explicit AveragedWeightTpl(WeightType weight = 0., uint64_t time = 0)
-      : WeightTpl<T>(weight), aweight_(0.), time_(time) {
+  // initialized at 0 at time 0.
+  explicit AveragedWeightTpl(WeightType weight = 0, uint64_t time = 0)
+      : WeightTpl<T>(weight), summed_weight_(0), time_(time) {
     Freshen(time);
   }
 
@@ -130,10 +127,8 @@ class AveragedWeightTpl : public WeightTpl<T> {
 
   // Implements the online mean.
   void Freshen(uint64_t time) {
-    while (time_ < time) {
-      aweight_ += (weight_ - aweight_) / (time_ + 1);
-      ++time_;
-    }
+    summed_weight_ += (time - time_) * weight_;
+    time_ = time;
   }
 
   void Update(WeightType tau, uint64_t time) {
@@ -146,11 +141,12 @@ class AveragedWeightTpl : public WeightTpl<T> {
   // instead.
   WeightType GetAverage(uint64_t time) {
     Freshen(time);
-    return aweight_;
+    //return static_cast<WeightType>(weight_ - summed_weight_ / time_);
+    return static_cast<WeightType>(summed_weight_ / time_);
   }
 
  protected:
-  WeightType aweight_;  // The averaged weight.
+  double summed_weight_;
   uint64_t time_;
 };
 

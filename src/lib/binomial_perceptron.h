@@ -1,4 +1,4 @@
-// Copyright (C) 2015-2016 Kyle Gorman
+// Copyright (C) 2015-2018 Kyle Gorman
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the
@@ -54,24 +54,24 @@ class BinomialPerceptronBaseTpl {
   void Score(Feature f, Weight *weight) const { *weight += table_[f]; }
 
   Weight *Score(Feature f) const {
-    auto weight = new Weight();
+    auto *weight = new Weight();
     Score(f, weight);
     return weight;
   }
 
   void Score(const FeatureBundle &fb, Weight *weight) const {
-    for (auto it = fb.cbegin(); it != fb.cend(); ++it) Score(*it, weight);
+    for (const auto &f : fb) Score(f, weight);
   }
 
   Weight *Score(const FeatureBundle &fb) const {
-    auto weight = new Weight();
+    auto *weight = new Weight();
     Score(fb, weight);
     return weight;
   }
 
   bool Predict(const FeatureBundle &fb) const {
     std::unique_ptr<Weight> weight(Score(fb));
-    return weight->Get() > 0.;
+    return weight->Get() > 0;
   }
 
   size_t Size() const { return table_.Size(); }
@@ -88,17 +88,16 @@ class BinomialAveragedPerceptronTpl
   using Feature = typename Base::Feature;
   using FeatureBundle = typename Base::FeatureBundle;
 
+  using Base::Predict;
+  using Base::Score;
+
+  using Base::table_;
+
   friend class BinomialPerceptronBaseTpl<InnerTableTpl, Weight>;
 
   explicit BinomialAveragedPerceptronTpl(size_t nfeats,
                                          Weight::WeightType alpha = 1.)
       : Base(nfeats), alpha_(alpha), time_(0) {}
-
-  using Base::table_;
-
-  using Base::Predict;
-
-  using Base::Score;
 
   // 1: Update a single feature given the correct label.
   void Update(Feature f, bool y) {
@@ -107,9 +106,8 @@ class BinomialAveragedPerceptronTpl
 
   // 2: Updates many features given the correct label.
   void Update(const FeatureBundle &fb, bool y) {
-    auto tau = y ? +alpha_ : -alpha_;
-    for (auto it = fb.cbegin(); it != fb.cend(); ++it)
-      table_[*it].Update(tau, time_);
+    const auto tau = y ? +alpha_ : -alpha_;
+    for (const auto &f : fb) table_[f].Update(tau, time_);
   }
 
   // Predicts a single example,and updates if it is incorrectly labeled,
@@ -140,6 +138,9 @@ class BinomialPerceptronTpl
   using Feature = typename Base::Feature;
   using FeatureBundle = typename Base::FeatureBundle;
 
+  using Base::Predict;
+  using Base::Score;
+
   using Base::table_;
 
   explicit BinomialPerceptronTpl(size_t nfeats, size_t nlabels)
@@ -147,10 +148,6 @@ class BinomialPerceptronTpl
 
   explicit BinomialPerceptronTpl(
       BinomialAveragedPerceptronTpl<InnerTableTpl> *avg);
-
-  using Base::Predict;
-
-  using Base::Score;
 
   // Construct model by deserializing.
 
