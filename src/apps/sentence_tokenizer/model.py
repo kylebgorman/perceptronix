@@ -1,56 +1,39 @@
-# Copyright (c) 2015-2018 Kyle Gorman <kylebgorman@gmail.com>
-#
-# Permission is hereby granted, free of charge, to any person obtaining a
-# copy of this software and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be included
-# in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-# OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-# CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-# TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-# SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+"""Sentence tokenizer model."""
 
 import collections
 
-from typing import Iterator
+from typing import Iterable, Iterator, List, Tuple
 
+import nlup
 import regex
 import perceptronix
 
 
-NEWLINE = regex.compile("\n|\r|\r\n")
+# Constant feature strings.
 
-# Bias feature string.
 BIAS = "*bias*"
 
-
-# For other (more important) defaults, see __main__.py in this directory.
+NEWLINE = regex.compile(r"\n|\r|\r\n")
 
 
 Candidate = collections.namedtuple(
-    "Candidate", ("left_index", "right_index", "left", "boundary", "right")
+    "Candidate", ("left_index", "right_index", "left", "right", "boundary")
 )
 
 
 class SentenceTokenizer(object):
+    """Sentence tokenizer model."""
+
     def __init__(
-        self, candidate_regex: str, max_context: int, *args, **kwargs
+        self,
+        candidate_regex: str,
+        max_context: int,
+        nfeats: int = 0x1000,
+        alpha: float = 1,
     ):
         self._candidate_regex = regex.compile(candidate_regex)
         self._max_context = max_context
-        self._classifier = perceptronix.SparseBinomialClassifier(
-            *args, **kwargs
-        )
+        self._classifier = perceptronix.SparseBinomialClassifier(nfeats, alpha)
 
     @classmethod
     def read(cls, filename: str, candidate_regex: str, max_context: int):
@@ -63,31 +46,31 @@ class SentenceTokenizer(object):
         )
         return result
 
-    def candidates(self, text: str) -> Iterator[Candidate]:
-        """Generates candidate sentence boundary string tuples from string."""
+    # Data readers.
+
+    def candidates(self, text: str) -> Iterator[Tuple[Candidate, bool]]:
         for match in self._candidate_regex.finditer(text, overlapped=True):
             (left, boundary, right) = match.groups()
             left_index = match.span()[0] + len(left)
             right_index = left_index + len(boundary)
-            # We get an extra character on the left because it's likely to have
-            # a '.' or whatever.
-            left_bound = min(len(left), self._max_context + 1)
+            left_bound = min(len(left), self._max_context)
             right_bound = min(len(right), self._max_context)
             yield Candidate(
                 left_index,
                 right_index,
                 left[-left_bound:],
-                boundary,
                 right[:right_bound],
+                bool(NEWLINE.match(boundary)),
             )
 
     def candidates_from_file(self, filename: str) -> Iterator[Candidate]:
-        """Generates candidate sentence boundary string tuples from file."""
         with open(filename, "r") as source:
-            text = source.read()
-        return self.candidates(text)
+            return self.candidates(source.read())
+
+    # Feature extraction
 
     @staticmethod
+    @nlup.listify
     def extract_features(candidate: Candidate) -> Iterator[str]:
         """Generates feature vector for a candidate."""
         yield BIAS
@@ -108,19 +91,28 @@ class SentenceTokenizer(object):
             f"{lpiece}^{rpiece}" for (lpiece, rpiece) in zip(lpieces, rpieces)
         )
 
-    def tokenize(self, text: str) -> Iterator[str]:
-        """Generates segmented strings of text."""
+    # Training and prediction.
+
+    def predict(self, candidate: Candidate) -> bool:
+        return self.predict_vector(self.extract_features(candidate))
+
+    def predict_vector(self, vector: List[str]) -> bool:
+        return self._classifier.predict(vector)
+
+    def apply(self, text: str) -> Iterator[str]:
+        """Tokenize a text."""
         start = 0
         for candidate in self.candidates(text):
-            # Passes through any whitespace already present.
-            if NEWLINE.match(candidate.boundary):
+            # Passes through any newlines already present.
+            if candidate.boundary:
                 continue
-            if self.predict(SentenceTokenizer.extract_features(candidate)):
-                yield text[start : candidate.left_index]
-                start = candidate.right_index
+            if self.predict(candidate):
+                yield text[start : candidate.left_index + 1]
+                start = candidate.right_index + 1
         yield text[start:].rstrip()
 
     # Delegates all attributes not otherwise defined to the underlying
     # classifier.
+
     def __getattr__(self, name):
         return getattr(self._classifier, name)

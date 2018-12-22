@@ -1,52 +1,45 @@
-# Copyright (c) 2015-2018 Kyle Gorman <kylebgorman@gmail.com>
-#
-# Permission is hereby granted, free of charge, to any person obtaining a
-# copy of this software and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be included
-# in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-# OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-# CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-# TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-# SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"""Sentence tokenizer main."""
 
 import argparse
 import logging
 import random
-import regex
+
+from typing import List, Tuple
 
 import nlup
+import regex
 
 from .model import SentenceTokenizer
 
 
-CANDIDATE_REGEX = regex.compile("(?:\s+)(\S+[\.\!\?]['\"]?)(\s+)(\S+)(?:\s+)")
-NEWLINE = regex.compile("[\n\r]")
+CANDIDATE_REGEX = regex.compile(r"(?:\s+)(\S+[\.\!\?]['\"]?)(\s+)(\S+)(?:\s+)")
+
+
+Data = List[Tuple[List[str], bool]]
+
+
+def _read_data(filename: str, model: SentenceTokenizer) -> Data:
+    return [
+        (model.extract_features(candidate), candidate.boundary)
+        for candidate in model.candidates_from_file(args.train)
+    ]
 
 
 argparser = argparse.ArgumentParser(
-    prog="sentence_tokenizer",
-    description="A sentence tokenizer using a linear model",
+    prog="sentence_tokenizer", description="A sentence tokenizer model"
 )
 argparser.add_argument(
     "-v", "--verbose", action="store_true", help="enable verbose output"
 )
 input_group = argparser.add_mutually_exclusive_group(required=True)
-input_group.add_argument("-t", "--train", help="input text training data")
-input_group.add_argument("-r", "--read", help="input serialized model")
+input_group.add_argument("-r", "--read", help="Input serialized model")
+input_group.add_argument("-t", "--train", help="Input text training data")
+argparser.add_argument("-d", "--dev", help="Input development training data")
 output_group = argparser.add_mutually_exclusive_group(required=True)
-output_group.add_argument("-s", "--tokenize", help="output tokenized text")
-output_group.add_argument("-w", "--write", help="output serialized model")
-# Other options.
+output_group.add_argument(
+    "-p", "--predict", help="Output tokenized text from untokenized train_data"
+)
+output_group.add_argument("-w", "--write", help="Output serialized model")
 argparser.add_argument(
     "--candidate_regex",
     default=CANDIDATE_REGEX,
@@ -54,7 +47,7 @@ argparser.add_argument(
 )
 argparser.add_argument(
     "--max_context",
-    default=5,
+    default=8,
     type=int,
     help="Maximum size for context bytestrings",
 )
@@ -62,7 +55,7 @@ argparser.add_argument(
     "--nfeats", type=int, default=0x1000, help="Initial number of features"
 )
 argparser.add_argument(
-    "--epochs", type=int, default=10, help="Number of epochs"
+    "--epochs", type=int, default=5, help="Number of epochs"
 )
 argparser.add_argument("--alpha", type=float, default=1, help="Learning rate")
 argparser.add_argument("--seed", type=int, default=1917, help="Random seed")
@@ -76,44 +69,49 @@ else:
 
 # Input block.
 if args.train:
-    stokenizer = SentenceTokenizer(
+    model = SentenceTokenizer(
         args.candidate_regex, args.max_context, args.nfeats, args.alpha
     )
     logging.info("Training model from %s", args.train)
-    data = [
-        (
-            tuple(stokenizer.extract_features(candidate)),
-            bool(NEWLINE.match(candidate.boundary)),
-        )
-        for candidate in stokenizer.candidates_from_file(args.train)
-    ]
+    train_data = _read_data(args.train, model)
+    dev_data = _read_data(args.dev, model) if args.dev else None
     random.seed(args.seed)
     for epoch in range(1, 1 + args.epochs):
-        random.shuffle(data)
+        random.shuffle(train_data)
         logging.info("Epoch %d...", epoch)
-        correct = 0
+        train_correct = 0
         with nlup.Timer():
-            for (features, label) in data:
-                correct += stokenizer.train(features, label)
-        logging.info("Resubstitution accuracy: %.4f", correct / len(data))
+            for (vector, boundary) in train_data:
+                train_correct += model.train(vector, boundary)
+        logging.info(
+            "Resubstitution accuracy: %.4f", train_correct / len(train_data)
+        )
+        if args.dev:
+            dev_correct = 0
+            for (vector, boundary) in dev_data:
+                if model.predict_vector(vector) == boundary:
+                    dev_correct += 1
+            logging.info(
+                "Development accuracy: %.4f", dev_correct / len(dev_data)
+            )
     logging.info("Averaging model")
-    with nlup.Timer():
-        stokenizer.average()
+    model.average()
+    del train_data
+    del dev_data
 elif args.read:
     logging.info("Reading model from %s", args.read)
-    stokenizer = SentenceTokenizer.read(
+    model = SentenceTokenizer.read(
         args.read, args.candidate_regex, args.max_context
     )
 # Else unreachable.
 
 # Output block.
-if args.tokenize:
-    logging.info("Tokenizing text from %s", args.tokenize)
-    with open(args.tokenize, "r") as source:
-        text = source.read()
-    for line in stokenizer.tokenize(text):
-        print(line)
+if args.predict:
+    logging.info("Tokenizing text from %s", args.predict)
+    with open(args.predict, "r") as source:
+        for line in model.apply(source.read()):
+            print(line)
 elif args.write:
     logging.info("Writing model to %s", args.write)
-    stokenizer.write(args.write)
+    model.write(args.write)
 # Else unreachable.
