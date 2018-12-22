@@ -1,23 +1,4 @@
-# Copyright (c) 2015-2018 Kyle Gorman <kylebgorman@gmail.com>
-#
-# Permission is hereby granted, free of charge, to any person obtaining a
-# copy of this software and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be included
-# in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-# OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-# CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-# TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-# SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"""POS tagger model."""
 
 from typing import Iterator, List, Tuple
 
@@ -25,20 +6,34 @@ import perceptronix
 
 
 # Constant feature string.
+
 BIAS = "*bias*"
+
 INITIAL = "*initial*"
 PENINITIAL = "*peninitial*"
 PENULTIMATE = "*penultimate*"
 ULTIMATE = "*ultimate*"
 
+HYPHEN = "*hyphen*"
+NUMBER = "*number*"
+UPPERCASE = "*uppercase*"
 
-# For other (more important) defaults, see __main__.py in this directory.
+# Types.
+
+Tokens = List[str]
+Tags = List[str]
+Vector = List[str]
+Vectors = List[Vector]
 
 
 class POSTagger(object):
-    def __init__(self, *args, **kwargs):
+    """Part-of-speech tagger model."""
+
+    def __init__(
+        self, nfeats: int = 0x1000, nlabels: int = 32, alpha: float = 1
+    ):
         self._classifier = perceptronix.SparseMultinomialClassifier(
-            *args, **kwargs
+            nfeats, nlabels, alpha
         )
 
     @classmethod
@@ -50,9 +45,11 @@ class POSTagger(object):
         )
         return result
 
+    # Data readers.
+
     @staticmethod
-    def untagged_sentences_from_file(filename: str) -> Iterator[List[str]]:
-        tokens: List[str] = []
+    def sentences_from_file(filename: str) -> Iterator[Tokens]:
+        tokens: Tokens = []
         with open(filename, "r") as source:
             for line in source:
                 line = line.strip()
@@ -67,16 +64,16 @@ class POSTagger(object):
     @staticmethod
     def tagged_sentences_from_file(
         filename: str
-    ) -> Iterator[Tuple[List[str], List[str]]]:
-        tokens: List[str] = []
-        tags: List[str] = []
+    ) -> Iterator[Tuple[Tokens, Tags]]:
+        tokens: Tokens = []
+        tags: Tags = []
         with open(filename, "r") as source:
             for line in source:
                 line = line.strip()
-                if (not line) and tokens:
-                    yield (tokens, tags)
-                    tokens = []
-                    tags = []
+                if (not line) and tokens and tags:
+                    yield (tokens.copy(), tags.copy())
+                    tokens.clear()
+                    tags.clear()
                 else:
                     (token, tag) = line.split("\t", 1)
                     tokens.append(token)
@@ -84,17 +81,25 @@ class POSTagger(object):
         if tokens:
             yield (tokens, tags)
 
-    @staticmethod
-    def _affix_features(token: str) -> Iterator[str]:
-        if len(token) >= 6:
-            yield f"pre_i={token[:3]}"
-            yield f"suf_i={token[-3:]}"
+    # Feature extraction.
 
     @staticmethod
-    def extract_emission_features(tokens: List[str]) -> List[List[str]]:
+    def _shape_features(token: str) -> Iterator[str]:
+        if len(token) > 4:  # TODO(kbg): Tune this.
+            for i in range(1, 1 + 4):
+                yield f"pre({i})={token[:i]}"
+                yield f"suf({i})={token[-i:]}"
+        if "-" in token:
+            yield HYPHEN
+        if any(ch.isdigit() for ch in token):
+            yield NUMBER
+        if any(ch.isupper() for ch in token):
+            yield UPPERCASE
+
+    @staticmethod
+    def extract_emission_features(tokens: Tokens) -> List[Vector]:
         """Generates emission feature vectors for a sentence."""
-        # NB: This doesn't do any clever capitalization features, which are
-        # probably important for state-of-the-art results on English, but YMMV.
+        # TODO(kbg): Add casing features.
         if not tokens:
             return []
         vectors = [[BIAS] for _ in range(len(tokens))]
@@ -103,7 +108,7 @@ class POSTagger(object):
         initial_vector = vectors[0]
         initial_vector.append(INITIAL)
         initial_vector.append(f"w_i={initial}")
-        initial_vector.extend(POSTagger._affix_features(initial))
+        initial_vector.extend(POSTagger._shape_features(initial))
         if len(tokens) > 1:
             peninitial = tokens[1]
             initial_vector.append(f"w_i+1={peninitial}")
@@ -111,7 +116,7 @@ class POSTagger(object):
             peninitial_vector.append(PENINITIAL)
             peninitial_vector.append(f"w_i-1={initial}")
             peninitial_vector.append(f"w_i={peninitial}")
-            peninitial_vector.extend(POSTagger._affix_features(peninitial))
+            peninitial_vector.extend(POSTagger._shape_features(peninitial))
             if len(tokens) > 2:
                 antepeninitial = tokens[2]
                 initial_vector.append(f"w_i+2={antepeninitial}")
@@ -122,7 +127,7 @@ class POSTagger(object):
             current_vector.append(f"w_i-2={tokens[i - 2]}")
             current_vector.append(f"w_i-1={tokens[i - 1]}")
             current_vector.append(f"w_i={token}")
-            current_vector.extend(POSTagger._affix_features(token))
+            current_vector.extend(POSTagger._shape_features(token))
             current_vector.append(f"w_i+1={tokens[i + 1]}")
             current_vector.append(f"w_i+2={tokens[i + 2]}")
         # Right edge features.
@@ -130,7 +135,7 @@ class POSTagger(object):
         ultimate_vector = vectors[-1]
         ultimate_vector.append(ULTIMATE)
         ultimate_vector.append(f"w_i={ultimate}")
-        ultimate_vector.extend(POSTagger._affix_features(ultimate))
+        ultimate_vector.extend(POSTagger._shape_features(ultimate))
         if len(tokens) > 1:
             penultimate = tokens[-2]
             ultimate_vector.append(f"w_i-1={penultimate}")
@@ -138,7 +143,7 @@ class POSTagger(object):
             penultimate_vector.append(PENULTIMATE)
             penultimate_vector.append(f"w_i+1={ultimate}")
             penultimate_vector.append(f"w_i={penultimate}")
-            penultimate_vector.extend(POSTagger._affix_features(penultimate))
+            penultimate_vector.extend(POSTagger._shape_features(penultimate))
             if len(tokens) > 2:
                 antepenultimate = tokens[-3]
                 ultimate_vector.append(f"w_i-2={antepenultimate}")
@@ -146,18 +151,27 @@ class POSTagger(object):
         # And we're done!
         return vectors
 
+    # Training and prediction.
+
     # Not yet supported: transition features, greedy or optimal.
 
-    def tag(self, tokens: List[str]) -> Iterator[str]:
-        """Generates tags for a sentence."""
-        for current_vector in POSTagger.extract_emission_features(tokens):
-            yield self.predict(current_vector).decode("utf8")
+    def train(self, vectors: Vectors, tags: Tags) -> Iterator[bool]:
+        for (vector, tag) in zip(vectors, tags):
+            yield self._classifier.train(vector, tag)
 
-    def train(self, emission_vectors: List[List[str]], tags: List[str]):
-        for (current_vector, tag) in zip(emission_vectors, tags):
-            yield self._classifier.train(current_vector, tag)
+    def tag_vectors(self, vectors: Vectors) -> Iterator[str]:
+        for vector in vectors:
+            yield self._classifier.predict(vector).decode("utf8")
+
+    def tag(self, tokens: Tokens) -> Iterator[str]:
+        return self.tag_vectors(POSTagger.extract_emission_features(tokens))
+
+    def apply(self, tokens: Tokens) -> Iterator[Tuple[str, str]]:
+        """Yield token/tag pairs."""
+        yield from zip(tokens, self.tag(tokens))
 
     # Delegates all attributes not otherwise defined to the underlying
     # classifier.
+
     def __getattr__(self, name):
         return getattr(self._classifier, name)

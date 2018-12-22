@@ -1,31 +1,27 @@
-# Copyright (c) 2015-2018 Kyle Gorman <kylebgorman@gmail.com>
-#
-# Permission is hereby granted, free of charge, to any person obtaining a
-# copy of this software and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be included
-# in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-# OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-# CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-# TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-# SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"""POS tagging main."""
 
 import argparse
 import logging
 import random
 
+from typing import List, Tuple
+
 import nlup
 
 from .model import POSTagger
+
+Data = List[Tuple[List[str], List[str]]]
+
+
+def _read_data(filename: str) -> Data:
+    return [
+        (POSTagger.extract_emission_features(tokens), tags)
+        for (tokens, tags) in POSTagger.tagged_sentences_from_file(filename)
+    ]
+
+
+def _data_size(data: Data) -> int:
+    return sum(len(tags) for (_, tags) in data)
 
 
 argparser = argparse.ArgumentParser(
@@ -35,11 +31,16 @@ argparser.add_argument(
     "-v", "--verbose", action="store_true", help="enable verbose output"
 )
 input_group = argparser.add_mutually_exclusive_group(required=True)
-input_group.add_argument("-t", "--train", help="input text training data")
-input_group.add_argument("-r", "--read", help="input serialized model")
+input_group.add_argument("-r", "--read", help="Input serialized model")
+input_group.add_argument(
+    "-t", "--train", help="Input two-column training training_data"
+)
+argparser.add_argument("-d", "--dev", help="Input two-column development data")
 output_group = argparser.add_mutually_exclusive_group(required=True)
-output_group.add_argument("-s", "--tag", help="output tagged text")
-output_group.add_argument("-w", "--write", help="output serialized model")
+output_group.add_argument(
+    "-p", "--predict", help="Output tagged text from one-column data"
+)
+output_group.add_argument("-w", "--write", help="Output serialized model")
 # Other options.
 argparser.add_argument(
     "--nlabels", type=int, default=32, help="Initial number of labels"
@@ -48,7 +49,7 @@ argparser.add_argument(
     "--nfeats", type=int, default=0x1000, help="Initial number of features"
 )
 argparser.add_argument(
-    "--epochs", type=int, default=10, help="Number of epochs"
+    "--epochs", type=int, default=5, help="Number of epochs"
 )
 argparser.add_argument("--alpha", type=float, default=1, help="Learning rate")
 argparser.add_argument("--seed", type=int, default=1917, help="Random seed")
@@ -62,41 +63,53 @@ else:
 
 # Input block.
 if args.train:
-    ptagger = POSTagger(args.nlabels, args.nfeats, args.alpha)
+    model = POSTagger(args.nfeats, args.nlabels, args.alpha)
     logging.info("Training model from %s", args.train)
-    data = [
-        (POSTagger.extract_emission_features(tokens), tags)
-        for (tokens, tags) in POSTagger.tagged_sentences_from_file(args.train)
-    ]
+    train_data = _read_data(args.train)
+    train_size = _data_size(train_data)
+    if args.dev:
+        dev_data = _read_data(args.dev)
+        dev_size = _data_size(dev_data)
+    else:
+        dev_data = None
     random.seed(args.seed)
     for epoch in range(1, 1 + args.epochs):
-        random.shuffle(data)
+        random.shuffle(train_data)
         logging.info("Epoch %d...", epoch)
-        correct = 0
-        size = 0
+        train_correct = 0
         with nlup.Timer():
-            for (emission_vectors, tags) in data:
-                correct += sum(ptagger.train(emission_vectors, tags))
-                size += len(tags)
-        logging.info("Resubstitution accuracy: %.4f", correct / size)
-    logging.info("Averaging model")
-    with nlup.Timer():
-        ptagger.average()
+            for (vectors, tags) in train_data:
+                train_correct += sum(model.train(vectors, tags))
+        logging.info(
+            "Resubstitution accuracy: %.4f", train_correct / train_size
+        )
+        if args.dev:
+            dev_correct = 0
+            for (vectors, tags) in dev_data:
+                dev_correct += sum(
+                    tag == predicted
+                    for (tag, predicted) in zip(
+                        tags, model.tag_vectors(vectors)
+                    )
+                )
+            logging.info("Develoment accuracy: %.4f", dev_correct / dev_size)
+    logging.info("Averaging model...")
+    model.average()
+    del train_data
+    del dev_data
 elif args.read:
     logging.info("Reading model from %s", args.read)
-    ptagger = POSTagger.read(args.read)
+    model = POSTagger.read(args.read)
 # Else unreachable.
 
 # Output block.
-if args.tag:
-    logging.info("Tagging text from %s", args.tag)
-    for tokens in POSTagger.untagged_sentences_from_file(args.tag):
-        tags = ptagger.tag(tokens)
-        print(
-            "\n".join(token + "\t" + tag for (token, tag) in zip(tokens, tags))
-        )
+if args.predict:
+    logging.info("Tagging text from %s", args.predict)
+    for tokens in POSTagger.sentences_from_file(args.predict):
+        for (token, tag) in model.apply(tokens):
+            print(f"{token}\t{tag}")
         print()
 elif args.write:
     logging.info("Writing model to %s", args.write)
-    ptagger.write(args.write)
+    model.write(args.write)
 # Else unreachable.
