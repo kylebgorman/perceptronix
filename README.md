@@ -71,7 +71,7 @@ Python
 ------
 
 Each of the above classifiers has a correspondent type in the Python API.
-However, these automate the averaging process. Take a look at 
+However, these automate the averaging process. Take a look at
 `applications/sentence_tokenizer/sentence_tokenizer.py` for a worked example.
 
 Design
