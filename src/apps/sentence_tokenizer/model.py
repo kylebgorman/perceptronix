@@ -67,9 +67,11 @@ class SentenceTokenizer(object):
         """Generates candidate sentence boundary string tuples from string."""
         for match in self._candidate_regex.finditer(text, overlapped=True):
             (left, boundary, right) = match.groups()
-            left_index = match.span()[0] + len(left) + 1
+            left_index = match.span()[0] + len(left)
             right_index = left_index + len(boundary)
-            left_bound = min(len(left), self._max_context)
+            # We get an extra character on the left because it's likely to have
+            # a '.' or whatever.
+            left_bound = min(len(left), self._max_context + 1)
             right_bound = min(len(right), self._max_context)
             yield Candidate(
                 left_index,
