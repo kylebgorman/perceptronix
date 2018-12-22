@@ -364,8 +364,9 @@ cdef class DenseMultinomialClassifier(object):
     cdef unique_ptr[DenseMultinomialPerceptron] _model
 
     def __init__(self, size_t nlabels, size_t nfeats, float alpha=1):
-        self._amodel.reset(new DenseMultinomialAveragedPerceptron(nlabels, nfeats,
-                                                                                                                            alpha))
+        self._amodel.reset(new DenseMultinomialAveragedPerceptron(nlabels,
+                                                                  nfeats,
+                                                                  alpha))
 
     def __repr__(self):
         return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
@@ -524,7 +525,7 @@ cdef class SparseDenseMultinomialClassifier(object):
 
     def __init__(self, size_t nlabels, size_t nfeats, float alpha=1):
         self._amodel.reset(new SparseDenseMultinomialAveragedPerceptron(nlabels,
-                                                                                                                                                       nfeats,
+                                                                        nfeats,
                                                                         alpha))
 
     def __repr__(self):
@@ -676,8 +677,9 @@ cdef class SparseMultinomialClassifier(object):
     cdef unique_ptr[SparseMultinomialPerceptron] _model
 
     def __init__(self, size_t nlabels, size_t nfeats, float alpha=1):
-        self._amodel.reset(new SparseMultinomialAveragedPerceptron(nlabels, nfeats,
-                                                                                                                             alpha))
+        self._amodel.reset(new SparseMultinomialAveragedPerceptron(nlabels,
+                                                                   nfeats,
+                                                                   alpha))
 
     def __repr__(self):
         return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))

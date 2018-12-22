@@ -1,24 +1,3 @@
-// Copyright (c) 2015-2018 Kyle Gorman
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to
-// permit persons to whom the Software is furnished to do so, subject to
-// the following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-// SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-//
 // weight.h: Weight class templates for perceptron classifiers.
 //
 // The base class Weight(Tpl) is just a number with methods. The derived
@@ -127,7 +106,8 @@ class AveragedWeightTpl : public WeightTpl<T> {
 
   // Implements the online mean.
   void Freshen(uint64_t time) {
-    summed_weight_ += (time - time_) * weight_;
+    const auto elapsed = time - time_;
+    summed_weight_ += elapsed * weight_;
     time_ = time;
   }
 
@@ -141,7 +121,6 @@ class AveragedWeightTpl : public WeightTpl<T> {
   // instead.
   WeightType GetAverage(uint64_t time) {
     Freshen(time);
-    //return static_cast<WeightType>(weight_ - summed_weight_ / time_);
     return static_cast<WeightType>(summed_weight_ / time_);
   }
 
