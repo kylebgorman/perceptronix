@@ -1,89 +1,111 @@
-# Copyright (c) 2015-2016 Kyle Gorman <kylebgorman@gmail.com>
-#
-# Permission is hereby granted, free of charge, to any person obtaining a
-# copy of this software and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be included
-# in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-# OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-# CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-# TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-# SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"""Case restorer main."""
 
 import argparse
 import logging
 import random
 
-import .truecaser
+from typing import List, Tuple
 
-ALPHA = 1.
-EPOCHS = 20.
-SEED = 2672555669
+import nlup
 
-argparser = argparse.ArgumentParser(prog="truecaser",
-                                    description="True-caser")
+from case_restorer import case
+
+from .model import CaseRestorer
+
+
+Data = List[Tuple[List[case.TokenCase], List[str]]]
+
+
+def _read_data(filename: str) -> Data:
+    return [
+        (CaseRestorer.extract_emission_features(tokens), tags)
+        for (tokens, tags) in CaseRestorer.tagged_sentences_from_file(filename)
+    ]
+
+
+def _data_size(data: Data) -> int:
+    return sum(len(tags) for (_, tags) in data)
+
+
+argparser = argparse.ArgumentParser(
+    prog="case_restorer", description="A case restoration model"
+)
 verbosity_group = argparser.add_mutually_exclusive_group()
-verbosity_group.add_argument("-v", "--verbose", action="store_true",
-                             help="enable verbose output")
-verbosity_group.add_argument("-V", "--extra-verbose", action="store_true",
-                             help="enable extra verbose (debugging) output")
+verbosity_group.add_argument(
+    "-v", "--verbose", action="store_true", help="Enable verbose output"
+)
 input_group = argparser.add_mutually_exclusive_group(required=True)
-input_group.add_argument("-t", "--train", help="input whitespace-delimited "
-                         "training data")
-input_group.add_argument("-r", "--read", help="input serialized model")
+input_group.add_argument("-r", "--read", help="Input serialized model")
+input_group.add_argument("-t", "--train", help="Input tokenized training data")
+argparser.add_argument("-d", "--dev", help="Input tokenized development data")
 output_group = argparser.add_mutually_exclusive_group(required=True)
-output_group.add_argument("-c", "--case", help="output cased "
-                          "whitespace-delimited text")
-output_group.add_argument("-w", "--write", help="output serialized model")
-argparser.add_argument("-A", "--alpha", type=float, default=ALPHA,
-                       help="learning rate")
-argparser.add_argument("-E", "--epochs", type=int, default=EPOCHS,
-                       help="# of epochs")
-
+output_group.add_argument(
+    "-p", "--predict", help="Output cased text from tokenized training_data"
+)
+output_group.add_argument("-w", "--write", help="Output serialized model")
+argparser.add_argument(
+    "--nfeats", type=int, default=0x1000, help="Initial number of features"
+)
+argparser.add_argument(
+    "--epochs", type=int, default=5, help="Number of epochs"
+)
+argparser.add_argument("--alpha", type=float, default=1, help="Learning rate")
+argparser.add_argument("--seed", type=int, default=1917, help="Random seed")
 args = argparser.parse_args()
 
 # Verbosity block.
-if args.really_verbose:
-  logging.basicConfig(level="DEBUG")
-elif args.verbose:
-  logging.basicConfig(level="INFO")
+if args.verbose:
+    logging.basicConfig(level="INFO", format="%(levelname)s: %(message)s")
+else:
+    logging.basicConfig(format="%(levelname)s: %(message)s")
 
 # Input block.
 if args.train:
-  logging.info("Training model from %s", args.train)
-  data = truecaser.slurp(args.train)
-  model = truecaser.TrueCaser(len(case.TokenCase) - 1)  # "d.c." not represented.
-  random = random.Random(SEED)
-  for epoch in range(1, 1 + args.epochs):
-    logging.info("Epoch %d...", epoch)
-    random.Random(
-    random.shuffle(data)
-    with nlup.Timer():
-      for sentence in data:
-        model.train_one(sentence)
-
-
+    model = CaseRestorer(args.nfeats, args.alpha)
+    logging.info("Training model from %s", args.train)
+    train_data = _read_data(args.train)
+    train_size = _data_size(train_data)
+    if args.dev:
+        dev_data = _read_data(args.dev)
+        dev_size = _data_size(dev_data)
+    else:
+        dev_data = None
+    random.seed(args.seed)
+    for epoch in range(1, 1 + args.epochs):
+        random.shuffle(train_data)
+        logging.info("Epoch %d...", epoch)
+        train_correct = 0
+        with nlup.Timer():
+            for (vectors, tags) in train_data:
+                train_correct += sum(model.train(vectors, tags))
+        logging.info(
+            "Resubstitution accuracy: %.4f", train_correct / train_size
+        )
+        if args.dev:
+            dev_correct = 0
+            for (vectors, tags) in dev_data:
+                dev_correct += sum(
+                    tag == predicted
+                    for (tag, predicted) in zip(
+                        tags, model.tag_vectors(vectors)
+                    )
+                )
+            logging.info("Development accuracy: %.4f", dev_correct / dev_size)
+    logging.info("Averaging model...")
+    model.average()
+    del train_data
+    del dev_data
 elif args.read:
-  logging.info("Reading serialized model from %s", args.read)
-  model = truecaser.TrueCaser.load(args.read)
+    logging.info("Reading model from %s", args.read)
+    model = CaseRestorer.read(args.read)
 # Else unreachable.
 
 # Output block.
-if args.case:
-  logging.info(
-  model
-
+if args.predict:
+    logging.info("Casing text from %s", args.predict)
+    for tokens in CaseRestorer.sentences_from_file(args.predict):
+        print(" ".join(model.apply(tokens)))
 elif args.write:
-  logging.info(
-
-
+    logging.info("Writing model to %s", args.write)
+    model.write(args.write)
 # Else unreachable.
