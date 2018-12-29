@@ -106,8 +106,9 @@ class SparseInnerTableTpl {
 
   void AddWeights(const SparseInnerTableTpl<WeightT> &weights) {
     if (!weights.Size()) return;
-    for (auto it = weights.cbegin(); it != weights.cend(); ++it)
+    for (auto it = weights.cbegin(); it != weights.cend(); ++it) {
       table_[it->first] += it->second;
+    }
   }
 
  private:
