@@ -69,8 +69,8 @@ cdef class DenseBinomialClassifier(object):
     cdef unique_ptr[DenseBinomialAveragedPerceptron] _amodel
     cdef unique_ptr[DenseBinomialPerceptron] _model
 
-    def __init__(self, size_t nfeats, float alpha=1):
-        self._amodel.reset(new DenseBinomialAveragedPerceptron(nfeats, alpha))
+    def __init__(self, size_t nfeats):
+        self._amodel.reset(new DenseBinomialAveragedPerceptron(nfeats))
 
     def __repr__(self):
         return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
@@ -224,8 +224,8 @@ cdef class SparseBinomialClassifier(object):
     cdef unique_ptr[SparseBinomialAveragedPerceptron] _amodel
     cdef unique_ptr[SparseBinomialPerceptron] _model
 
-    def __init__(self, size_t nlabels, float alpha=1):
-        self._amodel.reset(new SparseBinomialAveragedPerceptron(nlabels, alpha))
+    def __init__(self, size_t nlabels):
+        self._amodel.reset(new SparseBinomialAveragedPerceptron(nlabels))
 
     def __repr__(self):
         return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
@@ -372,10 +372,9 @@ cdef class DenseMultinomialClassifier(object):
     cdef unique_ptr[DenseMultinomialAveragedPerceptron] _amodel
     cdef unique_ptr[DenseMultinomialPerceptron] _model
 
-    def __init__(self, size_t nlabels, size_t nfeats, float alpha=1):
+    def __init__(self, size_t nlabels, size_t nfeats):
         self._amodel.reset(new DenseMultinomialAveragedPerceptron(nlabels,
-                                                                  nfeats,
-                                                                  alpha))
+                                                                  nfeats))
 
     def __repr__(self):
         return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
@@ -536,10 +535,9 @@ cdef class SparseDenseMultinomialClassifier(object):
     cdef unique_ptr[SparseDenseMultinomialAveragedPerceptron] _amodel
     cdef unique_ptr[SparseDenseMultinomialPerceptron] _model
 
-    def __init__(self, size_t nlabels, size_t nfeats, float alpha=1):
+    def __init__(self, size_t nlabels, size_t nfeats):
         self._amodel.reset(new SparseDenseMultinomialAveragedPerceptron(nlabels,
-                                                                        nfeats,
-                                                                        alpha))
+                                                                        nfeats))
 
     def __repr__(self):
         return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
@@ -696,10 +694,9 @@ cdef class SparseMultinomialClassifier(object):
     cdef unique_ptr[SparseMultinomialAveragedPerceptron] _amodel
     cdef unique_ptr[SparseMultinomialPerceptron] _model
 
-    def __init__(self, size_t nlabels, size_t nfeats, float alpha=1):
+    def __init__(self, size_t nlabels, size_t nfeats):
         self._amodel.reset(new SparseMultinomialAveragedPerceptron(nlabels,
-                                                                   nfeats,
-                                                                   alpha))
+                                                                   nfeats))
 
     def __repr__(self):
         return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))

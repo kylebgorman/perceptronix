@@ -33,11 +33,9 @@ class POSTagger(object):
 
     slots = ["_classifier"]
 
-    def __init__(
-        self, nfeats: int = 0x1000, nlabels: int = 32, alpha: float = 1
-    ):
+    def __init__(self, nfeats: int = 0x1000, nlabels: int = 32):
         self._classifier = perceptronix.SparseMultinomialClassifier(
-            nfeats, nlabels, alpha
+            nfeats, nlabels
         )
 
     @classmethod

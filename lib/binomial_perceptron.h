@@ -74,18 +74,17 @@ class BinomialAveragedPerceptronTpl
 
   friend class BinomialPerceptronBaseTpl<InnerTableTpl, Weight>;
 
-  explicit BinomialAveragedPerceptronTpl(size_t nfeats,
-                                         Weight::WeightType alpha = 1.)
-      : Base(nfeats), alpha_(alpha), time_(0) {}
+  explicit BinomialAveragedPerceptronTpl(size_t nfeats)
+      : Base(nfeats), time_(0) {}
 
   // 1: Update a single feature given the correct label.
   void Update(Feature f, bool y) {
-    table_[f].Update(y ? +alpha_ : -alpha_, time_);
+    table_[f].Update(y ? +1: -1, time_);
   }
 
   // 2: Updates many features given the correct label.
   void Update(const FeatureBundle &fb, bool y) {
-    const auto tau = y ? +alpha_ : -alpha_;
+    const auto tau = y ? +1 : -1;
     for (const auto &f : fb) table_[f].Update(tau, time_);
   }
 
@@ -102,7 +101,6 @@ class BinomialAveragedPerceptronTpl
   uint64_t Time() const { return time_; }
 
  private:
-  Weight::WeightType alpha_;
   uint64_t time_;
 
   // Advances the clock; invoked automatically by Train.

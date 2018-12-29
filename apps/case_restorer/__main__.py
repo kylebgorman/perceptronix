@@ -56,7 +56,6 @@ argparser.add_argument(
 argparser.add_argument(
     "--epochs", type=int, default=5, help="Number of epochs"
 )
-argparser.add_argument("--alpha", type=float, default=1, help="Learning rate")
 argparser.add_argument("--seed", type=int, default=1917, help="Random seed")
 args = argparser.parse_args()
 
@@ -74,7 +73,7 @@ if args.train:
     if args.dev:
         dev_sents = _read_data(args.dev)[0]
         dev_size = _data_size(dev_sents)
-    model = CaseRestorer(args.nfeats, args.alpha, train_mpt)
+    model = CaseRestorer(args.nfeats, train_mpt)
     random.seed(args.seed)
     for epoch in range(1, 1 + args.epochs):
         random.shuffle(train_sents)

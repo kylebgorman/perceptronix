@@ -28,15 +28,11 @@ class SentenceTokenizer(object):
     slots = ["_candidate_regex", "_max_context", "_classifier"]
 
     def __init__(
-        self,
-        candidate_regex: str,
-        max_context: int,
-        nfeats: int = 0x1000,
-        alpha: float = 1,
+        self, candidate_regex: str, max_context: int, nfeats: int = 0x1000
     ):
         self._candidate_regex = regex.compile(candidate_regex)
         self._max_context = max_context
-        self._classifier = perceptronix.SparseBinomialClassifier(nfeats, alpha)
+        self._classifier = perceptronix.SparseBinomialClassifier(nfeats)
 
     @classmethod
     def read(cls, filename: str, candidate_regex: str, max_context: int):

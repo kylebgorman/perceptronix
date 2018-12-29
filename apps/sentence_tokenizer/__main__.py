@@ -57,7 +57,6 @@ argparser.add_argument(
 argparser.add_argument(
     "--epochs", type=int, default=5, help="Number of epochs"
 )
-argparser.add_argument("--alpha", type=float, default=1, help="Learning rate")
 argparser.add_argument("--seed", type=int, default=1917, help="Random seed")
 args = argparser.parse_args()
 
@@ -70,7 +69,7 @@ else:
 # Input block.
 if args.train:
     model = SentenceTokenizer(
-        args.candidate_regex, args.max_context, args.nfeats, args.alpha
+        args.candidate_regex, args.max_context, args.nfeats
     )
     logging.info("Training model from %s", args.train)
     train_data = _read_data(args.train, model)

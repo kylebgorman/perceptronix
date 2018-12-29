@@ -80,9 +80,8 @@ class MultinomialAveragedPerceptronTpl
 
   friend class MultinomialPerceptronBaseTpl<OuterTableTpl, Weight>;
 
-  MultinomialAveragedPerceptronTpl(size_t nfeats, size_t nlabels,
-                                   typename Weight::WeightType alpha = 1)
-      : Base(nfeats, nlabels), alpha_(alpha), time_(0) {}
+  MultinomialAveragedPerceptronTpl(size_t nfeats, size_t nlabels)
+      : Base(nfeats, nlabels), time_(0) {}
 
   using Base::Predict;
   using Base::Score;
@@ -103,23 +102,22 @@ class MultinomialAveragedPerceptronTpl
   // 1: Updates a single feature given correct and incorrect labels.
   void Update(const Feature &f, Label y, Label yhat) {
     auto &ref = table_[f];
-    ref[y].Update(+alpha_, time_);
-    ref[yhat].Update(-alpha_, time_);
+    ref[y].Update(+1, time_);
+    ref[yhat].Update(-1, time_);
   }
 
   // 2: Updates many features given correct and incorrect labels.
   void Update(const FeatureBundle &fb, Label y, Label yhat) {
     for (const auto &f: fb) {
       auto &ref = table_[f];
-      ref[y].Update(+alpha_, time_);
-      ref[yhat].Update(-alpha_, time_);
+      ref[y].Update(+1, time_);
+      ref[yhat].Update(-1, time_);
     }
   }
 
   uint64_t Time() const { return time_; }
 
  private:
-  typename Weight::WeightType alpha_;
   uint64_t time_;
 
   // Advances the clock; invoked automatically by Train.

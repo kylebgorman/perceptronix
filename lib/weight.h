@@ -95,45 +95,47 @@ class AveragedWeightTpl : public WeightTpl<T> {
  public:
   using WeightType = T;
 
+  using Base = WeightTpl<T>;
+
   // Extends the base constructor. All weights are averaged as if they were
   // initialized at 0 at time 0.
   explicit AveragedWeightTpl(WeightType weight = 0, uint64_t time = 0)
-      : WeightTpl<T>(weight), summed_weight_(0), time_(time) {
+      : Base(weight), summed_weight_(weight), time_(time) {
     Freshen(time);
   }
 
-  using WeightTpl<T>::weight_;
+  using Base::Get;
 
-  // Implements the online mean.
+  // Implements the mean operation.
   void Freshen(uint64_t time) {
     const auto elapsed = time - time_;
-    summed_weight_ += elapsed * weight_;
+    summed_weight_ += elapsed * Base::Get();
     time_ = time;
   }
 
   void Update(WeightType tau, uint64_t time) {
     Freshen(time);
-    WeightTpl<T>::Update(tau);
+    Base::Update(tau);
   }
 
-  // This function should be used for retrieving a copy of the final weight,
-  // but not for inference during training time; during training, call Get()
-  // instead.
-  WeightType GetAverage(uint64_t time) {
+  // Used to retrieve the average of the final weight after training is
+  // complete.
+  float GetAverage(uint64_t time) {
     Freshen(time);
-    return static_cast<WeightType>(summed_weight_ / time_);
+    return static_cast<double>(summed_weight_) / time_;
   }
 
  protected:
-  double summed_weight_;
+  WeightType summed_weight_;
   uint64_t time_;
 };
 
 // Default specializations.
 
+// This is naturally a float because it is produced by averaging.
 using Weight = WeightTpl<float>;
-
-using AveragedWeight = AveragedWeightTpl<float>;
+// Whereas this is naturally integral.
+using AveragedWeight = AveragedWeightTpl<int32_t>;
 
 }  // namespace perceptronix
 

@@ -34,14 +34,9 @@ class CaseRestorer(object):
 
     slots = ["_classifier", "_mpt"]
 
-    def __init__(
-        self,
-        nfeats: int = 0x1000,
-        alpha: float = 1,
-        mpt: case.MixedPatternTable = {},
-    ):
+    def __init__(self, nfeats: int = 0x1000, mpt: case.MixedPatternTable = {}):
         self._classifier = perceptronix.SparseDenseMultinomialClassifier(
-            nfeats, len(case.TokenCase), alpha
+            nfeats, len(case.TokenCase)
         )
         self._mpt = mpt
 
