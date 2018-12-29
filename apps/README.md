@@ -11,4 +11,4 @@ Included or planned applications include:
 * Case restorer: `case_restorer`
 * Word tokenizer: `word_tokenizer`
 
-As of 2018-12-21 only the first two are fully functional.
+As of 2018-12-21 only the first three are fully functional.
