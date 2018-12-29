@@ -2,7 +2,7 @@
 // classifiers with binary features.
 
 #include "binomial_perceptron.h"
-#include "linmod.pb.h"
+#include "linear_model.pb.h"
 
 namespace perceptronix {
 
@@ -19,12 +19,15 @@ DenseBinomialPerceptron::BinomialPerceptronTpl(
 }
 
 template <>
-DenseBinomialPerceptron *DenseBinomialPerceptron::Read(std::istream &istrm) {
+DenseBinomialPerceptron *DenseBinomialPerceptron::Read(std::istream &istrm,
+                                                       string *metadata) {
   DenseBinomialPerceptron_pb pb;
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
+  if (metadata) *metadata = pb.metadata();
   const int size = pb.table_size();
   auto *model = new DenseBinomialPerceptron(size);
   for (int i = 0; i < size; ++i) model->table_[i].Set(pb.table(i));
+
   return model;
 }
 
@@ -32,7 +35,7 @@ template <>
 bool DenseBinomialPerceptron::Write(std::ostream &ostrm,
                                     const string &metadata) const {
   DenseBinomialPerceptron_pb pb;
-  pb.set_metadata(metadata);
+  if (!metadata.empty()) pb.set_metadata(metadata);
   for (auto it = table_.cbegin(); it != table_.cend(); ++it) {
     pb.add_table(it->Get());
   }
@@ -50,9 +53,11 @@ SparseBinomialPerceptron::BinomialPerceptronTpl(
 }
 
 template <>
-SparseBinomialPerceptron *SparseBinomialPerceptron::Read(std::istream &istrm) {
+SparseBinomialPerceptron *SparseBinomialPerceptron::Read(std::istream &istrm,
+                                                         string *metadata) {
   SparseBinomialPerceptron_pb pb;
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
+  if (metadata) *metadata = pb.metadata();
   auto *model = new SparseBinomialPerceptron(pb.table_size());
   auto pb_table = pb.table();
   auto &table = model->table_;
@@ -67,7 +72,7 @@ template <>
 bool SparseBinomialPerceptron::Write(std::ostream &ostrm,
                                      const string &metadata) const {
   SparseBinomialPerceptron_pb pb;
-  pb.set_metadata(metadata);
+  if (!metadata.empty()) pb.set_metadata(metadata);
   auto *pb_table = pb.mutable_table();
   for (auto it = table_.cbegin(); it != table_.cend(); ++it) {
     (*pb_table)[it->first] = it->second.Get();

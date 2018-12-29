@@ -13,6 +13,7 @@ of the unaveraged class), disabling further training and freeing the
 averaged model's memory.
 """
 
+from cython.operator cimport address as addr
 
 from libcpp.memory cimport unique_ptr
 from libcpp.string cimport string
@@ -95,7 +96,7 @@ cdef class DenseBinomialClassifier(object):
           better.
         * Serialization with (`write`) becomes possible.
         * The memory footprint of the model shrinks to approximately one third 
-          of pre-averaged model.
+          of the pre-averaged model.
 
         Therefore, this method should be called when switching from training to
         inference or serialization.
@@ -119,28 +120,32 @@ cdef class DenseBinomialClassifier(object):
         Creates instance by deserializing model on disk.
 
         Args:
-            filename: String path to source file.
+            filename: Path to source file.
 
         Returns:
-            The deserialized model.
+            A tuple of the deserialized model and the metadata string.
 
         Raises:
             PerceptronixIOError: Read failed.
         """
         cdef DenseBinomialClassifier result = cls.__new__(cls)
-        result._model.reset(DenseBinomialPerceptron.Read(filename))
+        cdef string metadata
+        result._model.reset(
+            DenseBinomialPerceptron.Read(tobytes(filename), addr(metadata))
+        )
         if result._model.get() == NULL:
             raise PerceptronixIOError("Read failed: {}".format(filename))
-        return result
+        return (result, metadata.decode("utf8"))
 
-    cpdef void write(self, filename) except *:
+    cpdef void write(self, filename, metadata) except *:
         """
-        write(filename)
+        write(filename, metadata)
 
         Serializes model to disk.
 
         Args:
-            filename: String path to sink file.
+            filename: Path to sink file.
+            metadata: Optional metadata string.
 
         Raises:
             PerceptronixOperationError: Must average model first.
@@ -148,7 +153,7 @@ cdef class DenseBinomialClassifier(object):
         """
         if not self._averaged():
             raise PerceptronixOperationError("Must average model first")
-        if not self._model.get().Write(tobytes(filename)):
+        if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
             raise PerceptronixIOError("Write failed: {}".format(filename))
 
     cpdef bool train(self, features, bool label) except *:
@@ -265,28 +270,32 @@ cdef class SparseBinomialClassifier(object):
         Creates instance by deserializing model on disk.
 
         Args:
-            filename: String path to source file.
+            filename: Path to source file.
 
         Returns:
-            The deserialized model.
+            A tuple of the deserialized model and the metadata string.
 
         Raises:
             PerceptronixIOError: Read failed.
         """
         cdef SparseBinomialClassifier result = cls.__new__(cls)
-        result._model.reset(SparseBinomialPerceptron.Read(tobytes(filename)))
+        cdef string metadata
+        result._model.reset(
+            SparseBinomialPerceptron.Read(tobytes(filename), addr(metadata))
+        )
         if result._model.get() == NULL:
             raise PerceptronixIOError("Read failed: {}".format(filename))
-        return result
+        return (result, metadata.decode("utf8"))
 
-    cpdef void write(self, filename) except *:
+    cpdef void write(self, filename, metadata=b"") except *:
         """
-        write(filename)
+        write(filename, metadata)
 
         Serializes model to disk.
 
         Args:
-            filename: String path to sink file.
+            filename: Path to sink file.
+            metadata: Optional metadata string.
 
         Raises:
             PerceptronixOperationError: Must average model first.
@@ -294,7 +303,7 @@ cdef class SparseBinomialClassifier(object):
         """
         if not self._averaged():
             raise PerceptronixOperationError("Must average model first")
-        if not self._model.get().Write(tobytes(filename)):
+        if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
             raise PerceptronixIOError("Write failed: {}".format(filename))
 
     cpdef bool train(self, features, bool label) except *:
@@ -392,7 +401,7 @@ cdef class DenseMultinomialClassifier(object):
           better.
         * Serialization with (`write`) becomes possible.
         * The memory footprint of the model shrinks to approximately one third
-          of pre-averaged model.
+          of the pre-averaged model.
 
         Therefore, this method should be called when switching from training to
         inference or serialization.
@@ -416,28 +425,32 @@ cdef class DenseMultinomialClassifier(object):
         Creates instance by deserializing model on disk.
 
         Args:
-            filename: String path to source file.
+            filename: Path to source file.
 
         Returns:
-            The deserialized model.
+            A tuple of the deserialized model and the metadata string.
 
         Raises:
             PerceptronixIOError: Read failed.
         """
         cdef DenseMultinomialClassifier result = cls.__new__(cls)
-        result._model.reset(DenseMultinomialPerceptron.Read(tobytes(filename)))
+        cdef string metadata
+        result._model.reset(
+            DenseMultinomialPerceptron.Read(tobytes(filename), addr(metadata))
+        )
         if result._model.get() == NULL:
             raise PerceptronixIOError("Read failed: {}".format(filename))
-        return result
+        return (result, metadata.decode("utf8"))
 
-    cpdef void write(self, filename) except *:
+    cpdef void write(self, filename, metadata) except *:
         """
         write(filename)
 
         Serializes model to disk.
 
         Args:
-            filename: String path to sink file.
+            filename: Path to sink file.
+            metadata: Optional metadata string.
 
         Raises:
             PerceptronixOperationError: Must average model first.
@@ -445,7 +458,7 @@ cdef class DenseMultinomialClassifier(object):
         """
         if not self._averaged():
             raise PerceptronixOperationError("Must average model first")
-        if not self._model.get().Write(tobytes(filename)):
+        if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
             raise PerceptronixIOError("Write failed: {}".format(filename))
 
     cpdef bool train(self, features, size_t label) except *:
@@ -551,7 +564,8 @@ cdef class SparseDenseMultinomialClassifier(object):
         * Prediction with `predict` becomes faster and should generalizes
           better.
         * Serialization with (`write`) becomes possible.
-        * The memory footprint of the model shrinks to approximately one third           of pre-averaged model.
+        * The memory footprint of the model shrinks to approximately one third
+          of the pre-averaged model.
 
         Therefore, this method should be called when switching from training to
         inference or serialization.
@@ -575,29 +589,35 @@ cdef class SparseDenseMultinomialClassifier(object):
         Creates instance by deserializing model on disk.
 
         Args:
-            filename: String path to source file.
+            filename: Path to source file.
 
         Returns:
-            The deserialized model.
+            A tuple of the deserialized model and the metadata string.
 
         Raises:
             PerceptronixIOError: Read failed.
         """
         cdef SparseDenseMultinomialClassifier result = cls.__new__(cls)
-        result._model.reset(SparseDenseMultinomialPerceptron.Read(
-                tobytes(filename)))
+        cdef string metadata
+        result._model.reset(
+            SparseDenseMultinomialPerceptron.Read(
+                tobytes(filename),
+                addr(metadata),
+            )
+        )
         if result._model.get() == NULL:
             raise PerceptronixIOError("Read failed: {}".format(filename))
-        return result
+        return (result, metadata.decode("utf8"))
 
-    cpdef void write(self, filename) except *:
+    cpdef void write(self, filename, metadata=b"") except *:
         """
-        write(filename)
+        write(filename, metadata)
 
         Serializes model to disk.
 
         Args:
-            filename: String path to sink file.
+            filename: Path to sink file.
+            metadata: Optional metadata string.
 
         Raises:
             PerceptronixOperationError: Must average model first.
@@ -605,7 +625,7 @@ cdef class SparseDenseMultinomialClassifier(object):
         """
         if not self._averaged():
             raise PerceptronixOperationError("Must average model first")
-        if not self._model.get().Write(tobytes(filename)):
+        if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
             raise PerceptronixIOError("Write failed: {}".format(filename))
 
     cpdef bool train(self, features, size_t label) except *:
@@ -704,7 +724,8 @@ cdef class SparseMultinomialClassifier(object):
         * Prediction with `predict` becomes faster and should generalizes
           better.
         * Serialization with (`write`) becomes possible.
-        * The memory footprint of the model shrinks to approximately one third           of pre-averaged model.
+        * The memory footprint of the model shrinks to approximately one third 
+          of the pre-averaged model.
 
         Therefore, this method should be called when switching from training to
         inference or serialization.
@@ -728,28 +749,35 @@ cdef class SparseMultinomialClassifier(object):
         Creates instance by deserializing model on disk.
 
         Args:
-            filename: String path to source file.
+            filename: Path to source file.
 
         Returns:
-            The deserialized model.
+            A tuple of the deserialized model and the metadata string.
 
         Raises:
             PerceptronixIOError: Read failed.
         """
         cdef SparseMultinomialClassifier result = cls.__new__(cls)
-        result._model.reset(SparseMultinomialPerceptron.Read(tobytes(filename)))
+        cdef string metadata
+        result._model.reset(
+            SparseMultinomialPerceptron.Read(
+                tobytes(filename),
+                addr(metadata),
+            )
+        )
         if result._model.get() == NULL:
             raise PerceptronixIOError("Read failed: {}".format(filename))
-        return result
+        return (result, metadata.decode("utf8"))
 
-    cpdef void write(self, filename) except *:
+    cpdef void write(self, filename, metadata=b"") except *:
         """
-        write(filename)
+        write(filename, metadata)
 
         Serializes model to disk.
 
         Args:
-            filename: String path to sink file.
+            filename: Path to sink file.
+            metadata: Optional metadata string.
 
         Raises:
             PerceptronixOperationError: Must average model first.
@@ -757,7 +785,7 @@ cdef class SparseMultinomialClassifier(object):
         """
         if not self._averaged():
             raise PerceptronixOperationError("Must average model first")
-        if not self._model.get().Write(tobytes(filename)):
+        if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
             raise PerceptronixIOError("Write failed: {}".format(filename))
 
     cpdef bool train(self, features, label) except *:

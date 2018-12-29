@@ -1,6 +1,7 @@
 """Sentence tokenizer model."""
 
 import collections
+import logging
 
 from typing import Iterable, Iterator, List, Tuple
 
@@ -24,6 +25,8 @@ Candidate = collections.namedtuple(
 class SentenceTokenizer(object):
     """Sentence tokenizer model."""
 
+    slots = ["_candidate_regex", "_max_context", "_classifier"]
+
     def __init__(
         self,
         candidate_regex: str,
@@ -38,13 +41,18 @@ class SentenceTokenizer(object):
     @classmethod
     def read(cls, filename: str, candidate_regex: str, max_context: int):
         """Reads sentence tokenizer model from serialized model file."""
-        result = cls.__new__(cls)
-        result._candidate_regex = regex.compile(candidate_regex)
-        result._max_context = max_context
-        result._classifier = perceptronix.SparseBinomialClassifier.read(
+        (classifier, metadata) = perceptronix.SparseBinomialClassifier.read(
             filename
         )
-        return result
+        # TODO(kbg): Consider storing the candidate regex and max context
+        # fields in the metadata string.
+        if metadata:
+            logging.warning("Ignoring metadata string: %s", metadata)
+        new = cls.__new__(cls)
+        new._classifier = classifier
+        new._candidate_regex = regex.compile(candidate_regex)
+        new._max_context = max_context
+        return new
 
     # Data readers.
 

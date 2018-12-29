@@ -1,5 +1,7 @@
 """POS tagger model."""
 
+import logging
+
 from typing import Iterator, List, Tuple
 
 import perceptronix
@@ -29,6 +31,8 @@ Vectors = List[Vector]
 class POSTagger(object):
     """Part-of-speech tagger model."""
 
+    slots = ["_classifier"]
+
     def __init__(
         self, nfeats: int = 0x1000, nlabels: int = 32, alpha: float = 1
     ):
@@ -39,11 +43,16 @@ class POSTagger(object):
     @classmethod
     def read(cls, filename: str):
         """Reads POS tagger model from serialized model file."""
-        result = cls.__new__(cls)
-        result._classifier = perceptronix.SparseMultinomialClassifier.read(
+        (classifier, metadata) = perceptronix.SparseMultinomialClassifier.read(
             filename
         )
-        return result
+        if metadata:
+            logging.warning("Ignoring metadata string: %s", metadata)
+        new = cls.__new__(cls)
+        new._classifier = classifier
+        return new
+
+    # `write` is dispatched to the underlying classifier.
 
     # Data readers.
 

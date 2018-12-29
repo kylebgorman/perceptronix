@@ -130,11 +130,13 @@ class BinomialPerceptronTpl
 
   // Construct model by deserializing.
 
-  static BinomialPerceptronTpl<InnerTableTpl> *Read(std::istream &istrm);
+  static BinomialPerceptronTpl<InnerTableTpl> *Read(std::istream &istrm,
+                                                    string *metadata = nullptr);
 
-  static BinomialPerceptronTpl<InnerTableTpl> *Read(const string &filename) {
+  static BinomialPerceptronTpl<InnerTableTpl> *Read(const string &filename,
+                                                    string *metadata = nullptr) {
     std::ifstream istrm(filename);
-    return Read(istrm);
+    return Read(istrm, metadata);
   }
 
   // Serializes the model.

@@ -12,9 +12,9 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
     DenseBinomialAveragedPerceptron(size_t, float)
 
-    bool Predict(vector[size_t] &)
+    bool Predict(const vector[size_t] &)
 
-    bool Train(vector[size_t] &, bool)
+    bool Train(const vector[size_t] &, bool)
 
 
   cdef cppclass DenseBinomialPerceptron:
@@ -23,21 +23,21 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
     DenseBinomialPerceptron(DenseBinomialAveragedPerceptron *)
 
-    bool Predict(vector[size_t] &)
+    bool Predict(const vector[size_t] &)
 
     @staticmethod
-    DenseBinomialPerceptron *Read(const string &)
+    DenseBinomialPerceptron *Read(const string &, string *)
 
-    bool Write(const string &)
+    bool Write(const string &, const string &)
 
 
   cdef cppclass SparseBinomialAveragedPerceptron:
 
     SparseBinomialAveragedPerceptron(size_t, float)
 
-    bool Predict(vector[string] &)
+    bool Predict(const vector[string] &)
 
-    bool Train(vector[string] &, bool)
+    bool Train(const vector[string] &, bool)
 
 
   cdef cppclass SparseBinomialPerceptron:
@@ -46,21 +46,21 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
     SparseBinomialPerceptron(SparseBinomialAveragedPerceptron *)
 
-    bool Predict(vector[string] &)
+    bool Predict(const vector[string] &)
 
     @staticmethod
-    SparseBinomialPerceptron *Read(const string &)
+    SparseBinomialPerceptron *Read(const string &, string *)
 
-    bool Write(const string &)
+    bool Write(const string &, const string &)
 
 
   cdef cppclass DenseMultinomialAveragedPerceptron:
 
     DenseMultinomialAveragedPerceptron(size_t, size_t, float)
 
-    size_t Predict(vector[size_t])
+    size_t Predict(const vector[size_t] &)
 
-    bool Train(vector[size_t], size_t)
+    bool Train(const vector[size_t] &, size_t)
 
 
   cdef cppclass DenseMultinomialPerceptron:
@@ -69,21 +69,21 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
     DenseMultinomialPerceptron(DenseMultinomialAveragedPerceptron *)
 
-    size_t Predict(vector[size_t])
+    size_t Predict(const vector[size_t] &)
 
     @staticmethod
-    DenseMultinomialPerceptron *Read(const string &)
+    DenseMultinomialPerceptron *Read(const string &, string *)
 
-    bool Write(const string &)
+    bool Write(const string &, const string &)
 
 
   cdef cppclass SparseDenseMultinomialAveragedPerceptron:
 
     SparseDenseMultinomialAveragedPerceptron(size_t, size_t, float)
 
-    size_t Predict(vector[string])
+    size_t Predict(const vector[string] &)
 
-    bool Train(vector[string], size_t)
+    bool Train(const vector[string] &, size_t)
 
 
   cdef cppclass SparseDenseMultinomialPerceptron:
@@ -92,21 +92,21 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
     SparseDenseMultinomialPerceptron(SparseDenseMultinomialAveragedPerceptron *)
 
-    size_t Predict(vector[string])
+    size_t Predict(const vector[string] &)
 
     @staticmethod
-    SparseDenseMultinomialPerceptron *Read(const string &)
+    SparseDenseMultinomialPerceptron *Read(const string &, string *)
 
-    bool Write(const string &)
+    bool Write(const string &, const string &)
 
 
   cdef cppclass SparseMultinomialAveragedPerceptron:
 
     SparseMultinomialAveragedPerceptron(size_t, size_t, float)
 
-    string Predict(vector[string])
+    string Predict(const vector[string] &)
 
-    bool Train(vector[string], string)
+    bool Train(const vector[string] &, string)
 
 
   cdef cppclass SparseMultinomialPerceptron:
@@ -115,9 +115,9 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
     SparseMultinomialPerceptron(SparseMultinomialAveragedPerceptron *)
 
-    string Predict(vector[string])
+    string Predict(const vector[string] &)
 
     @staticmethod
-    SparseMultinomialPerceptron *Read(const string &)
+    SparseMultinomialPerceptron *Read(const string &, string *)
 
-    bool Write(const string &)
+    bool Write(const string &, const string &)

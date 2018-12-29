@@ -70,8 +70,6 @@ if args.train:
     if args.dev:
         dev_data = _read_data(args.dev)
         dev_size = _data_size(dev_data)
-    else:
-        dev_data = None
     random.seed(args.seed)
     for epoch in range(1, 1 + args.epochs):
         random.shuffle(train_data)
@@ -95,8 +93,6 @@ if args.train:
             logging.info("Develoment accuracy: %.4f", dev_correct / dev_size)
     logging.info("Averaging model...")
     model.average()
-    del train_data
-    del dev_data
 elif args.read:
     logging.info("Reading model from %s", args.read)
     model = POSTagger.read(args.read)

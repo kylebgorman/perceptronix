@@ -12,7 +12,6 @@
 #include <string>
 #include <vector>
 
-#include "linmod.pb.h"
 #include "table.h"
 #include "weight.h"
 
@@ -149,11 +148,15 @@ class MultinomialPerceptronTpl
 
   // Constructs model by deserializing.
 
-  static MultinomialPerceptronTpl<OuterTableTpl> *Read(std::istream &istrm);
+  static MultinomialPerceptronTpl<OuterTableTpl> *Read(
+      std::istream &istrm,
+      string *metadata = nullptr);
 
-  static MultinomialPerceptronTpl<OuterTableTpl> *Read(const string &filename) {
+  static MultinomialPerceptronTpl<OuterTableTpl> *Read(
+      const string &filename,
+      string *metadata = nullptr) {
     std::ifstream istrm(filename);
-    return Read(istrm);
+    return Read(istrm, metadata);
   }
 
   // Serializes the model.

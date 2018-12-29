@@ -1,11 +1,14 @@
 """Case restorer model."""
 
-from typing import Iterable, Iterator, List, Tuple
+import json
+
+from typing import Dict, Iterator, List, Tuple
 
 import nlup
 import perceptronix
 
 from case_restorer import case
+
 
 # Constant feature strings.
 
@@ -17,30 +20,47 @@ PENINITIAL = "*peninitial*"
 HYPHEN = "*hyphen*"
 NUMBER = "*number*"
 
-# Types.
 
 Tokens = List[str]
-Tags = Iterable[case.TokenCase]
+Tags = List[case.TokenCase]
+Patterns = List[case.Pattern]
+
 Vector = List[str]
-Vectors = Iterable[Vector]
+Vectors = List[Vector]
 
 
 class CaseRestorer(object):
     """Case restorer model."""
 
-    def __init__(self, nfeats: int = 0x1000, alpha: float = 1):
+    slots = ["_classifier", "_mpt"]
+
+    def __init__(
+        self,
+        nfeats: int = 0x1000,
+        alpha: float = 1,
+        mpt: case.MixedPatternTable = {},
+    ):
         self._classifier = perceptronix.SparseDenseMultinomialClassifier(
             nfeats, len(case.TokenCase), alpha
         )
+        self._mpt = mpt
+
+    # (De)serialization methods, overwritten to handle MPT, stored in the metadata.
 
     @classmethod
     def read(cls, filename: str):
         """Reads case restorer model from serialized model file."""
-        result = cls.__new__(cls)
-        result._classifier = perceptronix.SparseDenseMultinomialClassifier.read(
-            filename
-        )
-        return result
+        (
+            classifier,
+            metadata,
+        ) = perceptronix.SparseDenseMultinomialClassifier.read(filename)
+        new = cls.__new__(cls)
+        new._classifier = classifier
+        new._mpt = json.loads(metadata)
+        return new
+
+    def write(self, filename) -> None:
+        self._classifier.write(filename, json.dumps(self._mpt))
 
     # Data readers.
 
@@ -48,26 +68,25 @@ class CaseRestorer(object):
     def sentences_from_file(filename: str) -> Iterator[Tokens]:
         with open(filename, "r") as source:
             for line in source:
-                tokens = line.split()
-                if tokens:
-                    yield tokens
+                yield line.split()
 
     @staticmethod
     def tagged_sentences_from_file(
         filename: str
-    ) -> Iterator[Tuple[Tokens, Tags]]:
+    ) -> Iterator[Tuple[Tokens, Tags, Patterns]]:
         for tokens in CaseRestorer.sentences_from_file(filename):
-            # TODO(kbg): Adds support for mixed case patterns.
-            tags = [case.get_tc(token)[0] for token in tokens]
-            yield (tokens, tags)
+            (tags, patterns) = zip(*(case.get_tc(token) for token in tokens))
+            # Casefolds after we get the labels.
+            tokens = [token.casefold() for token in tokens]
+            yield (tokens, list(tags), list(patterns))
 
     # Feature extraction.
 
     @staticmethod
     @nlup.listify
     def extract_emission_features(tokens: Tokens) -> Iterator[Vector]:
-        """Geneates emission feature vectors for a sentence."""
-        tokens = [token.casefold() for token in tokens]
+        """Generates emission feature vectors for a sentence."""
+        # Tokens are assumed to have already been case-folded.
         for (i, token) in enumerate(tokens):
             vector = [BIAS, f"w_i={token}"]
             # Context features.
@@ -94,7 +113,7 @@ class CaseRestorer(object):
 
     # Not yet supported: transition features, greedy or optimal.
 
-    def train(self, vectors: Vectors, tags: Tags) -> Iterator[case.TokenCase]:
+    def train(self, vectors: Vectors, tags: Tags) -> Iterator[bool]:
         for (vector, tag) in zip(vectors, tags):
             yield self._classifier.train(vector, tag.value)
 
@@ -107,9 +126,9 @@ class CaseRestorer(object):
 
     def apply(self, tokens: Tokens) -> Iterator[str]:
         """Case-restore a list of tokens."""
-        # TODO(kbg): Will break in mixed-case scenarios.
         for (token, tag) in zip(tokens, self.tag(tokens)):
-            yield case.apply_tc(token, tag)
+            pattern = self._mpt.get(token)
+            yield case.apply_tc(token, tag, pattern)
 
     # Delegates all attributes not otherwise defined to the underlying
     # classifier.

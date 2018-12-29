@@ -12,19 +12,26 @@ from case_restorer import case
 
 from .model import CaseRestorer
 
-
-Data = List[Tuple[List[case.TokenCase], List[str]]]
-
-
-def _read_data(filename: str) -> Data:
-    return [
-        (CaseRestorer.extract_emission_features(tokens), tags)
-        for (tokens, tags) in CaseRestorer.tagged_sentences_from_file(filename)
-    ]
+Tokens = List[str]
+Tags = List[case.TokenCase]
+Sentences = List[Tuple[Tokens, Tags]]
 
 
-def _data_size(data: Data) -> int:
-    return sum(len(tags) for (_, tags) in data)
+def _read_data(filename: str) -> Tuple[Sentences, case.MixedPatternTable]:
+    data = []
+    mixed_patterns: case.MixedPatternTable = {}
+    gen = CaseRestorer.tagged_sentences_from_file(filename)
+    for (tokens, tags, patterns) in gen:
+        vectors = CaseRestorer.extract_emission_features(tokens)
+        data.append((vectors, tags))
+        for (token, pattern) in zip(tokens, patterns):
+            if pattern is not None:
+                mixed_patterns[token] = pattern
+    return (data, mixed_patterns)
+
+
+def _data_size(sentences: Sentences) -> int:
+    return sum(len(tags) for (_, tags) in sentences)
 
 
 argparser = argparse.ArgumentParser(
@@ -61,29 +68,27 @@ else:
 
 # Input block.
 if args.train:
-    model = CaseRestorer(args.nfeats, args.alpha)
     logging.info("Training model from %s", args.train)
-    train_data = _read_data(args.train)
-    train_size = _data_size(train_data)
+    (train_sents, train_mpt) = _read_data(args.train)
+    train_size = _data_size(train_sents)
     if args.dev:
-        dev_data = _read_data(args.dev)
-        dev_size = _data_size(dev_data)
-    else:
-        dev_data = None
+        dev_sents = _read_data(args.dev)[0]
+        dev_size = _data_size(dev_sents)
+    model = CaseRestorer(args.nfeats, args.alpha, train_mpt)
     random.seed(args.seed)
     for epoch in range(1, 1 + args.epochs):
-        random.shuffle(train_data)
+        random.shuffle(train_sents)
         logging.info("Epoch %d...", epoch)
         train_correct = 0
         with nlup.Timer():
-            for (vectors, tags) in train_data:
+            for (vectors, tags) in train_sents:
                 train_correct += sum(model.train(vectors, tags))
         logging.info(
             "Resubstitution accuracy: %.4f", train_correct / train_size
         )
         if args.dev:
             dev_correct = 0
-            for (vectors, tags) in dev_data:
+            for (vectors, tags) in dev_sents:
                 dev_correct += sum(
                     tag == predicted
                     for (tag, predicted) in zip(
@@ -93,8 +98,6 @@ if args.train:
             logging.info("Development accuracy: %.4f", dev_correct / dev_size)
     logging.info("Averaging model...")
     model.average()
-    del train_data
-    del dev_data
 elif args.read:
     logging.info("Reading model from %s", args.read)
     model = CaseRestorer.read(args.read)

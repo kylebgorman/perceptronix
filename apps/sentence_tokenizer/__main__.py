@@ -96,8 +96,6 @@ if args.train:
             )
     logging.info("Averaging model")
     model.average()
-    del train_data
-    del dev_data
 elif args.read:
     logging.info("Reading model from %s", args.read)
     model = SentenceTokenizer.read(

@@ -1,6 +1,7 @@
 // multinomial_perceptron.cc: specializations for binomial_perceptron
 // classifiers with binary features.
 
+#include "linear_model.pb.h"
 #include "multinomial_perceptron.h"
 
 namespace perceptronix {
@@ -23,9 +24,10 @@ DenseMultinomialPerceptron::MultinomialPerceptronTpl(
 
 template <>
 DenseMultinomialPerceptron *DenseMultinomialPerceptron::Read(
-    std::istream &istrm) {
+    std::istream &istrm, string *metadata) {
   DenseMultinomialPerceptron_pb pb;
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
+  if (metadata) *metadata = pb.metadata();
   const size_t outer_size = pb.table_size();
   const size_t inner_size = pb.inner_size();
   auto *model = new DenseMultinomialPerceptron(outer_size, inner_size);
@@ -43,7 +45,7 @@ template <>
 bool DenseMultinomialPerceptron::Write(std::ostream &ostrm,
                                        const string &metadata) const {
   DenseMultinomialPerceptron_pb pb;
-  pb.set_metadata(metadata);
+  if (!metadata.empty()) pb.set_metadata(metadata);
   pb.set_inner_size(InnerSize());
   for (auto it = table_.cbegin(); it != table_.cend(); ++it) {
     auto inner_table_pb = pb.add_table();
@@ -71,9 +73,10 @@ SparseDenseMultinomialPerceptron::MultinomialPerceptronTpl(
 
 template <>
 SparseDenseMultinomialPerceptron *SparseDenseMultinomialPerceptron::Read(
-    std::istream &istrm) {
+    std::istream &istrm, string *metadata) {
   SparseDenseMultinomialPerceptron_pb pb;
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
+  if (metadata) *metadata = pb.metadata();
   const size_t inner_size = pb.inner_size();
   auto *model = new SparseDenseMultinomialPerceptron(pb.table_size(),
                                                      inner_size);
@@ -92,7 +95,7 @@ template <>
 bool SparseDenseMultinomialPerceptron::Write(std::ostream &ostrm,
                                              const string &metadata) const {
   SparseDenseMultinomialPerceptron_pb pb;
-  pb.set_metadata(metadata);
+  if (!metadata.empty()) pb.set_metadata(metadata);
   pb.set_inner_size(InnerSize());
   auto *outer_table_pb = pb.mutable_table();
   for (auto it = table_.cbegin(); it != table_.cend(); ++it) {
@@ -124,9 +127,10 @@ SparseMultinomialPerceptron::MultinomialPerceptronTpl(
 
 template <>
 SparseMultinomialPerceptron *SparseMultinomialPerceptron::Read(
-    std::istream &istrm) {
+    std::istream &istrm, string *metadata) {
   SparseMultinomialPerceptron_pb pb;
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
+  if (metadata) *metadata = pb.metadata();
   auto *model = new SparseMultinomialPerceptron(pb.table_size(),
                                                 pb.inner_size());
   auto outer_table_pb = pb.table();
@@ -146,7 +150,7 @@ template <>
 bool SparseMultinomialPerceptron::Write(std::ostream &ostrm,
                                         const string &metadata) const {
   SparseMultinomialPerceptron_pb pb;
-  pb.set_metadata(metadata);
+  if (!metadata.empty()) pb.set_metadata(metadata);
   pb.set_inner_size(InnerSize());
   auto *outer_table_pb = pb.mutable_table();
   for (auto it = table_.cbegin(); it != table_.cend(); ++it) {

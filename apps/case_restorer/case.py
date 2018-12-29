@@ -8,7 +8,7 @@ to an arbitrary Unicode string)."""
 import enum
 import unicodedata
 
-from typing import List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 
 # Casing features at the the Unicode character level.
@@ -99,7 +99,12 @@ class UnknownTokenCaseError(ValueError):
     pass
 
 
-Pattern = Optional[List[CharCase]]
+# Type definitions for mixed-base patterns.
+
+
+ObligatoryPattern = List[CharCase]
+Pattern = Optional[ObligatoryPattern]
+MixedPatternTable = Dict[str, ObligatoryPattern]
 
 
 def get_tc(nunistr: str) -> Tuple[TokenCase, Pattern]:
@@ -156,6 +161,9 @@ def apply_tc(nunistr: str, tc: TokenCase, pattern: Pattern = None) -> str:
     elif tc == TokenCase.TITLE:
         return nunistr.title()
     elif tc == TokenCase.MIXED:
+        # Defaults to lowercase if no pattern is provided.
+        if pattern is None:
+            return nunistr.lower()
         assert pattern
         assert len(nunistr) == len(pattern)
         return "".join(apply_cc(ch, cc) for (ch, cc) in zip(nunistr, pattern))

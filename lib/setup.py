@@ -7,14 +7,14 @@ from Cython.Build import cythonize
 extension = Extension(
     "perceptronix",
     sources=[
-        "perceptronix.pyx",
+        "linear_model.pb.cc",
         "binomial_perceptron.cc",
-        "linmod.pb.cc",
         "multinomial_perceptron.cc",
+        "perceptronix.pyx",
     ],
     libraries=["protobuf"],
     language="c++",
-    extra_compile_args=["-std=c++11", "-Wno-sign-compare"],
+    extra_compile_args=["-std=c++11", "-funsigned-char"],
 )
 
 setup(
@@ -23,5 +23,7 @@ setup(
     author="Kyle Gorman",
     author_email="kylebgorman@gmail.com",
     install_requires=["Cython >= 0.29"],
-    ext_modules=cythonize([extension], compiler_directives={"language_level": 3})
+    ext_modules=cythonize(
+        [extension], compiler_directives={"language_level": 3}
+    ),
 )
