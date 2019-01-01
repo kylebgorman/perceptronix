@@ -88,8 +88,7 @@ if args.train:
         if args.dev:
             dev_correct = 0
             for (vector, boundary) in dev_data:
-                if model.predict_vector(vector) == boundary:
-                    dev_correct += 1
+                dev_correct += model.evaluate(vector, boundary)
             logging.info(
                 "Development accuracy: %.4f", dev_correct / len(dev_data)
             )

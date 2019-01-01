@@ -50,7 +50,7 @@ class SentenceTokenizer(object):
 
     # Data readers.
 
-    def candidates(self, text: str) -> Iterator[Tuple[Candidate, bool]]:
+    def candidates(self, text: str) -> Iterator[Candidate]:
         for match in self._candidate_regex.finditer(text, overlapped=True):
             (left, boundary, right) = match.groups()
             left_index = match.span()[0] + len(left)
@@ -94,11 +94,8 @@ class SentenceTokenizer(object):
 
     # Training and prediction.
 
-    def predict(self, candidate: Candidate) -> bool:
-        return self.predict_vector(self.extract_features(candidate))
-
-    def predict_vector(self, vector: List[str]) -> bool:
-        return self._classifier.predict(vector)
+    def evaluate(self, vector: List[str], tag: bool) -> bool:
+        return tag == self.predict(vector)
 
     def apply(self, text: str) -> Iterator[str]:
         """Tokenize a text."""
@@ -107,7 +104,8 @@ class SentenceTokenizer(object):
             # Passes through any newlines already present.
             if candidate.boundary:
                 continue
-            if self.predict(candidate):
+            vector = SentenceTokenizer.extract_features(candidate)
+            if self.predict(vector):
                 yield text[start : candidate.left_index + 1]
                 start = candidate.right_index + 1
         yield text[start:].rstrip()
