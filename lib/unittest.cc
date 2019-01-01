@@ -143,15 +143,15 @@ void TestStructured() {
                                                      {"*bias*", "w=good"},
                                                      {"*bias*", "w=.",
                                                       "*ultimate*"}};
-  const SparseTransitionFunctor<bool> binomial_tfunctor(2);
-  for (size_t i = 0; i < 10; ++i) {
-    GreedyTrain(evectors, binomial_tfunctor, binomial_ys, &sba);
-  }
+  const SparseTransitionFunctor<bool> binomial_tf(1);
+  SparseBinomialAveragedDecoder sbad(&sba, binomial_tf);
+  for (size_t i = 0; i < 10; ++i) sbad.Train(evectors, binomial_ys);
   std::vector<bool> binomial_yhats;
-  GreedyPredict(evectors, binomial_tfunctor, sba, &binomial_yhats);
+  sbad.Predict(evectors, &binomial_yhats);
   AssertStructured(binomial_ys, binomial_yhats);
   const SparseBinomialPerceptron sb(&sba);
-  GreedyPredict(evectors, binomial_tfunctor, sb, &binomial_yhats);
+  const SparseBinomialDecoder sbd(sb, binomial_tf);
+  sbd.Predict(evectors, &binomial_yhats);
   AssertStructured(binomial_ys, binomial_yhats);
 
   // Sparse-dense multinomial; case-restoration (reusing the evectors and
@@ -162,21 +162,21 @@ void TestStructured() {
                                         static_cast<size_t>(Case::LOWER),
                                         static_cast<size_t>(Case::LOWER),
                                         static_cast<size_t>(Case::DC)};
-  const SparseTransitionFunctor<size_t> dense_tfunctor(2);
-  for (size_t i = 0; i < 10; ++i) {
-    GreedyTrain(evectors, dense_tfunctor, dense_ys, &sdma);
-  }
+  const SparseTransitionFunctor<size_t> dense_tf(2);
+  SparseDenseMultinomialAveragedDecoder sdmad(&sdma, dense_tf);
+  for (size_t i = 0; i < 10; ++i) sdmad.Train(evectors, dense_ys);
   std::vector<size_t> dense_yhats;
-  GreedyPredict(evectors, dense_tfunctor, sdma, &dense_yhats);
+  sdmad.Predict(evectors, &dense_yhats);
   AssertStructured(dense_ys, dense_yhats);
   const SparseDenseMultinomialPerceptron sdm(&sdma);
-  GreedyPredict(evectors, dense_tfunctor, sdm, &dense_yhats);
+  const SparseDenseMultinomialDecoder sdmd(sdm, dense_tf);
+  sdmd.Predict(evectors, &dense_yhats);
   AssertStructured(dense_ys, dense_yhats);
 }
 
 int main(void) {
-  TestBinomial();
-  TestMultinomial();
+  //TestBinomial();
+  //TestMultinomial();
   TestStructured();
   return 0;
 }

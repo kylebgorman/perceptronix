@@ -1,4 +1,4 @@
-// decode.h: Greedy decoding functions and classes.
+// decode.h:  decoding functions and classes.
 
 #include <cassert>
 
@@ -6,6 +6,9 @@
 #include <sstream>
 #include <string>
 #include <vector>
+
+#include "binomial_perceptron.h"
+#include "multinomial_perceptron.h"
 
 using std::string;
 
@@ -54,84 +57,142 @@ class SparseTransitionFunctor {
   const size_t order_;
 };
 
-// Performs greedy prediction.
-//
-// The caller provides emission vectors, a transition functor, and a classifier.
-//
-// The outputs include pointers to vectors for the combined features and a vector
-// of predicted labels.
-template <class Classifier, class TransitionFunctor>
-void GreedyPredict(
-    const std::vector<std::vector<typename Classifier::Feature>> &evectors,
-    const TransitionFunctor &tfunctor,
-    const Classifier &classifier,
-    std::vector<std::vector<typename Classifier::Feature>> *cvectors,
-    std::vector<typename Classifier::Label> *yhats) {
-  const auto size = evectors.size();
-  cvectors->clear();
-  cvectors->resize(size);
-  yhats->clear();
-  yhats->reserve(size);
-  for (size_t i = 0; i < size; ++i) {
-    const auto &evector = evectors[i];
-    auto &cvector = (*cvectors)[i];
-    // Gets transition features.
-    tfunctor(*yhats, &cvector);
-    // Appends emission features to it.
-    cvector.insert(cvector.end(), evector.begin(), evector.end());
-    // Makes prediction.
-    yhats->emplace_back(classifier.Predict(cvector));
+// Base greedy decoder, without training functionality.
+template <class Perceptron, class TransitionFunctor>
+class Decoder {
+ public:
+  using Label = typename Perceptron::Label;
+  using Feature = typename Perceptron::Feature;
+
+  using Labels = std::vector<Label>;
+  using Vectors = std::vector<std::vector<Feature>>;
+
+  Decoder(const Perceptron &perceptron,
+                const TransitionFunctor &tfunctor) :
+    perceptron_(perceptron),
+    tfunctor_(tfunctor) {}
+
+  // Performs greedy prediction.
+  void Predict(const Vectors &evectors, Labels *yhats) const {
+    Vectors cvectors;
+    Predict(evectors, &cvectors, yhats);
   }
-}
 
-// Variant of greedy prediction that hides the combined feature vectors for when
-// they are not needed (i.e., inference without training).
-template <class Classifier, class TransitionFunctor>
-void GreedyPredict(
-    const std::vector<std::vector<typename Classifier::Feature>> &evectors,
-    const TransitionFunctor &tfunctor,
-    const Classifier &classifier,
-    std::vector<typename Classifier::Label> *yhats) {
-  std::vector<std::vector<typename Classifier::Feature>> cvectors;
-  GreedyPredict(evectors, tfunctor, classifier, &cvectors, yhats);
-}
-
-// Performs binomial-model training with greedy decoding.
-//
-
-// Performs training with greedy decoding.
-//
-// The caller provides emission vectors, a transition functor, a label vector,
-// and a pointer to the classifier. 
-//
-// The output is the number of correctly predicted labels.
-template <class Classifier, class TransitionFunctor>
-size_t GreedyTrain(
-    const std::vector<std::vector<typename Classifier::Feature>> &evectors,
-    const TransitionFunctor &tfunctor,
-    const std::vector<typename Classifier::Label> &ys,
-    Classifier *classifier) {
-  const auto size = ys.size();
-  assert(size == evectors.size());
-  std::vector<std::vector<typename Classifier::Feature>> cvectors;
-  std::vector<typename Classifier::Label> yhats;
-  GreedyPredict(evectors, tfunctor, *classifier, &cvectors, &yhats);
-  size_t correct = 0;
-  for (size_t i = 0; i < size; ++i) {
-    const auto &y = ys[i];;
-    const auto &yhat = yhats[i];
-    if (y == yhat) {
-      correct += 1;
-    } else {
-      const auto &cvector = cvectors[i];
-      // yhat is ignored in the binomial case thanks to a dumb hack.
-      classifier->Update(cvector, y, yhat);
+  // Same but exposes the cvectors.
+  void Predict(const Vectors &evectors,
+               Vectors *cvectors,
+               Labels *yhats) const {
+    const auto size = evectors.size();
+    cvectors->clear();
+    cvectors->resize(size);
+    yhats->clear();
+    yhats->reserve(size);
+    for (size_t i = 0; i < size; ++i) {
+      const auto &evector = evectors[i];
+      auto &cvector = (*cvectors)[i];
+      // Gets transition features.
+      tfunctor_(*yhats, &cvector);
+      // Appends emission features to it.
+      cvector.insert(cvector.end(), evector.begin(), evector.end());
+      // Makes prediction.
+      yhats->emplace_back(perceptron_.Predict(cvector));
     }
   }
-  classifier->Tick(size);
-  return correct;
-}
 
-// TODO(kbg): Viterbi someday?
+ private:
+  const Perceptron &perceptron_;
+  const TransitionFunctor &tfunctor_;
+};
+
+// Specializations of the above
+
+using SparseBinomialDecoder =
+    Decoder<
+        SparseBinomialPerceptron,
+        SparseTransitionFunctor<typename SparseBinomialPerceptron::Label>
+    >;
+using SparseDenseMultinomialDecoder =
+    Decoder<
+        SparseDenseMultinomialPerceptron,
+        SparseTransitionFunctor<
+            typename SparseDenseMultinomialPerceptron::Label
+        >
+    >;
+using SparseMultinomialDecoder =
+    Decoder<
+        SparseMultinomialPerceptron,
+        SparseTransitionFunctor<typename SparseMultinomialPerceptron::Label>
+    >;
+
+// Enhanced greedy decoder, with training functionality.
+template <class Perceptron, class TransitionFunctor>
+class AveragedDecoder {
+ public:
+  using Label = typename Perceptron::Label;
+  using Feature = typename Perceptron::Feature;
+
+  using Labels = std::vector<Label>;
+  using Vectors = std::vector<std::vector<Feature>>;
+
+  AveragedDecoder(Perceptron *perceptron,
+                  const TransitionFunctor &tfunctor) :
+    base_(*perceptron, tfunctor),
+    perceptron_(perceptron) {}
+
+  // Performs greedy prediction.
+  void Predict(const Vectors &evectors, Labels *yhat) const {
+    base_.Predict(evectors, yhat);
+  }
+
+  // Performs greedy training and returns the number of correct classifications. 
+  size_t Train(const Vectors &evectors, const Labels &ys) {
+    const auto size = ys.size();
+    assert(size == evectors.size());
+    Vectors cvectors;
+    Labels yhats;
+    base_.Predict(evectors, &cvectors, &yhats);
+    size_t correct = 0;
+    for (size_t i = 0; i < size; ++i) {
+      const auto &y = ys[i];
+      const auto &yhat = yhats[i];
+      if (y == yhat) {
+        correct += 1;
+      } else {
+        const auto &cvector = cvectors[i];
+        perceptron_->Update(cvector, y, yhat);
+      }
+    }
+    perceptron_->Tick(size);
+    return correct;
+  }
+
+ private:
+  const Decoder<Perceptron, TransitionFunctor> base_;
+  Perceptron *perceptron_;
+};
+
+// Specializations of the above.
+
+using SparseBinomialAveragedDecoder =
+    AveragedDecoder<
+        SparseBinomialAveragedPerceptron,
+        SparseTransitionFunctor<
+            typename SparseBinomialAveragedPerceptron::Label
+        >
+    >;
+using SparseDenseMultinomialAveragedDecoder =
+    AveragedDecoder<
+        SparseDenseMultinomialAveragedPerceptron,
+        SparseTransitionFunctor<
+            typename SparseDenseMultinomialAveragedPerceptron::Label
+        >
+    >;
+using SparseMultinomialAveragedDecoder =
+    AveragedDecoder<
+        SparseMultinomialAveragedPerceptron,
+        SparseTransitionFunctor<
+            typename SparseMultinomialAveragedPerceptron::Label
+        >
+    >;
 
 }  // namespace perceptronix
