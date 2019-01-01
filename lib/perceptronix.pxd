@@ -8,6 +8,13 @@ from libcpp.vector cimport vector
 
 cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
+  cdef cppclass SparseTransitionFunctor[Label]:
+    
+    SparseTransitionFunctor(size_t)
+
+    operator()(const vector[Label] &, vector[string] *)
+
+
   cdef cppclass DenseBinomialAveragedPerceptron:
 
     DenseBinomialAveragedPerceptron(size_t)
