@@ -9,12 +9,12 @@
 // methods of AveragingWeight(Tpl) during training, and then to finalize
 // the model by creating new Weight(Tpl) instances like so:
 //
-//     uint64_t t = 0;
+//     uint64_t time = 0;
 //     AveragingWeight aw(0);
 //     // ...
 //     // Many rounds of training using aw.Get() and aw.Update().
 //     // ...
-//     Weight w(aw.GetAveragingWeight(t));
+//     Weight w(aw.GetAverage(time));
 
 #ifndef PERCEPTRONIX_WEIGHT_H_
 #define PERCEPTRONIX_WEIGHT_H_
@@ -122,7 +122,7 @@ class AveragingWeightTpl : public WeightTpl<T> {
   // complete.
   float GetAverage(uint64_t time) {
     Freshen(time);
-    return static_cast<double>(summed_weight_) / time_;
+    return static_cast<double>(summed_weight_) / time;
   }
 
  protected:

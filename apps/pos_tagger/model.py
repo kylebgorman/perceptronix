@@ -9,8 +9,6 @@ import perceptronix
 
 # Constant feature string.
 
-BIAS = "*bias*"
-
 INITIAL = "*initial*"
 PENINITIAL = "*peninitial*"
 PENULTIMATE = "*penultimate*"
@@ -114,12 +112,11 @@ class POSTagger(object):
         # TODO(kbg): Add casing features.
         if not tokens:
             return []
-        vectors = [[BIAS] for _ in range(len(tokens))]
+        vectors = [[f"w_i={token}"] for token in tokens]
         # Left edge features.
         initial = tokens[0]
         initial_vector = vectors[0]
         initial_vector.append(INITIAL)
-        initial_vector.append(f"w_i={initial}")
         initial_vector.extend(POSTagger._shape_features(initial))
         if len(tokens) > 1:
             peninitial = tokens[1]
@@ -127,7 +124,6 @@ class POSTagger(object):
             peninitial_vector = vectors[1]
             peninitial_vector.append(PENINITIAL)
             peninitial_vector.append(f"w_i-1={initial}")
-            peninitial_vector.append(f"w_i={peninitial}")
             peninitial_vector.extend(POSTagger._shape_features(peninitial))
             if len(tokens) > 2:
                 antepeninitial = tokens[2]
@@ -138,7 +134,6 @@ class POSTagger(object):
             current_vector = vectors[i]
             current_vector.append(f"w_i-2={tokens[i - 2]}")
             current_vector.append(f"w_i-1={tokens[i - 1]}")
-            current_vector.append(f"w_i={token}")
             current_vector.extend(POSTagger._shape_features(token))
             current_vector.append(f"w_i+1={tokens[i + 1]}")
             current_vector.append(f"w_i+2={tokens[i + 2]}")
@@ -146,7 +141,6 @@ class POSTagger(object):
         ultimate = tokens[-1]
         ultimate_vector = vectors[-1]
         ultimate_vector.append(ULTIMATE)
-        ultimate_vector.append(f"w_i={ultimate}")
         ultimate_vector.extend(POSTagger._shape_features(ultimate))
         if len(tokens) > 1:
             penultimate = tokens[-2]
@@ -154,7 +148,6 @@ class POSTagger(object):
             penultimate_vector = vectors[-2]
             penultimate_vector.append(PENULTIMATE)
             penultimate_vector.append(f"w_i+1={ultimate}")
-            penultimate_vector.append(f"w_i={penultimate}")
             penultimate_vector.extend(POSTagger._shape_features(penultimate))
             if len(tokens) > 2:
                 antepenultimate = tokens[-3]

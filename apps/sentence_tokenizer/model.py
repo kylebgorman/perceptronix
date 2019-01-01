@@ -12,8 +12,6 @@ import perceptronix
 
 # Constant feature strings.
 
-BIAS = "*bias*"
-
 NEWLINE = regex.compile(r"\n|\r|\r\n")
 
 
@@ -77,7 +75,6 @@ class SentenceTokenizer(object):
     @nlup.listify
     def extract_features(candidate: Candidate) -> Iterator[str]:
         """Generates feature vector for a candidate."""
-        yield BIAS
         # All suffixes of the left context.
         lpieces = tuple(
             f"L={candidate.left[-i:]}"

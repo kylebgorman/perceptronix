@@ -33,8 +33,6 @@ void TestBinomial() {
   dba.Train({static_cast<DenseFeature>(DFeat::BLUE)}, false);
   dba.Train({static_cast<DenseFeature>(DFeat::BLUE)}, false);
   dba.Train({static_cast<DenseFeature>(DFeat::RED)}, true);
-  std::unique_ptr<AveragingWeight> score(
-      dba.Score(static_cast<DenseFeature>(DFeat::PURPLE)));
   const DenseBinomialPerceptron db(&dba);
   assert(db.Predict({static_cast<DenseFeature>(DFeat::GREEN),
                      static_cast<DenseFeature>(DFeat::RED)}));
@@ -73,7 +71,6 @@ constexpr size_t N = static_cast<size_t>(Case::__SIZE__);
 void TestMultinomial() {
   using DenseFeature = DenseMultinomialAveragingPerceptron::Feature;
 
-  /*
   DenseMultinomialAveragingPerceptron dma(F, N);
   dma.Train({static_cast<DenseFeature>(DFeat::BLUE)},
             static_cast<DenseFeature>(Case::MIXED));
@@ -94,13 +91,13 @@ void TestMultinomial() {
   assert(dmr->Predict({static_cast<DenseFeature>(DFeat::BLUE),
                        static_cast<DenseFeature>(DFeat::GREEN)}) ==
          static_cast<DenseFeature>(Case::MIXED));
-  */
 
   SparseDenseMultinomialAveragingPerceptron sdma(F, N);
   sdma.Train({"blue"}, static_cast<DenseFeature>(Case::MIXED));
   sdma.Train({"green"}, static_cast<DenseFeature>(Case::TITLE));
+  sdma.Train({"green"}, static_cast<DenseFeature>(Case::LOWER));
   sdma.Train({"green"}, static_cast<DenseFeature>(Case::MIXED));
-  sdma.Train({"green"}, static_cast<DenseFeature>(Case::MIXED));
+  sdma.Train({"brown"}, static_cast<DenseFeature>(Case::UPPER));
   const SparseDenseMultinomialPerceptron sdm(&sdma);
   assert(sdm.Predict({"blue", "green"}) ==
          static_cast<DenseFeature>(Case::MIXED));
@@ -137,13 +134,11 @@ void TestStructured() {
   // Sparse binomial: word segmentation (space before?).
   SparseBinomialAveragingPerceptron sba(32);
   const std::vector<bool> binomial_ys = {false, true, true, true, false};
-  const std::vector<std::vector<string>> evectors = {{"*bias*", "w=this",
-                                                      "*initial*"},
-                                                     {"*bias*", "w=sentence"},
-                                                     {"*bias*", "w=is"},
-                                                     {"*bias*", "w=good"},
-                                                     {"*bias*", "w=.",
-                                                      "*ultimate*"}};
+  const std::vector<std::vector<string>> evectors = {{"w=this", "*initial*"},
+                                                     {"w=sentence"},
+                                                     {"w=is"},
+                                                     {"w=good"},
+                                                     {"w=.", "*ultimate*"}};
   const SparseTransitionFunctor<bool> binomial_tf(1);
   SparseBinomialAveragingDecoder sbad(&sba, binomial_tf);
   for (size_t i = 0; i < 10; ++i) sbad.Train(evectors, binomial_ys);
@@ -176,8 +171,11 @@ void TestStructured() {
 }
 
 int main(void) {
-  //TestBinomial();
-  //TestMultinomial();
+  TestBinomial();
+  TestMultinomial();
   TestStructured();
+
+  std::cout << "Success!" << std::endl;
+
   return 0;
 }

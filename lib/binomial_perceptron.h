@@ -33,18 +33,12 @@ class BinomialPerceptronBaseTpl {
 
   void Score(Feature f, Weight *weight) const { *weight += table_[f]; }
 
-  Weight *Score(Feature f) const {
-    auto *weight = new Weight();
-    Score(f, weight);
-    return weight;
-  }
-
   void Score(const FeatureBundle &fb, Weight *weight) const {
     for (const auto &f : fb) Score(f, weight);
   }
 
   Weight *Score(const FeatureBundle &fb) const {
-    auto *weight = new Weight();
+    auto *weight = new Weight(bias_);
     Score(fb, weight);
     return weight;
   }
@@ -57,6 +51,7 @@ class BinomialPerceptronBaseTpl {
   size_t Size() const { return table_.Size(); }
 
  protected:
+  Weight bias_;
   Table table_;
 };
 
@@ -72,6 +67,7 @@ class BinomialAveragingPerceptronTpl
   using Base::Predict;
   using Base::Score;
 
+  using Base::bias_;
   using Base::table_;
 
   friend class BinomialPerceptronBaseTpl<InnerTableTpl, Weight>;
@@ -90,6 +86,7 @@ class BinomialAveragingPerceptronTpl
   // 2: Updates many features given the correct label.
   void Update(const FeatureBundle &fb, bool y) {
     const auto tau = y ? +1 : -1;
+    bias_.Update(tau, time_);
     for (const auto &f : fb) table_[f].Update(tau, time_);
   }
 
@@ -127,6 +124,7 @@ class BinomialPerceptronTpl
   using Base::Predict;
   using Base::Score;
 
+  using Base::bias_;
   using Base::table_;
 
   explicit BinomialPerceptronTpl(size_t nfeats, size_t nlabels)

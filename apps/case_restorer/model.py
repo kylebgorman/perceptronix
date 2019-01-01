@@ -12,8 +12,6 @@ from case_restorer import case
 
 # Constant feature strings.
 
-BIAS = "*bias*"
-
 INITIAL = "*initial*"
 PENINITIAL = "*peninitial*"
 
@@ -90,7 +88,7 @@ class CaseRestorer(object):
         """Generates emission feature vectors for a sentence."""
         # Tokens are assumed to have already been case-folded.
         for (i, token) in enumerate(tokens):
-            vector = [BIAS, f"w_i={token}"]
+            vector = [f"w_i={token}"]
             # Context features.
             if i == 0:
                 vector.append(INITIAL)

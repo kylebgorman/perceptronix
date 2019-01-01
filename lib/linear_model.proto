@@ -11,45 +11,50 @@ package perceptronix;
 // Binomial models.
 
 // Dense in features (rare).
-message DenseBinomialPerceptron_pb {
+message DenseBinomialPerceptronProto {
   optional string metadata = 1 [default = ""];
-  repeated float table = 2;
+  required float bias = 2;
+  repeated float table = 3;
 }
 
 // Sparse in features (common).
-message SparseBinomialPerceptron_pb {
+message SparseBinomialPerceptronProto {
   optional string metadata = 1 [default = ""];
-  map<string, float> table = 2;
+  required float bias = 2;
+  map<string, float> table = 3;
 }
 
 // Multinomial models.
 
-message DenseInnerTable_pb {
+message DenseInnerTableProto {
   repeated float table = 1;
 }
 
-message SparseInnerTable_pb {
+message SparseInnerTableProto {
   map<string, float> table = 1;
 }
 
 // Dense in both features and labels (rare).
-message DenseMultinomialPerceptron_pb {
+message DenseMultinomialPerceptronProto {
   optional string metadata = 1 [default = ""];
   required uint32 inner_size = 2;
-  repeated DenseInnerTable_pb table = 3;
-}
-
-// Sparse in both features and labels (common).
-message SparseMultinomialPerceptron_pb {
-  optional string metadata = 1 [default = ""];
-  required uint32 inner_size = 2;
-  map<string, SparseInnerTable_pb> table = 3;
+  required DenseInnerTableProto bias = 3;
+  repeated DenseInnerTableProto table = 4;
 }
 
 // Sparse in features, dense in labels (very common).
 
-message SparseDenseMultinomialPerceptron_pb {
+message SparseDenseMultinomialPerceptronProto {
   optional string metadata = 1 [default = ""];
   required uint32 inner_size = 2;
-  map<string, DenseInnerTable_pb> table = 3;
+  required DenseInnerTableProto bias = 3;
+  map<string, DenseInnerTableProto> table = 4;
+}
+
+// Sparse in both features and labels (common).
+message SparseMultinomialPerceptronProto {
+  optional string metadata = 1 [default = ""];
+  required uint32 inner_size = 2;
+  required SparseInnerTableProto bias = 3;
+  map<string, SparseInnerTableProto> table = 4;
 }

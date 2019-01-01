@@ -19,10 +19,10 @@ using std::string;
 
 namespace perceptronix {
 
-template <template <class> class OuterTableTpl, class WeightT>
+template <template <class> class OuterTableTpl, class Weight>
 class MultinomialPerceptronBaseTpl {
  public:
-  using Table = OuterTableTpl<WeightT>;
+  using Table = OuterTableTpl<Weight>;
   using InnerTable = typename Table::InnerTable;
   using Feature = typename Table::Feature;
   // Vectors of features may be large so we pass them by reference.
@@ -30,7 +30,7 @@ class MultinomialPerceptronBaseTpl {
   using Label = typename Table::Label;
 
   MultinomialPerceptronBaseTpl(size_t nfeats, size_t nlabels)
-      : table_(nfeats, nlabels) {
+      : bias_(nlabels), table_(nfeats, nlabels) {
     assert(nfeats > 0);
     assert(nlabels > 2);
   }
@@ -44,18 +44,12 @@ class MultinomialPerceptronBaseTpl {
     inner->AddWeights(table_[f]);
   }
 
-  InnerTable *Score(Feature f) const {
-    auto *inner = new InnerTable(InnerSize());
-    Score(f, inner);
-    return inner;
-  }
-
   void Score(const FeatureBundle &fb, InnerTable *inner) const {
     for (const auto &f: fb) Score(f, inner);
   }
 
   InnerTable *Score(const FeatureBundle &fb) const {
-    auto *inner = new InnerTable(InnerSize());
+    auto *inner = new InnerTable(bias_);
     Score(fb, inner);
     return inner;
   }
@@ -65,6 +59,7 @@ class MultinomialPerceptronBaseTpl {
   size_t InnerSize() const { return table_.InnerSize(); }
 
  protected:
+  InnerTable bias_;
   Table table_;
 };
 
@@ -86,6 +81,9 @@ class MultinomialAveragingPerceptronTpl
   using Base::Predict;
   using Base::Score;
 
+  using Base::bias_;
+  using Base::table_;
+
   // Predicts a single example, updates if it is incorrectly labeled; then
   // updates the timer and returns a boolean indicating success or failure
   // (which callers may safely choose to ignore).
@@ -97,8 +95,6 @@ class MultinomialAveragingPerceptronTpl
     return success;
   }
 
-  using Base::table_;
-
   // 1: Updates a single feature given correct and incorrect labels.
   void Update(const Feature &f, Label y, Label yhat) {
     auto &ref = table_[f];
@@ -108,6 +104,8 @@ class MultinomialAveragingPerceptronTpl
 
   // 2: Updates many features given correct and incorrect labels.
   void Update(const FeatureBundle &fb, Label y, Label yhat) {
+    bias_[y].Update(+1, time_);
+    bias_[yhat].Update(-1, time_);
     for (const auto &f: fb) {
       auto &ref = table_[f];
       ref[y].Update(+1, time_);
@@ -122,7 +120,6 @@ class MultinomialAveragingPerceptronTpl
 
  private:
   uint64_t time_;
-
 };
 
 template <template <class> class OuterTableTpl>
