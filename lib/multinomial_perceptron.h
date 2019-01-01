@@ -115,13 +115,14 @@ class MultinomialAveragedPerceptronTpl
     }
   }
 
+  // Advances the clock; invoked automatically by Train.
+  void Tick(uint64_t increment = 1) { time_ += increment; }
+
   uint64_t Time() const { return time_; }
 
  private:
   uint64_t time_;
 
-  // Advances the clock; invoked automatically by Train.
-  void Tick() { ++time_; }
 };
 
 template <template <class> class OuterTableTpl>

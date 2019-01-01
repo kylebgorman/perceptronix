@@ -7,9 +7,9 @@ linear_model.pb.h: linear_model.proto
 
 linear_model.pb.cc: linear_model.pb.h
 
-unittest: binomial_perceptron.h binomial_perceptron.cc        \
-		  multinomial_perceptron.h multinomial_perceptron.cc  \
-          linear_model.pb.h linear_model.pb.cc table.h weight.h  		  \
+unittest: binomial_perceptron.h binomial_perceptron.cc        			 \
+		  multinomial_perceptron.h multinomial_perceptron.cc  			 \
+          decode.h linear_model.pb.h linear_model.pb.cc table.h weight.h \
 		  unittest.cc
 	g++ $(CXXFLAGS) $(LDFLAGS) binomial_perceptron.cc \
         multinomial_perceptron.cc linear_model.pb.cc unittest.cc \

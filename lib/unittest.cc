@@ -2,9 +2,12 @@
 
 #include <cassert>
 
+#include <iostream>
 #include <memory>
+#include <vector>
 
 #include "binomial_perceptron.h"
+#include "decode.h"
 #include "multinomial_perceptron.h"
 
 using namespace perceptronix;
@@ -64,7 +67,7 @@ void TestBinomial() {
 
 // MULTINOMIAL PERCEPTRON STUFF.
 
-enum class Case { LOWER, MIXED, TITLE, UPPER, __SIZE__ };
+enum class Case { LOWER, MIXED, TITLE, UPPER, DC, __SIZE__ };
 
 constexpr size_t N = static_cast<size_t>(Case::__SIZE__);
 
@@ -121,8 +124,59 @@ void TestMultinomial() {
   assert(smr->Predict({"blue", "green"}) == "lower");
 }
 
+template <class Label>
+void AssertStructured(const std::vector<Label> &ys,
+                      const std::vector<Label> &yhats) {
+  const auto size = ys.size();
+  assert(size == yhats.size());
+  for (size_t i = 0; i < size; ++i) assert(ys[i] == yhats[i]);
+}
+
+void TestStructured() {
+  // Sparse binomial: word segmentation (space before?).
+  SparseBinomialAveragedPerceptron sba(32);
+  const std::vector<bool> binomial_ys = {false, true, true, true, false};
+  const std::vector<std::vector<string>> evectors = {{"*bias*", "w=this",
+                                                      "*initial*"},
+                                                     {"*bias*", "w=sentence"},
+                                                     {"*bias*", "w=is"},
+                                                     {"*bias*", "w=good"},
+                                                     {"*bias*", "w=.",
+                                                      "*ultimate*"}};
+  const SparseTransitionFunctor<bool> binomial_tfunctor(2);
+  for (size_t i = 0; i < 10; ++i) {
+    GreedyTrain(evectors, binomial_tfunctor, binomial_ys, &sba);
+  }
+  std::vector<bool> binomial_yhats;
+  GreedyPredict(evectors, binomial_tfunctor, sba, &binomial_yhats);
+  AssertStructured(binomial_ys, binomial_yhats);
+  const SparseBinomialPerceptron sb(&sba);
+  GreedyPredict(evectors, binomial_tfunctor, sb, &binomial_yhats);
+  AssertStructured(binomial_ys, binomial_yhats);
+
+  // Sparse-dense multinomial; case-restoration (reusing the evectors and
+  // transition functor from above).
+  SparseDenseMultinomialAveragedPerceptron sdma(32, N);
+  const std::vector<size_t> dense_ys = {static_cast<size_t>(Case::TITLE),
+                                        static_cast<size_t>(Case::LOWER),
+                                        static_cast<size_t>(Case::LOWER),
+                                        static_cast<size_t>(Case::LOWER),
+                                        static_cast<size_t>(Case::DC)};
+  const SparseTransitionFunctor<size_t> dense_tfunctor(2);
+  for (size_t i = 0; i < 10; ++i) {
+    GreedyTrain(evectors, dense_tfunctor, dense_ys, &sdma);
+  }
+  std::vector<size_t> dense_yhats;
+  GreedyPredict(evectors, dense_tfunctor, sdma, &dense_yhats);
+  AssertStructured(dense_ys, dense_yhats);
+  const SparseDenseMultinomialPerceptron sdm(&sdma);
+  GreedyPredict(evectors, dense_tfunctor, sdm, &dense_yhats);
+  AssertStructured(dense_ys, dense_yhats);
+}
+
 int main(void) {
   TestBinomial();
   TestMultinomial();
+  TestStructured();
   return 0;
 }

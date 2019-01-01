@@ -25,6 +25,7 @@ class BinomialPerceptronBaseTpl {
   using Table = InnerTableTpl<Weight>;
   using Feature = typename Table::Feature;
   using FeatureBundle = std::vector<Feature>;
+  using Label = bool;
 
   explicit BinomialPerceptronBaseTpl(size_t nfeats) : table_(nfeats) {
     assert(nfeats > 0);
@@ -48,7 +49,7 @@ class BinomialPerceptronBaseTpl {
     return weight;
   }
 
-  bool Predict(const FeatureBundle &fb) const {
+  Label Predict(const FeatureBundle &fb) const {
     std::unique_ptr<Weight> weight(Score(fb));
     return weight->Get() > 0;
   }
@@ -66,6 +67,7 @@ class BinomialAveragedPerceptronTpl
   using Base = BinomialPerceptronBaseTpl<InnerTableTpl, AveragedWeight>;
   using Feature = typename Base::Feature;
   using FeatureBundle = typename Base::FeatureBundle;
+  using Label = typename Base::Label;
 
   using Base::Predict;
   using Base::Score;
@@ -82,13 +84,19 @@ class BinomialAveragedPerceptronTpl
     table_[f].Update(y ? +1: -1, time_);
   }
 
+  // 1': Same as (1) but with optional (useless) yhat argument.
+  void Update(Feature f, bool y, bool yhat) { Update(f, y); }
+
   // 2: Updates many features given the correct label.
   void Update(const FeatureBundle &fb, bool y) {
     const auto tau = y ? +1 : -1;
     for (const auto &f : fb) table_[f].Update(tau, time_);
   }
 
-  // Predicts a single example,and updates if it is incorrectly labeled,
+  // 2': Same as (2) but with optional (useless) yhat argument.
+  void Update(const FeatureBundle &fb, bool y, bool yhat) { Update(fb, y); }
+
+  // Predicts a single example, and updates if it is incorrectly labeled,
   // then updates the timer and returns a boolean indicating success or
   // failure (which callers may safely choose to ignore).
   bool Train(const FeatureBundle &fb, bool y) {
@@ -98,13 +106,13 @@ class BinomialAveragedPerceptronTpl
     return success;
   }
 
+  // Advances the clock; invoked automatically by Train.
+  void Tick(uint64_t increment = 1) { time_ += increment; }
+
   uint64_t Time() const { return time_; }
 
  private:
   uint64_t time_;
-
-  // Advances the clock; invoked automatically by Train.
-  inline void Tick() { ++time_; }
 };
 
 template <template <class> class InnerTableTpl>
@@ -114,6 +122,7 @@ class BinomialPerceptronTpl
   using Base = BinomialPerceptronBaseTpl<InnerTableTpl, Weight>;
   using Feature = typename Base::Feature;
   using FeatureBundle = typename Base::FeatureBundle;
+  using Label = typename Base::Label;
 
   using Base::Predict;
   using Base::Score;
