@@ -61,10 +61,10 @@ class BinomialPerceptronBaseTpl {
 };
 
 template <template <class> class InnerTableTpl>
-class BinomialAveragedPerceptronTpl
-    : public BinomialPerceptronBaseTpl<InnerTableTpl, AveragedWeight> {
+class BinomialAveragingPerceptronTpl
+    : public BinomialPerceptronBaseTpl<InnerTableTpl, AveragingWeight> {
  public:
-  using Base = BinomialPerceptronBaseTpl<InnerTableTpl, AveragedWeight>;
+  using Base = BinomialPerceptronBaseTpl<InnerTableTpl, AveragingWeight>;
   using Feature = typename Base::Feature;
   using FeatureBundle = typename Base::FeatureBundle;
   using Label = typename Base::Label;
@@ -76,7 +76,7 @@ class BinomialAveragedPerceptronTpl
 
   friend class BinomialPerceptronBaseTpl<InnerTableTpl, Weight>;
 
-  explicit BinomialAveragedPerceptronTpl(size_t nfeats)
+  explicit BinomialAveragingPerceptronTpl(size_t nfeats)
       : Base(nfeats), time_(0) {}
 
   // 1: Update a single feature given the correct label.
@@ -133,7 +133,7 @@ class BinomialPerceptronTpl
       : Base(nfeats, nlabels) {}
 
   explicit BinomialPerceptronTpl(
-      BinomialAveragedPerceptronTpl<InnerTableTpl> *avg);
+      BinomialAveragingPerceptronTpl<InnerTableTpl> *avg);
 
   // Construct model by deserializing.
 
@@ -162,14 +162,14 @@ class BinomialPerceptronTpl
 // Specializes the classifiers to use an array.
 
 using DenseBinomialPerceptron = BinomialPerceptronTpl<DenseInnerTableTpl>;
-using DenseBinomialAveragedPerceptron =
-    BinomialAveragedPerceptronTpl<DenseInnerTableTpl>;
+using DenseBinomialAveragingPerceptron =
+    BinomialAveragingPerceptronTpl<DenseInnerTableTpl>;
 
 // Specializes the classifiers to use a hash table.
 
 using SparseBinomialPerceptron = BinomialPerceptronTpl<SparseInnerTableTpl>;
-using SparseBinomialAveragedPerceptron =
-    BinomialAveragedPerceptronTpl<SparseInnerTableTpl>;
+using SparseBinomialAveragingPerceptron =
+    BinomialAveragingPerceptronTpl<SparseInnerTableTpl>;
 
 }  // namespace perceptronix
 

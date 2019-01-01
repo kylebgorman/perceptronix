@@ -1,20 +1,20 @@
 // weight.h: Weight class templates for perceptron classifiers.
 //
 // The base class Weight(Tpl) is just a number with methods. The derived
-// class AveragedWeight(Tpl) also holds the averaged weight, in a delayed,
-// overflow-resistent form. Since AveragedWeightTpl contains about three
+// class AveragingWeight(Tpl) also holds the averaged weight, in a delayed,
+// overflow-resistent form. Since AveragingWeightTpl contains about three
 // machine words, it should usually be passed by reference.
 //
 // When training an averaged perceptron, the normal workflow is to use the
-// methods of AveragedWeight(Tpl) during training, and then to finalize
+// methods of AveragingWeight(Tpl) during training, and then to finalize
 // the model by creating new Weight(Tpl) instances like so:
 //
 //     uint64_t t = 0;
-//     AveragedWeight aw(0);
+//     AveragingWeight aw(0);
 //     // ...
 //     // Many rounds of training using aw.Get() and aw.Update().
 //     // ...
-//     Weight w(aw.GetAveragedWeight(t));
+//     Weight w(aw.GetAveragingWeight(t));
 
 #ifndef PERCEPTRONIX_WEIGHT_H_
 #define PERCEPTRONIX_WEIGHT_H_
@@ -91,7 +91,7 @@ WeightTpl<T> operator/(WeightTpl<T> lhs, WeightTpl<T> rhs) {
 // returns the averaged weight.
 
 template <class T>
-class AveragedWeightTpl : public WeightTpl<T> {
+class AveragingWeightTpl : public WeightTpl<T> {
  public:
   using WeightType = T;
 
@@ -99,7 +99,7 @@ class AveragedWeightTpl : public WeightTpl<T> {
 
   // Extends the base constructor. All weights are averaged as if they were
   // initialized at 0 at time 0.
-  explicit AveragedWeightTpl(WeightType weight = 0, uint64_t time = 0)
+  explicit AveragingWeightTpl(WeightType weight = 0, uint64_t time = 0)
       : Base(weight), summed_weight_(weight), time_(time) {
     Freshen(time);
   }
@@ -135,7 +135,7 @@ class AveragedWeightTpl : public WeightTpl<T> {
 // This is naturally a float because it is produced by averaging.
 using Weight = WeightTpl<float>;
 // Whereas this is naturally integral.
-using AveragedWeight = AveragedWeightTpl<int32_t>;
+using AveragingWeight = AveragingWeightTpl<int32_t>;
 
 }  // namespace perceptronix
 

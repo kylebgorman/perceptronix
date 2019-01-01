@@ -126,7 +126,7 @@ using SparseMultinomialDecoder =
 
 // Enhanced greedy decoder, with training functionality.
 template <class Perceptron, class TransitionFunctor>
-class AveragedDecoder {
+class AveragingDecoder {
  public:
   using Label = typename Perceptron::Label;
   using Feature = typename Perceptron::Feature;
@@ -134,7 +134,7 @@ class AveragedDecoder {
   using Labels = std::vector<Label>;
   using Vectors = std::vector<std::vector<Feature>>;
 
-  AveragedDecoder(Perceptron *perceptron,
+  AveragingDecoder(Perceptron *perceptron,
                   const TransitionFunctor &tfunctor) :
     base_(*perceptron, tfunctor),
     perceptron_(perceptron) {}
@@ -173,25 +173,25 @@ class AveragedDecoder {
 
 // Specializations of the above.
 
-using SparseBinomialAveragedDecoder =
-    AveragedDecoder<
-        SparseBinomialAveragedPerceptron,
+using SparseBinomialAveragingDecoder =
+    AveragingDecoder<
+        SparseBinomialAveragingPerceptron,
         SparseTransitionFunctor<
-            typename SparseBinomialAveragedPerceptron::Label
+            typename SparseBinomialAveragingPerceptron::Label
         >
     >;
-using SparseDenseMultinomialAveragedDecoder =
-    AveragedDecoder<
-        SparseDenseMultinomialAveragedPerceptron,
+using SparseDenseMultinomialAveragingDecoder =
+    AveragingDecoder<
+        SparseDenseMultinomialAveragingPerceptron,
         SparseTransitionFunctor<
-            typename SparseDenseMultinomialAveragedPerceptron::Label
+            typename SparseDenseMultinomialAveragingPerceptron::Label
         >
     >;
-using SparseMultinomialAveragedDecoder =
-    AveragedDecoder<
-        SparseMultinomialAveragedPerceptron,
+using SparseMultinomialAveragingDecoder =
+    AveragingDecoder<
+        SparseMultinomialAveragingPerceptron,
         SparseTransitionFunctor<
-            typename SparseMultinomialAveragedPerceptron::Label
+            typename SparseMultinomialAveragingPerceptron::Label
         >
     >;
 

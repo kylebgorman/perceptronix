@@ -10,7 +10,7 @@ namespace perceptronix {
 
 template <>
 DenseBinomialPerceptron::BinomialPerceptronTpl(
-    DenseBinomialAveragedPerceptron *avg)
+    DenseBinomialAveragingPerceptron *avg)
     : Base(avg->Size()) {
   const size_t size = table_.Size();
   for (size_t i = 0; i < size; ++i) {
@@ -44,7 +44,7 @@ bool DenseBinomialPerceptron::Write(std::ostream &ostrm,
 
 template <>
 SparseBinomialPerceptron::BinomialPerceptronTpl(
-    SparseBinomialAveragedPerceptron *avg)
+    SparseBinomialAveragingPerceptron *avg)
     : Base(avg->Size()) {
   for (auto it = avg->table_.begin(); it != avg->table_.end(); ++it) {
     const auto weight = it->second.GetAverage(avg->Time());

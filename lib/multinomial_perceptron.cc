@@ -10,7 +10,7 @@ namespace perceptronix {
 
 template <>
 DenseMultinomialPerceptron::MultinomialPerceptronTpl(
-    DenseMultinomialAveragedPerceptron *avg)
+    DenseMultinomialAveragingPerceptron *avg)
     : Base(avg->OuterSize(), avg->InnerSize()) {
   const auto time = avg->Time();
   for (size_t i = 0; i < avg->OuterSize(); ++i) {
@@ -60,7 +60,7 @@ bool DenseMultinomialPerceptron::Write(std::ostream &ostrm,
 
 template <>
 SparseDenseMultinomialPerceptron::MultinomialPerceptronTpl(
-    SparseDenseMultinomialAveragedPerceptron *avg)
+    SparseDenseMultinomialAveragingPerceptron *avg)
     : Base(avg->OuterSize(), avg->InnerSize()) {
   const auto time = avg->Time();
   for (auto it = avg->table_.begin(); it != avg->table_.end(); ++it) {
@@ -111,7 +111,7 @@ bool SparseDenseMultinomialPerceptron::Write(std::ostream &ostrm,
 
 template <>
 SparseMultinomialPerceptron::MultinomialPerceptronTpl(
-    SparseMultinomialAveragedPerceptron *avg)
+    SparseMultinomialAveragingPerceptron *avg)
     : Base(avg->OuterSize(), avg->InnerSize()) {
   const size_t time = avg->Time();
   for (auto it = avg->table_.begin(); it != avg->table_.end(); ++it) {

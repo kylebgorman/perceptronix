@@ -70,17 +70,17 @@ class MultinomialPerceptronBaseTpl {
 
 // Specialization with averaged weights.
 template <template <class> class OuterTableTpl>
-class MultinomialAveragedPerceptronTpl
-    : public MultinomialPerceptronBaseTpl<OuterTableTpl, AveragedWeight> {
+class MultinomialAveragingPerceptronTpl
+    : public MultinomialPerceptronBaseTpl<OuterTableTpl, AveragingWeight> {
  public:
-  using Base = MultinomialPerceptronBaseTpl<OuterTableTpl, AveragedWeight>;
+  using Base = MultinomialPerceptronBaseTpl<OuterTableTpl, AveragingWeight>;
   using Feature = typename Base::Feature;
   using FeatureBundle = typename Base::FeatureBundle;
   using Label = typename Base::Label;
 
   friend class MultinomialPerceptronBaseTpl<OuterTableTpl, Weight>;
 
-  MultinomialAveragedPerceptronTpl(size_t nfeats, size_t nlabels)
+  MultinomialAveragingPerceptronTpl(size_t nfeats, size_t nlabels)
       : Base(nfeats, nlabels), time_(0) {}
 
   using Base::Predict;
@@ -143,7 +143,7 @@ class MultinomialPerceptronTpl
   // Constructs model from averaged model.
 
   explicit MultinomialPerceptronTpl(
-      MultinomialAveragedPerceptronTpl<OuterTableTpl> *avg);
+      MultinomialAveragingPerceptronTpl<OuterTableTpl> *avg);
 
   // Constructs model by deserializing.
 
@@ -171,24 +171,24 @@ class MultinomialPerceptronTpl
 // Specializes the classifiers to use arrays for both inner and outer tables.
 
 using DenseMultinomialPerceptron = MultinomialPerceptronTpl<DenseOuterTableTpl>;
-using DenseMultinomialAveragedPerceptron =
-    MultinomialAveragedPerceptronTpl<DenseOuterTableTpl>;
+using DenseMultinomialAveragingPerceptron =
+    MultinomialAveragingPerceptronTpl<DenseOuterTableTpl>;
 
 // Specializes the classifiers to use hash tables as the outer table, and arrays
 // as the inner tables.
 
 using SparseDenseMultinomialPerceptron =
     MultinomialPerceptronTpl<SparseDenseOuterTableTpl>;
-using SparseDenseMultinomialAveragedPerceptron =
-    MultinomialAveragedPerceptronTpl<SparseDenseOuterTableTpl>;
+using SparseDenseMultinomialAveragingPerceptron =
+    MultinomialAveragingPerceptronTpl<SparseDenseOuterTableTpl>;
 
 // Specializes the classifiers to use hash tables for both inner and outer 
 // tables.
 
 using SparseMultinomialPerceptron =
     MultinomialPerceptronTpl<SparseOuterTableTpl>;
-using SparseMultinomialAveragedPerceptron =
-    MultinomialAveragedPerceptronTpl<SparseOuterTableTpl>;
+using SparseMultinomialAveragingPerceptron =
+    MultinomialAveragingPerceptronTpl<SparseOuterTableTpl>;
 
 }  // namespace perceptronix
 

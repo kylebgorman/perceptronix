@@ -8,16 +8,13 @@ from libcpp.vector cimport vector
 
 cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
-    cdef cppclass SparseTransitionFunctor[Label]:
 
-        SparseTransitionFunctor(size_t)
-
-        operator()(const vector[Label] &, vector[string] *)
+    # Models.
 
 
-    cdef cppclass DenseBinomialAveragedPerceptron:
+    cdef cppclass DenseBinomialAveragingPerceptron:
 
-        DenseBinomialAveragedPerceptron(size_t)
+        DenseBinomialAveragingPerceptron(size_t)
 
         bool Predict(const vector[size_t] &)
 
@@ -28,7 +25,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
         DenseBinomialPerceptron(size_t)
 
-        DenseBinomialPerceptron(DenseBinomialAveragedPerceptron *)
+        DenseBinomialPerceptron(DenseBinomialAveragingPerceptron *)
 
         bool Predict(const vector[size_t] &)
 
@@ -38,9 +35,9 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
         bool Write(const string &, const string &)
 
 
-    cdef cppclass SparseBinomialAveragedPerceptron:
+    cdef cppclass SparseBinomialAveragingPerceptron:
 
-        SparseBinomialAveragedPerceptron(size_t)
+        SparseBinomialAveragingPerceptron(size_t)
 
         bool Predict(const vector[string] &)
 
@@ -51,7 +48,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
         SparseBinomialPerceptron(size_t)
 
-        SparseBinomialPerceptron(SparseBinomialAveragedPerceptron *)
+        SparseBinomialPerceptron(SparseBinomialAveragingPerceptron *)
 
         bool Predict(const vector[string] &)
 
@@ -61,9 +58,9 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
         bool Write(const string &, const string &)
 
 
-    cdef cppclass DenseMultinomialAveragedPerceptron:
+    cdef cppclass DenseMultinomialAveragingPerceptron:
 
-        DenseMultinomialAveragedPerceptron(size_t, size_t)
+        DenseMultinomialAveragingPerceptron(size_t, size_t)
 
         size_t Predict(const vector[size_t] &)
 
@@ -74,7 +71,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
         DenseMultinomialPerceptron(size_t, size_t)
 
-        DenseMultinomialPerceptron(DenseMultinomialAveragedPerceptron *)
+        DenseMultinomialPerceptron(DenseMultinomialAveragingPerceptron *)
 
         size_t Predict(const vector[size_t] &)
 
@@ -84,9 +81,9 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
         bool Write(const string &, const string &)
 
 
-    cdef cppclass SparseDenseMultinomialAveragedPerceptron:
+    cdef cppclass SparseDenseMultinomialAveragingPerceptron:
 
-        SparseDenseMultinomialAveragedPerceptron(size_t, size_t)
+        SparseDenseMultinomialAveragingPerceptron(size_t, size_t)
 
         size_t Predict(const vector[string] &)
 
@@ -98,7 +95,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
         SparseDenseMultinomialPerceptron(size_t, size_t)
 
         SparseDenseMultinomialPerceptron(
-            SparseDenseMultinomialAveragedPerceptron *)
+            SparseDenseMultinomialAveragingPerceptron *)
 
         size_t Predict(const vector[string] &)
 
@@ -108,9 +105,9 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
         bool Write(const string &, const string &)
 
 
-    cdef cppclass SparseMultinomialAveragedPerceptron:
+    cdef cppclass SparseMultinomialAveragingPerceptron:
 
-        SparseMultinomialAveragedPerceptron(size_t, size_t)
+        SparseMultinomialAveragingPerceptron(size_t, size_t)
 
         string Predict(const vector[string] &)
 
@@ -121,7 +118,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
         SparseMultinomialPerceptron(size_t, size_t)
 
-        SparseMultinomialPerceptron(SparseMultinomialAveragedPerceptron *)
+        SparseMultinomialPerceptron(SparseMultinomialAveragingPerceptron *)
 
         string Predict(const vector[string] &)
 
@@ -129,3 +126,76 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
         SparseMultinomialPerceptron *Read(const string &, string *)
 
         bool Write(const string &, const string &)
+
+
+    # Decoding.
+
+
+    cdef cppclass SparseTransitionFunctor[Label]:
+
+        SparseTransitionFunctor(size_t)
+
+
+    cdef cppclass SparseBinomialDecoder:
+
+        SparseBinomialDecoder(const SparseBinomialPerceptron &,
+                              const SparseTransitionFunctor[bool] &)
+
+        void Predict(const vector[vector[string]] &,
+                     vector[bool] *)
+
+
+    cdef cppclass SparseBinomialAveragingDecoder:
+
+        SparseBinomialAveragingDecoder(SparseBinomialAveragingPerceptron *,
+                                      const SparseTransitionFunctor[bool] &)
+
+        void Predict(const vector[vector[string]] &,
+                     vector[bool] *)
+
+        size_t Train(const vector[vector[string]] &,
+                     const vector[bool] &)
+
+
+    cdef cppclass SparseDenseMultinomialDecoder:
+
+        SparseDenseMultinomialDecoder(const SparseDenseMultinomialPerceptron &,
+                                      const SparseTransitionFunctor[size_t] &)
+
+        void Predict(const vector[vector[string]] &,
+                     vector[size_t] *)
+
+
+    cdef cppclass SparseDenseMultinomialAveragingDecoder:
+
+        SparseDenseMultinomialAveragingDecoder(
+            SparseDenseMultinomialAveragingPerceptron *,
+            const SparseTransitionFunctor[size_t] &)
+
+        void Predict(const vector[vector[string]] &,
+                     vector[size_t] *)
+
+        size_t Train(const vector[vector[string]] &,
+                     const vector[size_t] &)
+
+
+    cdef cppclass SparseMultinomialDecoder:
+
+        SparseMultinomialDecoder(const SparseMultinomialPerceptron &,
+                                 const SparseTransitionFunctor[string] &)
+
+        void Predict(const vector[vector[string]] &,
+                     vector[string] *)
+
+
+    cdef cppclass SparseMultinomialAveragingDecoder:
+
+        SparseMultinomialAveragingDecoder(
+            SparseMultinomialAveragingPerceptron *,
+            const SparseTransitionFunctor[string] &)
+
+        void Predict(const vector[vector[string]] &,
+                     vector[string] *)
+
+        size_t Train(const vector[vector[string]] &,
+                     const vector[string] &)
