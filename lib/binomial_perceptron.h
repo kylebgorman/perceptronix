@@ -107,7 +107,7 @@ class BinomialAveragedPerceptronTpl
   }
 
   // Advances the clock; invoked automatically by Train.
-  void Tick(uint64_t increment = 1) { time_ += increment; }
+  void Tick(uint64_t step = 1) { time_ += step; }
 
   uint64_t Time() const { return time_; }
 

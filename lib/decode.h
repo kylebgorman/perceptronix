@@ -1,3 +1,5 @@
+// decode.h: Greedy decoding functions and classes.
+
 #include <cassert>
 
 #include <algorithm>
@@ -109,8 +111,8 @@ size_t GreedyTrain(
     const TransitionFunctor &tfunctor,
     const std::vector<typename Classifier::Label> &ys,
     Classifier *classifier) {
-  const auto size = evectors.size();
-  assert(size == ys.size());
+  const auto size = ys.size();
+  assert(size == evectors.size());
   std::vector<std::vector<typename Classifier::Feature>> cvectors;
   std::vector<typename Classifier::Label> yhats;
   GreedyPredict(evectors, tfunctor, *classifier, &cvectors, &yhats);
@@ -122,7 +124,7 @@ size_t GreedyTrain(
       correct += 1;
     } else {
       const auto &cvector = cvectors[i];
-      // yhat is ignored in the binomial case.
+      // yhat is ignored in the binomial case thanks to a dumb hack.
       classifier->Update(cvector, y, yhat);
     }
   }
