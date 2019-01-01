@@ -34,21 +34,28 @@ class CaseRestorer(object):
 
     slots = ["_classifier", "_mpt"]
 
-    def __init__(self, nfeats: int = 0x1000, mpt: case.MixedPatternTable = {}):
-        self._classifier = perceptronix.SparseDenseMultinomialClassifier(
-            nfeats, len(case.TokenCase)
+    def __init__(
+        self,
+        nfeats: int = 0x1000,
+        order: int = 2,
+        mpt: case.MixedPatternTable = {},
+    ):
+        self._classifier = perceptronix.SparseDenseMultinomialSequentialClassifier(
+            nfeats, len(case.TokenCase), order
         )
         self._mpt = mpt
 
     # (De)serialization methods, overwritten to handle MPT, stored in the metadata.
 
     @classmethod
-    def read(cls, filename: str):
+    def read(cls, filename: str, order: int):
         """Reads case restorer model from serialized model file."""
         (
             classifier,
             metadata,
-        ) = perceptronix.SparseDenseMultinomialClassifier.read(filename)
+        ) = perceptronix.SparseDenseMultinomialSequentialClassifier.read(
+            filename, order
+        )
         new = cls.__new__(cls)
         new._classifier = classifier
         new._mpt = json.loads(metadata)
@@ -106,22 +113,22 @@ class CaseRestorer(object):
 
     # Training and prediction.
 
-    # Not yet supported: transition features, greedy or optimal.
-
     def train(self, vectors: Vectors, tags: Tags) -> Iterator[bool]:
-        for (vector, tag) in zip(vectors, tags):
-            yield self._classifier.train(vector, tag.value)
+        return self._classifier.train_sequence(vectors, tags)
 
-    def tag_vectors(self, vectors: Vectors) -> Iterator[case.TokenCase]:
-        for vector in vectors:
-            yield case.TokenCase(self._classifier.predict(vector))
+    def predict(self, vectors: Vectors) -> Iterator[case.TokenCase]:
+        for label in self._classifier.predict_sequence(vectors):
+            yield case.TokenCase(label)
 
-    def tag(self, tokens: Tokens) -> Iterator[case.TokenCase]:
-        return self.tag_vectors(CaseRestorer.extract_emission_features(tokens))
+    def evaluate(self, vectors: Vectors, tags: Tags) -> int:
+        return sum(
+            tag == predicted_tag
+            for (tag, predicted_tag) in zip(tags, self.predict(vectors))
+        )
 
     def apply(self, tokens: Tokens) -> Iterator[str]:
-        """Case-restore a list of tokens."""
-        for (token, tag) in zip(tokens, self.tag(tokens)):
+        vectors = CaseRestorer.extract_emission_features(tokens)
+        for (token, tag) in zip(tokens, self.predict(vectors)):
             pattern = self._mpt.get(token)
             yield case.apply_tc(token, tag, pattern)
 

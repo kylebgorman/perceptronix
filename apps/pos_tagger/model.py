@@ -33,16 +33,21 @@ class POSTagger(object):
 
     slots = ["_classifier"]
 
-    def __init__(self, nfeats: int = 0x1000, nlabels: int = 32):
-        self._classifier = perceptronix.SparseMultinomialClassifier(
-            nfeats, nlabels
+    def __init__(
+        self, nfeats: int = 0x1000, nlabels: int = 32, order: int = 2
+    ):
+        self._classifier = perceptronix.SparseMultinomialSequentialClassifier(
+            nfeats, nlabels, order
         )
 
     @classmethod
-    def read(cls, filename: str):
+    def read(cls, filename: str, order: int):
         """Reads POS tagger model from serialized model file."""
-        (classifier, metadata) = perceptronix.SparseMultinomialClassifier.read(
-            filename
+        (
+            classifier,
+            metadata,
+        ) = perceptronix.SparseMultinomialSequentialClassifier.read(
+            filename, order
         )
         if metadata:
             logging.warning("Ignoring metadata string: %s", metadata)
@@ -160,22 +165,22 @@ class POSTagger(object):
 
     # Training and prediction.
 
-    # Not yet supported: transition features, greedy or optimal.
-
     def train(self, vectors: Vectors, tags: Tags) -> Iterator[bool]:
-        for (vector, tag) in zip(vectors, tags):
-            yield self._classifier.train(vector, tag)
+        return self._classifier.train_sequence(vectors, tags)
 
-    def tag_vectors(self, vectors: Vectors) -> Iterator[str]:
-        for vector in vectors:
-            yield self._classifier.predict(vector).decode("utf8")
+    def predict(self, vectors: Vectors) -> Iterator[str]:
+        for tag in self._classifier.predict_sequence(vectors):
+            yield tag.decode("utf8")
 
-    def tag(self, tokens: Tokens) -> Iterator[str]:
-        return self.tag_vectors(POSTagger.extract_emission_features(tokens))
+    def evaluate(self, vectors: Vectors, tags: Tags) -> int:
+        return sum(
+            tag == predicted_tag
+            for (tag, predicted_tag) in zip(tags, self.predict(vectors))
+        )
 
     def apply(self, tokens: Tokens) -> Iterator[Tuple[str, str]]:
-        """Yield token/tag pairs."""
-        yield from zip(tokens, self.tag(tokens))
+        vectors = POSTagger.extract_emission_features(tokens)
+        yield from zip(tokens, self.predict(vectors))
 
     # Delegates all attributes not otherwise defined to the underlying
     # classifier.

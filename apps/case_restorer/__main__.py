@@ -56,6 +56,7 @@ argparser.add_argument(
 argparser.add_argument(
     "--epochs", type=int, default=5, help="Number of epochs"
 )
+argparser.add_argument("--order", type=int, default=2, help="Model order")
 argparser.add_argument("--seed", type=int, default=1917, help="Random seed")
 args = argparser.parse_args()
 
@@ -73,7 +74,7 @@ if args.train:
     if args.dev:
         dev_sents = _read_data(args.dev)[0]
         dev_size = _data_size(dev_sents)
-    model = CaseRestorer(args.nfeats, train_mpt)
+    model = CaseRestorer(args.nfeats, args.order, train_mpt)
     random.seed(args.seed)
     for epoch in range(1, 1 + args.epochs):
         random.shuffle(train_sents)
@@ -81,25 +82,20 @@ if args.train:
         train_correct = 0
         with nlup.Timer():
             for (vectors, tags) in train_sents:
-                train_correct += sum(model.train(vectors, tags))
+                train_correct += model.train(vectors, tags)
         logging.info(
             "Resubstitution accuracy: %.4f", train_correct / train_size
         )
         if args.dev:
             dev_correct = 0
             for (vectors, tags) in dev_sents:
-                dev_correct += sum(
-                    tag == predicted
-                    for (tag, predicted) in zip(
-                        tags, model.tag_vectors(vectors)
-                    )
-                )
+                dev_correct += model.evaluate(vectors, tags)
             logging.info("Development accuracy: %.4f", dev_correct / dev_size)
     logging.info("Averaging model...")
     model.average()
 elif args.read:
     logging.info("Reading model from %s", args.read)
-    model = CaseRestorer.read(args.read)
+    model = CaseRestorer.read(args.read, args.order)
 # Else unreachable.
 
 # Output block.

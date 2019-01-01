@@ -51,6 +51,7 @@ argparser.add_argument(
 argparser.add_argument(
     "--epochs", type=int, default=5, help="Number of epochs"
 )
+argparser.add_argument("--order", type=int, default=2, help="Model order")
 argparser.add_argument("--seed", type=int, default=1917, help="Random seed")
 args = argparser.parse_args()
 
@@ -62,7 +63,7 @@ else:
 
 # Input block.
 if args.train:
-    model = POSTagger(args.nfeats, args.nlabels)
+    model = POSTagger(args.nfeats, args.nlabels, args.order)
     logging.info("Training model from %s", args.train)
     train_data = _read_data(args.train)
     train_size = _data_size(train_data)
@@ -76,25 +77,20 @@ if args.train:
         train_correct = 0
         with nlup.Timer():
             for (vectors, tags) in train_data:
-                train_correct += sum(model.train(vectors, tags))
+                train_correct += model.train(vectors, tags)
         logging.info(
             "Resubstitution accuracy: %.4f", train_correct / train_size
         )
         if args.dev:
             dev_correct = 0
             for (vectors, tags) in dev_data:
-                dev_correct += sum(
-                    tag == predicted
-                    for (tag, predicted) in zip(
-                        tags, model.tag_vectors(vectors)
-                    )
-                )
+                dev_correct += model.evaluate(vectors, tags)
             logging.info("Develoment accuracy: %.4f", dev_correct / dev_size)
     logging.info("Averaging model...")
     model.average()
 elif args.read:
     logging.info("Reading model from %s", args.read)
-    model = POSTagger.read(args.read)
+    model = POSTagger.read(args.read, args.order)
 # Else unreachable.
 
 # Output block.
