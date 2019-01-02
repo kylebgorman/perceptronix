@@ -23,7 +23,5 @@ setup(
     author="Kyle Gorman",
     author_email="kylebgorman@gmail.com",
     install_requires=["Cython >= 0.29"],
-    ext_modules=cythonize(
-        [extension], compiler_directives={"language_level": 3}
-    ),
+    ext_modules=cythonize([extension]),
 )

@@ -1,3 +1,4 @@
+#cython: language_level=3
 """Python interface to Perceptronix, providing wrappers for:
 
 * DenseBinomial(Averaging)Perceptron: 
