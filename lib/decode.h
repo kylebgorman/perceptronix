@@ -14,8 +14,8 @@ using std::string;
 
 namespace perceptronix {
 
-// TODO(kbg): This entire thing feels like an abstractional leak that ought to live
-// lower in the stack. Consider adding this to (bi|multi)nomial_perceptron.h
+// TODO(kbg): This entire thing feels like an abstractional leak that ought to
+// live lower in the stack. Consider adding this to the perceptron classes
 // instead.
 
 // Transition feature functors should have the following interface:
@@ -26,8 +26,8 @@ namespace perceptronix {
 //                   std::vector<F> *tfeats);
 // };
 
-// Transition feature functor for sparse (i.e., string) features. Should work with
-// both sparse and dense (integral) labels.
+// Transition feature functor for sparse (i.e., string) features. Should work
+// with both sparse and dense (integral) labels.
 template <class Label>
 class SparseTransitionFunctor {
  public:  
@@ -45,9 +45,9 @@ class SparseTransitionFunctor {
     sstrm << "t_i-1=" << labels[size - 1];
     tvector->emplace_back(sstrm.str());
     for (size_t i = 2; i <= bound; ++i) {
-      // Here the feature conjunctions are in the reverse order from what you might
-      // expect. We sacrifice readability for the ability to reuse the stringstream
-      // buffer.
+      // Here the feature conjunctions are in the reverse order from what you
+      // might expect. We sacrifice readability for the ability to reuse the
+      // stringstream buffer.
       sstrm << "^" << "t_i-" << i << "=" << labels[size - i];
       tvector->emplace_back(sstrm.str());
     }
@@ -144,7 +144,7 @@ class AveragingDecoder {
     base_.Predict(evectors, yhat);
   }
 
-  // Performs greedy training and returns the number of correct classifications. 
+  // Performs greedy training and returns the number of correct classifications.
   size_t Train(const Vectors &evectors, const Labels &ys) {
     const auto size = ys.size();
     assert(size == evectors.size());

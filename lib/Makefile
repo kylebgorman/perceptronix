@@ -24,31 +24,39 @@ unittest.o: unittest.cc decode.h
 unittest: unittest.o \
           linear_model.pb.o binomial_perceptron.o multinomial_perceptron.o
 	g++ $(CXXFLAGS) $(LDFLAGS) \
-		unittest.o \
-		linear_model.pb.o binomial_perceptron.o multinomial_perceptron.o \
-		-lprotobuf -lpthread \
-		-o unittest
-
-#unittest: binomial_perceptron.h binomial_perceptron.cc        			 \
-#		  multinomial_perceptron.h multinomial_perceptron.cc  			 \
-#          decode.h linear_model.pb.h linear_model.pb.cc table.h weight.h \
-#		  unittest.cc
-#	g++ $(CXXFLAGS) $(LDFLAGS) binomial_perceptron.cc \
-#        multinomial_perceptron.cc linear_model.pb.cc unittest.cc \
-#        -lprotobuf -lpthread -o unittest
+                unittest.o \
+                linear_model.pb.o \
+                binomial_perceptron.o \
+                multinomial_perceptron.o \
+                -lprotobuf -lpthread -o unittest
 
 test: unittest
 	./unittest
-	protoc --decode=perceptronix.DenseBinomialPerceptronProto linear_model.proto < db.pb
-	protoc --decode=perceptronix.SparseBinomialPerceptronProto linear_model.proto < sb.pb
-	protoc --decode=perceptronix.DenseMultinomialPerceptronProto linear_model.proto < dm.pb
-	protoc --decode=perceptronix.SparseDenseMultinomialPerceptronProto linear_model.proto < sdm.pb
-	protoc --decode=perceptronix.SparseMultinomialPerceptronProto linear_model.proto < sm.pb
+	protoc \
+            --decode=perceptronix.DenseBinomialPerceptronProto \
+            linear_model.proto \
+             < db.pb
+	protoc \
+             --decode=perceptronix.SparseBinomialPerceptronProto \
+             linear_model.proto \
+             < sb.pb
+	protoc \
+            --decode=perceptronix.DenseMultinomialPerceptronProto \
+            linear_model.proto \
+            < dm.pb
+	protoc \
+             --decode=perceptronix.SparseDenseMultinomialPerceptronProto \
+             linear_model.proto \
+             < sdm.pb
+	protoc \
+             --decode=perceptronix.SparseMultinomialPerceptronProto \
+             linear_model.proto \
+             < sm.pb
 
 python: binomial_perceptron.h binomial_perceptron.cc \
-		linear_model.pb.h linear_model.pb.cc \
-		multinomial_perceptron.h multinomial_perceptron.cc \
-		decode.h table.h weight.h
+        linear_model.pb.h linear_model.pb.cc \
+        multinomial_perceptron.h multinomial_perceptron.cc 
+        decode.h table.h weight.h
 	python setup.py build
 
 clean:

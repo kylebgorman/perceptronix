@@ -38,12 +38,14 @@ class CaseRestorer(object):
         order: int = 2,
         mpt: case.MixedPatternTable = {},
     ):
-        self._classifier = perceptronix.SparseDenseMultinomialSequentialClassifier(
-            nfeats, len(case.TokenCase), order
-        )
+        self._classifier = \
+            perceptronix.SparseDenseMultinomialSequentialClassifier(
+                nfeats, len(case.TokenCase), order
+            )
         self._mpt = mpt
 
-    # (De)serialization methods, overwritten to handle MPT, stored in the metadata.
+    # (De)serialization methods, overwritten to handle MPT, stored in the
+    # metadata.
 
     @classmethod
     def read(cls, filename: str, order: int):

@@ -116,9 +116,9 @@ def get_tc(nunistr: str) -> Tuple[TokenCase, Pattern]:
         nunistr: A Unicode string whose casing is to be computed.
 
     Returns:
-        A list consisting of the TokenCase for the input character, and either None
-        (representing "n/a") or an iterable of CharCase instances representing the
-        specifics of a `MIXED` TokenCase pattern.
+        A list consisting of the TokenCase for the input character, and either
+        None (representing "n/a") or a list of CharCase instances representing
+        the specifics of a `MIXED` TokenCase pattern.
     """
     if nunistr.islower():
         return (TokenCase.LOWER, None)
@@ -143,8 +143,8 @@ def apply_tc(nunistr: str, tc: TokenCase, pattern: Pattern = None) -> str:
     Args:
         nunistr: A Unicode string to be cased.
         tc: A Tokencase indicating the casing to be applied.
-        pattern: An iterable of CharCase characters representing the specifics of
-           the `MIXED` TokenCase, when the `tc` argument is `MIXED`.
+        pattern: An iterable of CharCase characters representing the specifics
+            of the `MIXED` TokenCase, when the `tc` argument is `MIXED`.
 
     Returns:
         An appropriately-cased Unicode string.

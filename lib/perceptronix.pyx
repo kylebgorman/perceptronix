@@ -409,7 +409,8 @@ cdef class SparseBinomialSequentialClassifier(SparseBinomialClassifier):
         which each observation consists of a feature vector and a boolean label.
 
         Args:
-            efeats: An iterable of string emission features for each observation.
+            efeats: An iterable of string emission features for each
+                observation.
             labels: An iterable of boolean labels for each observation.
 
         Returns:
@@ -430,7 +431,8 @@ cdef class SparseBinomialSequentialClassifier(SparseBinomialClassifier):
         Predicts the labels for a sequence.
 
         Args:
-            efeats: An iterable of string emission features for each observation.
+            efeats: An iterable of string emission features for each
+                observation.
         
         Returns:
             A list of the predicted labels.
@@ -611,8 +613,8 @@ cdef class SparseDenseMultinomialClassifier(object):
     cdef unique_ptr[SparseDenseMultinomialPerceptron] _model
 
     def __init__(self, size_t nlabels, size_t nfeats):
-        self._amodel.reset(new SparseDenseMultinomialAveragingPerceptron(nlabels,
-                                                                         nfeats))
+        self._amodel.reset(new SparseDenseMultinomialAveragingPerceptron(
+            nlabels, nfeats))
 
     def __repr__(self):
         return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
@@ -635,7 +637,8 @@ cdef class SparseDenseMultinomialClassifier(object):
         """
         if self._averaged():
             raise PerceptronixOpError("Model already averaged")
-        self._model.reset(new SparseDenseMultinomialPerceptron(self._amodel.get()))
+        self._model.reset(new SparseDenseMultinomialPerceptron(
+            self._amodel.get()))
         self._amodel.reset()
 
     @classmethod
@@ -803,7 +806,8 @@ cdef class SparseDenseMultinomialSequentialClassifier(
         which each observation consists of a feature vector and a integer value.
 
         Args:
-            efeats: An iterable of string emission features for each observation.
+            efeats: An iterable of string emission features for each
+                observation.
             labels: An iterable of integral labels for each observation.
 
         Returns:
@@ -824,7 +828,8 @@ cdef class SparseDenseMultinomialSequentialClassifier(
         Predicts the labels for a sequence.
 
         Args:
-            efeats: An iterable of string emission features for each observation.
+            efeats: An iterable of string emission features for each
+                observation.
 
         Returns:
             A list of the predicted labels.
@@ -1054,7 +1059,8 @@ cdef class SparseMultinomialSequentialClassifier(
         which each observation consists of a feature vector and a string label.
 
         Args:
-            efeats: An iterable of string emission features for each observation.
+            efeats: An iterable of string emission features for each
+                observation.
             labels: An iterable of string labels for each observation.
 
         Returns:
@@ -1076,7 +1082,8 @@ cdef class SparseMultinomialSequentialClassifier(
         Predicts the labels for a sequence.
 
         Args:
-            efeats: An iterable of string emission features for each observation.
+            efeats: An iterable of string emission features for each
+                observation.
 
         Returns:
             A list of the predicted labels.
