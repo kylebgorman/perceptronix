@@ -41,7 +41,8 @@ class CaseRestorer(object):
         )
         self._mpt = mpt
 
-    # (De)serialization methods, overwritten to handle MPT, stored in the metadata.
+    # (De)serialization methods, overwritten to handle MPT, stored in the
+    # metadata.
 
     @classmethod
     def read(cls, filename: str, order: int):

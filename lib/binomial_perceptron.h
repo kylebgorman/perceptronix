@@ -135,8 +135,9 @@ class BinomialPerceptronTpl
   static BinomialPerceptronTpl<InnerTableTpl> *Read(std::istream &istrm,
                                                     string *metadata = nullptr);
 
-  static BinomialPerceptronTpl<InnerTableTpl> *Read(const string &filename,
-                                                    string *metadata = nullptr) {
+  static BinomialPerceptronTpl<InnerTableTpl> *Read(
+  	const string &filename,
+        string *metadata = nullptr) {
     std::ifstream istrm(filename);
     return Read(istrm, metadata);
   }
