@@ -29,25 +29,11 @@ suggested workflow is to train an averaged model, and then use the
 averaged weights to initialize an immutable unaveraged model. E.g.:
 
     namespace perceptronix {
-      SparseDenseMultinomialAveragingPerceptron avgmodel(nfeats, nlabels);
+      SparseDenseMultinomialModel model(nfeats, nlabels);
       // ... training ...
-      const SparseDenseMultinomialPerceptron model(&model);
+      model.Average()
       // ... inference ...
     }
-
-When memory is at a premium (or if you don't trust your compiler),
-another option is to heap-allocate the averaged model, and then free it
-once the unaveraged model is constructed. E.g.:
-
-    namespace perceptronix {
-      std::unique_ptr<SparseDenseMultinomialAveragingPerceptron> avgmodel(
-           new SparseDenseMultinomialAveragingPerceptron(nfeats, nlabels);
-      // ... training ...
-      const SparseDenseMultinomialPerceptron model(avgmodel.get());
-      avgmodel.reset()
-      // ... inference ...
-
-}
 
 Note that in the example above, `avgmodel` requires approximately three
 times as much memory as `model`. Furthermore, inference is significantly
@@ -56,22 +42,25 @@ model serialization.
 
 The major classes are:
 
--   `DenseBinomial(Averaging)Perceptron`: A binomial classifier using a
+-   `DenseBinomialModel`: A binomial classifier using a
     dense weight table; users must set the maximum number of unique
     features at construction time.
--   `SparseBinomial(Averaging)Perceptron`: A binomial classifier using a
+-   `SparseBinomialModel`: A binomial classifier using a
     dynamically-sized sparse weight table.
--   `DenseMultinomial(Averaging)Perceptron`: A multinomial classifier
+-   `DenseMultinomialModel`: A multinomial classifier
     using dense weight tables; users must set the maximum number of
     unique features and labels at construction time.
--   `SparseDenseMultinomial(Averaging)Perceptron`: A multinomial
+-   `SparseDenseMultinomialModel`: A multinomial
     classifier using a dynamically-sized hash table for the outer table
     and dense arrays for the inner table.
--   `SparseMultinomial(Averaging)Perceptron`: A multinomial classifier
+-   `SparseMultinomialModel`: A multinomial classifier
     using dynamically-sized hash tables for both outer and inner tables.
 
-There are also interfaces in `decoder.h` for performing greedy sequential
-decoding with the sparse perceptron classes.
+There are also HMM-like classes for greedy sequential decoding:
+
+-   `SparseBinomialSequentialModel`
+-   `SparseDenseMultinomialSequentialModel`
+-   `SparseMultinomialSequentialModel`
 
 Python
 ------

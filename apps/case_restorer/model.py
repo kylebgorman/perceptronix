@@ -7,10 +7,11 @@ from typing import Dict, Iterator, List, Tuple
 import nlup
 import perceptronix
 
-from case_restorer import case
+from case_restorer import *
 
 
 # Constant feature strings.
+
 
 INITIAL = "*initial*"
 PENINITIAL = "*peninitial*"
@@ -20,8 +21,8 @@ NUMBER = "*number*"
 
 
 Tokens = List[str]
-Tags = List[case.TokenCase]
-Patterns = List[case.Pattern]
+Tags = List[TokenCase]
+Patterns = List[Pattern]
 
 Vector = List[str]
 Vectors = List[Vector]
@@ -33,13 +34,10 @@ class CaseRestorer(object):
     slots = ["_classifier", "_mpt"]
 
     def __init__(
-        self,
-        nfeats: int = 0x1000,
-        order: int = 2,
-        mpt: case.MixedPatternTable = {},
+        self, nfeats: int = 0x1000, order: int = 2, mpt: MixedPatternTable = {}
     ):
         self._classifier = perceptronix.SparseDenseMultinomialSequentialClassifier(
-            nfeats, len(case.TokenCase), order
+            nfeats, len(TokenCase), order
         )
         self._mpt = mpt
 
@@ -75,7 +73,7 @@ class CaseRestorer(object):
         filename: str
     ) -> Iterator[Tuple[Tokens, Tags, Patterns]]:
         for tokens in CaseRestorer.sentences_from_file(filename):
-            (tags, patterns) = zip(*(case.get_tc(token) for token in tokens))
+            (tags, patterns) = zip(*(get_tc(token) for token in tokens))
             # Casefolds after we get the labels.
             tokens = [token.casefold() for token in tokens]
             yield (tokens, list(tags), list(patterns))
@@ -112,11 +110,11 @@ class CaseRestorer(object):
     # Training and prediction.
 
     def train(self, vectors: Vectors, tags: Tags) -> Iterator[bool]:
-        return self._classifier.train_sequence(vectors, tags)
+        return self._classifier.train(vectors, tags)
 
-    def predict(self, vectors: Vectors) -> Iterator[case.TokenCase]:
-        for label in self._classifier.predict_sequence(vectors):
-            yield case.TokenCase(label)
+    def predict(self, vectors: Vectors) -> Iterator[TokenCase]:
+        for label in self._classifier.predict(vectors):
+            yield TokenCase(label)
 
     def evaluate(self, vectors: Vectors, tags: Tags) -> int:
         return sum(
@@ -128,7 +126,7 @@ class CaseRestorer(object):
         vectors = CaseRestorer.extract_emission_features(tokens)
         for (token, tag) in zip(tokens, self.predict(vectors)):
             pattern = self._mpt.get(token)
-            yield case.apply_tc(token, tag, pattern)
+            yield apply_tc(token, tag, pattern)
 
     # Delegates all attributes not otherwise defined to the underlying
     # classifier.

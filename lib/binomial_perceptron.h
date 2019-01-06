@@ -75,22 +75,14 @@ class BinomialAveragingPerceptronTpl
   explicit BinomialAveragingPerceptronTpl(size_t nfeats)
       : Base(nfeats), time_(0) {}
 
-  // 1: Update a single feature given the correct label.
-  void Update(Feature f, bool y) {
-    table_[f].Update(y ? +1: -1, time_);
-  }
-
-  // 1': Same as (1) but with optional (useless) yhat argument.
-  void Update(Feature f, bool y, bool yhat) { Update(f, y); }
-
-  // 2: Updates many features given the correct label.
+  // Updates many features given the correct label.
   void Update(const FeatureBundle &fb, bool y) {
     const auto tau = y ? +1 : -1;
     bias_.Update(tau, time_);
     for (const auto &f : fb) table_[f].Update(tau, time_);
   }
 
-  // 2': Same as (2) but with optional (useless) yhat argument.
+  // Same as above but with optional (useless) yhat argument.
   void Update(const FeatureBundle &fb, bool y, bool yhat) { Update(fb, y); }
 
   // Predicts a single example, and updates if it is incorrectly labeled,
@@ -109,6 +101,14 @@ class BinomialAveragingPerceptronTpl
   uint64_t Time() const { return time_; }
 
  private:
+  // Update a single feature given the correct label.
+  void Update(Feature f, bool y) {
+    table_[f].Update(y ? +1: -1, time_);
+  }
+
+  // 1Same as above but with optional (useless) yhat argument.
+  void Update(Feature f, bool y, bool yhat) { Update(f, y); }
+
   uint64_t time_;
 };
 
@@ -126,9 +126,6 @@ class BinomialPerceptronTpl
 
   using Base::bias_;
   using Base::table_;
-
-  explicit BinomialPerceptronTpl(size_t nfeats, size_t nlabels)
-      : Base(nfeats, nlabels) {}
 
   explicit BinomialPerceptronTpl(
       BinomialAveragingPerceptronTpl<InnerTableTpl> *avg);

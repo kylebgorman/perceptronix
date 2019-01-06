@@ -159,10 +159,10 @@ class POSTagger(object):
     # Training and prediction.
 
     def train(self, vectors: Vectors, tags: Tags) -> Iterator[bool]:
-        return self._classifier.train_sequence(vectors, tags)
+        return self._classifier.train(vectors, tags)
 
     def predict(self, vectors: Vectors) -> Iterator[str]:
-        for tag in self._classifier.predict_sequence(vectors):
+        for tag in self._classifier.predict(vectors):
             yield tag.decode("utf8")
 
     def evaluate(self, vectors: Vectors, tags: Tags) -> int:

@@ -1,18 +1,4 @@
-"""Python interface to Perceptronix, providing wrappers for:
-
-* DenseBinomial(Averaging)Perceptron: 
-    - DenseBinomialClassifier
-* SparseBinomial(Averaging)Perceptron: 
-    - SparseBinomialClassifier
-    - SparseBinomialSequenceClassifier
-* DenseMultinomial(Averaging)Perceptron: 
-    - DenseMultinomialClassifier
-* SparseDenseMultinomial(Averaging)Perceptron:
-    - SparseDenseMultinomialClassifier
-    - SparseDenseMultinomialSequenceClassifier
-* SparseMultinomial(Averaging)Perceptron: 
-    - SparseMultinomialClassifier
-    - SparseMultinomialSequenceClassifier
+"""Python interface to Perceptronix.
 
 Each instance is initially an averaging model; calling the instance method
 `average` "finalizes" the weights (by calling the averaging constructor
@@ -83,35 +69,13 @@ cdef class DenseBinomialClassifier(object):
     non-negative integers.
     """
 
-    cdef unique_ptr[DenseBinomialAveragingPerceptron] _amodel
-    cdef unique_ptr[DenseBinomialPerceptron] _model
+    cdef unique_ptr[DenseBinomialModel] _model
 
     def __init__(self, size_t nfeats):
-        self._amodel.reset(new DenseBinomialAveragingPerceptron(nfeats))
+        self._model.reset(new DenseBinomialModel(nfeats))
 
     def __repr__(self):
         return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
-
-    cdef bool _averaged(self):
-        return self._amodel.get() == NULL
-
-    @property
-    def averaged(self):
-        return self._averaged()
-
-    cpdef void average(self) except *:
-        """
-        average()
-
-        Average the weights in the model.
-
-        Raises:
-            PerceptronixOpError: Model already averaged.
-        """
-        if self._averaged():
-            raise PerceptronixOpError("Model already averaged")
-        self._model.reset(new DenseBinomialPerceptron(self._amodel.get()))
-        self._amodel.reset()
 
     @classmethod
     def read(cls, filename):
@@ -131,8 +95,8 @@ cdef class DenseBinomialClassifier(object):
         """
         cdef DenseBinomialClassifier result = cls.__new__(cls)
         cdef string metadata
-        result._model.reset(DenseBinomialPerceptron.Read(tobytes(filename),
-                                                         addr(metadata)))
+        result._model.reset(DenseBinomialModel.Read(tobytes(filename),
+                                                    addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError("Read failed: {}".format(filename))
         return (result, metadata.decode("utf8"))
@@ -151,7 +115,7 @@ cdef class DenseBinomialClassifier(object):
             PerceptronixOpError: Must average model first.
             PerceptronixIOError: Read failed.
         """
-        if not self._averaged():
+        if not self._model.get().Averaged():
             raise PerceptronixOpError("Must average model first")
         if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
             raise PerceptronixIOError("Write failed: {}".format(filename))
@@ -176,10 +140,27 @@ cdef class DenseBinomialClassifier(object):
         Raises:
             PerceptronixOpError: Model already averaged.
         """
-        if self._averaged():
+        if self._model.get().Averaged():
             raise PerceptronixOpError("Model already averaged")
         cdef vector[size_t] fvector = feats
-        return self._amodel.get().Train(fvector, label)
+        return self._model.get().Train(fvector, label)
+
+    @property
+    def averaged(self):
+        return self._model.get().Averaged()
+
+    cpdef void average(self) except *:
+        """
+        average()
+
+        Average the weights in the model.
+
+        Raises:
+            PerceptronixOpError: Model already averaged.
+        """
+        if self._model.get().Averaged():
+            raise PerceptronixOpError("Model already averaged")
+        self._model.get().Average()
 
     cpdef bool predict(self, feats):
         """
@@ -195,10 +176,7 @@ cdef class DenseBinomialClassifier(object):
             The prediction.
         """
         cdef vector[size_t] fvector = feats
-        if self._averaged():
-            return self._model.get().Predict(fvector)
-        else:
-            return self._amodel.get().Predict(fvector)
+        return self._model.get().Predict(fvector)
 
 
 cdef class SparseBinomialClassifier(object):
@@ -219,35 +197,13 @@ cdef class SparseBinomialClassifier(object):
     of strings.
     """
 
-    cdef unique_ptr[SparseBinomialAveragingPerceptron] _amodel
-    cdef unique_ptr[SparseBinomialPerceptron] _model
+    cdef unique_ptr[SparseBinomialModel] _model
 
     def __init__(self, size_t nfeats):
-        self._amodel.reset(new SparseBinomialAveragingPerceptron(nfeats))
+        self._model.reset(new SparseBinomialModel(nfeats))
 
     def __repr__(self):
         return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
-
-    cdef bool _averaged(self):
-        return self._amodel.get() == NULL
-
-    @property
-    def averaged(self):
-        return self._averaged()
-
-    cpdef void average(self) except *:
-        """
-        average()
-
-        Average the weights in the model.
-
-        Raises:
-            PerceptronixOpError: Model already averaged.
-        """
-        if self._averaged():
-            raise PerceptronixOpError("Model already averaged")
-        self._model.reset(new SparseBinomialPerceptron(self._amodel.get()))
-        self._amodel.reset()
 
     @classmethod
     def read(cls, filename):
@@ -267,8 +223,8 @@ cdef class SparseBinomialClassifier(object):
         """
         cdef SparseBinomialClassifier result = cls.__new__(cls)
         cdef string metadata
-        result._model.reset(SparseBinomialPerceptron.Read(tobytes(filename),
-                                                          addr(metadata)))
+        result._model.reset(SparseBinomialModel.Read(tobytes(filename),
+                                                     addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError("Read failed: {}".format(filename))
         return (result, metadata.decode("utf8"))
@@ -287,7 +243,7 @@ cdef class SparseBinomialClassifier(object):
             PerceptronixOpError: Must average model first.
             PerceptronixIOError: Read failed.
         """
-        if not self._averaged():
+        if not self._model.get().Averaged():
             raise PerceptronixOpError("Must average model first")
         if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
             raise PerceptronixIOError("Write failed: {}".format(filename))
@@ -311,10 +267,27 @@ cdef class SparseBinomialClassifier(object):
         Raises:
             PerceptronixOpError: Model already averaged.
         """
-        if self._averaged():
+        if self._model.get().Averaged():
             raise PerceptronixOpError("Model already averaged")
         cdef vector[string] fvector = tobytevector(feats)
-        return self._amodel.get().Train(fvector, label)
+        return self._model.get().Train(fvector, label)
+
+    @property
+    def averaged(self):
+        return self._model.get().Averaged()
+
+    cpdef void average(self) except *:
+        """
+        average()
+
+        Average the weights in the model.
+
+        Raises:
+            PerceptronixOpError: Model already averaged.
+        """
+        if self._model.get().Averaged():
+            raise PerceptronixOpError("Model already averaged")
+        self._model.get().Average()
 
     cpdef bool predict(self, feats):
         """
@@ -329,13 +302,10 @@ cdef class SparseBinomialClassifier(object):
              Boolean prediction.
         """
         cdef vector[string] fvector = tobytevector(feats)
-        if self._averaged():
-            return self._model.get().Predict(fvector)
-        else:
-            return self._amodel.get().Predict(fvector)
+        return self._model.get().Predict(fvector)
 
 
-cdef class SparseBinomialSequentialClassifier(SparseBinomialClassifier):
+cdef class SparseBinomialSequentialClassifier:
 
     """
     SparseBinomialSequentialClassifier(nfeats, order)
@@ -348,32 +318,13 @@ cdef class SparseBinomialSequentialClassifier(SparseBinomialClassifier):
     sequential decoding.
     """
 
-    cdef unique_ptr[SparseTransitionFunctor[bool]] _tf
-    cdef unique_ptr[SparseBinomialAveragingDecoder] _adecoder
-    cdef unique_ptr[SparseBinomialDecoder] _decoder
-
-    cdef void _init_transition_functor(self, size_t order):
-        self._tf.reset(new SparseTransitionFunctor[bool](order))
-
-    cdef void _average_decoder(self):
-        self._decoder.reset(new SparseBinomialDecoder(deref(self._model),
-                                                      deref(self._tf)))
-        self._adecoder.reset()
+    cdef unique_ptr[SparseBinomialSequentialModel] _model
 
     def __init__(self, size_t nfeats, size_t order):
-        super(SparseBinomialSequentialClassifier, self).__init__(nfeats)
-        self._init_transition_functor(order)
-        self._adecoder.reset(new SparseBinomialAveragingDecoder(
-            self._amodel.get(), deref(self._tf)))
+        self._model.reset(new SparseBinomialSequentialModel(nfeats, order))
 
-    cpdef void average(self):
-        """
-        average()
-        
-        Average the weights in the model.
-        """
-        super(SparseBinomialSequentialClassifier, self).average()
-        self._average_decoder()
+    def __repr__(self):
+        return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
 
     @classmethod
     def read(cls, filename, size_t order):
@@ -384,7 +335,7 @@ cdef class SparseBinomialSequentialClassifier(SparseBinomialClassifier):
 
         Args:
             filename: Path to source file.
-            order: Model order.
+            order: Model order (e.g., 1 implies bigram model).
 
         Returns:
             A tuple of the deserialized model and the metadata string.
@@ -392,15 +343,38 @@ cdef class SparseBinomialSequentialClassifier(SparseBinomialClassifier):
         Raises:
             PerceptronixIOError: Read failed.
         """
-        (classifier, metadata) = \
-            super(SparseBinomialSequentialClassifier, cls).read(filename)
-        classifier._init_transition_functor(order)
-        classifier._average_decoder()
-        return (classifier, metadata)
+        cdef SparseBinomialSequentialClassifier result = cls.__new__(cls)
+        cdef string metadata
+        result._model.reset(
+            SparseBinomialSequentialModel.Read(tobytes(filename),
+                                               order,
+                                               addr(metadata)))
+        if result._model.get() == NULL:
+            raise PerceptronixIOError("Read failed: {}".format(filename))
+        return (result, metadata.decode("utf8"))
 
-    cpdef size_t train_sequence(self, efeats, labels) except *:
+    cpdef void write(self, filename, metadata) except *:
         """
-        train_sequence(efeats, labels)
+                write(filename, metadata)
+
+        Serializes model to disk.
+
+        Args:
+            filename: Path to sink file.
+            metadata: Optional metadata string.
+
+        Raises:
+            PerceptronixOpError: Must average model first.
+            PerceptronixIOError: Read failed.
+        """
+        if not self._model.get().Averaged():
+            raise PerceptronixOpError("Must average model first")
+        if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
+            raise PerceptronixIOError("Write failed: {}".format(filename))
+
+    cpdef size_t train(self, efeats, labels) except *:
+        """
+        train(efeats, labels)
 
         Trains model using a single labeled sequence.
 
@@ -417,14 +391,31 @@ cdef class SparseBinomialSequentialClassifier(SparseBinomialClassifier):
         Raises:
             PerceptronixOpError: Model already averaged.
         """
-        if self._averaged():
+        if self._model.get().Averaged():
             raise PerceptronixOpError("Model already averaged")
         cdef vector[vector[string]] fvectors = tobytevectors(efeats)
-        return self._adecoder.get().Train(fvectors, labels)
+        return self._model.get().Train(fvectors, labels)
 
-    cpdef vector[bool] predict_sequence(self, efeats):
+    @property
+    def averaged(self):
+        return self._model.get().Averaged()
+
+    cpdef void average(self) except *:
         """
-        predict_sequence(efeats)
+        average()
+
+        Average the weights in the model.
+
+        Raises:
+            PerceptronixOpError: Model already averaged.
+        """
+        if self._model.get().Averaged():
+            raise PerceptronixOpError("Model already averaged")
+        self._model.get().Average()
+
+    cpdef vector[bool] predict(self, efeats):
+        """
+        predict(efeats)
 
         Predicts the labels for a sequence.
 
@@ -436,10 +427,7 @@ cdef class SparseBinomialSequentialClassifier(SparseBinomialClassifier):
         """
         cdef vector[vector[string]] fvectors = tobytevectors(efeats)
         cdef vector[bool] yhats
-        if self._averaged():
-            self._decoder.get().Predict(fvectors, addr(yhats))
-        else:
-            self._adecoder.get().Predict(fvectors, addr(yhats))
+        self._model.get().Predict(fvectors, addr(yhats))
         return yhats
 
 
@@ -461,36 +449,13 @@ cdef class DenseMultinomialClassifier(object):
     of non-negative integers and labels as non-negative integers.
     """
 
-    cdef unique_ptr[DenseMultinomialAveragingPerceptron] _amodel
-    cdef unique_ptr[DenseMultinomialPerceptron] _model
+    cdef unique_ptr[DenseMultinomialModel] _model
 
     def __init__(self, size_t nlabels, size_t nfeats):
-        self._amodel.reset(new DenseMultinomialAveragingPerceptron(nlabels,
-                                                                   nfeats))
+        self._model.reset(new DenseMultinomialModel(nlabels, nfeats))
 
     def __repr__(self):
         return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
-
-    cdef bool _averaged(self):
-        return self._amodel.get() == NULL
-
-    @property
-    def averaged(self):
-        return self._averaged()
-
-    cpdef void average(self) except *:
-        """
-        average()
-
-        Average the weights in the model.
-
-        Raises:
-            PerceptronixOpError: Model already averaged.
-        """
-        if self._averaged():
-            raise PerceptronixOpError("Model already averaged")
-        self._model.reset(new DenseMultinomialPerceptron(self._amodel.get()))
-        self._amodel.reset()
 
     @classmethod
     def read(cls, filename):
@@ -511,8 +476,7 @@ cdef class DenseMultinomialClassifier(object):
         cdef DenseMultinomialClassifier result = cls.__new__(cls)
         cdef string metadata
         result._model.reset(
-            DenseMultinomialPerceptron.Read(tobytes(filename), addr(metadata))
-        )
+            DenseMultinomialModel.Read(tobytes(filename), addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError("Read failed: {}".format(filename))
         return (result, metadata.decode("utf8"))
@@ -560,7 +524,24 @@ cdef class DenseMultinomialClassifier(object):
         if self._averaged():
             raise PerceptronixOpError("Model already averaged")
         cdef vector[size_t] fvector = feats
-        return self._amodel.get().Train(fvector, label)
+        return self._model.get().Train(fvector, label)
+
+    @property
+    def averaged(self):
+        return self._model.get().Averaged()
+
+    cpdef void average(self) except *:
+        """
+        average()
+
+        Average the weights in the model.
+
+        Raises:
+            PerceptronixOpError: Model already averaged.
+        """
+        if self._model.get().Averaged():
+            raise PerceptronixOpError("Model already averaged")
+        self._model.get().Average()
 
     cpdef size_t predict(self, feats):
         """
@@ -576,10 +557,7 @@ cdef class DenseMultinomialClassifier(object):
             The prediction.
         """
         cdef vector[size_t] fvector = feats
-        if self._averaged():
-            return self._model.get().Predict(fvector)
-        else:
-            return self._amodel.get().Predict(fvector)
+        return self._model.get().Predict(fvector)
 
 
 cdef class SparseDenseMultinomialClassifier(object):
@@ -606,36 +584,13 @@ cdef class SparseDenseMultinomialClassifier(object):
     iterables of strings and labels as non-negative integers.
     """
 
-    cdef unique_ptr[SparseDenseMultinomialAveragingPerceptron] _amodel
-    cdef unique_ptr[SparseDenseMultinomialPerceptron] _model
+    cdef unique_ptr[SparseDenseMultinomialModel] _model
 
     def __init__(self, size_t nlabels, size_t nfeats):
-        self._amodel.reset(new SparseDenseMultinomialAveragingPerceptron(nlabels,
-                                                                         nfeats))
+        self._model.reset(new SparseDenseMultinomialModel(nlabels, nfeats)) 
 
     def __repr__(self):
         return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
-
-    cdef bool _averaged(self):
-        return self._amodel.get() == NULL
-
-    @property
-    def averaged(self):
-        return self._averaged()
-
-    cpdef void average(self) except *:
-        """
-        average()
-
-        Average the weights in the model.
-
-        Raises:
-            PerceptronixOpError: Model already averaged.
-        """
-        if self._averaged():
-            raise PerceptronixOpError("Model already averaged")
-        self._model.reset(new SparseDenseMultinomialPerceptron(self._amodel.get()))
-        self._amodel.reset()
 
     @classmethod
     def read(cls, filename):
@@ -655,8 +610,8 @@ cdef class SparseDenseMultinomialClassifier(object):
         """
         cdef SparseDenseMultinomialClassifier result = cls.__new__(cls)
         cdef string metadata
-        result._model.reset(SparseDenseMultinomialPerceptron.Read(
-            tobytes(filename), addr(metadata)))
+        result._model.reset(SparseDenseMultinomialModel.Read(tobytes(filename),
+                                                             addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError("Read failed: {}".format(filename))
         return (result, metadata.decode("utf8"))
@@ -675,7 +630,7 @@ cdef class SparseDenseMultinomialClassifier(object):
             PerceptronixOpError: Must average model first.
             PerceptronixIOError: Read failed.
         """
-        if not self._averaged():
+        if not self._model.get().Averaged():
             raise PerceptronixOpError("Must average model first")
         if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
             raise PerceptronixIOError("Write failed: {}".format(filename))
@@ -699,10 +654,27 @@ cdef class SparseDenseMultinomialClassifier(object):
         Raises:
             PerceptronixOpError: Model already averaged.
         """
-        if self._averaged():
+        if self._model.get().Averaged():
             raise PerceptronixOpError("Model already averaged")
         cdef vector[string] fvector = tobytevector(feats)
-        return self._amodel.get().Train(fvector, label)
+        return self._model.get().Train(fvector, label)
+
+    @property
+    def averaged(self):
+        return self._model.get().Averaged()
+
+    cpdef void average(self) except *:
+        """
+        average()
+
+        Average the weights in the model.
+
+        Raises:
+            PerceptronixOpError: Model already averaged.
+        """
+        if self._model.get().Averaged():
+            raise PerceptronixOpError("Model already averaged")
+        self._model.get().Average()
 
     cpdef size_t predict(self, feats):
         """
@@ -718,14 +690,9 @@ cdef class SparseDenseMultinomialClassifier(object):
             The prediction. 
         """
         cdef vector[string] fvector = tobytevector(feats)
-        if self._averaged():
-            return self._model.get().Predict(fvector)
-        else:
-            return self._amodel.get().Predict(fvector)
+        return self._model.get().Predict(fvector)
 
-
-cdef class SparseDenseMultinomialSequentialClassifier(
-    SparseDenseMultinomialClassifier):
+cdef class SparseDenseMultinomialSequentialClassifier:
 
     """
     SparseDenseMultinomialSequentialClassifier(nfeats, nlabels, order)
@@ -739,33 +706,11 @@ cdef class SparseDenseMultinomialSequentialClassifier(
     fixed-size arrays of weights and greedy sequential decoding.
     """
 
-    cdef unique_ptr[SparseTransitionFunctor[size_t]] _tf
-    cdef unique_ptr[SparseDenseMultinomialAveragingDecoder] _adecoder
-    cdef unique_ptr[SparseDenseMultinomialDecoder] _decoder
-
-    cdef void _init_transition_functor(self, size_t order):
-        self._tf.reset(new SparseTransitionFunctor[size_t](order))
-
-    cdef void _average_decoder(self):
-        self._decoder.reset(new SparseDenseMultinomialDecoder(
-            deref(self._model), deref(self._tf)))
-        self._adecoder.reset()
+    cdef unique_ptr[SparseDenseMultinomialSequentialModel] _model
 
     def __init__(self, size_t nfeats, size_t nlabels, size_t order):
-        super(SparseDenseMultinomialSequentialClassifier, self).__init__(
-            nfeats, nlabels)
-        self._init_transition_functor(order)
-        self._adecoder.reset(new SparseDenseMultinomialAveragingDecoder(
-            self._amodel.get(), deref(self._tf)))
-
-    cpdef void average(self):
-        """
-        average()
-    
-        Average the weights in the model.
-        """
-        super(SparseDenseMultinomialSequentialClassifier, self).average()
-        self._average_decoder()
+        self._model.reset(new SparseDenseMultinomialSequentialModel(
+            nfeats, nlabels, order))
 
     @classmethod
     def read(cls, filename, size_t order):
@@ -784,17 +729,39 @@ cdef class SparseDenseMultinomialSequentialClassifier(
         Raises:
             PerceptronixIOError: Read failed.
         """
-        cdef SparseDenseMultinomialSequentialClassifier classifier
-        (classifier, metadata) = \
-            super(SparseDenseMultinomialSequentialClassifier, cls).read(
-                filename)
-        classifier._init_transition_functor(order)
-        classifier._average_decoder()
-        return (classifier, metadata)
+        cdef SparseDenseMultinomialSequentialClassifier result \
+            = cls.__new__(cls)
+        cdef string metadata
+        result._model.reset(
+            SparseDenseMultinomialSequentialModel.Read(tobytes(filename),
+                                                       order,
+                                                       addr(metadata)))
+        if result._model.get() == NULL:
+            raise PerceptronixIOError("Read failed: {}".format(filename))
+        return (result, metadata.decode("utf8"))
 
-    cpdef size_t train_sequence(self, efeats, labels) except *:
+    cpdef void write(self, filename, metadata) except *:
         """
-        train_sequence(efeats, labels)
+        write(filename, metadata)
+
+        Serializes model to disk.
+
+        Args:
+            filename: Path to sink file.
+            metadata: Optional metadata string.
+
+        Raises:
+            PerceptronixOpError: Must average model first.
+            PerceptronixIOError: Read failed.
+        """
+        if not self._model.get().Averaged():
+            raise PerceptronixOpError("Must average model first")
+        if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
+            raise PerceptronixIOError("Write failed: {}".format(filename))
+
+    cpdef size_t train(self, efeats, labels) except *:
+        """
+        train(efeats, labels)
 
         Trains model using a single labeled sequence.
 
@@ -811,14 +778,26 @@ cdef class SparseDenseMultinomialSequentialClassifier(
         Raises:
             PerceptronixOpError: Model already averaged.
         """
-        if self._averaged():
+        if self._model.get().Averaged():
             raise PerceptronixOpError("Model already averaged")
         cdef vector[vector[string]] fvectors = tobytevectors(efeats)
-        return self._adecoder.get().Train(fvectors, labels)
+        return self._model.get().Train(fvectors, labels)
 
-    cpdef vector[size_t] predict_sequence(self, efeats):
+    @property
+    def averaged(self):
+        return self._model.get().Averaged()
+
+    cpdef void average(self):
         """
-        predict_sequence(efeats) 
+        average()
+    
+        Average the weights in the model.
+        """
+        self._model.get().Average()
+
+    cpdef vector[size_t] predict(self, efeats):
+        """
+        predict(efeats) 
 
         Predicts the labels for a sequence.
 
@@ -830,12 +809,8 @@ cdef class SparseDenseMultinomialSequentialClassifier(
         """
         cdef vector[vector[string]] fvectors = tobytevectors(efeats)
         cdef vector[size_t] yhats
-        if self._averaged():
-            self._decoder.get().Predict(fvectors, addr(yhats))
-        else:
-            self._adecoder.get().Predict(fvectors, addr(yhats))
+        self._model.get().Predict(fvectors, addr(yhats))
         return yhats
-
 
 cdef class SparseMultinomialClassifier(object):
 
@@ -856,36 +831,13 @@ cdef class SparseMultinomialClassifier(object):
     features as iterables of strings and labels as strings.
     """
 
-    cdef unique_ptr[SparseMultinomialAveragingPerceptron] _amodel
-    cdef unique_ptr[SparseMultinomialPerceptron] _model
+    cdef unique_ptr[SparseMultinomialModel] _model
 
     def __init__(self, size_t nlabels, size_t nfeats):
-        self._amodel.reset(new SparseMultinomialAveragingPerceptron(nlabels,
-                                                                    nfeats))
+        self._model.reset(new SparseMultinomialModel(nlabels, nfeats))
 
     def __repr__(self):
         return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
-
-    cdef bool _averaged(self):
-        return self._amodel.get() == NULL
-
-    @property
-    def averaged(self):
-        return self._averaged()
-
-    cpdef void average(self) except *:
-        """
-        average()
-
-        Average the weights in the model.
-
-        Raises:
-            PerceptronixOpError: Model already averaged.
-        """
-        if self._averaged():
-            raise PerceptronixOpError("Model already averaged")
-        self._model.reset(new SparseMultinomialPerceptron(self._amodel.get()))
-        self._amodel.reset()
 
     @classmethod
     def read(cls, filename):
@@ -905,8 +857,8 @@ cdef class SparseMultinomialClassifier(object):
         """
         cdef SparseMultinomialClassifier result = cls.__new__(cls)
         cdef string metadata
-        result._model.reset(SparseMultinomialPerceptron.Read(tobytes(filename),
-                                                             addr(metadata)))
+        result._model.reset(SparseMultinomialModel.Read(tobytes(filename),
+                                                        addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError("Read failed: {}".format(filename))
         return (result, metadata.decode("utf8"))
@@ -925,7 +877,7 @@ cdef class SparseMultinomialClassifier(object):
             PerceptronixOpError: Must average model first.
             PerceptronixIOError: Read failed.
         """
-        if not self._averaged():
+        if not self._model.get().Averaged():
             raise PerceptronixOpError("Must average model first")
         if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
             raise PerceptronixIOError("Write failed: {}".format(filename))
@@ -951,10 +903,27 @@ cdef class SparseMultinomialClassifier(object):
         Raises:
             PerceptronixOpError: Model already averaged.
         """
-        if self._averaged():
+        if self._model.get().Averaged():
             raise PerceptronixOpError("Model already averaged")
         cdef vector[string] fvector = tobytevector(feats)
-        return self._amodel.get().Train(fvector, tobytes(label))
+        return self._model.get().Train(fvector, tobytes(label))
+
+    @property
+    def averaged(self):
+        return self._model.get().Averaged()
+
+    cpdef void average(self) except *:
+        """
+        average()
+
+        Average the weights in the model.
+
+        Raises:
+            PerceptronixOpError: Model already averaged.
+        """
+        if self._model.get().Averaged():
+            raise PerceptronixOpError("Model already averaged")
+        self._model.get().Averaged()
 
     cpdef string predict(self, feats):
         """
@@ -968,16 +937,10 @@ cdef class SparseMultinomialClassifier(object):
         Returns:
              String prediction.
         """
-
         cdef vector[string] fvector = tobytevector(feats)
-        if self._averaged():
-            return self._model.get().Predict(fvector)
-        else:
-            return self._amodel.get().Predict(fvector)
+        return self._model.get().Predict(fvector)
 
-
-cdef class SparseMultinomialSequentialClassifier(
-    SparseMultinomialClassifier):
+cdef class SparseMultinomialSequentialClassifier:
 
     """
     SparseMultinomialSequentialClassifier(nfeats, nlabels, order)
@@ -991,33 +954,12 @@ cdef class SparseMultinomialSequentialClassifier(
     greedy sequential decoding.
     """
 
-    cdef unique_ptr[SparseTransitionFunctor[string]] _tf
-    cdef unique_ptr[SparseMultinomialAveragingDecoder] _adecoder
-    cdef unique_ptr[SparseMultinomialDecoder] _decoder
-
-    cdef void _init_transition_functor(self, size_t order):
-        self._tf.reset(new SparseTransitionFunctor[string](order))
-
-    cdef void _average_decoder(self):
-        self._decoder.reset(new SparseMultinomialDecoder(deref(self._model),
-                                                         deref(self._tf)))
-        self._adecoder.reset()
+    cdef unique_ptr[SparseMultinomialSequentialModel] _model
 
     def __init__(self, size_t nfeats, size_t nlabels, size_t order):
-        super(SparseMultinomialSequentialClassifier, self).__init__(nfeats,
-                                                                    nlabels)
-        self._init_transition_functor(order)
-        self._adecoder.reset(new SparseMultinomialAveragingDecoder(
-            self._amodel.get(), deref(self._tf)))
-
-    cpdef void average(self):
-        """
-        average()
-
-        Average the weights in the model.
-        """ 
-        super(SparseMultinomialSequentialClassifier, self).average()
-        self._average_decoder()
+        self._model.reset(new SparseMultinomialSequentialModel(nfeats,
+                                                               nlabels,
+                                                               order))
 
     @classmethod
     def read(cls, filename, size_t order):
@@ -1036,16 +978,36 @@ cdef class SparseMultinomialSequentialClassifier(
         Raises:
             PerceptronixIOError: Read failed.
         """
-        cdef SparseMultinomialSequentialClassifier classifier
-        (classifier, metadata) = \
-            super(SparseMultinomialSequentialClassifier, cls).read(filename)
-        classifier._init_transition_functor(order)
-        classifier._average_decoder()
-        return (classifier, metadata)
+        cdef SparseMultinomialSequentialClassifier result = cls.__new__(cls)
+        cdef string metadata
+        result._model.reset(SparseMultinomialSequentialModel.Read(
+            tobytes(filename), order, addr(metadata)))
+        if result._model.get() == NULL:
+            raise PerceptronixIOError("Read failed: {}".format(filename))
+        return (result, metadata.decode("utf8"))
 
-    cpdef size_t train_sequence(self, efeats, labels) except *:
+    cpdef void write(self, filename, metadata=b"") except *:
         """
-        train_sequence(efeats, labels)
+        write(filename, metadata)
+
+        Serializes model to disk.
+
+        Args:
+            filename: Path to sink file.
+            metadata: Optional metadata string.
+
+        Raises:
+            PerceptronixOpError: Must average model first.
+            PerceptronixIOError: Read failed.
+        """
+        if not self._model.get().Averaged():
+            raise PerceptronixOpError("Must average model first")
+        if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
+            raise PerceptronixIOError("Write failed: {}".format(filename))
+
+    cpdef size_t train(self, efeats, labels) except *:
+        """
+        train(efeats, labels)
 
         Trains model using a single labeled sequence.
 
@@ -1062,15 +1024,32 @@ cdef class SparseMultinomialSequentialClassifier(
         Raises:
             PerceptronixOpError: Model already averaged.
         """
-        if self._averaged():
+        if self._model.get().Averaged():
             raise PerceptronixOpError("Model already averaged")
         cdef vector[vector[string]] fvectors = tobytevectors(efeats)
         cdef vector[string] ys = tobytevector(labels)
-        return self._adecoder.get().Train(fvectors, ys)
+        return self._model.get().Train(fvectors, ys)
 
-    cpdef vector[string] predict_sequence(self, efeats):
+    @property
+    def averaged(self):
+        return self._model.get().Averaged()
+    
+    cpdef void average(self):
         """
-        predict_sequence(efeats)
+        average()
+
+        Average the weights in the model.
+
+        Raises:
+            PerceptronixOPError: Model already averaged.
+        """ 
+        if self._model.get().Averaged():
+            raise PerceptronixOpError("Model already averaged")
+        self._model.get().Average()
+
+    cpdef vector[string] predict(self, efeats):
+        """
+        predict(efeats)
     
         Predicts the labels for a sequence.
 
@@ -1082,8 +1061,5 @@ cdef class SparseMultinomialSequentialClassifier(
         """
         cdef vector[vector[string]] fvectors = tobytevectors(efeats)
         cdef vector[string] yhats
-        if self._averaged():
-            self._decoder.get().Predict(fvectors, addr(yhats))
-        else:
-            self._adecoder.get().Predict(fvectors, addr(yhats))
+        self._model.get().Predict(fvectors, addr(yhats))
         return yhats

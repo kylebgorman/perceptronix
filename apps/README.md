@@ -6,9 +6,9 @@ All applications here:
 
 Included or planned applications include:
 
+* Case restorer: `case_restorer`
 * POS tagger: `pos_tagger`
 * Sentence tokenizer: `sentence_tokenizer`
-* Case restorer: `case_restorer`
 * Word tokenizer: `word_tokenizer`
 
 As of 2019-01-01 the first three are fully functional.

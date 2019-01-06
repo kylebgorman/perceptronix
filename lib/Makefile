@@ -16,7 +16,7 @@ multinomial_perceptron.o: multinomial_perceptron.h multinomial_perceptron.cc \
 					   	  table.h weight.h
 	g++ $(CXXFLAGS) -c multinomial_perceptron.cc
 
-unittest.o: unittest.cc decode.h
+unittest.o: unittest.cc binomial_model.h multinomial_model.h decoder.h
 	g++ $(CXXFLAGS) -c unittest.cc
 
 unittest: unittest.o \
@@ -44,9 +44,10 @@ test: unittest
 	protoc --decode=perceptronix.SparseMultinomialPerceptronProto linear_model.proto < sm.pb
 
 python: binomial_perceptron.h binomial_perceptron.cc \
-		linear_model.pb.h linear_model.pb.cc \
 		multinomial_perceptron.h multinomial_perceptron.cc \
-		decode.h table.h weight.h
+		linear_model.pb.h linear_model.pb.cc \
+		binomial_model.h multinomial_model.h \
+		decoder.h table.h weight.h
 	python setup.py build
 
 clean:

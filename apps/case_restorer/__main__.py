@@ -8,18 +8,19 @@ from typing import List, Tuple
 
 import nlup
 
-from case_restorer import case
 
+from .case import MixedPatternTable, TokenCase
 from .model import CaseRestorer
 
+
 Tokens = List[str]
-Tags = List[case.TokenCase]
+Tags = List[TokenCase]
 Sentences = List[Tuple[Tokens, Tags]]
 
 
-def _read_data(filename: str) -> Tuple[Sentences, case.MixedPatternTable]:
+def _read_data(filename: str) -> Tuple[Sentences, MixedPatternTable]:
     data = []
-    mixed_patterns: case.MixedPatternTable = {}
+    mixed_patterns: MixedPatternTable = {}
     gen = CaseRestorer.tagged_sentences_from_file(filename)
     for (tokens, tags, patterns) in gen:
         vectors = CaseRestorer.extract_emission_features(tokens)

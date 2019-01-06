@@ -95,14 +95,14 @@ class MultinomialAveragingPerceptronTpl
     return success;
   }
 
-  // 1: Updates a single feature given correct and incorrect labels.
+  // Updates a single feature given correct and incorrect labels.
   void Update(const Feature &f, Label y, Label yhat) {
     auto &ref = table_[f];
     ref[y].Update(+1, time_);
     ref[yhat].Update(-1, time_);
   }
 
-  // 2: Updates many features given correct and incorrect labels.
+  // Updates many features given correct and incorrect labels.
   void Update(const FeatureBundle &fb, Label y, Label yhat) {
     bias_[y].Update(+1, time_);
     bias_[yhat].Update(-1, time_);

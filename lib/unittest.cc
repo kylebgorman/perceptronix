@@ -6,9 +6,8 @@
 #include <memory>
 #include <vector>
 
-#include "binomial_perceptron.h"
-#include "decode.h"
-#include "multinomial_perceptron.h"
+#include "binomial_model.h"
+#include "multinomial_model.h"
 
 using namespace perceptronix;
 
@@ -19,47 +18,47 @@ enum class DFeat { GREEN, RED, BLUE, YELLOW, PURPLE, WHITE, __SIZE__ };
 constexpr size_t F = static_cast<size_t>(DFeat::__SIZE__);
 
 void TestBinomial() {
-  using DenseFeature = DenseBinomialAveragingPerceptron::Feature;
+  using DenseFeature = DenseBinomialModel::Feature;
 
-  DenseBinomialAveragingPerceptron dba(F);
-  dba.Train({static_cast<DenseFeature>(DFeat::GREEN)}, false);
-  dba.Train({static_cast<DenseFeature>(DFeat::GREEN)}, true);
-  dba.Train({static_cast<DenseFeature>(DFeat::RED)}, false);
-  dba.Train({static_cast<DenseFeature>(DFeat::GREEN)}, true);
-  dba.Train({static_cast<DenseFeature>(DFeat::YELLOW)}, false);
-  dba.Train({static_cast<DenseFeature>(DFeat::RED)}, true);
-  dba.Train({static_cast<DenseFeature>(DFeat::RED)}, true);
-  dba.Train({static_cast<DenseFeature>(DFeat::GREEN)}, true);
-  dba.Train({static_cast<DenseFeature>(DFeat::BLUE)}, false);
-  dba.Train({static_cast<DenseFeature>(DFeat::BLUE)}, false);
-  dba.Train({static_cast<DenseFeature>(DFeat::RED)}, true);
-  const DenseBinomialPerceptron db(&dba);
-  assert(db.Predict({static_cast<DenseFeature>(DFeat::GREEN),
-                     static_cast<DenseFeature>(DFeat::RED)}));
-  assert(db.Write("db.pb"));
-  std::unique_ptr<DenseBinomialPerceptron> dbr(
+  DenseBinomialModel dbm(F);
+  dbm.Train({static_cast<DenseFeature>(DFeat::GREEN)}, false);
+  dbm.Train({static_cast<DenseFeature>(DFeat::GREEN)}, true);
+  dbm.Train({static_cast<DenseFeature>(DFeat::RED)}, false);
+  dbm.Train({static_cast<DenseFeature>(DFeat::GREEN)}, true);
+  dbm.Train({static_cast<DenseFeature>(DFeat::YELLOW)}, false);
+  dbm.Train({static_cast<DenseFeature>(DFeat::RED)}, true);
+  dbm.Train({static_cast<DenseFeature>(DFeat::RED)}, true);
+  dbm.Train({static_cast<DenseFeature>(DFeat::GREEN)}, true);
+  dbm.Train({static_cast<DenseFeature>(DFeat::BLUE)}, false);
+  dbm.Train({static_cast<DenseFeature>(DFeat::BLUE)}, false);
+  dbm.Train({static_cast<DenseFeature>(DFeat::RED)}, true);
+  dbm.Average();
+  assert(dbm.Predict({static_cast<DenseFeature>(DFeat::GREEN),
+                      static_cast<DenseFeature>(DFeat::RED)}));
+  assert(dbm.Write("db.pb"));
+  std::unique_ptr<DenseBinomialPerceptron> dbm2(
       DenseBinomialPerceptron::Read("db.pb"));
-  assert(dbr.get());
-  assert(dbr->Predict({static_cast<DenseFeature>(DFeat::GREEN),
-                       static_cast<DenseFeature>(DFeat::RED)}));
+  assert(dbm2.get());
+  assert(dbm2->Predict({static_cast<DenseFeature>(DFeat::GREEN),
+                        static_cast<DenseFeature>(DFeat::RED)}));
 
-  SparseBinomialAveragingPerceptron sba(10);
-  sba.Train({"green"}, true);
-  sba.Train({"green"}, true);
-  sba.Train({"red"}, true);
-  sba.Train({"yellow"}, false);
-  sba.Train({"red"}, true);
-  sba.Train({"red"}, true);
-  sba.Train({"blue"}, false);
-  sba.Train({"blue"}, false);
-  sba.Train({"red"}, false);
-  const SparseBinomialPerceptron sb(&sba);
-  assert(sb.Predict({"green", "red"}));
-  assert(sb.Write("sb.pb"));
-  std::unique_ptr<SparseBinomialPerceptron> sbr(
+  SparseBinomialModel sbm(10);
+  sbm.Train({"green"}, true);
+  sbm.Train({"green"}, true);
+  sbm.Train({"red"}, true);
+  sbm.Train({"yellow"}, false);
+  sbm.Train({"red"}, true);
+  sbm.Train({"red"}, true);
+  sbm.Train({"blue"}, false);
+  sbm.Train({"blue"}, false);
+  sbm.Train({"red"}, false);
+  sbm.Average();
+  assert(sbm.Predict({"green", "red"}));
+  assert(sbm.Write("sb.pb"));
+  std::unique_ptr<SparseBinomialPerceptron> sbm2(
       SparseBinomialPerceptron::Read("sb.pb"));
-  assert(sbr.get());
-  assert(sbr->Predict({"green", "red"}));
+  assert(sbm2.get());
+  assert(sbm2->Predict({"green", "red"}));
 }
 
 // MULTINOMIAL PERCEPTRON STUFF.
@@ -69,57 +68,57 @@ enum class Case { LOWER, MIXED, TITLE, UPPER, DC, __SIZE__ };
 constexpr size_t N = static_cast<size_t>(Case::__SIZE__);
 
 void TestMultinomial() {
-  using DenseFeature = DenseMultinomialAveragingPerceptron::Feature;
+  using DenseFeature = DenseMultinomialModel::Feature;
 
-  DenseMultinomialAveragingPerceptron dma(F, N);
-  dma.Train({static_cast<DenseFeature>(DFeat::BLUE)},
+  DenseMultinomialModel dmm(F, N);
+  dmm.Train({static_cast<DenseFeature>(DFeat::BLUE)},
             static_cast<DenseFeature>(Case::MIXED));
-  dma.Train({static_cast<DenseFeature>(DFeat::GREEN)},
+  dmm.Train({static_cast<DenseFeature>(DFeat::GREEN)},
             static_cast<DenseFeature>(Case::TITLE));
-  dma.Train({static_cast<DenseFeature>(DFeat::GREEN)},
+  dmm.Train({static_cast<DenseFeature>(DFeat::GREEN)},
             static_cast<DenseFeature>(Case::MIXED));
-  dma.Train({static_cast<DenseFeature>(DFeat::GREEN)},
+  dmm.Train({static_cast<DenseFeature>(DFeat::GREEN)},
             static_cast<DenseFeature>(Case::MIXED));
-  const DenseMultinomialPerceptron dm(&dma);
-  assert(dm.Predict({static_cast<DenseFeature>(DFeat::BLUE),
-                     static_cast<DenseFeature>(DFeat::GREEN)}) ==
+  dmm.Average();
+  assert(dmm.Predict({static_cast<DenseFeature>(DFeat::BLUE),
+                      static_cast<DenseFeature>(DFeat::GREEN)}) ==
          static_cast<DenseFeature>(Case::MIXED));
-  assert(dm.Write("dm.pb"));
-  std::unique_ptr<DenseMultinomialPerceptron> dmr(
+  assert(dmm.Write("dm.pb"));
+  std::unique_ptr<DenseMultinomialPerceptron> dmm2(
       DenseMultinomialPerceptron::Read("dm.pb"));
-  assert(dmr.get());
-  assert(dmr->Predict({static_cast<DenseFeature>(DFeat::BLUE),
-                       static_cast<DenseFeature>(DFeat::GREEN)}) ==
+  assert(dmm2.get());
+  assert(dmm2->Predict({static_cast<DenseFeature>(DFeat::BLUE),
+                        static_cast<DenseFeature>(DFeat::GREEN)}) ==
          static_cast<DenseFeature>(Case::MIXED));
 
-  SparseDenseMultinomialAveragingPerceptron sdma(F, N);
-  sdma.Train({"blue"}, static_cast<DenseFeature>(Case::MIXED));
-  sdma.Train({"green"}, static_cast<DenseFeature>(Case::TITLE));
-  sdma.Train({"green"}, static_cast<DenseFeature>(Case::LOWER));
-  sdma.Train({"green"}, static_cast<DenseFeature>(Case::MIXED));
-  sdma.Train({"brown"}, static_cast<DenseFeature>(Case::UPPER));
-  const SparseDenseMultinomialPerceptron sdm(&sdma);
-  assert(sdm.Predict({"blue", "green"}) ==
+  SparseDenseMultinomialModel sdmm(F, N);
+  sdmm.Train({"blue"}, static_cast<DenseFeature>(Case::MIXED));
+  sdmm.Train({"green"}, static_cast<DenseFeature>(Case::TITLE));
+  sdmm.Train({"green"}, static_cast<DenseFeature>(Case::LOWER));
+  sdmm.Train({"green"}, static_cast<DenseFeature>(Case::MIXED));
+  sdmm.Train({"brown"}, static_cast<DenseFeature>(Case::UPPER));
+  sdmm.Average();
+  assert(sdmm.Predict({"blue", "green"}) ==
          static_cast<DenseFeature>(Case::MIXED));
-  assert(sdm.Write("sdm.pb"));
-  std::unique_ptr<SparseDenseMultinomialPerceptron> sdr(
+  assert(sdmm.Write("sdm.pb"));
+  std::unique_ptr<SparseDenseMultinomialPerceptron> sdmm2(
       SparseDenseMultinomialPerceptron::Read("sdm.pb"));
-  assert(sdr.get());
-  assert(sdr->Predict({"blue", "green"}) ==
+  assert(sdmm2.get());
+  assert(sdmm2->Predict({"blue", "green"}) ==
          static_cast<DenseFeature>(Case::MIXED));
 
-  SparseMultinomialAveragingPerceptron sma(F, N);
-  sma.Train({"blue"}, "lower");
-  sma.Train({"green"}, "lower");
-  sma.Train({"green"}, "mixed");
-  sma.Train({"green"}, "lower");
-  const SparseMultinomialPerceptron sm(&sma);
-  assert(sm.Predict({"blue", "green"}) == "lower");
-  assert(sm.Write("sm.pb"));
-  std::unique_ptr<SparseMultinomialPerceptron> smr(
+  SparseMultinomialModel smm(F, N);
+  smm.Train({"blue"}, "lower");
+  smm.Train({"green"}, "lower");
+  smm.Train({"green"}, "mixed");
+  smm.Train({"green"}, "lower");
+  smm.Average();
+  assert(smm.Predict({"blue", "green"}) == "lower");
+  assert(smm.Write("sm.pb"));
+  std::unique_ptr<SparseMultinomialPerceptron> smm2(
       SparseMultinomialPerceptron::Read("sm.pb"));
-  assert(smr.get());
-  assert(smr->Predict({"blue", "green"}) == "lower");
+  assert(smm2.get());
+  assert(smm2->Predict({"blue", "green"}) == "lower");
 }
 
 template <class Label>
@@ -132,41 +131,35 @@ void AssertStructured(const std::vector<Label> &ys,
 
 void TestStructured() {
   // Sparse binomial: word segmentation (space before?).
-  SparseBinomialAveragingPerceptron sba(32);
+  SparseBinomialSequentialModel sbsm(32, 2);
   const std::vector<bool> binomial_ys = {false, true, true, true, false};
   const std::vector<std::vector<string>> evectors = {{"w=this", "*initial*"},
                                                      {"w=sentence"},
                                                      {"w=is"},
                                                      {"w=good"},
                                                      {"w=.", "*ultimate*"}};
-  const SparseTransitionFunctor<bool> binomial_tf(1);
-  SparseBinomialAveragingDecoder sbad(&sba, binomial_tf);
-  for (size_t i = 0; i < 10; ++i) sbad.Train(evectors, binomial_ys);
+  for (size_t i = 0; i < 10; ++i) sbsm.Train(evectors, binomial_ys);
   std::vector<bool> binomial_yhats;
-  sbad.Predict(evectors, &binomial_yhats);
+  sbsm.Predict(evectors, &binomial_yhats);
   AssertStructured(binomial_ys, binomial_yhats);
-  const SparseBinomialPerceptron sb(&sba);
-  const SparseBinomialDecoder sbd(sb, binomial_tf);
-  sbd.Predict(evectors, &binomial_yhats);
+  sbsm.Average();
+  sbsm.Predict(evectors, &binomial_yhats);
   AssertStructured(binomial_ys, binomial_yhats);
 
   // Sparse-dense multinomial; case-restoration (reusing the evectors and
   // transition functor from above).
-  SparseDenseMultinomialAveragingPerceptron sdma(32, N);
+  SparseDenseMultinomialSequentialModel sdmsm(32, N, 2);
   const std::vector<size_t> dense_ys = {static_cast<size_t>(Case::TITLE),
                                         static_cast<size_t>(Case::LOWER),
                                         static_cast<size_t>(Case::LOWER),
                                         static_cast<size_t>(Case::LOWER),
                                         static_cast<size_t>(Case::DC)};
-  const SparseTransitionFunctor<size_t> dense_tf(2);
-  SparseDenseMultinomialAveragingDecoder sdmad(&sdma, dense_tf);
-  for (size_t i = 0; i < 10; ++i) sdmad.Train(evectors, dense_ys);
+  for (size_t i = 0; i < 10; ++i) sdmsm.Train(evectors, dense_ys);
   std::vector<size_t> dense_yhats;
-  sdmad.Predict(evectors, &dense_yhats);
+  sdmsm.Predict(evectors, &dense_yhats);
   AssertStructured(dense_ys, dense_yhats);
-  const SparseDenseMultinomialPerceptron sdm(&sdma);
-  const SparseDenseMultinomialDecoder sdmd(sdm, dense_tf);
-  sdmd.Predict(evectors, &dense_yhats);
+  sdmsm.Average();
+  sdmsm.Predict(evectors, &dense_yhats);
   AssertStructured(dense_ys, dense_yhats);
 }
 
