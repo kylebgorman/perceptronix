@@ -1,8 +1,7 @@
-// multinomial_perceptron.h: templates for multinomial perceptron
-//     classifiers with binary features.
-
 #ifndef PERCEPTRONIX_MULTINOMIAL_PERCEPTRON_H_
 #define PERCEPTRONIX_MULTINOMIAL_PERCEPTRON_H_
+
+// multinomial_perceptron.h: templates for multinomial perceptron classifiers.
 
 #include <cassert>
 #include <cstdint>

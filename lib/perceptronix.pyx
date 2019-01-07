@@ -1,4 +1,4 @@
-#cython: language_level=3
+#cython: language-level=3, c_string_type=str
 """Python interface to Perceptronix.
 
 Each instance is initially an averaging model; calling the instance method
@@ -595,28 +595,6 @@ cdef class SparseDenseMultinomialClassifier(object):
     def __repr__(self):
         return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
 
-    cdef bool _averaged(self):
-        return self._amodel.get() == NULL
-
-    @property
-    def averaged(self):
-        return self._averaged()
-
-    cpdef void average(self) except *:
-        """
-        average()
-
-        Average the weights in the model.
-
-        Raises:
-            PerceptronixOpError: Model already averaged.
-        """
-        if self._averaged():
-            raise PerceptronixOpError("Model already averaged")
-        self._model.reset(new SparseDenseMultinomialPerceptron(
-            self._amodel.get()))
-        self._amodel.reset()
-
     @classmethod
     def read(cls, filename):
         """
@@ -716,6 +694,7 @@ cdef class SparseDenseMultinomialClassifier(object):
         """
         cdef vector[string] fvector = tobytevector(feats)
         return self._model.get().Predict(fvector)
+
 
 cdef class SparseDenseMultinomialSequentialClassifier:
 

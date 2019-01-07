@@ -1,7 +1,7 @@
-// binomial_model.h: wrappers for binomial models.
-
 #ifndef PERCEPTRONIX_BINOMIAL_MODEL_H_
 #define PERCEPTRONIX_BINOMIAL_MODEL_H_
+
+// binomial_model.h: wrappers for binomial models.
 
 #include <cassert>
 #include <iostream>

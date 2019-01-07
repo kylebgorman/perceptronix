@@ -28,12 +28,10 @@ Classes are available in both averaged and unaveraged forms. The
 suggested workflow is to train an averaged model, and then use the
 averaged weights to initialize an immutable unaveraged model. E.g.:
 
-    namespace perceptronix {
-      SparseDenseMultinomialModel model(nfeats, nlabels);
+      perceptronix::SparseDenseMultinomialModel model(nfeats, nlabels);
       // ... training ...
-      model.Average()
+      model.Average();
       // ... inference ...
-    }
 
 Note that in the example above, `avgmodel` requires approximately three
 times as much memory as `model`. Furthermore, inference is significantly
@@ -42,19 +40,19 @@ model serialization.
 
 The major classes are:
 
--   `DenseBinomialModel`: A binomial classifier using a
-    dense weight table; users must set the maximum number of unique
-    features at construction time.
+-   `DenseBinomialModel`: A binomial classifier using a dense weight
+    table; users must set the maximum number of unique features at
+    construction time.
 -   `SparseBinomialModel`: A binomial classifier using a
     dynamically-sized sparse weight table.
--   `DenseMultinomialModel`: A multinomial classifier
-    using dense weight tables; users must set the maximum number of
-    unique features and labels at construction time.
--   `SparseDenseMultinomialModel`: A multinomial
-    classifier using a dynamically-sized hash table for the outer table
-    and dense arrays for the inner table.
--   `SparseMultinomialModel`: A multinomial classifier
-    using dynamically-sized hash tables for both outer and inner tables.
+-   `DenseMultinomialModel`: A multinomial classifier using dense weight
+    tables; users must set the maximum number of unique features and
+    labels at construction time.
+-   `SparseDenseMultinomialModel`: A multinomial classifier using a
+    dynamically-sized hash table for the outer table and dense arrays
+    for the inner table.
+-   `SparseMultinomialModel`: A multinomial classifier using
+    dynamically-sized hash tables for both outer and inner tables.
 
 There are also HMM-like classes for greedy sequential decoding:
 
@@ -76,8 +74,9 @@ Design
 Weights
 -------
 
-Weight averaging is done using a lazy strategy. An averaged weight
-consists of:
+Weight averaging is done using a [lazy
+strategy](https://explosion.ai/blog/part-of-speech-pos-tagger-in-python#averaging-the-weights).
+An averaged weight consists of:
 
 -   The true weight (`weight_`), used for inference *during training*,
     and updated using the perceptron learning rule
@@ -89,11 +88,11 @@ consists of:
 At `time`, the time elapsed since the summed weight was last "freshened"
 is given by `time - time_`.
 
-The summed weight is "freshened" by adding to it the true weight multiplied
-by the time elapsed since timestamp.
+The summed weight is "freshened" by adding to it the true weight
+multiplied by the time elapsed since timestamp.
 
-The weight is averaged by freshening the summed weight then dividing it by
-the current time.
+The weight is averaged by freshening the summed weight then dividing it
+by the current time.
 
 Tables
 ------
@@ -165,7 +164,7 @@ pip.
 Author
 ======
 
-Kyle Gorman <kylebgorman@gmail.com>.
+[Kyle Gorman](kylebgorman@gmail.com)
 
 License
 =======

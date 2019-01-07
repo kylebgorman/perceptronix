@@ -1,3 +1,6 @@
+#ifndef PERCEPTRONIX_WEIGHT_H_
+#define PERCEPTRONIX_WEIGHT_H_
+
 // weight.h: Weight class templates for perceptron classifiers.
 //
 // The base class Weight(Tpl) is just a number with methods. The derived
@@ -15,9 +18,6 @@
 //     // Many rounds of training using aw.Get() and aw.Update().
 //     // ...
 //     Weight w(aw.GetAverage(time));
-
-#ifndef PERCEPTRONIX_WEIGHT_H_
-#define PERCEPTRONIX_WEIGHT_H_
 
 namespace perceptronix {
 

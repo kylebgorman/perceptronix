@@ -19,7 +19,7 @@ extension = Extension(
 
 setup(
     name="Perceptronix",
-    version="0.4",
+    version="0.5",
     author="Kyle Gorman",
     author_email="kylebgorman@gmail.com",
     install_requires=["Cython >= 0.29"],

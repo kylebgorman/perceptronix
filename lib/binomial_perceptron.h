@@ -1,8 +1,8 @@
-// binomial_perceptron.h: templates for binomial_perceptron classifiers
-// with binary features.
-
 #ifndef PERCEPTRONIX_BINOMIAL_PERCEPTRON_H_
 #define PERCEPTRONIX_BINOMIAL_PERCEPTRON_H_
+
+// binomial_perceptron.h: templates for binomial_perceptron classifiers
+// with binary features.
 
 #include <cassert>
 #include <cstdint>

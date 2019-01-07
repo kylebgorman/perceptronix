@@ -1,7 +1,7 @@
-// table.h: template classes for tables of linear model weights.
-
 #ifndef PERCEPTRONIX_TABLE_H_
 #define PERCEPTRONIX_TABLE_H_
+
+// table.h: template classes for tables of linear model weights.
 
 #include <cstdint>
 
@@ -19,12 +19,12 @@ namespace perceptronix {
 
 // Inner table using an array.
 
-template <class WeightT>
+template <class W>
 class DenseInnerTableTpl {
  public:
   using Feature = size_t;
-  using Weight = WeightT;
-  using Table = std::valarray<WeightT>;
+  using Weight = W;
+  using Table = std::valarray<Weight>;
   using Iterator = decltype(std::begin(Table()));
 
   // DO NOT USE THIS. It's just to appease std::valarray.
@@ -32,9 +32,9 @@ class DenseInnerTableTpl {
 
   explicit DenseInnerTableTpl(size_t nfeats) : table_(nfeats) {}
 
-  WeightT &operator[](Feature f) { return table_[f]; }
+  Weight &operator[](Feature f) { return table_[f]; }
 
-  const WeightT &operator[](Feature f) const { return table_[f]; }
+  const Weight &operator[](Feature f) const { return table_[f]; }
 
   Iterator begin() { return std::begin(table_); }
 
@@ -50,7 +50,7 @@ class DenseInnerTableTpl {
     return std::distance(cbegin(), std::max_element(cbegin(), cend()));
   }
 
-  void AddWeights(const DenseInnerTableTpl<WeightT> &weights) {
+  void AddWeights(const DenseInnerTableTpl<Weight> &weights) {
     if (!weights.Size()) return;
     table_ += weights.table_;
   }
@@ -61,12 +61,12 @@ class DenseInnerTableTpl {
 
 // Inner table using a hash table.
 
-template <class WeightT>
+template <class W>
 class SparseInnerTableTpl {
  public:
   using Feature = string;
-  using Weight = WeightT;
-  using Table = std::unordered_map<Feature, WeightT>;
+  using Weight = W;
+  using Table = std::unordered_map<Feature, Weight>;
   using Iterator = typename Table::iterator;
   using ConstIterator = typename Table::const_iterator;
   using Pair = typename Table::value_type;
@@ -77,9 +77,9 @@ class SparseInnerTableTpl {
   // Here, this is just a hint for the initial size of the table.
   explicit SparseInnerTableTpl(size_t nfeats) : table_(nfeats) {}
 
-  WeightT &operator[](Feature f) { return table_[f]; }
+  Weight &operator[](Feature f) { return table_[f]; }
 
-  const WeightT &operator[](Feature f) const {
+  const Weight &operator[](Feature f) const {
     auto it = table_.find(f);
     if (it == table_.cend()) return default_weight_;
     return it->second;
@@ -104,7 +104,7 @@ class SparseInnerTableTpl {
     return std::max_element(cbegin(), cend(), cmp)->first;
   }
 
-  void AddWeights(const SparseInnerTableTpl<WeightT> &weights) {
+  void AddWeights(const SparseInnerTableTpl<Weight> &weights) {
     if (!weights.Size()) return;
     for (auto it = weights.cbegin(); it != weights.cend(); ++it) {
       table_[it->first] += it->second;
@@ -114,23 +114,23 @@ class SparseInnerTableTpl {
  private:
   Table table_;
 
-  static const WeightT default_weight_;
+  static const Weight default_weight_;
 };
 
-template <class WeightT>
-const WeightT SparseInnerTableTpl<WeightT>::default_weight_ = \
-    WeightT();
+template <class Weight>
+const Weight SparseInnerTableTpl<Weight>::default_weight_ = \
+    Weight();
 
 
 // Outer table using arrays.
 
-template <class WeightT>
+template <class W>
 class DenseOuterTableTpl {
  public:
   using Feature = size_t;
   using Label = size_t;
-  using Weight = WeightT;
-  using InnerTable = DenseInnerTableTpl<WeightT>;
+  using Weight = W;
+  using InnerTable = DenseInnerTableTpl<Weight>;
   using Table = std::valarray<InnerTable>;
   using Iterator = decltype(std::begin(Table()));
 
@@ -159,13 +159,13 @@ class DenseOuterTableTpl {
 };
 
 // Outer table using hash table with an inner table using an array.
-template <class WeightT>
+template <class W>
 class SparseDenseOuterTableTpl {
  public:
   using Feature = string;
   using Label = size_t;
-  using Weight = WeightT;
-  using InnerTable = DenseInnerTableTpl<WeightT>;
+  using Weight = W;
+  using InnerTable = DenseInnerTableTpl<Weight>;
   using Table = std::unordered_map<Feature, InnerTable>;
   using Iterator = typename Table::iterator;
   using ConstIterator = typename Table::const_iterator;
@@ -208,20 +208,20 @@ class SparseDenseOuterTableTpl {
   static const InnerTable default_inner_table_;
 };
 
-template <class WeightT>
-const typename SparseDenseOuterTableTpl<WeightT>::InnerTable \
-    SparseDenseOuterTableTpl<WeightT>::default_inner_table_ = \
-    SparseDenseOuterTableTpl<WeightT>::InnerTable();
+template <class Weight>
+const typename SparseDenseOuterTableTpl<Weight>::InnerTable \
+    SparseDenseOuterTableTpl<Weight>::default_inner_table_ = \
+    SparseDenseOuterTableTpl<Weight>::InnerTable();
 
 // Outer table using hash tables.
 
-template <class WeightT>
+template <class W>
 class SparseOuterTableTpl {
  public:
   using Feature = string;
   using Label = string;
-  using Weight = WeightT;
-  using InnerTable = SparseInnerTableTpl<WeightT>;
+  using Weight = W;
+  using InnerTable = SparseInnerTableTpl<Weight>;
   using Table = std::unordered_map<Feature, InnerTable>;
   using Iterator = typename Table::iterator;
   using ConstIterator = typename Table::const_iterator;
@@ -264,10 +264,10 @@ class SparseOuterTableTpl {
   static const InnerTable default_inner_table_;
 };
 
-template <class WeightT>
-const typename SparseOuterTableTpl<WeightT>::InnerTable \
-    SparseOuterTableTpl<WeightT>::default_inner_table_ = \
-    SparseOuterTableTpl<WeightT>::InnerTable();
+template <class Weight>
+const typename SparseOuterTableTpl<Weight>::InnerTable \
+    SparseOuterTableTpl<Weight>::default_inner_table_ = \
+    SparseOuterTableTpl<Weight>::InnerTable();
 
 }  // namespace perceptronix
 

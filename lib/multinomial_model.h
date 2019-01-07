@@ -42,7 +42,8 @@ class MultinomialModel {
 
   // Deserialization.
 
-  static MultinomialModel *Read(std::istream &istrm, string *metadata = nullptr) {
+  static MultinomialModel *Read(std::istream &istrm,
+                                string *metadata = nullptr) {
     return new MultinomialModel(Perceptron::Read(istrm, metadata));
   }
 

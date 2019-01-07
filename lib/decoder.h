@@ -1,7 +1,7 @@
-// decoder.h: decoding functions and classes.
-
 #ifndef PERCEPTRONIX_DECODER_H_
 #define PERCEPTRONIX_DECODER_H_
+
+// decoder.h: decoding functions and classes.
 
 #include <cassert>
 
@@ -17,13 +17,6 @@ using std::string;
 
 namespace perceptronix {
 
-<<<<<<< HEAD:lib/decoder.h
-=======
-// TODO(kbg): This entire thing feels like an abstractional leak that ought to
-// live lower in the stack. Consider adding this to the perceptron classes
-// instead.
-
->>>>>>> 92f2b4d3dc31c182f8b1e8e83ab8344dd7430689:lib/decode.h
 // Transition feature functors should have the following interface:
 //
 // template <class L, class F>
@@ -31,6 +24,8 @@ namespace perceptronix {
 //   void operator()(const std::vector<L> &labels,
 //                   std::vector<F> *tfeats);
 // };
+
+// TODO(kbg): Come up with a DenseTransitionFunctor, somehow.
 
 // Transition feature functor for sparse (i.e., string) features. Should work
 // with both sparse and dense (integral) labels.
@@ -45,7 +40,7 @@ class SparseTransitionFunctor {
     // Second condition is purely for compatibility.
     if (labels.empty() || order_ == 0) return;
     const auto size = labels.size();
-    const auto bound = std::min(size, order_);
+    const auto bound = std::min(order_, size);
     tvector->reserve(bound);
     std::stringstream sstrm;
     sstrm << "t_i-1=" << labels[size - 1];
@@ -168,8 +163,7 @@ class AveragingDecoder {
       if (y == yhat) {
         correct += 1;
       } else {
-        const auto &cvector = cvectors[i];
-        perceptron_->Update(cvector, y, yhat);
+        perceptron_->Update(cvectors[i], y, yhat);
       }
     }
     perceptron_->Tick(size);
