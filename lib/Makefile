@@ -58,7 +58,7 @@ python: binomial_perceptron.h binomial_perceptron.cc \
 		linear_model.pb.h linear_model.pb.cc \
 		binomial_model.h multinomial_model.h \
 		decoder.h table.h weight.h
-	python setup.py build
+	python setup.py install
 
 clean:
 	$(RM) -r *.o *.pb *.pb.cc *.pb.h unittest \
