@@ -12,7 +12,7 @@ extension = Extension(
         "multinomial_perceptron.cc",
         "perceptronix.pyx",
     ],
-    libraries=["protobuf"],
+    libraries=["protobuf", "pthread"],
     language="c++",
     extra_compile_args=["-std=c++11", "-funsigned-char"],
 )
