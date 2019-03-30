@@ -33,11 +33,6 @@ averaged weights to initialize an immutable unaveraged model. E.g.:
       model.Average();
       // ... inference ...
 
-Note that in the example above, `avgmodel` requires approximately three
-times as much memory as `model`. Furthermore, inference is significantly
-faster with an constant `model`, and this conversion is required for
-model serialization.
-
 The major classes are:
 
 -   `DenseBinomialModel`: A binomial classifier using a dense weight
