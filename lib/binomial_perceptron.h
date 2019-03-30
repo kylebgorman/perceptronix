@@ -106,8 +106,8 @@ class BinomialAveragingPerceptronTpl
     table_[f].Update(y ? +1: -1, time_);
   }
 
-  // 1Same as above but with optional (useless) yhat argument.
-  void Update(Feature f, bool y, bool yhat) { Update(f, y); }
+  // Same as above but with optional (useless) yhat argument.
+  void Update(Feature f, bool y, bool) { Update(f, y); }
 
   uint64_t time_;
 };

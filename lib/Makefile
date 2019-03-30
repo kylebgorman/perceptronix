@@ -1,6 +1,6 @@
 all: unittest python
 
-CXXFLAGS += -std=c++11 -Wall -O2
+CXXFLAGS += -std=c++11 -Wall -O3
 
 linear_model.pb.h: linear_model.proto
 	protoc --cpp_out=. linear_model.proto
