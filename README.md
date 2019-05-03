@@ -24,19 +24,13 @@ API
 C++
 ---
 
-Classes are available in both averaged and unaveraged forms. The
-suggested workflow is to train an averaged model, and then use the
-averaged weights to initialize an immutable unaveraged model. E.g.:
+The normal workflow is to create a `...Model` object, train it, then 
+average it, creating an immutable, serializable object, E.g.:
 
       perceptronix::SparseDenseMultinomialModel model(nfeats, nlabels);
       // ... training ...
       model.Average();
       // ... inference ...
-
-Note that in the example above, `avgmodel` requires approximately three
-times as much memory as `model`. Furthermore, inference is significantly
-faster with an constant `model`, and this conversion is required for
-model serialization.
 
 The major classes are:
 
@@ -135,8 +129,6 @@ weights for all labels, or one which has a non-zero weight for some
 labels but not the one under consideration---is merely that of a hash
 table miss.
 
-TODO: Kyle will add an actual big-O analysis here.
-
 When you have sparse features, but you know the maximum number of labels
 at construction time (and this number is small, say, less than 64),
 consider using `SparseDenseMultinomial(Averaging)Perceptron` rather than
@@ -158,7 +150,7 @@ from protobuf itself.
 
 The Python wrapper and applications are written for Python 3.7.
 Compiling the wrapper requires Cython, and the applications require the
-`nlup` and `regex` Python libraries, both of which are available via
+`nlup` and `regex` Python libraries, both of which are available from
 pip.
 
 Author
