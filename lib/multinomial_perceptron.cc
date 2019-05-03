@@ -166,6 +166,10 @@ SparseMultinomialPerceptron *SparseMultinomialPerceptron::Read(
   if (metadata) *metadata = pb.metadata();
   auto *model = new SparseMultinomialPerceptron(pb.table_size(),
                                                 pb.inner_size());
+  auto bias = pb.bias().table();
+  for (auto iit = bias.cbegin(); iit != bias.cend(); ++iit) {
+    model->bias_[iit->first].Set(iit->second);
+  }
   auto outer_table_proto = pb.table();
   for (auto it = outer_table_proto.cbegin(); it != outer_table_proto.cend();
         ++it) {
