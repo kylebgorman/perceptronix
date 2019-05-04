@@ -85,7 +85,7 @@ if args.train:
             dev_correct = 0
             for (vectors, tags) in dev_data:
                 dev_correct += model.evaluate(vectors, tags)
-            logging.info("Develoment accuracy: %.4f", dev_correct / dev_size)
+            logging.info("Development accuracy: %.4f", dev_correct / dev_size)
     logging.info("Averaging model...")
     model.average()
 elif args.read:
