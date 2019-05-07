@@ -110,6 +110,8 @@ class CaseRestorer(object):
 
     # Training and prediction.
 
+    # `train` is delegated to the underlying classifier.
+
     def train(self, vectors: Vectors, tags: Tags) -> Iterator[bool]:
         return self._classifier.train(vectors, tags)
 

@@ -48,6 +48,8 @@ class SentenceTokenizer(object):
         new._max_context = max_context
         return new
 
+    # `write` is delegated to the underlying classifier.
+
     # Data readers.
 
     def candidates(self, text: str) -> Iterator[Candidate]:
@@ -93,6 +95,8 @@ class SentenceTokenizer(object):
         )
 
     # Training and prediction.
+
+    # `train` is delegated to the underlying classifier.
 
     def evaluate(self, vector: List[str], tag: bool) -> bool:
         return tag == self.predict(vector)

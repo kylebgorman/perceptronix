@@ -53,7 +53,7 @@ class POSTagger(object):
         new._classifier = classifier
         return new
 
-    # `write` is dispatched to the underlying classifier.
+    # `write` is delegated to the underlying classifier.
 
     # Data readers.
 
@@ -158,8 +158,7 @@ class POSTagger(object):
 
     # Training and prediction.
 
-    def train(self, vectors: Vectors, tags: Tags) -> Iterator[bool]:
-        return self._classifier.train(vectors, tags)
+    # `train` is delegated to the underlying classifier.
 
     def predict(self, vectors: Vectors) -> Iterator[str]:
         for tag in self._classifier.predict(vectors):
