@@ -48,7 +48,7 @@ class MultinomialModel {
   }
 
   static MultinomialModel *Read(const string &filename,
-                             string *metadata = nullptr) {
+                                string *metadata = nullptr) {
     return new MultinomialModel(Perceptron::Read(filename, metadata));
   }
  
@@ -194,7 +194,6 @@ using SparseDenseMultinomialSequentialModel = MultinomialSequentialModel<
    SparseDenseMultinomialDecoder,
    SparseTransitionFunctor<typename SparseDenseMultinomialDecoder::Label>
 >;
-
 using SparseMultinomialSequentialModel = MultinomialSequentialModel<
    SparseMultinomialAveragingDecoder,
    SparseMultinomialDecoder,
