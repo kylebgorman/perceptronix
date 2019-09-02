@@ -13,8 +13,6 @@
 #include <valarray>
 #include <vector>
 
-using std::string;
-
 namespace perceptronix {
 
 // Inner table using an array.
@@ -64,7 +62,7 @@ class DenseInnerTableTpl {
 template <class W>
 class SparseInnerTableTpl {
  public:
-  using Feature = string;
+  using Feature = std::string;
   using Weight = W;
   using Table = std::unordered_map<Feature, Weight>;
   using Iterator = typename Table::iterator;
@@ -162,7 +160,7 @@ class DenseOuterTableTpl {
 template <class W>
 class SparseDenseOuterTableTpl {
  public:
-  using Feature = string;
+  using Feature = std::string;
   using Label = size_t;
   using Weight = W;
   using InnerTable = DenseInnerTableTpl<Weight>;
@@ -218,8 +216,8 @@ const typename SparseDenseOuterTableTpl<Weight>::InnerTable \
 template <class W>
 class SparseOuterTableTpl {
  public:
-  using Feature = string;
-  using Label = string;
+  using Feature = std::string;
+  using Label = std::string;
   using Weight = W;
   using InnerTable = SparseInnerTableTpl<Weight>;
   using Table = std::unordered_map<Feature, InnerTable>;
