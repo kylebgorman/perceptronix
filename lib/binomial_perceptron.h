@@ -15,8 +15,6 @@
 #include "table.h"
 #include "weight.h"
 
-using std::string;
-
 namespace perceptronix {
 
 template <template <class> class InnerTableTpl, class Weight>
@@ -132,21 +130,23 @@ class BinomialPerceptronTpl
 
   // Construct model by deserializing.
 
-  static BinomialPerceptronTpl<InnerTableTpl> *Read(std::istream &istrm,
-                                                    string *metadata = nullptr);
+  static BinomialPerceptronTpl<InnerTableTpl> *Read(
+      std::istream &istrm,
+      std::string *metadata = nullptr);
 
   static BinomialPerceptronTpl<InnerTableTpl> *Read(
-  	const string &filename,
-        string *metadata = nullptr) {
+  	  const std::string &filename,
+      std::string *metadata = nullptr) {
     std::ifstream istrm(filename);
     return Read(istrm, metadata);
   }
 
   // Serializes the model.
 
-  bool Write(std::ostream &ostrm, const string &metadata = "") const;
+  bool Write(std::ostream &ostrm, const std::string &metadata = "") const;
 
-  bool Write(const string &filename, const string &metadata = "") const {
+  bool Write(const std::string &filename,
+             const std::string &metadata = "") const {
     std::ofstream ostrm(filename);
     return Write(ostrm, metadata);
   }

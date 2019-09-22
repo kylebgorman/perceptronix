@@ -133,11 +133,12 @@ void TestStructured() {
   // Sparse binomial: word segmentation (space before?).
   SparseBinomialSequentialModel sbsm(32, 2);
   const std::vector<bool> binomial_ys = {false, true, true, true, false};
-  const std::vector<std::vector<string>> evectors = {{"w=this", "*initial*"},
-                                                     {"w=sentence"},
-                                                     {"w=is"},
-                                                     {"w=good"},
-                                                     {"w=.", "*ultimate*"}};
+  const std::vector<std::vector<std::string>> evectors = 
+      {{"w=this", "*initial*"},
+       {"w=sentence"},
+       {"w=is"},
+       {"w=good"},
+       {"w=.", "*ultimate*"}};
   for (size_t i = 0; i < 10; ++i) sbsm.Train(evectors, binomial_ys);
   std::vector<bool> binomial_yhats;
   sbsm.Predict(evectors, &binomial_yhats);

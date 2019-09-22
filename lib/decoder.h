@@ -13,8 +13,6 @@
 #include "binomial_perceptron.h"
 #include "multinomial_perceptron.h"
 
-using std::string;
-
 namespace perceptronix {
 
 // Transition feature functors should have the following interface:
@@ -35,7 +33,7 @@ class SparseTransitionFunctor {
   explicit SparseTransitionFunctor(size_t order) : order_(order) {}
 
   void operator()(const std::vector<Label> &labels,
-                  std::vector<string> *tvector) const {
+                  std::vector<std::string> *tvector) const {
     tvector->clear();
     // Second condition is purely for compatibility.
     if (labels.empty() || order_ == 0) return;

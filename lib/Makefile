@@ -61,7 +61,7 @@ python: binomial_perceptron.h binomial_perceptron.cc \
 	python setup.py install
 
 clean:
-	$(RM) -r *.o *.pb *.pb.cc *.pb.h unittest \
+	$(RM) -r *.o unittest \
 	build dist perceptronix.cpp Perceptronix.egg-info
 
 .PHONY: test clean
