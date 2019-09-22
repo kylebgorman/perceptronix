@@ -25,10 +25,7 @@ class DenseInnerTableTpl {
   using Table = std::valarray<Weight>;
   using Iterator = decltype(std::begin(Table()));
 
-  // DO NOT USE THIS. It's just to appease std::valarray.
-  DenseInnerTableTpl() : table_(0) {}
-
-  explicit DenseInnerTableTpl(size_t nfeats) : table_(nfeats) {}
+  explicit DenseInnerTableTpl(size_t nfeats = 0) : table_(nfeats) {}
 
   Weight &operator[](Feature f) { return table_[f]; }
 
@@ -69,11 +66,8 @@ class SparseInnerTableTpl {
   using ConstIterator = typename Table::const_iterator;
   using Pair = typename Table::value_type;
 
-  // DO NOT USE THIS. It's just to appease std::unordered_map.
-  SparseInnerTableTpl() : table_(0) {}
-
   // Here, this is just a hint for the initial size of the table.
-  explicit SparseInnerTableTpl(size_t nfeats) : table_(nfeats) {}
+  explicit SparseInnerTableTpl(size_t nfeats = 0) : table_(nfeats) {}
 
   Weight &operator[](Feature f) { return table_[f]; }
 
