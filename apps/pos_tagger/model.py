@@ -32,7 +32,7 @@ class POSTagger(object):
     slots = ["_classifier"]
 
     def __init__(
-        self, nfeats: int = 0x1000, nlabels: int = 32, order: int = 2
+        self, nfeats: int = 0x1000, nlabels: int = 0x20, order: int = 2
     ):
         self._classifier = perceptronix.SparseMultinomialSequentialClassifier(
             nfeats, nlabels, order
