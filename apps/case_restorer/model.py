@@ -2,7 +2,7 @@
 
 import json
 
-from typing import Dict, Iterator, List, Tuple
+from typing import Iterator, List, Tuple
 
 import nlup
 import perceptronix
@@ -39,9 +39,10 @@ class CaseRestorer(object):
         order: int = 2,
         mpt: case.MixedPatternTable = {},
     ):
-        self._classifier = perceptronix.SparseDenseMultinomialSequentialClassifier(
-            nfeats, len(case.TokenCase), order
-        )
+        self._classifier = \
+            perceptronix.SparseDenseMultinomialSequentialClassifier(
+                nfeats, len(case.TokenCase), order
+            )
         self._mpt = mpt
 
     # (De)serialization methods, overwritten to handle MPT, stored in the
