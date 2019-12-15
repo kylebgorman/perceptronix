@@ -32,9 +32,6 @@ from .word_tokenizer import WordTokenizer
 BOUNDARY_REGEX = r"(\s+)"
 LEFT_REGEX = r"(?:\s+)(\S+[\.\!\?][\'\"]?)$"
 RIGHT_REGEX = r"(\S+)(?:\s+)"
-MAX_CONTEXT = 4
-NFEATS = 0x400
-ALPHA = 1.0
 EPOCHS = 10
 
 SEED = 2672555669
@@ -69,28 +66,21 @@ argparser.add_argument(
 )
 argparser.add_argument(
     "--max_context",
-    default=MAX_CONTEXT,
+    default=8,
     type=int,
-    help="Maximum size for both context bytestrings "
-    "(default: {})".format(MAX_CONTEXT),
+    help="maximum size for both context bytestrings (default: %(default)s)",
 )
 argparser.add_argument(
     "--nfeats",
     type=int,
-    default=NFEATS,
-    help="Initial number of features " "(default: {})".format(NFEATS),
+    default=0x1000,
+    help="initial number of features (default: %(default)s)",
 )
 argparser.add_argument(
     "--epochs",
     type=int,
-    default=EPOCHS,
-    help="# of epochs (default: {})".format(EPOCHS),
-)
-argparser.add_argument(
-    "--alpha",
-    type=float,
-    default=ALPHA,
-    help="learning rate (default: {})".format(ALPHA),
+    default=5,
+    help="number of epochs (default: %(default)s)",
 )
 args = argparser.parse_args()
 
@@ -105,7 +95,6 @@ wtokenizer = WordTokenizer(
     args.right_regex,
     args.max_context,
     args.nfeats,
-    args.alpha,
 )
 if args.train:
     logging.info("Training model from %s", args.train)
