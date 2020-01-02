@@ -18,7 +18,6 @@ extension = Extension(
 )
 
 setup(
-    name="Perceptronix",
     name="perceptronix",
     version="0.7",
     author="Kyle Gorman",
