@@ -12,8 +12,6 @@
 #include "binomial_perceptron.h"
 #include "decoder.h"
 
-using std::string;
-
 namespace perceptronix {
 
 // Binomial model wrapper.
@@ -42,23 +40,25 @@ class BinomialModel {
 
   // Deserialization.
 
-  static BinomialModel *Read(std::istream &istrm, string *metadata = nullptr) {
+  static BinomialModel *Read(std::istream &istrm,
+                             std::string *metadata = nullptr) {
     return new BinomialModel(Perceptron::Read(istrm, metadata));
   }
 
-  static BinomialModel *Read(const string &filename,
-                             string *metadata = nullptr) {
+  static BinomialModel *Read(const std::string &filename,
+                             std::string *metadata = nullptr) {
     return new BinomialModel(Perceptron::Read(filename, metadata));
   }
 
   // Serialization.
 
-  bool Write(std::ostream &ostrm, const string &metadata = "") const {
+  bool Write(std::ostream &ostrm, const std::string &metadata = "") const {
     assert(Averaged());
     return perceptron_->Write(ostrm, metadata);
   }
 
-  bool Write(const string &filename, const string &metadata = "") const {
+  bool Write(const std::string &filename,
+             const std::string &metadata = "") const {
     assert(Averaged());
     return perceptron_->Write(filename, metadata);
   }
@@ -131,13 +131,14 @@ class BinomialSequentialModel
         adecoder_(new AveragingDecoder(aperceptron_.get(), tf_)) {}
 
   static BinomialSequentialModel *Read(std::istream &istrm, size_t order,
-                                       string *metadata = nullptr) {
+                                       std::string *metadata = nullptr) {
     return new BinomialSequentialModel(Base::Perceptron::Read(istrm, metadata),
                                        order);
   }
 
-  static BinomialSequentialModel *Read(const string &filename, size_t order,
-                                       string *metadata = nullptr) {
+  static BinomialSequentialModel *Read(const std::string &filename,
+                                       size_t order,
+                                       std::string *metadata = nullptr) {
     return new BinomialSequentialModel(
         Base::Perceptron::Read(filename, metadata), order);
   }

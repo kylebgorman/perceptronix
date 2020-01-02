@@ -31,7 +31,7 @@ DenseMultinomialPerceptron::MultinomialPerceptronTpl(
 
 template <>
 DenseMultinomialPerceptron *DenseMultinomialPerceptron::Read(
-    std::istream &istrm, string *metadata) {
+    std::istream &istrm, std::string *metadata) {
   DenseMultinomialPerceptronProto pb;
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
   const size_t outer_size = pb.table_size();
@@ -53,7 +53,7 @@ DenseMultinomialPerceptron *DenseMultinomialPerceptron::Read(
 
 template <>
 bool DenseMultinomialPerceptron::Write(std::ostream &ostrm,
-                                       const string &metadata) const {
+                                       const std::string &metadata) const {
   const auto outer_size = OuterSize();
   const auto inner_size = InnerSize();
   DenseMultinomialPerceptronProto pb;
@@ -94,7 +94,7 @@ SparseDenseMultinomialPerceptron::MultinomialPerceptronTpl(
 
 template <>
 SparseDenseMultinomialPerceptron *SparseDenseMultinomialPerceptron::Read(
-    std::istream &istrm, string *metadata) {
+    std::istream &istrm, std::string *metadata) {
   SparseDenseMultinomialPerceptronProto pb;
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
   const auto inner_size = pb.inner_size();
@@ -117,8 +117,8 @@ SparseDenseMultinomialPerceptron *SparseDenseMultinomialPerceptron::Read(
 }
 
 template <>
-bool SparseDenseMultinomialPerceptron::Write(std::ostream &ostrm,
-                                             const string &metadata) const {
+bool SparseDenseMultinomialPerceptron::Write(
+    std::ostream &ostrm, const std::string &metadata) const {
   const auto inner_size = InnerSize();
   SparseDenseMultinomialPerceptronProto pb;
   if (!metadata.empty()) pb.set_metadata(metadata);
@@ -160,7 +160,7 @@ SparseMultinomialPerceptron::MultinomialPerceptronTpl(
 
 template <>
 SparseMultinomialPerceptron *SparseMultinomialPerceptron::Read(
-    std::istream &istrm, string *metadata) {
+    std::istream &istrm, std::string *metadata) {
   SparseMultinomialPerceptronProto pb;
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
   if (metadata) *metadata = pb.metadata();
@@ -186,7 +186,7 @@ SparseMultinomialPerceptron *SparseMultinomialPerceptron::Read(
 
 template <>
 bool SparseMultinomialPerceptron::Write(std::ostream &ostrm,
-                                        const string &metadata) const {
+                                        const std::string &metadata) const {
   SparseMultinomialPerceptronProto pb;
   if (!metadata.empty()) pb.set_metadata(metadata);
   pb.set_inner_size(InnerSize());

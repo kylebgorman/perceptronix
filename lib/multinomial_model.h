@@ -12,8 +12,6 @@
 #include "decoder.h"
 #include "multinomial_perceptron.h"
 
-using std::string;
-
 namespace perceptronix {
 
 // Multinomial model wrapper.
@@ -43,23 +41,24 @@ class MultinomialModel {
   // Deserialization.
 
   static MultinomialModel *Read(std::istream &istrm,
-                                string *metadata = nullptr) {
+                                std::string *metadata = nullptr) {
     return new MultinomialModel(Perceptron::Read(istrm, metadata));
   }
 
-  static MultinomialModel *Read(const string &filename,
-                                string *metadata = nullptr) {
+  static MultinomialModel *Read(const std::string &filename,
+                                std::string *metadata = nullptr) {
     return new MultinomialModel(Perceptron::Read(filename, metadata));
   }
 
   // Serialization.
 
-  bool Write(std::ostream &ostrm, const string &metadata = "") const {
+  bool Write(std::ostream &ostrm, const std::string &metadata = "") const {
     assert(Averaged());
     return perceptron_->Write(ostrm, metadata);
   }
 
-  bool Write(const string &filename, const string &metadata = "") const {
+  bool Write(const std::string &filename,
+             const std::string &metadata = "") const {
     assert(Averaged());
     return perceptron_->Write(filename, metadata);
   }
@@ -137,13 +136,14 @@ class MultinomialSequentialModel
         adecoder_(new AveragingDecoder(aperceptron_.get(), tf_)) {}
 
   static MultinomialSequentialModel *Read(std::istream &istrm, size_t order,
-                                          string *metadata = nullptr) {
+                                          std::string *metadata = nullptr) {
     return new MultinomialSequentialModel(
         Base::Perceptron::Read(istrm, metadata), order);
   }
 
-  static MultinomialSequentialModel *Read(const string &filename, size_t order,
-                                          string *metadata = nullptr) {
+  static MultinomialSequentialModel *Read(const std::string &filename,
+                                          size_t order,
+                                          std::string *metadata = nullptr) {
     return new MultinomialSequentialModel(
         Base::Perceptron::Read(filename, metadata), order);
   }

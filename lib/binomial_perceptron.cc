@@ -22,7 +22,7 @@ DenseBinomialPerceptron::BinomialPerceptronTpl(
 
 template <>
 DenseBinomialPerceptron *DenseBinomialPerceptron::Read(std::istream &istrm,
-                                                       string *metadata) {
+                                                       std::string *metadata) {
   DenseBinomialPerceptronProto pb;
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
   if (metadata) *metadata = pb.metadata();
@@ -35,7 +35,7 @@ DenseBinomialPerceptron *DenseBinomialPerceptron::Read(std::istream &istrm,
 
 template <>
 bool DenseBinomialPerceptron::Write(std::ostream &ostrm,
-                                    const string &metadata) const {
+                                    const std::string &metadata) const {
   DenseBinomialPerceptronProto pb;
   if (!metadata.empty()) pb.set_metadata(metadata);
   pb.set_bias(bias_.Get());
@@ -58,8 +58,8 @@ SparseBinomialPerceptron::BinomialPerceptronTpl(
 }
 
 template <>
-SparseBinomialPerceptron *SparseBinomialPerceptron::Read(std::istream &istrm,
-                                                         string *metadata) {
+SparseBinomialPerceptron *SparseBinomialPerceptron::Read(
+    std::istream &istrm, std::string *metadata) {
   SparseBinomialPerceptronProto pb;
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
   if (metadata) *metadata = pb.metadata();
@@ -76,7 +76,7 @@ SparseBinomialPerceptron *SparseBinomialPerceptron::Read(std::istream &istrm,
 
 template <>
 bool SparseBinomialPerceptron::Write(std::ostream &ostrm,
-                                     const string &metadata) const {
+                                     const std::string &metadata) const {
   SparseBinomialPerceptronProto pb;
   if (!metadata.empty()) pb.set_metadata(metadata);
   pb.set_bias(bias_.Get());
