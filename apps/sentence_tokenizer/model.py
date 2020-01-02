@@ -3,7 +3,7 @@
 import collections
 import logging
 
-from typing import Iterable, Iterator, List, Tuple
+from typing import Iterator, List
 
 import nlup
 import regex
@@ -110,7 +110,7 @@ class SentenceTokenizer(object):
                 continue
             vector = SentenceTokenizer.extract_features(candidate)
             if self.predict(vector):
-                yield text[start : candidate.left_index + 1]
+                yield text[start:candidate.left_index + 1]
                 start = candidate.right_index + 1
         yield text[start:].rstrip()
 

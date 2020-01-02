@@ -31,28 +31,39 @@ argparser.add_argument(
     "-v", "--verbose", action="store_true", help="enable verbose output"
 )
 input_group = argparser.add_mutually_exclusive_group(required=True)
-input_group.add_argument("-r", "--read", help="Input serialized model")
+input_group.add_argument("-r", "--read", help="input serialized model")
 input_group.add_argument(
-    "-t", "--train", help="Input two-column training training_data"
+    "-t", "--train", help="input two-column training training_data"
 )
-argparser.add_argument("-d", "--dev", help="Input two-column development data")
+argparser.add_argument("-d", "--dev", help="input two-column development data")
 output_group = argparser.add_mutually_exclusive_group(required=True)
 output_group.add_argument(
-    "-p", "--predict", help="Output tagged text from one-column data"
+    "-p", "--predict", help="output tagged text from one-column data"
 )
-output_group.add_argument("-w", "--write", help="Output serialized model")
+output_group.add_argument("-w", "--write", help="output serialized model")
 # Other options.
 argparser.add_argument(
-    "--nlabels", type=int, default=32, help="Initial number of labels"
+    "--nlabels",
+    type=int,
+    default=32,
+    help="initial number of labels (default: %(default)s)",
 )
 argparser.add_argument(
-    "--nfeats", type=int, default=0x1000, help="Initial number of features"
+    "--nfeats",
+    type=int,
+    default=0x1000,
+    help="initial number of features (default: %(default)s)",
 )
 argparser.add_argument(
-    "--epochs", type=int, default=5, help="Number of epochs"
+    "--epochs",
+    type=int,
+    default=5,
+    help="number of epochs (default: %(default)s)",
 )
-argparser.add_argument("--order", type=int, default=2, help="Model order")
-argparser.add_argument("--seed", type=int, default=1917, help="Random seed")
+argparser.add_argument(
+    "--order", type=int, default=2, help="model order (default: %(default)s)"
+)
+argparser.add_argument("--seed", type=int, default=0, help="random seed")
 args = argparser.parse_args()
 
 # Verbosity block.

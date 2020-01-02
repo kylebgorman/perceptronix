@@ -1,7 +1,7 @@
-#ifndef PERCEPTRONIX_BINOMIAL_MODEL_H_
-#define PERCEPTRONIX_BINOMIAL_MODEL_H_
+#ifndef PERCEPTRONIX_MULTINOMIAL_MODEL_H_
+#define PERCEPTRONIX_MULTINOMIAL_MODEL_H_
 
-// binomial_model.h: wrappers for binomial models.
+// multinomial_model.h: wrappers for multinomial models.
 
 #include <cassert>
 #include <iostream>
@@ -9,14 +9,14 @@
 #include <string>
 #include <type_traits>
 
-#include "binomial_perceptron.h"
 #include "decoder.h"
+#include "multinomial_perceptron.h"
 
 namespace perceptronix {
 
-// Binomial model wrapper.
+// Multinomial model wrapper.
 template <class A, class P>
-class BinomialModel {
+class MultinomialModel {
  public:
   using AveragingPerceptron = A;
   using Perceptron = P;
@@ -35,23 +35,22 @@ class BinomialModel {
                    typename AveragingPerceptron::FeatureBundle>::value,
       "FeatureBundle must be same type");
 
-  explicit BinomialModel(size_t nfeats)
-      : aperceptron_(new AveragingPerceptron(nfeats)) {}
+  explicit MultinomialModel(size_t nfeats, size_t nlabels)
+      : aperceptron_(new AveragingPerceptron(nfeats, nlabels)) {}
 
   // Deserialization.
 
-  static BinomialModel *Read(std::istream &istrm,
-                             std::string *metadata = nullptr) {
-    return new BinomialModel(Perceptron::Read(istrm, metadata));
+  static MultinomialModel *Read(std::istream &istrm,
+                                std::string *metadata = nullptr) {
+    return new MultinomialModel(Perceptron::Read(istrm, metadata));
   }
 
-  static BinomialModel *Read(const std::string &filename,
-                             std::string *metadata = nullptr) {
-    return new BinomialModel(Perceptron::Read(filename, metadata));
+  static MultinomialModel *Read(const std::string &filename,
+                                std::string *metadata = nullptr) {
+    return new MultinomialModel(Perceptron::Read(filename, metadata));
   }
 
   // Serialization.
-
   bool Write(std::ostream &ostrm, const std::string &metadata = "") const {
     assert(Averaged());
     return perceptron_->Write(ostrm, metadata);
@@ -65,7 +64,7 @@ class BinomialModel {
 
   // Before averaging...
 
-  bool Train(const FeatureBundle &fb, bool y) {
+  bool Train(const FeatureBundle &fb, Label y) {
     assert(!Averaged());
     return aperceptron_->Train(fb, y);
   }
@@ -85,7 +84,7 @@ class BinomialModel {
   bool Averaged() const { return aperceptron_.get() == nullptr; }
 
  protected:
-  BinomialModel(Perceptron *perceptron) : perceptron_(perceptron) {}
+  MultinomialModel(Perceptron *perceptron) : perceptron_(perceptron) {}
 
   std::unique_ptr<AveragingPerceptron> aperceptron_;
   std::unique_ptr<const Perceptron> perceptron_;
@@ -93,17 +92,22 @@ class BinomialModel {
 
 // Specializations for the above.
 
-using DenseBinomialModel =
-    BinomialModel<DenseBinomialAveragingPerceptron, DenseBinomialPerceptron>;
-using SparseBinomialModel =
-    BinomialModel<SparseBinomialAveragingPerceptron, SparseBinomialPerceptron>;
+using DenseMultinomialModel =
+    MultinomialModel<DenseMultinomialAveragingPerceptron,
+                     DenseMultinomialPerceptron>;
+using SparseDenseMultinomialModel =
+    MultinomialModel<SparseDenseMultinomialAveragingPerceptron,
+                     SparseDenseMultinomialPerceptron>;
+using SparseMultinomialModel =
+    MultinomialModel<SparseMultinomialAveragingPerceptron,
+                     SparseMultinomialPerceptron>;
 
-// Sequential binomial model wrapper.
+// Sequential multinomial model wrapper.
 
 template <class AveragingDecoder, class Decoder, class TransitionFunctor>
-class BinomialSequentialModel
-    : public BinomialModel<typename AveragingDecoder::Perceptron,
-                           typename Decoder::Perceptron> {
+class MultinomialSequentialModel
+    : public MultinomialModel<typename AveragingDecoder::Perceptron,
+                              typename Decoder::Perceptron> {
  public:
   using Labels = typename Decoder::Labels;
   using Vectors = typename Decoder::Vectors;
@@ -114,8 +118,8 @@ class BinomialSequentialModel
       std::is_same<Vectors, typename AveragingDecoder::Vectors>::value,
       "Vectors must be same type");
 
-  using Base = BinomialModel<typename AveragingDecoder::Perceptron,
-                             typename Decoder::Perceptron>;
+  using Base = MultinomialModel<typename AveragingDecoder::Perceptron,
+                                typename Decoder::Perceptron>;
 
   using Perceptron = typename Base::Perceptron;
 
@@ -125,21 +129,21 @@ class BinomialSequentialModel
   using Base::aperceptron_;
   using Base::perceptron_;
 
-  BinomialSequentialModel(size_t nfeats, size_t order)
-      : Base(nfeats),
+  MultinomialSequentialModel(size_t nfeats, size_t nlabels, size_t order)
+      : Base(nfeats, nlabels),
         tf_(order),
         adecoder_(new AveragingDecoder(aperceptron_.get(), tf_)) {}
 
-  static BinomialSequentialModel *Read(std::istream &istrm, size_t order,
-                                       std::string *metadata = nullptr) {
-    return new BinomialSequentialModel(Base::Perceptron::Read(istrm, metadata),
-                                       order);
+  static MultinomialSequentialModel *Read(std::istream &istrm, size_t order,
+                                          std::string *metadata = nullptr) {
+    return new MultinomialSequentialModel(
+        Base::Perceptron::Read(istrm, metadata), order);
   }
 
-  static BinomialSequentialModel *Read(const std::string &filename,
-                                       size_t order,
-                                       std::string *metadata = nullptr) {
-    return new BinomialSequentialModel(
+  static MultinomialSequentialModel *Read(const std::string &filename,
+                                          size_t order,
+                                          std::string *metadata = nullptr) {
+    return new MultinomialSequentialModel(
         Base::Perceptron::Read(filename, metadata), order);
   }
 
@@ -165,7 +169,7 @@ class BinomialSequentialModel
   }
 
  private:
-  BinomialSequentialModel(Perceptron *perceptron, size_t order)
+  MultinomialSequentialModel(Perceptron *perceptron, size_t order)
       : Base(perceptron),
         tf_(order),
         decoder_(new Decoder(*perceptron_, tf_)) {}
@@ -175,12 +179,15 @@ class BinomialSequentialModel
   std::unique_ptr<const Decoder> decoder_;
 };
 
-// Specialization for the above.
+// Specializations for the above.
 
-using SparseBinomialSequentialModel = BinomialSequentialModel<
-    SparseBinomialAveragingDecoder, SparseBinomialDecoder,
-    SparseTransitionFunctor<typename SparseBinomialAveragingDecoder::Label>>;
+using SparseDenseMultinomialSequentialModel = MultinomialSequentialModel<
+    SparseDenseMultinomialAveragingDecoder, SparseDenseMultinomialDecoder,
+    SparseTransitionFunctor<typename SparseDenseMultinomialDecoder::Label>>;
+using SparseMultinomialSequentialModel = MultinomialSequentialModel<
+    SparseMultinomialAveragingDecoder, SparseMultinomialDecoder,
+    SparseTransitionFunctor<typename SparseMultinomialDecoder::Label>>;
 
 }  // namespace perceptronix
 
-#endif  // PERCEPTRONIX_BINOMIAL_MODEL_H_
+#endif  // PERCEPTRONIX_MULTINOMIAL_MODEL_H_

@@ -1,4 +1,4 @@
-all: unittest python
+all: unittest
 
 CXXFLAGS += -std=c++11 -Wall -O3
 
@@ -53,15 +53,7 @@ test: unittest
              linear_model.proto \
              < sm.pb
 
-python: binomial_perceptron.h binomial_perceptron.cc \
-		multinomial_perceptron.h multinomial_perceptron.cc \
-		linear_model.pb.h linear_model.pb.cc \
-		binomial_model.h multinomial_model.h \
-		decoder.h table.h weight.h
-	python setup.py install
-
 clean:
-	$(RM) -r *.o *.pb *.pb.cc *.pb.h unittest \
-	build dist perceptronix.cpp Perceptronix.egg-info
+	$(RM) -r *.o *.pb unittest
 
 .PHONY: test clean

@@ -7,10 +7,10 @@ from Cython.Build import cythonize
 extension = Extension(
     "perceptronix",
     sources=[
-        "linear_model.pb.cc",
-        "binomial_perceptron.cc",
-        "multinomial_perceptron.cc",
-        "perceptronix.pyx",
+        "src/linear_model.pb.cc",
+        "src/binomial_perceptron.cc",
+        "src/multinomial_perceptron.cc",
+        "src/perceptronix.pyx",
     ],
     libraries=["protobuf", "pthread"],
     language="c++",
@@ -19,6 +19,7 @@ extension = Extension(
 
 setup(
     name="Perceptronix",
+    name="perceptronix",
     version="0.7",
     author="Kyle Gorman",
     author_email="kylebgorman@gmail.com",

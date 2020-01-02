@@ -32,14 +32,14 @@ argparser.add_argument(
     "-v", "--verbose", action="store_true", help="enable verbose output"
 )
 input_group = argparser.add_mutually_exclusive_group(required=True)
-input_group.add_argument("-r", "--read", help="Input serialized model")
-input_group.add_argument("-t", "--train", help="Input text training data")
-argparser.add_argument("-d", "--dev", help="Input development training data")
+input_group.add_argument("-r", "--read", help="input serialized model")
+input_group.add_argument("-t", "--train", help="input text training data")
+argparser.add_argument("-d", "--dev", help="input development training data")
 output_group = argparser.add_mutually_exclusive_group(required=True)
 output_group.add_argument(
-    "-p", "--predict", help="Output tokenized text from untokenized train_data"
+    "-p", "--predict", help="output tokenized text from untokenized train_data"
 )
-output_group.add_argument("-w", "--write", help="Output serialized model")
+output_group.add_argument("-w", "--write", help="output serialized model")
 argparser.add_argument(
     "--candidate_regex",
     default=CANDIDATE_REGEX,
@@ -49,15 +49,21 @@ argparser.add_argument(
     "--max_context",
     default=8,
     type=int,
-    help="Maximum size for context bytestrings",
+    help="maximum size for context bytestrings (default: %(default)s)",
 )
 argparser.add_argument(
-    "--nfeats", type=int, default=0x1000, help="Initial number of features"
+    "--nfeats",
+    type=int,
+    default=0x1000,
+    help="initial number of features (default: %(default)s)",
 )
 argparser.add_argument(
-    "--epochs", type=int, default=5, help="Number of epochs"
+    "--epochs",
+    type=int,
+    default=5,
+    help="number of epochs (default: %(default)s)",
 )
-argparser.add_argument("--seed", type=int, default=1917, help="Random seed")
+argparser.add_argument("--seed", type=int, default=0, help="random seed")
 args = argparser.parse_args()
 
 # Verbosity block.

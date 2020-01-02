@@ -174,7 +174,6 @@ class CaseTests(unittest.TestCase):
 
     def testLowerToMixed(self):
         for (token, pattern) in self.mixed:
-            token_folded = token.casefold()
             self.assertEqual(
                 case.apply_tc(token.casefold(), case.TokenCase.MIXED, pattern),
                 token,
