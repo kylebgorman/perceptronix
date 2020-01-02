@@ -7,7 +7,6 @@
 #include <cstdint>
 
 #include <fstream>
-#include <memory>
 #include <string>
 #include <vector>
 
@@ -35,8 +34,8 @@ class MultinomialPerceptronBaseTpl {
   }
 
   Label Predict(const FeatureBundle &fb) const {
-    std::unique_ptr<InnerTable> table(Score(fb));
-    return table->ArgMax();
+    const InnerTable inner(Score(fb));
+    return inner.ArgMax();
   }
 
   void Score(Feature f, InnerTable *inner) const {
@@ -47,9 +46,9 @@ class MultinomialPerceptronBaseTpl {
     for (const auto &f: fb) Score(f, inner);
   }
 
-  InnerTable *Score(const FeatureBundle &fb) const {
-    auto *inner = new InnerTable(bias_);
-    Score(fb, inner);
+  InnerTable Score(const FeatureBundle &fb) const {
+    InnerTable inner(bias_);
+    Score(fb, &inner);
     return inner;
   }
 
@@ -88,7 +87,7 @@ class MultinomialAveragingPerceptronTpl
   // (which callers may safely choose to ignore).
   bool Train(const FeatureBundle &fb, Label y) {
     const auto yhat = Predict(fb);
-    const bool success = (yhat == y);
+    const bool success = yhat == y;
     if (!success) Update(fb, y, yhat);
     Tick();
     return success;

@@ -8,7 +8,6 @@
 #include <cstdint>
 
 #include <fstream>
-#include <memory>
 #include <string>
 #include <vector>
 
@@ -37,16 +36,13 @@ class BinomialPerceptronBaseTpl {
     for (const auto &f : fb) Score(f, weight);
   }
 
-  Weight *Score(const FeatureBundle &fb) const {
-    auto *weight = new Weight(bias_);
-    Score(fb, weight);
+  Weight Score(const FeatureBundle &fb) const {
+    Weight weight(bias_);
+    Score(fb, &weight);
     return weight;
   }
 
-  Label Predict(const FeatureBundle &fb) const {
-    std::unique_ptr<Weight> weight(Score(fb));
-    return weight->Get() > 0;
-  }
+  Label Predict(const FeatureBundle &fb) const { return Score(fb).Get() > 0; }
 
   size_t Size() const { return table_.Size(); }
 
@@ -136,7 +132,7 @@ class BinomialPerceptronTpl
                                                     string *metadata = nullptr);
 
   static BinomialPerceptronTpl<InnerTableTpl> *Read(
-  	const string &filename,
+        const string &filename,
         string *metadata = nullptr) {
     std::ifstream istrm(filename);
     return Read(istrm, metadata);
