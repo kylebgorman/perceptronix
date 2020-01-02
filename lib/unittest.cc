@@ -149,11 +149,10 @@ void TestStructured() {
   // Sparse-dense multinomial; case-restoration (reusing the evectors and
   // transition functor from above).
   SparseDenseMultinomialSequentialModel sdmsm(32, N, 2);
-  const std::vector<size_t> dense_ys = {static_cast<size_t>(Case::TITLE),
-                                        static_cast<size_t>(Case::LOWER),
-                                        static_cast<size_t>(Case::LOWER),
-                                        static_cast<size_t>(Case::LOWER),
-                                        static_cast<size_t>(Case::DC)};
+  const std::vector<size_t> dense_ys = {
+      static_cast<size_t>(Case::TITLE), static_cast<size_t>(Case::LOWER),
+      static_cast<size_t>(Case::LOWER), static_cast<size_t>(Case::LOWER),
+      static_cast<size_t>(Case::DC)};
   for (size_t i = 0; i < 10; ++i) sdmsm.Train(evectors, dense_ys);
   std::vector<size_t> dense_yhats;
   sdmsm.Predict(evectors, &dense_yhats);

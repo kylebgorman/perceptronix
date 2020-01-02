@@ -1,8 +1,8 @@
 // multinomial_perceptron.cc: specializations for binomial_perceptron
 // classifiers with binary features.
 
-#include "linear_model.pb.h"
 #include "multinomial_perceptron.h"
+#include "linear_model.pb.h"
 
 namespace perceptronix {
 
@@ -99,8 +99,8 @@ SparseDenseMultinomialPerceptron *SparseDenseMultinomialPerceptron::Read(
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
   const auto inner_size = pb.inner_size();
   if (metadata) *metadata = pb.metadata();
-  auto *model = new SparseDenseMultinomialPerceptron(pb.table_size(),
-                                                     inner_size);
+  auto *model =
+      new SparseDenseMultinomialPerceptron(pb.table_size(), inner_size);
   for (size_t j = 0; j < inner_size; ++j) {
     model->bias_[j].Set(pb.bias().table(j));
   }
@@ -164,15 +164,15 @@ SparseMultinomialPerceptron *SparseMultinomialPerceptron::Read(
   SparseMultinomialPerceptronProto pb;
   if (!pb.ParseFromIstream(&istrm)) return nullptr;
   if (metadata) *metadata = pb.metadata();
-  auto *model = new SparseMultinomialPerceptron(pb.table_size(),
-                                                pb.inner_size());
+  auto *model =
+      new SparseMultinomialPerceptron(pb.table_size(), pb.inner_size());
   auto bias = pb.bias().table();
   for (auto iit = bias.cbegin(); iit != bias.cend(); ++iit) {
     model->bias_[iit->first].Set(iit->second);
   }
   auto outer_table_proto = pb.table();
   for (auto it = outer_table_proto.cbegin(); it != outer_table_proto.cend();
-        ++it) {
+       ++it) {
     const auto &feature = it->first;
     auto &inner_table = model->table_[feature];
     const auto &inner_table_proto = outer_table_proto[feature].table();

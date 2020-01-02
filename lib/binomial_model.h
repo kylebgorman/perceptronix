@@ -27,18 +27,18 @@ class BinomialModel {
   using Feature = typename Perceptron::Feature;
   using FeatureBundle = typename Perceptron::FeatureBundle;
 
-  static_assert(std::is_same<Label,
-                             typename AveragingPerceptron::Label>::value,
+  static_assert(std::is_same<Label, typename AveragingPerceptron::Label>::value,
                 "Label must be same type");
-  static_assert(std::is_same<Feature,
-                             typename AveragingPerceptron::Feature>::value,
-                "Feature must be same type");
-  static_assert(std::is_same<
-      FeatureBundle, typename AveragingPerceptron::FeatureBundle>::value,
+  static_assert(
+      std::is_same<Feature, typename AveragingPerceptron::Feature>::value,
+      "Feature must be same type");
+  static_assert(
+      std::is_same<FeatureBundle,
+                   typename AveragingPerceptron::FeatureBundle>::value,
       "FeatureBundle must be same type");
 
-  explicit BinomialModel(size_t nfeats) :
-      aperceptron_(new AveragingPerceptron(nfeats)) {}
+  explicit BinomialModel(size_t nfeats)
+      : aperceptron_(new AveragingPerceptron(nfeats)) {}
 
   // Deserialization.
 
@@ -57,7 +57,7 @@ class BinomialModel {
     assert(Averaged());
     return perceptron_->Write(ostrm, metadata);
   }
- 
+
   bool Write(const string &filename, const string &metadata = "") const {
     assert(Averaged());
     return perceptron_->Write(filename, metadata);
@@ -93,30 +93,29 @@ class BinomialModel {
 
 // Specializations for the above.
 
-using DenseBinomialModel = BinomialModel<DenseBinomialAveragingPerceptron,
-                                         DenseBinomialPerceptron>;
-using SparseBinomialModel = BinomialModel<SparseBinomialAveragingPerceptron,
-                                          SparseBinomialPerceptron>;
+using DenseBinomialModel =
+    BinomialModel<DenseBinomialAveragingPerceptron, DenseBinomialPerceptron>;
+using SparseBinomialModel =
+    BinomialModel<SparseBinomialAveragingPerceptron, SparseBinomialPerceptron>;
 
 // Sequential binomial model wrapper.
 
 template <class AveragingDecoder, class Decoder, class TransitionFunctor>
-class BinomialSequentialModel :
-    public BinomialModel<typename AveragingDecoder::Perceptron,
-                         typename Decoder::Perceptron> {
+class BinomialSequentialModel
+    : public BinomialModel<typename AveragingDecoder::Perceptron,
+                           typename Decoder::Perceptron> {
  public:
   using Labels = typename Decoder::Labels;
   using Vectors = typename Decoder::Vectors;
 
-  static_assert(std::is_same<Labels,
-                             typename AveragingDecoder::Labels>::value,
-                             "Labels must be same type");
-  static_assert(std::is_same<Vectors,
-                             typename AveragingDecoder::Vectors>::value,
-                             "Vectors must be same type");
+  static_assert(std::is_same<Labels, typename AveragingDecoder::Labels>::value,
+                "Labels must be same type");
+  static_assert(
+      std::is_same<Vectors, typename AveragingDecoder::Vectors>::value,
+      "Vectors must be same type");
 
   using Base = BinomialModel<typename AveragingDecoder::Perceptron,
-                              typename Decoder::Perceptron>;
+                             typename Decoder::Perceptron>;
 
   using Perceptron = typename Base::Perceptron;
 
@@ -126,27 +125,25 @@ class BinomialSequentialModel :
   using Base::aperceptron_;
   using Base::perceptron_;
 
-  BinomialSequentialModel(size_t nfeats, size_t order) :
-       Base(nfeats),
-       tf_(order),
-       adecoder_(new AveragingDecoder(aperceptron_.get(), tf_)) {}
+  BinomialSequentialModel(size_t nfeats, size_t order)
+      : Base(nfeats),
+        tf_(order),
+        adecoder_(new AveragingDecoder(aperceptron_.get(), tf_)) {}
 
-  static BinomialSequentialModel *Read(std::istream &istrm, 
-                                       size_t order,
+  static BinomialSequentialModel *Read(std::istream &istrm, size_t order,
                                        string *metadata = nullptr) {
     return new BinomialSequentialModel(Base::Perceptron::Read(istrm, metadata),
                                        order);
   }
 
-  static BinomialSequentialModel *Read(const string &filename,
-                                       size_t order,
+  static BinomialSequentialModel *Read(const string &filename, size_t order,
                                        string *metadata = nullptr) {
     return new BinomialSequentialModel(
         Base::Perceptron::Read(filename, metadata), order);
   }
 
   // Before averaging...
-  
+
   // Returns the number of observations in the sequence correctly classified.
   size_t Train(const Vectors &evectors, const Labels &ys) {
     assert(!Base::Averaged());
@@ -160,16 +157,15 @@ class BinomialSequentialModel :
   }
 
   // At any time...
-  
+
   void Predict(const Vectors &evectors, Labels *yhats) const {
-    Averaged() ?
-        decoder_->Predict(evectors, yhats) :
-        adecoder_->Predict(evectors, yhats);
+    Averaged() ? decoder_->Predict(evectors, yhats)
+               : adecoder_->Predict(evectors, yhats);
   }
 
  private:
-  BinomialSequentialModel(Perceptron *perceptron, size_t order) : 
-        Base(perceptron),
+  BinomialSequentialModel(Perceptron *perceptron, size_t order)
+      : Base(perceptron),
         tf_(order),
         decoder_(new Decoder(*perceptron_, tf_)) {}
 
@@ -181,10 +177,8 @@ class BinomialSequentialModel :
 // Specialization for the above.
 
 using SparseBinomialSequentialModel = BinomialSequentialModel<
-    SparseBinomialAveragingDecoder,
-    SparseBinomialDecoder,
-    SparseTransitionFunctor<typename SparseBinomialAveragingDecoder::Label>
->;
+    SparseBinomialAveragingDecoder, SparseBinomialDecoder,
+    SparseTransitionFunctor<typename SparseBinomialAveragingDecoder::Label>>;
 
 }  // namespace perceptronix
 

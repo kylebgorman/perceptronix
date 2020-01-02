@@ -118,9 +118,7 @@ class SparseInnerTableTpl {
 };
 
 template <class Weight>
-const Weight SparseInnerTableTpl<Weight>::default_weight_ = \
-    Weight();
-
+const Weight SparseInnerTableTpl<Weight>::default_weight_ = Weight();
 
 // Outer table using arrays.
 
@@ -209,9 +207,9 @@ class SparseDenseOuterTableTpl {
 };
 
 template <class Weight>
-const typename SparseDenseOuterTableTpl<Weight>::InnerTable \
-    SparseDenseOuterTableTpl<Weight>::default_inner_table_ = \
-    SparseDenseOuterTableTpl<Weight>::InnerTable();
+const typename SparseDenseOuterTableTpl<Weight>::InnerTable
+    SparseDenseOuterTableTpl<Weight>::default_inner_table_ =
+        SparseDenseOuterTableTpl<Weight>::InnerTable();
 
 // Outer table using hash tables.
 
@@ -265,9 +263,9 @@ class SparseOuterTableTpl {
 };
 
 template <class Weight>
-const typename SparseOuterTableTpl<Weight>::InnerTable \
-    SparseOuterTableTpl<Weight>::default_inner_table_ = \
-    SparseOuterTableTpl<Weight>::InnerTable();
+const typename SparseOuterTableTpl<Weight>::InnerTable
+    SparseOuterTableTpl<Weight>::default_inner_table_ =
+        SparseOuterTableTpl<Weight>::InnerTable();
 
 }  // namespace perceptronix
 

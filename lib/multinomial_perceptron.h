@@ -43,7 +43,7 @@ class MultinomialPerceptronBaseTpl {
   }
 
   void Score(const FeatureBundle &fb, InnerTable *inner) const {
-    for (const auto &f: fb) Score(f, inner);
+    for (const auto &f : fb) Score(f, inner);
   }
 
   InnerTable Score(const FeatureBundle &fb) const {
@@ -104,7 +104,7 @@ class MultinomialAveragingPerceptronTpl
   void Update(const FeatureBundle &fb, Label y, Label yhat) {
     bias_[y].Update(+1, time_);
     bias_[yhat].Update(-1, time_);
-    for (const auto &f: fb) {
+    for (const auto &f : fb) {
       auto &ref = table_[f];
       ref[y].Update(+1, time_);
       ref[yhat].Update(-1, time_);
@@ -143,12 +143,10 @@ class MultinomialPerceptronTpl
   // Constructs model by deserializing.
 
   static MultinomialPerceptronTpl<OuterTableTpl> *Read(
-      std::istream &istrm,
-      string *metadata = nullptr);
+      std::istream &istrm, string *metadata = nullptr);
 
   static MultinomialPerceptronTpl<OuterTableTpl> *Read(
-      const string &filename,
-      string *metadata = nullptr) {
+      const string &filename, string *metadata = nullptr) {
     std::ifstream istrm(filename);
     return Read(istrm, metadata);
   }
@@ -177,7 +175,7 @@ using SparseDenseMultinomialPerceptron =
 using SparseDenseMultinomialAveragingPerceptron =
     MultinomialAveragingPerceptronTpl<SparseDenseOuterTableTpl>;
 
-// Specializes the classifiers to use hash tables for both inner and outer 
+// Specializes the classifiers to use hash tables for both inner and outer
 // tables.
 
 using SparseMultinomialPerceptron =

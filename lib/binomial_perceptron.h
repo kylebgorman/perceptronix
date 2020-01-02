@@ -98,9 +98,7 @@ class BinomialAveragingPerceptronTpl
 
  private:
   // Update a single feature given the correct label.
-  void Update(Feature f, bool y) {
-    table_[f].Update(y ? +1: -1, time_);
-  }
+  void Update(Feature f, bool y) { table_[f].Update(y ? +1 : -1, time_); }
 
   // Same as above but with optional (useless) yhat argument.
   void Update(Feature f, bool y, bool) { Update(f, y); }
@@ -132,8 +130,7 @@ class BinomialPerceptronTpl
                                                     string *metadata = nullptr);
 
   static BinomialPerceptronTpl<InnerTableTpl> *Read(
-        const string &filename,
-        string *metadata = nullptr) {
+      const string &filename, string *metadata = nullptr) {
     std::ifstream istrm(filename);
     return Read(istrm, metadata);
   }

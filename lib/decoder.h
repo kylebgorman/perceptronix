@@ -31,7 +31,7 @@ namespace perceptronix {
 // with both sparse and dense (integral) labels.
 template <class Label>
 class SparseTransitionFunctor {
- public:  
+ public:
   explicit SparseTransitionFunctor(size_t order) : order_(order) {}
 
   void operator()(const std::vector<Label> &labels,
@@ -49,11 +49,12 @@ class SparseTransitionFunctor {
       // Here the feature conjunctions are in the reverse order from what you
       // might expect. We sacrifice readability for the ability to reuse the
       // stringstream buffer.
-      sstrm << "^" << "t_i-" << i << "=" << labels[size - i];
+      sstrm << "^"
+            << "t_i-" << i << "=" << labels[size - i];
       tvector->emplace_back(sstrm.str());
     }
   }
- 
+
  private:
   const size_t order_;
 };
@@ -70,10 +71,8 @@ class Decoder {
   using Labels = std::vector<Label>;
   using Vectors = std::vector<std::vector<Feature>>;
 
-  Decoder(const Perceptron &perceptron,
-          const TransitionFunctor &tfunctor) :
-    perceptron_(perceptron),
-    tfunctor_(tfunctor) {}
+  Decoder(const Perceptron &perceptron, const TransitionFunctor &tfunctor)
+      : perceptron_(perceptron), tfunctor_(tfunctor) {}
 
   // Performs greedy prediction.
   void Predict(const Vectors &evectors, Labels *yhats) const {
@@ -82,8 +81,7 @@ class Decoder {
   }
 
   // Same but exposes the cvectors.
-  void Predict(const Vectors &evectors,
-               Vectors *cvectors,
+  void Predict(const Vectors &evectors, Vectors *cvectors,
                Labels *yhats) const {
     const auto size = evectors.size();
     cvectors->clear();
@@ -110,22 +108,14 @@ class Decoder {
 // Specializations of the above
 
 using SparseBinomialDecoder =
-    Decoder<
-        SparseBinomialPerceptron,
-        SparseTransitionFunctor<typename SparseBinomialPerceptron::Label>
-    >;
-using SparseDenseMultinomialDecoder =
-    Decoder<
-        SparseDenseMultinomialPerceptron,
-        SparseTransitionFunctor<
-            typename SparseDenseMultinomialPerceptron::Label
-        >
-    >;
-using SparseMultinomialDecoder =
-    Decoder<
-        SparseMultinomialPerceptron,
-        SparseTransitionFunctor<typename SparseMultinomialPerceptron::Label>
-    >;
+    Decoder<SparseBinomialPerceptron,
+            SparseTransitionFunctor<typename SparseBinomialPerceptron::Label>>;
+using SparseDenseMultinomialDecoder = Decoder<
+    SparseDenseMultinomialPerceptron,
+    SparseTransitionFunctor<typename SparseDenseMultinomialPerceptron::Label>>;
+using SparseMultinomialDecoder = Decoder<
+    SparseMultinomialPerceptron,
+    SparseTransitionFunctor<typename SparseMultinomialPerceptron::Label>>;
 
 // Enhanced greedy decoder, with training functionality.
 template <class P, class F>
@@ -139,10 +129,8 @@ class AveragingDecoder {
   using Labels = std::vector<Label>;
   using Vectors = std::vector<std::vector<Feature>>;
 
-  AveragingDecoder(Perceptron *perceptron,
-                  const TransitionFunctor &tfunctor) :
-    base_(*perceptron, tfunctor),
-    perceptron_(perceptron) {}
+  AveragingDecoder(Perceptron *perceptron, const TransitionFunctor &tfunctor)
+      : base_(*perceptron, tfunctor), perceptron_(perceptron) {}
 
   // Performs greedy prediction.
   void Predict(const Vectors &evectors, Labels *yhat) const {
@@ -177,27 +165,17 @@ class AveragingDecoder {
 
 // Specializations of the above.
 
-using SparseBinomialAveragingDecoder =
-    AveragingDecoder<
-        SparseBinomialAveragingPerceptron,
-        SparseTransitionFunctor<
-            typename SparseBinomialAveragingPerceptron::Label
-        >
-    >;
-using SparseDenseMultinomialAveragingDecoder =
-    AveragingDecoder<
-        SparseDenseMultinomialAveragingPerceptron,
-        SparseTransitionFunctor<
-            typename SparseDenseMultinomialAveragingPerceptron::Label
-        >
-    >;
+using SparseBinomialAveragingDecoder = AveragingDecoder<
+    SparseBinomialAveragingPerceptron,
+    SparseTransitionFunctor<typename SparseBinomialAveragingPerceptron::Label>>;
+using SparseDenseMultinomialAveragingDecoder = AveragingDecoder<
+    SparseDenseMultinomialAveragingPerceptron,
+    SparseTransitionFunctor<
+        typename SparseDenseMultinomialAveragingPerceptron::Label>>;
 using SparseMultinomialAveragingDecoder =
-    AveragingDecoder<
-        SparseMultinomialAveragingPerceptron,
-        SparseTransitionFunctor<
-            typename SparseMultinomialAveragingPerceptron::Label
-        >
-    >;
+    AveragingDecoder<SparseMultinomialAveragingPerceptron,
+                     SparseTransitionFunctor<
+                         typename SparseMultinomialAveragingPerceptron::Label>>;
 
 }  // namespace perceptronix
 
