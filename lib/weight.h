@@ -106,13 +106,6 @@ class AveragingWeightTpl : public WeightTpl<T> {
 
   using Base::Get;
 
-  // Implements the mean operation.
-  void Freshen(uint64_t time) {
-    const auto elapsed = time - time_;
-    summed_weight_ += elapsed * Base::Get();
-    time_ = time;
-  }
-
   void Update(WeightType tau, uint64_t time) {
     Freshen(time);
     Base::Update(tau);
@@ -125,7 +118,14 @@ class AveragingWeightTpl : public WeightTpl<T> {
     return static_cast<double>(summed_weight_) / time;
   }
 
- protected:
+ private:
+  // Implements the mean operation.
+  void Freshen(uint64_t time) {
+    const auto elapsed = time - time_;
+    summed_weight_ += elapsed * Base::Get();
+    time_ = time;
+  }
+
   WeightType summed_weight_;
   uint64_t time_;
 };
