@@ -5,7 +5,6 @@
 
 #include <algorithm>
 
-#include <google/protobuf/stubs/common.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/wire_format_lite.h>
@@ -79,7 +78,7 @@ static void InitDefaultsscc_info_DenseBinomialPerceptronProto_linear_5fmodel_2ep
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_DenseBinomialPerceptronProto_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_DenseBinomialPerceptronProto_linear_5fmodel_2eproto}, {}};
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_DenseBinomialPerceptronProto_linear_5fmodel_2eproto}, {}};
 
 static void InitDefaultsscc_info_DenseInnerTableProto_linear_5fmodel_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -93,7 +92,7 @@ static void InitDefaultsscc_info_DenseInnerTableProto_linear_5fmodel_2eproto() {
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_DenseInnerTableProto_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_DenseInnerTableProto_linear_5fmodel_2eproto}, {}};
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_DenseInnerTableProto_linear_5fmodel_2eproto}, {}};
 
 static void InitDefaultsscc_info_DenseMultinomialPerceptronProto_linear_5fmodel_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -107,7 +106,7 @@ static void InitDefaultsscc_info_DenseMultinomialPerceptronProto_linear_5fmodel_
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_DenseMultinomialPerceptronProto_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_DenseMultinomialPerceptronProto_linear_5fmodel_2eproto}, {
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_DenseMultinomialPerceptronProto_linear_5fmodel_2eproto}, {
       &scc_info_DenseInnerTableProto_linear_5fmodel_2eproto.base,}};
 
 static void InitDefaultsscc_info_SparseBinomialPerceptronProto_linear_5fmodel_2eproto() {
@@ -122,7 +121,7 @@ static void InitDefaultsscc_info_SparseBinomialPerceptronProto_linear_5fmodel_2e
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SparseBinomialPerceptronProto_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_SparseBinomialPerceptronProto_linear_5fmodel_2eproto}, {
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_SparseBinomialPerceptronProto_linear_5fmodel_2eproto}, {
       &scc_info_SparseBinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto.base,}};
 
 static void InitDefaultsscc_info_SparseBinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto() {
@@ -136,7 +135,7 @@ static void InitDefaultsscc_info_SparseBinomialPerceptronProto_TableEntry_DoNotU
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_SparseBinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_SparseBinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto}, {}};
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_SparseBinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto}, {}};
 
 static void InitDefaultsscc_info_SparseDenseMultinomialPerceptronProto_linear_5fmodel_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -150,7 +149,7 @@ static void InitDefaultsscc_info_SparseDenseMultinomialPerceptronProto_linear_5f
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_SparseDenseMultinomialPerceptronProto_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsscc_info_SparseDenseMultinomialPerceptronProto_linear_5fmodel_2eproto}, {
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_SparseDenseMultinomialPerceptronProto_linear_5fmodel_2eproto}, {
       &scc_info_DenseInnerTableProto_linear_5fmodel_2eproto.base,
       &scc_info_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto.base,}};
 
@@ -165,7 +164,7 @@ static void InitDefaultsscc_info_SparseDenseMultinomialPerceptronProto_TableEntr
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto}, {
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto}, {
       &scc_info_DenseInnerTableProto_linear_5fmodel_2eproto.base,}};
 
 static void InitDefaultsscc_info_SparseInnerTableProto_linear_5fmodel_2eproto() {
@@ -180,7 +179,7 @@ static void InitDefaultsscc_info_SparseInnerTableProto_linear_5fmodel_2eproto() 
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SparseInnerTableProto_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_SparseInnerTableProto_linear_5fmodel_2eproto}, {
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_SparseInnerTableProto_linear_5fmodel_2eproto}, {
       &scc_info_SparseInnerTableProto_TableEntry_DoNotUse_linear_5fmodel_2eproto.base,}};
 
 static void InitDefaultsscc_info_SparseInnerTableProto_TableEntry_DoNotUse_linear_5fmodel_2eproto() {
@@ -194,7 +193,7 @@ static void InitDefaultsscc_info_SparseInnerTableProto_TableEntry_DoNotUse_linea
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_SparseInnerTableProto_TableEntry_DoNotUse_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_SparseInnerTableProto_TableEntry_DoNotUse_linear_5fmodel_2eproto}, {}};
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_SparseInnerTableProto_TableEntry_DoNotUse_linear_5fmodel_2eproto}, {}};
 
 static void InitDefaultsscc_info_SparseMultinomialPerceptronProto_linear_5fmodel_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -208,7 +207,7 @@ static void InitDefaultsscc_info_SparseMultinomialPerceptronProto_linear_5fmodel
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_SparseMultinomialPerceptronProto_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsscc_info_SparseMultinomialPerceptronProto_linear_5fmodel_2eproto}, {
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_SparseMultinomialPerceptronProto_linear_5fmodel_2eproto}, {
       &scc_info_SparseInnerTableProto_linear_5fmodel_2eproto.base,
       &scc_info_SparseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto.base,}};
 
@@ -223,7 +222,7 @@ static void InitDefaultsscc_info_SparseMultinomialPerceptronProto_TableEntry_DoN
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SparseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_SparseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto}, {
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_SparseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto}, {
       &scc_info_SparseInnerTableProto_linear_5fmodel_2eproto.base,}};
 
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_linear_5fmodel_2eproto[11];
@@ -459,7 +458,7 @@ DenseBinomialPerceptronProto::DenseBinomialPerceptronProto(const DenseBinomialPe
       table_(from.table_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from.has_metadata()) {
+  if (from._internal_has_metadata()) {
     metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
   }
   bias_ = from.bias_;
@@ -506,7 +505,6 @@ void DenseBinomialPerceptronProto::Clear() {
   _internal_metadata_.Clear();
 }
 
-#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 const char* DenseBinomialPerceptronProto::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   _Internal::HasBits has_bits{};
@@ -518,7 +516,11 @@ const char* DenseBinomialPerceptronProto::_InternalParse(const char* ptr, ::PROT
       // optional string metadata = 1 [default = ""];
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_metadata(), ptr, ctx, "perceptronix.DenseBinomialPerceptronProto.metadata");
+          auto str = _internal_mutable_metadata();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          #ifndef NDEBUG
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "perceptronix.DenseBinomialPerceptronProto.metadata");
+          #endif  // !NDEBUG
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -536,12 +538,12 @@ const char* DenseBinomialPerceptronProto::_InternalParse(const char* ptr, ::PROT
           ptr -= 1;
           do {
             ptr += 1;
-            add_table(::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr));
+            _internal_add_table(::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr));
             ptr += sizeof(float);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 29);
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<29>(ptr));
         } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedFloatParser(mutable_table(), ptr, ctx);
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedFloatParser(_internal_mutable_table(), ptr, ctx);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -565,119 +567,9 @@ failure:
   goto success;
 #undef CHK_
 }
-#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool DenseBinomialPerceptronProto::MergePartialFromCodedStream(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  // @@protoc_insertion_point(parse_start:perceptronix.DenseBinomialPerceptronProto)
-  for (;;) {
-    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string metadata = 1 [default = ""];
-      case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
-                input, this->mutable_metadata()));
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->metadata().data(), static_cast<int>(this->metadata().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
-            "perceptronix.DenseBinomialPerceptronProto.metadata");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
 
-      // required float bias = 2;
-      case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (21 & 0xFF)) {
-          _Internal::set_has_bias(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &bias_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated float table = 3;
-      case 3: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (29 & 0xFF)) {
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadRepeatedPrimitive<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 1, 29u, input, this->mutable_table())));
-        } else if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, this->mutable_table())));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:perceptronix.DenseBinomialPerceptronProto)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:perceptronix.DenseBinomialPerceptronProto)
-  return false;
-#undef DO_
-}
-#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-
-void DenseBinomialPerceptronProto::SerializeWithCachedSizes(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:perceptronix.DenseBinomialPerceptronProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // optional string metadata = 1 [default = ""];
-  if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->metadata().data(), static_cast<int>(this->metadata().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "perceptronix.DenseBinomialPerceptronProto.metadata");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->metadata(), output);
-  }
-
-  // required float bias = 2;
-  if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(2, this->bias(), output);
-  }
-
-  // repeated float table = 3;
-  for (int i = 0, n = this->table_size(); i < n; i++) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(
-      3, this->table(i), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:perceptronix.DenseBinomialPerceptronProto)
-}
-
-::PROTOBUF_NAMESPACE_ID::uint8* DenseBinomialPerceptronProto::InternalSerializeWithCachedSizesToArray(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* DenseBinomialPerceptronProto::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:perceptronix.DenseBinomialPerceptronProto)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
@@ -686,26 +578,28 @@ void DenseBinomialPerceptronProto::SerializeWithCachedSizes(
   // optional string metadata = 1 [default = ""];
   if (cached_has_bits & 0x00000001u) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->metadata().data(), static_cast<int>(this->metadata().length()),
+      this->_internal_metadata().data(), static_cast<int>(this->_internal_metadata().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "perceptronix.DenseBinomialPerceptronProto.metadata");
-    target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
-        1, this->metadata(), target);
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_metadata(), target);
   }
 
   // required float bias = 2;
   if (cached_has_bits & 0x00000002u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->bias(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->_internal_bias(), target);
   }
 
   // repeated float table = 3;
-  target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-    WriteFloatToArray(3, this->table_, target);
+  for (int i = 0, n = this->_internal_table_size(); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->_internal_table(i), target);
+  }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:perceptronix.DenseBinomialPerceptronProto)
   return target;
@@ -715,13 +609,8 @@ size_t DenseBinomialPerceptronProto::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:perceptronix.DenseBinomialPerceptronProto)
   size_t total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
   // required float bias = 2;
-  if (has_bias()) {
+  if (_internal_has_bias()) {
     total_size += 1 + 4;
   }
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
@@ -730,10 +619,10 @@ size_t DenseBinomialPerceptronProto::ByteSizeLong() const {
 
   // repeated float table = 3;
   {
-    unsigned int count = static_cast<unsigned int>(this->table_size());
+    unsigned int count = static_cast<unsigned int>(this->_internal_table_size());
     size_t data_size = 4UL * count;
     total_size += 1 *
-                  ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->table_size());
+                  ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_table_size());
     total_size += data_size;
   }
 
@@ -742,9 +631,13 @@ size_t DenseBinomialPerceptronProto::ByteSizeLong() const {
   if (cached_has_bits & 0x00000001u) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->metadata());
+        this->_internal_metadata());
   }
 
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -864,7 +757,7 @@ SparseBinomialPerceptronProto::SparseBinomialPerceptronProto(const SparseBinomia
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   table_.MergeFrom(from.table_);
   metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from.has_metadata()) {
+  if (from._internal_has_metadata()) {
     metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
   }
   bias_ = from.bias_;
@@ -911,7 +804,6 @@ void SparseBinomialPerceptronProto::Clear() {
   _internal_metadata_.Clear();
 }
 
-#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 const char* SparseBinomialPerceptronProto::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   _Internal::HasBits has_bits{};
@@ -923,7 +815,11 @@ const char* SparseBinomialPerceptronProto::_InternalParse(const char* ptr, ::PRO
       // optional string metadata = 1 [default = ""];
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_metadata(), ptr, ctx, "perceptronix.SparseBinomialPerceptronProto.metadata");
+          auto str = _internal_mutable_metadata();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          #ifndef NDEBUG
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "perceptronix.SparseBinomialPerceptronProto.metadata");
+          #endif  // !NDEBUG
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -944,7 +840,7 @@ const char* SparseBinomialPerceptronProto::_InternalParse(const char* ptr, ::PRO
             ptr = ctx->ParseMessage(&table_, ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 26);
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -967,160 +863,9 @@ failure:
   goto success;
 #undef CHK_
 }
-#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool SparseBinomialPerceptronProto::MergePartialFromCodedStream(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  // @@protoc_insertion_point(parse_start:perceptronix.SparseBinomialPerceptronProto)
-  for (;;) {
-    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string metadata = 1 [default = ""];
-      case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
-                input, this->mutable_metadata()));
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->metadata().data(), static_cast<int>(this->metadata().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
-            "perceptronix.SparseBinomialPerceptronProto.metadata");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
 
-      // required float bias = 2;
-      case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (21 & 0xFF)) {
-          _Internal::set_has_bias(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &bias_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // map<string, float> table = 3;
-      case 3: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
-          SparseBinomialPerceptronProto_TableEntry_DoNotUse::Parser< ::PROTOBUF_NAMESPACE_ID::internal::MapField<
-              SparseBinomialPerceptronProto_TableEntry_DoNotUse,
-              std::string, float,
-              ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
-              ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT,
-              0 >,
-            ::PROTOBUF_NAMESPACE_ID::Map< std::string, float > > parser(&table_);
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessageNoVirtual(
-              input, &parser));
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-            parser.key().data(), static_cast<int>(parser.key().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
-            "perceptronix.SparseBinomialPerceptronProto.TableEntry.key");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:perceptronix.SparseBinomialPerceptronProto)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:perceptronix.SparseBinomialPerceptronProto)
-  return false;
-#undef DO_
-}
-#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-
-void SparseBinomialPerceptronProto::SerializeWithCachedSizes(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:perceptronix.SparseBinomialPerceptronProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // optional string metadata = 1 [default = ""];
-  if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->metadata().data(), static_cast<int>(this->metadata().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "perceptronix.SparseBinomialPerceptronProto.metadata");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->metadata(), output);
-  }
-
-  // required float bias = 2;
-  if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(2, this->bias(), output);
-  }
-
-  // map<string, float> table = 3;
-  if (!this->table().empty()) {
-    typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_pointer
-        ConstPtr;
-    typedef ConstPtr SortItem;
-    typedef ::PROTOBUF_NAMESPACE_ID::internal::CompareByDerefFirst<SortItem> Less;
-    struct Utf8Check {
-      static void Check(ConstPtr p) {
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-          p->first.data(), static_cast<int>(p->first.length()),
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-          "perceptronix.SparseBinomialPerceptronProto.TableEntry.key");
-      }
-    };
-
-    if (output->IsSerializationDeterministic() &&
-        this->table().size() > 1) {
-      ::std::unique_ptr<SortItem[]> items(
-          new SortItem[this->table().size()]);
-      typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::size_type size_type;
-      size_type n = 0;
-      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_iterator
-          it = this->table().begin();
-          it != this->table().end(); ++it, ++n) {
-        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
-      }
-      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
-      for (size_type i = 0; i < n; i++) {
-        SparseBinomialPerceptronProto_TableEntry_DoNotUse::Funcs::SerializeToCodedStream(3, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, output);
-        Utf8Check::Check(&(*items[static_cast<ptrdiff_t>(i)]));
-      }
-    } else {
-      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_iterator
-          it = this->table().begin();
-          it != this->table().end(); ++it) {
-        SparseBinomialPerceptronProto_TableEntry_DoNotUse::Funcs::SerializeToCodedStream(3, it->first, it->second, output);
-        Utf8Check::Check(&(*it));
-      }
-    }
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:perceptronix.SparseBinomialPerceptronProto)
-}
-
-::PROTOBUF_NAMESPACE_ID::uint8* SparseBinomialPerceptronProto::InternalSerializeWithCachedSizesToArray(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* SparseBinomialPerceptronProto::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:perceptronix.SparseBinomialPerceptronProto)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1129,21 +874,21 @@ void SparseBinomialPerceptronProto::SerializeWithCachedSizes(
   // optional string metadata = 1 [default = ""];
   if (cached_has_bits & 0x00000001u) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->metadata().data(), static_cast<int>(this->metadata().length()),
+      this->_internal_metadata().data(), static_cast<int>(this->_internal_metadata().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "perceptronix.SparseBinomialPerceptronProto.metadata");
-    target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
-        1, this->metadata(), target);
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_metadata(), target);
   }
 
   // required float bias = 2;
   if (cached_has_bits & 0x00000002u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->bias(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->_internal_bias(), target);
   }
 
   // map<string, float> table = 3;
-  if (!this->table().empty()) {
+  if (!this->_internal_table().empty()) {
     typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_pointer
         ConstPtr;
     typedef ConstPtr SortItem;
@@ -1157,35 +902,35 @@ void SparseBinomialPerceptronProto::SerializeWithCachedSizes(
       }
     };
 
-    if (false &&
-        this->table().size() > 1) {
+    if (stream->IsSerializationDeterministic() &&
+        this->_internal_table().size() > 1) {
       ::std::unique_ptr<SortItem[]> items(
-          new SortItem[this->table().size()]);
+          new SortItem[this->_internal_table().size()]);
       typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::size_type size_type;
       size_type n = 0;
       for (::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_iterator
-          it = this->table().begin();
-          it != this->table().end(); ++it, ++n) {
+          it = this->_internal_table().begin();
+          it != this->_internal_table().end(); ++it, ++n) {
         items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
       }
       ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
       for (size_type i = 0; i < n; i++) {
-        target = SparseBinomialPerceptronProto_TableEntry_DoNotUse::Funcs::SerializeToArray(3, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, target);
+        target = SparseBinomialPerceptronProto_TableEntry_DoNotUse::Funcs::InternalSerialize(3, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, target, stream);
         Utf8Check::Check(&(*items[static_cast<ptrdiff_t>(i)]));
       }
     } else {
       for (::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_iterator
-          it = this->table().begin();
-          it != this->table().end(); ++it) {
-        target = SparseBinomialPerceptronProto_TableEntry_DoNotUse::Funcs::SerializeToArray(3, it->first, it->second, target);
+          it = this->_internal_table().begin();
+          it != this->_internal_table().end(); ++it) {
+        target = SparseBinomialPerceptronProto_TableEntry_DoNotUse::Funcs::InternalSerialize(3, it->first, it->second, target, stream);
         Utf8Check::Check(&(*it));
       }
     }
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:perceptronix.SparseBinomialPerceptronProto)
   return target;
@@ -1195,13 +940,8 @@ size_t SparseBinomialPerceptronProto::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:perceptronix.SparseBinomialPerceptronProto)
   size_t total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
   // required float bias = 2;
-  if (has_bias()) {
+  if (_internal_has_bias()) {
     total_size += 1 + 4;
   }
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
@@ -1210,10 +950,10 @@ size_t SparseBinomialPerceptronProto::ByteSizeLong() const {
 
   // map<string, float> table = 3;
   total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->table_size());
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_table_size());
   for (::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_iterator
-      it = this->table().begin();
-      it != this->table().end(); ++it) {
+      it = this->_internal_table().begin();
+      it != this->_internal_table().end(); ++it) {
     total_size += SparseBinomialPerceptronProto_TableEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
   }
 
@@ -1222,9 +962,13 @@ size_t SparseBinomialPerceptronProto::ByteSizeLong() const {
   if (cached_has_bits & 0x00000001u) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->metadata());
+        this->_internal_metadata());
   }
 
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -1354,7 +1098,6 @@ void DenseInnerTableProto::Clear() {
   _internal_metadata_.Clear();
 }
 
-#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 const char* DenseInnerTableProto::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
@@ -1368,12 +1111,12 @@ const char* DenseInnerTableProto::_InternalParse(const char* ptr, ::PROTOBUF_NAM
           ptr -= 1;
           do {
             ptr += 1;
-            add_table(::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr));
+            _internal_add_table(::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr));
             ptr += sizeof(float);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 13);
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<13>(ptr));
         } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedFloatParser(mutable_table(), ptr, ctx);
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedFloatParser(_internal_mutable_table(), ptr, ctx);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1396,86 +1139,22 @@ failure:
   goto success;
 #undef CHK_
 }
-#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool DenseInnerTableProto::MergePartialFromCodedStream(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  // @@protoc_insertion_point(parse_start:perceptronix.DenseInnerTableProto)
-  for (;;) {
-    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated float table = 1;
-      case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (13 & 0xFF)) {
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadRepeatedPrimitive<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 1, 13u, input, this->mutable_table())));
-        } else if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, this->mutable_table())));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
 
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:perceptronix.DenseInnerTableProto)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:perceptronix.DenseInnerTableProto)
-  return false;
-#undef DO_
-}
-#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-
-void DenseInnerTableProto::SerializeWithCachedSizes(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:perceptronix.DenseInnerTableProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // repeated float table = 1;
-  for (int i = 0, n = this->table_size(); i < n; i++) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(
-      1, this->table(i), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:perceptronix.DenseInnerTableProto)
-}
-
-::PROTOBUF_NAMESPACE_ID::uint8* DenseInnerTableProto::InternalSerializeWithCachedSizesToArray(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* DenseInnerTableProto::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:perceptronix.DenseInnerTableProto)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // repeated float table = 1;
-  target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-    WriteFloatToArray(1, this->table_, target);
+  for (int i = 0, n = this->_internal_table_size(); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(1, this->_internal_table(i), target);
+  }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:perceptronix.DenseInnerTableProto)
   return target;
@@ -1485,24 +1164,23 @@ size_t DenseInnerTableProto::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:perceptronix.DenseInnerTableProto)
   size_t total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   // repeated float table = 1;
   {
-    unsigned int count = static_cast<unsigned int>(this->table_size());
+    unsigned int count = static_cast<unsigned int>(this->_internal_table_size());
     size_t data_size = 4UL * count;
     total_size += 1 *
-                  ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->table_size());
+                  ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_table_size());
     total_size += data_size;
   }
 
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -1635,7 +1313,6 @@ void SparseInnerTableProto::Clear() {
   _internal_metadata_.Clear();
 }
 
-#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 const char* SparseInnerTableProto::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
@@ -1652,7 +1329,7 @@ const char* SparseInnerTableProto::_InternalParse(const char* ptr, ::PROTOBUF_NA
             ptr = ctx->ParseMessage(&table_, ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 10);
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -1674,122 +1351,15 @@ failure:
   goto success;
 #undef CHK_
 }
-#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool SparseInnerTableProto::MergePartialFromCodedStream(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  // @@protoc_insertion_point(parse_start:perceptronix.SparseInnerTableProto)
-  for (;;) {
-    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // map<string, float> table = 1;
-      case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          SparseInnerTableProto_TableEntry_DoNotUse::Parser< ::PROTOBUF_NAMESPACE_ID::internal::MapField<
-              SparseInnerTableProto_TableEntry_DoNotUse,
-              std::string, float,
-              ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
-              ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT,
-              0 >,
-            ::PROTOBUF_NAMESPACE_ID::Map< std::string, float > > parser(&table_);
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessageNoVirtual(
-              input, &parser));
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-            parser.key().data(), static_cast<int>(parser.key().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
-            "perceptronix.SparseInnerTableProto.TableEntry.key");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
 
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:perceptronix.SparseInnerTableProto)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:perceptronix.SparseInnerTableProto)
-  return false;
-#undef DO_
-}
-#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-
-void SparseInnerTableProto::SerializeWithCachedSizes(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:perceptronix.SparseInnerTableProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // map<string, float> table = 1;
-  if (!this->table().empty()) {
-    typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_pointer
-        ConstPtr;
-    typedef ConstPtr SortItem;
-    typedef ::PROTOBUF_NAMESPACE_ID::internal::CompareByDerefFirst<SortItem> Less;
-    struct Utf8Check {
-      static void Check(ConstPtr p) {
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-          p->first.data(), static_cast<int>(p->first.length()),
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-          "perceptronix.SparseInnerTableProto.TableEntry.key");
-      }
-    };
-
-    if (output->IsSerializationDeterministic() &&
-        this->table().size() > 1) {
-      ::std::unique_ptr<SortItem[]> items(
-          new SortItem[this->table().size()]);
-      typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::size_type size_type;
-      size_type n = 0;
-      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_iterator
-          it = this->table().begin();
-          it != this->table().end(); ++it, ++n) {
-        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
-      }
-      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
-      for (size_type i = 0; i < n; i++) {
-        SparseInnerTableProto_TableEntry_DoNotUse::Funcs::SerializeToCodedStream(1, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, output);
-        Utf8Check::Check(&(*items[static_cast<ptrdiff_t>(i)]));
-      }
-    } else {
-      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_iterator
-          it = this->table().begin();
-          it != this->table().end(); ++it) {
-        SparseInnerTableProto_TableEntry_DoNotUse::Funcs::SerializeToCodedStream(1, it->first, it->second, output);
-        Utf8Check::Check(&(*it));
-      }
-    }
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:perceptronix.SparseInnerTableProto)
-}
-
-::PROTOBUF_NAMESPACE_ID::uint8* SparseInnerTableProto::InternalSerializeWithCachedSizesToArray(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* SparseInnerTableProto::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:perceptronix.SparseInnerTableProto)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // map<string, float> table = 1;
-  if (!this->table().empty()) {
+  if (!this->_internal_table().empty()) {
     typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_pointer
         ConstPtr;
     typedef ConstPtr SortItem;
@@ -1803,35 +1373,35 @@ void SparseInnerTableProto::SerializeWithCachedSizes(
       }
     };
 
-    if (false &&
-        this->table().size() > 1) {
+    if (stream->IsSerializationDeterministic() &&
+        this->_internal_table().size() > 1) {
       ::std::unique_ptr<SortItem[]> items(
-          new SortItem[this->table().size()]);
+          new SortItem[this->_internal_table().size()]);
       typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::size_type size_type;
       size_type n = 0;
       for (::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_iterator
-          it = this->table().begin();
-          it != this->table().end(); ++it, ++n) {
+          it = this->_internal_table().begin();
+          it != this->_internal_table().end(); ++it, ++n) {
         items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
       }
       ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
       for (size_type i = 0; i < n; i++) {
-        target = SparseInnerTableProto_TableEntry_DoNotUse::Funcs::SerializeToArray(1, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, target);
+        target = SparseInnerTableProto_TableEntry_DoNotUse::Funcs::InternalSerialize(1, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, target, stream);
         Utf8Check::Check(&(*items[static_cast<ptrdiff_t>(i)]));
       }
     } else {
       for (::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_iterator
-          it = this->table().begin();
-          it != this->table().end(); ++it) {
-        target = SparseInnerTableProto_TableEntry_DoNotUse::Funcs::SerializeToArray(1, it->first, it->second, target);
+          it = this->_internal_table().begin();
+          it != this->_internal_table().end(); ++it) {
+        target = SparseInnerTableProto_TableEntry_DoNotUse::Funcs::InternalSerialize(1, it->first, it->second, target, stream);
         Utf8Check::Check(&(*it));
       }
     }
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:perceptronix.SparseInnerTableProto)
   return target;
@@ -1841,24 +1411,23 @@ size_t SparseInnerTableProto::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:perceptronix.SparseInnerTableProto)
   size_t total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   // map<string, float> table = 1;
   total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->table_size());
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_table_size());
   for (::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_iterator
-      it = this->table().begin();
-      it != this->table().end(); ++it) {
+      it = this->_internal_table().begin();
+      it != this->_internal_table().end(); ++it) {
     total_size += SparseInnerTableProto_TableEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
   }
 
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -1956,10 +1525,10 @@ DenseMultinomialPerceptronProto::DenseMultinomialPerceptronProto(const DenseMult
       table_(from.table_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from.has_metadata()) {
+  if (from._internal_has_metadata()) {
     metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
   }
-  if (from.has_bias()) {
+  if (from._internal_has_bias()) {
     bias_ = new ::perceptronix::DenseInnerTableProto(*from.bias_);
   } else {
     bias_ = nullptr;
@@ -2017,7 +1586,6 @@ void DenseMultinomialPerceptronProto::Clear() {
   _internal_metadata_.Clear();
 }
 
-#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 const char* DenseMultinomialPerceptronProto::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   _Internal::HasBits has_bits{};
@@ -2029,7 +1597,11 @@ const char* DenseMultinomialPerceptronProto::_InternalParse(const char* ptr, ::P
       // optional string metadata = 1 [default = ""];
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_metadata(), ptr, ctx, "perceptronix.DenseMultinomialPerceptronProto.metadata");
+          auto str = _internal_mutable_metadata();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          #ifndef NDEBUG
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "perceptronix.DenseMultinomialPerceptronProto.metadata");
+          #endif  // !NDEBUG
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2044,7 +1616,7 @@ const char* DenseMultinomialPerceptronProto::_InternalParse(const char* ptr, ::P
       // required .perceptronix.DenseInnerTableProto bias = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ctx->ParseMessage(mutable_bias(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_bias(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2054,10 +1626,10 @@ const char* DenseMultinomialPerceptronProto::_InternalParse(const char* ptr, ::P
           ptr -= 1;
           do {
             ptr += 1;
-            ptr = ctx->ParseMessage(add_table(), ptr);
+            ptr = ctx->ParseMessage(_internal_add_table(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 34);
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -2080,134 +1652,9 @@ failure:
   goto success;
 #undef CHK_
 }
-#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool DenseMultinomialPerceptronProto::MergePartialFromCodedStream(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  // @@protoc_insertion_point(parse_start:perceptronix.DenseMultinomialPerceptronProto)
-  for (;;) {
-    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string metadata = 1 [default = ""];
-      case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
-                input, this->mutable_metadata()));
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->metadata().data(), static_cast<int>(this->metadata().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
-            "perceptronix.DenseMultinomialPerceptronProto.metadata");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
 
-      // required uint32 inner_size = 2;
-      case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
-          _Internal::set_has_inner_size(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::uint32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &inner_size_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .perceptronix.DenseInnerTableProto bias = 3;
-      case 3: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_bias()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .perceptronix.DenseInnerTableProto table = 4;
-      case 4: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (34 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-                input, add_table()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:perceptronix.DenseMultinomialPerceptronProto)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:perceptronix.DenseMultinomialPerceptronProto)
-  return false;
-#undef DO_
-}
-#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-
-void DenseMultinomialPerceptronProto::SerializeWithCachedSizes(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:perceptronix.DenseMultinomialPerceptronProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // optional string metadata = 1 [default = ""];
-  if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->metadata().data(), static_cast<int>(this->metadata().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "perceptronix.DenseMultinomialPerceptronProto.metadata");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->metadata(), output);
-  }
-
-  // required uint32 inner_size = 2;
-  if (cached_has_bits & 0x00000004u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(2, this->inner_size(), output);
-  }
-
-  // required .perceptronix.DenseInnerTableProto bias = 3;
-  if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, _Internal::bias(this), output);
-  }
-
-  // repeated .perceptronix.DenseInnerTableProto table = 4;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->table_size()); i < n; i++) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4,
-      this->table(static_cast<int>(i)),
-      output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:perceptronix.DenseMultinomialPerceptronProto)
-}
-
-::PROTOBUF_NAMESPACE_ID::uint8* DenseMultinomialPerceptronProto::InternalSerializeWithCachedSizesToArray(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* DenseMultinomialPerceptronProto::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:perceptronix.DenseMultinomialPerceptronProto)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
@@ -2216,37 +1663,38 @@ void DenseMultinomialPerceptronProto::SerializeWithCachedSizes(
   // optional string metadata = 1 [default = ""];
   if (cached_has_bits & 0x00000001u) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->metadata().data(), static_cast<int>(this->metadata().length()),
+      this->_internal_metadata().data(), static_cast<int>(this->_internal_metadata().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "perceptronix.DenseMultinomialPerceptronProto.metadata");
-    target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
-        1, this->metadata(), target);
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_metadata(), target);
   }
 
   // required uint32 inner_size = 2;
   if (cached_has_bits & 0x00000004u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->inner_size(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_inner_size(), target);
   }
 
   // required .perceptronix.DenseInnerTableProto bias = 3;
   if (cached_has_bits & 0x00000002u) {
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        3, _Internal::bias(this), target);
+      InternalWriteMessage(
+        3, _Internal::bias(this), target, stream);
   }
 
   // repeated .perceptronix.DenseInnerTableProto table = 4;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->table_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->_internal_table_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        4, this->table(static_cast<int>(i)), target);
+      InternalWriteMessage(4, this->_internal_table(i), target, stream);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:perceptronix.DenseMultinomialPerceptronProto)
   return target;
@@ -2256,18 +1704,18 @@ size_t DenseMultinomialPerceptronProto::RequiredFieldsByteSizeFallback() const {
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:perceptronix.DenseMultinomialPerceptronProto)
   size_t total_size = 0;
 
-  if (has_bias()) {
+  if (_internal_has_bias()) {
     // required .perceptronix.DenseInnerTableProto bias = 3;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *bias_);
   }
 
-  if (has_inner_size()) {
+  if (_internal_has_inner_size()) {
     // required uint32 inner_size = 2;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->inner_size());
+        this->_internal_inner_size());
   }
 
   return total_size;
@@ -2276,11 +1724,6 @@ size_t DenseMultinomialPerceptronProto::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:perceptronix.DenseMultinomialPerceptronProto)
   size_t total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
   if (((_has_bits_[0] & 0x00000006) ^ 0x00000006) == 0) {  // All required fields are present.
     // required .perceptronix.DenseInnerTableProto bias = 3;
     total_size += 1 +
@@ -2290,7 +1733,7 @@ size_t DenseMultinomialPerceptronProto::ByteSizeLong() const {
     // required uint32 inner_size = 2;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->inner_size());
+        this->_internal_inner_size());
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
@@ -2300,14 +1743,10 @@ size_t DenseMultinomialPerceptronProto::ByteSizeLong() const {
   (void) cached_has_bits;
 
   // repeated .perceptronix.DenseInnerTableProto table = 4;
-  {
-    unsigned int count = static_cast<unsigned int>(this->table_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-          this->table(static_cast<int>(i)));
-    }
+  total_size += 1UL * this->_internal_table_size();
+  for (const auto& msg : this->table_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
   // optional string metadata = 1 [default = ""];
@@ -2315,9 +1754,13 @@ size_t DenseMultinomialPerceptronProto::ByteSizeLong() const {
   if (cached_has_bits & 0x00000001u) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->metadata());
+        this->_internal_metadata());
   }
 
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -2353,7 +1796,7 @@ void DenseMultinomialPerceptronProto::MergeFrom(const DenseMultinomialPerceptron
       metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
     }
     if (cached_has_bits & 0x00000002u) {
-      mutable_bias()->::perceptronix::DenseInnerTableProto::MergeFrom(from.bias());
+      _internal_mutable_bias()->::perceptronix::DenseInnerTableProto::MergeFrom(from._internal_bias());
     }
     if (cached_has_bits & 0x00000004u) {
       inner_size_ = from.inner_size_;
@@ -2385,7 +1828,7 @@ void DenseMultinomialPerceptronProto::InternalSwap(DenseMultinomialPerceptronPro
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
-  CastToBase(&table_)->InternalSwap(CastToBase(&other->table_));
+  table_.InternalSwap(&other->table_);
   metadata_.Swap(&other->metadata_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(bias_, other->bias_);
@@ -2451,10 +1894,10 @@ SparseDenseMultinomialPerceptronProto::SparseDenseMultinomialPerceptronProto(con
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   table_.MergeFrom(from.table_);
   metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from.has_metadata()) {
+  if (from._internal_has_metadata()) {
     metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
   }
-  if (from.has_bias()) {
+  if (from._internal_has_bias()) {
     bias_ = new ::perceptronix::DenseInnerTableProto(*from.bias_);
   } else {
     bias_ = nullptr;
@@ -2512,7 +1955,6 @@ void SparseDenseMultinomialPerceptronProto::Clear() {
   _internal_metadata_.Clear();
 }
 
-#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 const char* SparseDenseMultinomialPerceptronProto::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   _Internal::HasBits has_bits{};
@@ -2524,7 +1966,11 @@ const char* SparseDenseMultinomialPerceptronProto::_InternalParse(const char* pt
       // optional string metadata = 1 [default = ""];
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_metadata(), ptr, ctx, "perceptronix.SparseDenseMultinomialPerceptronProto.metadata");
+          auto str = _internal_mutable_metadata();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          #ifndef NDEBUG
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "perceptronix.SparseDenseMultinomialPerceptronProto.metadata");
+          #endif  // !NDEBUG
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2539,7 +1985,7 @@ const char* SparseDenseMultinomialPerceptronProto::_InternalParse(const char* pt
       // required .perceptronix.DenseInnerTableProto bias = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ctx->ParseMessage(mutable_bias(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_bias(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2552,7 +1998,7 @@ const char* SparseDenseMultinomialPerceptronProto::_InternalParse(const char* pt
             ptr = ctx->ParseMessage(&table_, ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 34);
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -2575,177 +2021,9 @@ failure:
   goto success;
 #undef CHK_
 }
-#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool SparseDenseMultinomialPerceptronProto::MergePartialFromCodedStream(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  // @@protoc_insertion_point(parse_start:perceptronix.SparseDenseMultinomialPerceptronProto)
-  for (;;) {
-    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string metadata = 1 [default = ""];
-      case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
-                input, this->mutable_metadata()));
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->metadata().data(), static_cast<int>(this->metadata().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
-            "perceptronix.SparseDenseMultinomialPerceptronProto.metadata");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
 
-      // required uint32 inner_size = 2;
-      case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
-          _Internal::set_has_inner_size(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::uint32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &inner_size_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .perceptronix.DenseInnerTableProto bias = 3;
-      case 3: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_bias()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // map<string, .perceptronix.DenseInnerTableProto> table = 4;
-      case 4: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (34 & 0xFF)) {
-          SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::Parser< ::PROTOBUF_NAMESPACE_ID::internal::MapField<
-              SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse,
-              std::string, ::perceptronix::DenseInnerTableProto,
-              ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
-              ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE,
-              0 >,
-            ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::DenseInnerTableProto > > parser(&table_);
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessageNoVirtual(
-              input, &parser));
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-            parser.key().data(), static_cast<int>(parser.key().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
-            "perceptronix.SparseDenseMultinomialPerceptronProto.TableEntry.key");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:perceptronix.SparseDenseMultinomialPerceptronProto)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:perceptronix.SparseDenseMultinomialPerceptronProto)
-  return false;
-#undef DO_
-}
-#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-
-void SparseDenseMultinomialPerceptronProto::SerializeWithCachedSizes(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:perceptronix.SparseDenseMultinomialPerceptronProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // optional string metadata = 1 [default = ""];
-  if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->metadata().data(), static_cast<int>(this->metadata().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "perceptronix.SparseDenseMultinomialPerceptronProto.metadata");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->metadata(), output);
-  }
-
-  // required uint32 inner_size = 2;
-  if (cached_has_bits & 0x00000004u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(2, this->inner_size(), output);
-  }
-
-  // required .perceptronix.DenseInnerTableProto bias = 3;
-  if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, _Internal::bias(this), output);
-  }
-
-  // map<string, .perceptronix.DenseInnerTableProto> table = 4;
-  if (!this->table().empty()) {
-    typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::DenseInnerTableProto >::const_pointer
-        ConstPtr;
-    typedef ConstPtr SortItem;
-    typedef ::PROTOBUF_NAMESPACE_ID::internal::CompareByDerefFirst<SortItem> Less;
-    struct Utf8Check {
-      static void Check(ConstPtr p) {
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-          p->first.data(), static_cast<int>(p->first.length()),
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-          "perceptronix.SparseDenseMultinomialPerceptronProto.TableEntry.key");
-      }
-    };
-
-    if (output->IsSerializationDeterministic() &&
-        this->table().size() > 1) {
-      ::std::unique_ptr<SortItem[]> items(
-          new SortItem[this->table().size()]);
-      typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::DenseInnerTableProto >::size_type size_type;
-      size_type n = 0;
-      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::DenseInnerTableProto >::const_iterator
-          it = this->table().begin();
-          it != this->table().end(); ++it, ++n) {
-        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
-      }
-      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
-      for (size_type i = 0; i < n; i++) {
-        SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::SerializeToCodedStream(4, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, output);
-        Utf8Check::Check(&(*items[static_cast<ptrdiff_t>(i)]));
-      }
-    } else {
-      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::DenseInnerTableProto >::const_iterator
-          it = this->table().begin();
-          it != this->table().end(); ++it) {
-        SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::SerializeToCodedStream(4, it->first, it->second, output);
-        Utf8Check::Check(&(*it));
-      }
-    }
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:perceptronix.SparseDenseMultinomialPerceptronProto)
-}
-
-::PROTOBUF_NAMESPACE_ID::uint8* SparseDenseMultinomialPerceptronProto::InternalSerializeWithCachedSizesToArray(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* SparseDenseMultinomialPerceptronProto::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:perceptronix.SparseDenseMultinomialPerceptronProto)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
@@ -2754,28 +2032,29 @@ void SparseDenseMultinomialPerceptronProto::SerializeWithCachedSizes(
   // optional string metadata = 1 [default = ""];
   if (cached_has_bits & 0x00000001u) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->metadata().data(), static_cast<int>(this->metadata().length()),
+      this->_internal_metadata().data(), static_cast<int>(this->_internal_metadata().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "perceptronix.SparseDenseMultinomialPerceptronProto.metadata");
-    target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
-        1, this->metadata(), target);
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_metadata(), target);
   }
 
   // required uint32 inner_size = 2;
   if (cached_has_bits & 0x00000004u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->inner_size(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_inner_size(), target);
   }
 
   // required .perceptronix.DenseInnerTableProto bias = 3;
   if (cached_has_bits & 0x00000002u) {
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        3, _Internal::bias(this), target);
+      InternalWriteMessage(
+        3, _Internal::bias(this), target, stream);
   }
 
   // map<string, .perceptronix.DenseInnerTableProto> table = 4;
-  if (!this->table().empty()) {
+  if (!this->_internal_table().empty()) {
     typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::DenseInnerTableProto >::const_pointer
         ConstPtr;
     typedef ConstPtr SortItem;
@@ -2789,35 +2068,35 @@ void SparseDenseMultinomialPerceptronProto::SerializeWithCachedSizes(
       }
     };
 
-    if (false &&
-        this->table().size() > 1) {
+    if (stream->IsSerializationDeterministic() &&
+        this->_internal_table().size() > 1) {
       ::std::unique_ptr<SortItem[]> items(
-          new SortItem[this->table().size()]);
+          new SortItem[this->_internal_table().size()]);
       typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::DenseInnerTableProto >::size_type size_type;
       size_type n = 0;
       for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::DenseInnerTableProto >::const_iterator
-          it = this->table().begin();
-          it != this->table().end(); ++it, ++n) {
+          it = this->_internal_table().begin();
+          it != this->_internal_table().end(); ++it, ++n) {
         items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
       }
       ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
       for (size_type i = 0; i < n; i++) {
-        target = SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::SerializeToArray(4, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, target);
+        target = SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::InternalSerialize(4, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, target, stream);
         Utf8Check::Check(&(*items[static_cast<ptrdiff_t>(i)]));
       }
     } else {
       for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::DenseInnerTableProto >::const_iterator
-          it = this->table().begin();
-          it != this->table().end(); ++it) {
-        target = SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::SerializeToArray(4, it->first, it->second, target);
+          it = this->_internal_table().begin();
+          it != this->_internal_table().end(); ++it) {
+        target = SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::InternalSerialize(4, it->first, it->second, target, stream);
         Utf8Check::Check(&(*it));
       }
     }
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:perceptronix.SparseDenseMultinomialPerceptronProto)
   return target;
@@ -2827,18 +2106,18 @@ size_t SparseDenseMultinomialPerceptronProto::RequiredFieldsByteSizeFallback() c
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:perceptronix.SparseDenseMultinomialPerceptronProto)
   size_t total_size = 0;
 
-  if (has_bias()) {
+  if (_internal_has_bias()) {
     // required .perceptronix.DenseInnerTableProto bias = 3;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *bias_);
   }
 
-  if (has_inner_size()) {
+  if (_internal_has_inner_size()) {
     // required uint32 inner_size = 2;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->inner_size());
+        this->_internal_inner_size());
   }
 
   return total_size;
@@ -2847,11 +2126,6 @@ size_t SparseDenseMultinomialPerceptronProto::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:perceptronix.SparseDenseMultinomialPerceptronProto)
   size_t total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
   if (((_has_bits_[0] & 0x00000006) ^ 0x00000006) == 0) {  // All required fields are present.
     // required .perceptronix.DenseInnerTableProto bias = 3;
     total_size += 1 +
@@ -2861,7 +2135,7 @@ size_t SparseDenseMultinomialPerceptronProto::ByteSizeLong() const {
     // required uint32 inner_size = 2;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->inner_size());
+        this->_internal_inner_size());
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
@@ -2872,10 +2146,10 @@ size_t SparseDenseMultinomialPerceptronProto::ByteSizeLong() const {
 
   // map<string, .perceptronix.DenseInnerTableProto> table = 4;
   total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->table_size());
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_table_size());
   for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::DenseInnerTableProto >::const_iterator
-      it = this->table().begin();
-      it != this->table().end(); ++it) {
+      it = this->_internal_table().begin();
+      it != this->_internal_table().end(); ++it) {
     total_size += SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
   }
 
@@ -2884,9 +2158,13 @@ size_t SparseDenseMultinomialPerceptronProto::ByteSizeLong() const {
   if (cached_has_bits & 0x00000001u) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->metadata());
+        this->_internal_metadata());
   }
 
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -2922,7 +2200,7 @@ void SparseDenseMultinomialPerceptronProto::MergeFrom(const SparseDenseMultinomi
       metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
     }
     if (cached_has_bits & 0x00000002u) {
-      mutable_bias()->::perceptronix::DenseInnerTableProto::MergeFrom(from.bias());
+      _internal_mutable_bias()->::perceptronix::DenseInnerTableProto::MergeFrom(from._internal_bias());
     }
     if (cached_has_bits & 0x00000004u) {
       inner_size_ = from.inner_size_;
@@ -3020,10 +2298,10 @@ SparseMultinomialPerceptronProto::SparseMultinomialPerceptronProto(const SparseM
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   table_.MergeFrom(from.table_);
   metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from.has_metadata()) {
+  if (from._internal_has_metadata()) {
     metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
   }
-  if (from.has_bias()) {
+  if (from._internal_has_bias()) {
     bias_ = new ::perceptronix::SparseInnerTableProto(*from.bias_);
   } else {
     bias_ = nullptr;
@@ -3081,7 +2359,6 @@ void SparseMultinomialPerceptronProto::Clear() {
   _internal_metadata_.Clear();
 }
 
-#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 const char* SparseMultinomialPerceptronProto::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   _Internal::HasBits has_bits{};
@@ -3093,7 +2370,11 @@ const char* SparseMultinomialPerceptronProto::_InternalParse(const char* ptr, ::
       // optional string metadata = 1 [default = ""];
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_metadata(), ptr, ctx, "perceptronix.SparseMultinomialPerceptronProto.metadata");
+          auto str = _internal_mutable_metadata();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          #ifndef NDEBUG
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "perceptronix.SparseMultinomialPerceptronProto.metadata");
+          #endif  // !NDEBUG
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -3108,7 +2389,7 @@ const char* SparseMultinomialPerceptronProto::_InternalParse(const char* ptr, ::
       // required .perceptronix.SparseInnerTableProto bias = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ctx->ParseMessage(mutable_bias(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_bias(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -3121,7 +2402,7 @@ const char* SparseMultinomialPerceptronProto::_InternalParse(const char* ptr, ::
             ptr = ctx->ParseMessage(&table_, ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 34);
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -3144,177 +2425,9 @@ failure:
   goto success;
 #undef CHK_
 }
-#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool SparseMultinomialPerceptronProto::MergePartialFromCodedStream(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  // @@protoc_insertion_point(parse_start:perceptronix.SparseMultinomialPerceptronProto)
-  for (;;) {
-    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string metadata = 1 [default = ""];
-      case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
-                input, this->mutable_metadata()));
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->metadata().data(), static_cast<int>(this->metadata().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
-            "perceptronix.SparseMultinomialPerceptronProto.metadata");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
 
-      // required uint32 inner_size = 2;
-      case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
-          _Internal::set_has_inner_size(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::uint32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &inner_size_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .perceptronix.SparseInnerTableProto bias = 3;
-      case 3: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_bias()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // map<string, .perceptronix.SparseInnerTableProto> table = 4;
-      case 4: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (34 & 0xFF)) {
-          SparseMultinomialPerceptronProto_TableEntry_DoNotUse::Parser< ::PROTOBUF_NAMESPACE_ID::internal::MapField<
-              SparseMultinomialPerceptronProto_TableEntry_DoNotUse,
-              std::string, ::perceptronix::SparseInnerTableProto,
-              ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
-              ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE,
-              0 >,
-            ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::SparseInnerTableProto > > parser(&table_);
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessageNoVirtual(
-              input, &parser));
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-            parser.key().data(), static_cast<int>(parser.key().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
-            "perceptronix.SparseMultinomialPerceptronProto.TableEntry.key");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:perceptronix.SparseMultinomialPerceptronProto)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:perceptronix.SparseMultinomialPerceptronProto)
-  return false;
-#undef DO_
-}
-#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-
-void SparseMultinomialPerceptronProto::SerializeWithCachedSizes(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:perceptronix.SparseMultinomialPerceptronProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // optional string metadata = 1 [default = ""];
-  if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->metadata().data(), static_cast<int>(this->metadata().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "perceptronix.SparseMultinomialPerceptronProto.metadata");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->metadata(), output);
-  }
-
-  // required uint32 inner_size = 2;
-  if (cached_has_bits & 0x00000004u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(2, this->inner_size(), output);
-  }
-
-  // required .perceptronix.SparseInnerTableProto bias = 3;
-  if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, _Internal::bias(this), output);
-  }
-
-  // map<string, .perceptronix.SparseInnerTableProto> table = 4;
-  if (!this->table().empty()) {
-    typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::SparseInnerTableProto >::const_pointer
-        ConstPtr;
-    typedef ConstPtr SortItem;
-    typedef ::PROTOBUF_NAMESPACE_ID::internal::CompareByDerefFirst<SortItem> Less;
-    struct Utf8Check {
-      static void Check(ConstPtr p) {
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-          p->first.data(), static_cast<int>(p->first.length()),
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-          "perceptronix.SparseMultinomialPerceptronProto.TableEntry.key");
-      }
-    };
-
-    if (output->IsSerializationDeterministic() &&
-        this->table().size() > 1) {
-      ::std::unique_ptr<SortItem[]> items(
-          new SortItem[this->table().size()]);
-      typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::SparseInnerTableProto >::size_type size_type;
-      size_type n = 0;
-      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::SparseInnerTableProto >::const_iterator
-          it = this->table().begin();
-          it != this->table().end(); ++it, ++n) {
-        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
-      }
-      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
-      for (size_type i = 0; i < n; i++) {
-        SparseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::SerializeToCodedStream(4, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, output);
-        Utf8Check::Check(&(*items[static_cast<ptrdiff_t>(i)]));
-      }
-    } else {
-      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::SparseInnerTableProto >::const_iterator
-          it = this->table().begin();
-          it != this->table().end(); ++it) {
-        SparseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::SerializeToCodedStream(4, it->first, it->second, output);
-        Utf8Check::Check(&(*it));
-      }
-    }
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:perceptronix.SparseMultinomialPerceptronProto)
-}
-
-::PROTOBUF_NAMESPACE_ID::uint8* SparseMultinomialPerceptronProto::InternalSerializeWithCachedSizesToArray(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* SparseMultinomialPerceptronProto::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:perceptronix.SparseMultinomialPerceptronProto)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
@@ -3323,28 +2436,29 @@ void SparseMultinomialPerceptronProto::SerializeWithCachedSizes(
   // optional string metadata = 1 [default = ""];
   if (cached_has_bits & 0x00000001u) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->metadata().data(), static_cast<int>(this->metadata().length()),
+      this->_internal_metadata().data(), static_cast<int>(this->_internal_metadata().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "perceptronix.SparseMultinomialPerceptronProto.metadata");
-    target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
-        1, this->metadata(), target);
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_metadata(), target);
   }
 
   // required uint32 inner_size = 2;
   if (cached_has_bits & 0x00000004u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->inner_size(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_inner_size(), target);
   }
 
   // required .perceptronix.SparseInnerTableProto bias = 3;
   if (cached_has_bits & 0x00000002u) {
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        3, _Internal::bias(this), target);
+      InternalWriteMessage(
+        3, _Internal::bias(this), target, stream);
   }
 
   // map<string, .perceptronix.SparseInnerTableProto> table = 4;
-  if (!this->table().empty()) {
+  if (!this->_internal_table().empty()) {
     typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::SparseInnerTableProto >::const_pointer
         ConstPtr;
     typedef ConstPtr SortItem;
@@ -3358,35 +2472,35 @@ void SparseMultinomialPerceptronProto::SerializeWithCachedSizes(
       }
     };
 
-    if (false &&
-        this->table().size() > 1) {
+    if (stream->IsSerializationDeterministic() &&
+        this->_internal_table().size() > 1) {
       ::std::unique_ptr<SortItem[]> items(
-          new SortItem[this->table().size()]);
+          new SortItem[this->_internal_table().size()]);
       typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::SparseInnerTableProto >::size_type size_type;
       size_type n = 0;
       for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::SparseInnerTableProto >::const_iterator
-          it = this->table().begin();
-          it != this->table().end(); ++it, ++n) {
+          it = this->_internal_table().begin();
+          it != this->_internal_table().end(); ++it, ++n) {
         items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
       }
       ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
       for (size_type i = 0; i < n; i++) {
-        target = SparseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::SerializeToArray(4, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, target);
+        target = SparseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::InternalSerialize(4, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, target, stream);
         Utf8Check::Check(&(*items[static_cast<ptrdiff_t>(i)]));
       }
     } else {
       for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::SparseInnerTableProto >::const_iterator
-          it = this->table().begin();
-          it != this->table().end(); ++it) {
-        target = SparseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::SerializeToArray(4, it->first, it->second, target);
+          it = this->_internal_table().begin();
+          it != this->_internal_table().end(); ++it) {
+        target = SparseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::InternalSerialize(4, it->first, it->second, target, stream);
         Utf8Check::Check(&(*it));
       }
     }
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:perceptronix.SparseMultinomialPerceptronProto)
   return target;
@@ -3396,18 +2510,18 @@ size_t SparseMultinomialPerceptronProto::RequiredFieldsByteSizeFallback() const 
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:perceptronix.SparseMultinomialPerceptronProto)
   size_t total_size = 0;
 
-  if (has_bias()) {
+  if (_internal_has_bias()) {
     // required .perceptronix.SparseInnerTableProto bias = 3;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *bias_);
   }
 
-  if (has_inner_size()) {
+  if (_internal_has_inner_size()) {
     // required uint32 inner_size = 2;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->inner_size());
+        this->_internal_inner_size());
   }
 
   return total_size;
@@ -3416,11 +2530,6 @@ size_t SparseMultinomialPerceptronProto::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:perceptronix.SparseMultinomialPerceptronProto)
   size_t total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
   if (((_has_bits_[0] & 0x00000006) ^ 0x00000006) == 0) {  // All required fields are present.
     // required .perceptronix.SparseInnerTableProto bias = 3;
     total_size += 1 +
@@ -3430,7 +2539,7 @@ size_t SparseMultinomialPerceptronProto::ByteSizeLong() const {
     // required uint32 inner_size = 2;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->inner_size());
+        this->_internal_inner_size());
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
@@ -3441,10 +2550,10 @@ size_t SparseMultinomialPerceptronProto::ByteSizeLong() const {
 
   // map<string, .perceptronix.SparseInnerTableProto> table = 4;
   total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->table_size());
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_table_size());
   for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::SparseInnerTableProto >::const_iterator
-      it = this->table().begin();
-      it != this->table().end(); ++it) {
+      it = this->_internal_table().begin();
+      it != this->_internal_table().end(); ++it) {
     total_size += SparseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
   }
 
@@ -3453,9 +2562,13 @@ size_t SparseMultinomialPerceptronProto::ByteSizeLong() const {
   if (cached_has_bits & 0x00000001u) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->metadata());
+        this->_internal_metadata());
   }
 
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -3491,7 +2604,7 @@ void SparseMultinomialPerceptronProto::MergeFrom(const SparseMultinomialPerceptr
       metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
     }
     if (cached_has_bits & 0x00000002u) {
-      mutable_bias()->::perceptronix::SparseInnerTableProto::MergeFrom(from.bias());
+      _internal_mutable_bias()->::perceptronix::SparseInnerTableProto::MergeFrom(from._internal_bias());
     }
     if (cached_has_bits & 0x00000004u) {
       inner_size_ = from.inner_size_;
