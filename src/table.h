@@ -41,7 +41,7 @@ class DenseInnerTableTpl {
 
   size_t Size() const { return table_.size(); }
 
-  auto ArgMax() const -> decltype(std::distance(Iterator(), Iterator())) {
+  auto ArgMax() const {
     return std::distance(cbegin(), std::max_element(cbegin(), cend()));
   }
 

@@ -10,6 +10,7 @@ averaging model's memory.
 from cython.operator cimport address as addr
 from cython.operator cimport dereference as deref
 
+from libcpp.memory cimport make_unique
 from libcpp.memory cimport unique_ptr
 from libcpp.string cimport string
 
@@ -23,7 +24,7 @@ cdef string tobytes(data) except *:
     try:
         return data.encode("utf8")
     except Exception:
-        raise ValueError("Cannot encode {!r} as a bytestring".format(data))
+        raise ValueError(f"Cannot encode {data} as a bytestring")
 
 
 # Helpers for encoding vectors.
@@ -73,10 +74,10 @@ cdef class DenseBinomialClassifier(object):
     cdef unique_ptr[DenseBinomialModel] _model
 
     def __init__(self, size_t nfeats):
-        self._model.reset(new DenseBinomialModel(nfeats))
+        self._model = make_unique[DenseBinomialModel](nfeats)
 
     def __repr__(self):
-        return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
+        return f"<{self.__class__.__name__} at 0x{id(self):x}>"
 
     @classmethod
     def read(cls, filename):
@@ -99,7 +100,7 @@ cdef class DenseBinomialClassifier(object):
         result._model.reset(DenseBinomialModel.Read(tobytes(filename),
                                                     addr(metadata)))
         if result._model.get() == NULL:
-            raise PerceptronixIOError("Read failed: {}".format(filename))
+            raise PerceptronixIOError(f"Read failed: {filename}")
         return (result, metadata.decode("utf8"))
 
     cpdef void write(self, filename, metadata) except *:
@@ -114,12 +115,12 @@ cdef class DenseBinomialClassifier(object):
 
         Raises:
             PerceptronixOpError: Must average model first.
-            PerceptronixIOError: Read failed.
+            PerceptronixIOError: Write failed.
         """
         if not self._model.get().Averaged():
             raise PerceptronixOpError("Must average model first")
         if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
-            raise PerceptronixIOError("Write failed: {}".format(filename))
+            raise PerceptronixIOError(f"Write failed: {filename}")
 
     cpdef bool train(self, feats, bool label) except *:
         """
@@ -201,10 +202,10 @@ cdef class SparseBinomialClassifier(object):
     cdef unique_ptr[SparseBinomialModel] _model
 
     def __init__(self, size_t nfeats):
-        self._model.reset(new SparseBinomialModel(nfeats))
+        self._model = make_unique[SparseBinomialModel](nfeats)
 
     def __repr__(self):
-        return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
+        return f"<{self.__class__.__name__} at 0x{id(self):x}>"
 
     @classmethod
     def read(cls, filename):
@@ -227,7 +228,7 @@ cdef class SparseBinomialClassifier(object):
         result._model.reset(SparseBinomialModel.Read(tobytes(filename),
                                                      addr(metadata)))
         if result._model.get() == NULL:
-            raise PerceptronixIOError("Read failed: {}".format(filename))
+            raise PerceptronixIOError(f"Read failed: {filename}")
         return (result, metadata.decode("utf8"))
 
     cpdef void write(self, filename, metadata=b"") except *:
@@ -242,12 +243,12 @@ cdef class SparseBinomialClassifier(object):
 
         Raises:
             PerceptronixOpError: Must average model first.
-            PerceptronixIOError: Read failed.
+            PerceptronixIOError: Write failed.
         """
         if not self._model.get().Averaged():
             raise PerceptronixOpError("Must average model first")
         if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
-            raise PerceptronixIOError("Write failed: {}".format(filename))
+            raise PerceptronixIOError(f"Write failed: {filename}")
 
     cpdef bool train(self, feats, bool label) except *:
         """
@@ -322,10 +323,10 @@ cdef class SparseBinomialSequentialClassifier:
     cdef unique_ptr[SparseBinomialSequentialModel] _model
 
     def __init__(self, size_t nfeats, size_t order):
-        self._model.reset(new SparseBinomialSequentialModel(nfeats, order))
+        self._model = make_unique[SparseBinomialSequentialModel](nfeats, order)
 
     def __repr__(self):
-        return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
+        return f"<{self.__class__.__name__} at 0x{id(self):x}>"
 
     @classmethod
     def read(cls, filename, size_t order):
@@ -351,12 +352,12 @@ cdef class SparseBinomialSequentialClassifier:
                                                order,
                                                addr(metadata)))
         if result._model.get() == NULL:
-            raise PerceptronixIOError("Read failed: {}".format(filename))
+            raise PerceptronixIOError(f"Read failed: {filename}")
         return (result, metadata.decode("utf8"))
 
     cpdef void write(self, filename, metadata) except *:
         """
-                write(filename, metadata)
+        write(filename, metadata)
 
         Serializes model to disk.
 
@@ -366,12 +367,12 @@ cdef class SparseBinomialSequentialClassifier:
 
         Raises:
             PerceptronixOpError: Must average model first.
-            PerceptronixIOError: Read failed.
+            PerceptronixIOError: Write failed.
         """
         if not self._model.get().Averaged():
             raise PerceptronixOpError("Must average model first")
         if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
-            raise PerceptronixIOError("Write failed: {}".format(filename))
+            raise PerceptronixIOError(f"Write failed: {filename}")
 
     cpdef size_t train(self, efeats, labels) except *:
         """
@@ -455,10 +456,10 @@ cdef class DenseMultinomialClassifier(object):
     cdef unique_ptr[DenseMultinomialModel] _model
 
     def __init__(self, size_t nlabels, size_t nfeats):
-        self._model.reset(new DenseMultinomialModel(nlabels, nfeats))
+        self._model = make_unique[DenseMultinomialModel](nlabels, nfeats)
 
     def __repr__(self):
-        return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
+        return f"<{self.__class__.__name__} at 0x{id(self):x}>"
 
     @classmethod
     def read(cls, filename):
@@ -481,7 +482,7 @@ cdef class DenseMultinomialClassifier(object):
         result._model.reset(
             DenseMultinomialModel.Read(tobytes(filename), addr(metadata)))
         if result._model.get() == NULL:
-            raise PerceptronixIOError("Read failed: {}".format(filename))
+            raise PerceptronixIOError(f"Read failed: {filename}")
         return (result, metadata.decode("utf8"))
 
     cpdef void write(self, filename, metadata) except *:
@@ -496,12 +497,12 @@ cdef class DenseMultinomialClassifier(object):
 
         Raises:
             PerceptronixOpError: Must average model first.
-            PerceptronixIOError: Read failed.
+            PerceptronixIOError: Write failed.
         """
         if not self._averaged():
             raise PerceptronixOpError("Must average model first")
         if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
-            raise PerceptronixIOError("Write failed: {}".format(filename))
+            raise PerceptronixIOError(f"Write failed: {filename}")
 
     cpdef bool train(self, feats, size_t label) except *:
         """
@@ -590,10 +591,10 @@ cdef class SparseDenseMultinomialClassifier(object):
     cdef unique_ptr[SparseDenseMultinomialModel] _model
 
     def __init__(self, size_t nlabels, size_t nfeats):
-        self._model.reset(new SparseDenseMultinomialModel(nlabels, nfeats)) 
+        self._model = make_unique[SparseDenseMultinomialModel](nlabels, nfeats)
 
     def __repr__(self):
-        return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
+        return f"<{self.__class__.__name__} at 0x{id(self):x}>"
 
     @classmethod
     def read(cls, filename):
@@ -616,7 +617,7 @@ cdef class SparseDenseMultinomialClassifier(object):
         result._model.reset(SparseDenseMultinomialModel.Read(tobytes(filename),
                                                              addr(metadata)))
         if result._model.get() == NULL:
-            raise PerceptronixIOError("Read failed: {}".format(filename))
+            raise PerceptronixIOError(f"Read failed: {filename}")
         return (result, metadata.decode("utf8"))
 
     cpdef void write(self, filename, metadata=b"") except *:
@@ -631,12 +632,12 @@ cdef class SparseDenseMultinomialClassifier(object):
 
         Raises:
             PerceptronixOpError: Must average model first.
-            PerceptronixIOError: Read failed.
+            PerceptronixIOError: Write failed.
         """
         if not self._model.get().Averaged():
             raise PerceptronixOpError("Must average model first")
         if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
-            raise PerceptronixIOError("Write failed: {}".format(filename))
+            raise PerceptronixIOError(f"Write failed: {filename}")
 
     cpdef bool train(self, feats, size_t label) except *:
         """
@@ -713,8 +714,8 @@ cdef class SparseDenseMultinomialSequentialClassifier:
     cdef unique_ptr[SparseDenseMultinomialSequentialModel] _model
 
     def __init__(self, size_t nfeats, size_t nlabels, size_t order):
-        self._model.reset(new SparseDenseMultinomialSequentialModel(
-            nfeats, nlabels, order))
+        self._model = make_unique[SparseDenseMultinomialSequentialModel](
+            nfeats, nlabels, order)
 
     @classmethod
     def read(cls, filename, size_t order):
@@ -741,7 +742,7 @@ cdef class SparseDenseMultinomialSequentialClassifier:
                                                        order,
                                                        addr(metadata)))
         if result._model.get() == NULL:
-            raise PerceptronixIOError("Read failed: {}".format(filename))
+            raise PerceptronixIOError(f"Read failed: {filename}")
         return (result, metadata.decode("utf8"))
 
     cpdef void write(self, filename, metadata) except *:
@@ -756,12 +757,12 @@ cdef class SparseDenseMultinomialSequentialClassifier:
 
         Raises:
             PerceptronixOpError: Must average model first.
-            PerceptronixIOError: Read failed.
+            PerceptronixIOError: Write failed.
         """
         if not self._model.get().Averaged():
             raise PerceptronixOpError("Must average model first")
         if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
-            raise PerceptronixIOError("Write failed: {}".format(filename))
+            raise PerceptronixIOError(f"Write failed: {filename}")
 
     cpdef size_t train(self, efeats, labels) except *:
         """
@@ -841,10 +842,10 @@ cdef class SparseMultinomialClassifier(object):
     cdef unique_ptr[SparseMultinomialModel] _model
 
     def __init__(self, size_t nlabels, size_t nfeats):
-        self._model.reset(new SparseMultinomialModel(nlabels, nfeats))
+        self._model = make_unique[SparseMultinomialModel](nlabels, nfeats)
 
     def __repr__(self):
-        return "<{} at 0x{:x}>".format(self.__class__.__name__, id(self))
+        return f"<{self.__class__.__name__} at 0x{id(self):x}>"
 
     @classmethod
     def read(cls, filename):
@@ -867,7 +868,7 @@ cdef class SparseMultinomialClassifier(object):
         result._model.reset(SparseMultinomialModel.Read(tobytes(filename),
                                                         addr(metadata)))
         if result._model.get() == NULL:
-            raise PerceptronixIOError("Read failed: {}".format(filename))
+            raise PerceptronixIOError(f"Read failed: {filename}")
         return (result, metadata.decode("utf8"))
 
     cpdef void write(self, filename, metadata=b"") except *:
@@ -882,12 +883,12 @@ cdef class SparseMultinomialClassifier(object):
 
         Raises:
             PerceptronixOpError: Must average model first.
-            PerceptronixIOError: Read failed.
+            PerceptronixIOError: Write failed.
         """
         if not self._model.get().Averaged():
             raise PerceptronixOpError("Must average model first")
         if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
-            raise PerceptronixIOError("Write failed: {}".format(filename))
+            raise PerceptronixIOError(f"Write failed: {filename}")
 
     cpdef bool train(self, feats, label) except *:
         """
@@ -965,9 +966,9 @@ cdef class SparseMultinomialSequentialClassifier:
     cdef unique_ptr[SparseMultinomialSequentialModel] _model
 
     def __init__(self, size_t nfeats, size_t nlabels, size_t order):
-        self._model.reset(new SparseMultinomialSequentialModel(nfeats,
-                                                               nlabels,
-                                                               order))
+        self._model = make_unique[SparseMultinomialSequentialModel](nfeats,
+                                                                    nlabels,
+                                                                    order)
 
     @classmethod
     def read(cls, filename, size_t order):
@@ -991,7 +992,7 @@ cdef class SparseMultinomialSequentialClassifier:
         result._model.reset(SparseMultinomialSequentialModel.Read(
             tobytes(filename), order, addr(metadata)))
         if result._model.get() == NULL:
-            raise PerceptronixIOError("Read failed: {}".format(filename))
+            raise PerceptronixIOError(f"Read failed: {filename}")
         return (result, metadata.decode("utf8"))
 
     cpdef void write(self, filename, metadata=b"") except *:
@@ -1006,12 +1007,12 @@ cdef class SparseMultinomialSequentialClassifier:
 
         Raises:
             PerceptronixOpError: Must average model first.
-            PerceptronixIOError: Read failed.
+            PerceptronixIOError: Write failed.
         """
         if not self._model.get().Averaged():
             raise PerceptronixOpError("Must average model first")
         if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
-            raise PerceptronixIOError("Write failed: {}".format(filename))
+            raise PerceptronixIOError(f"Write failed: {filename}")
 
     cpdef size_t train(self, efeats, labels) except *:
         """
