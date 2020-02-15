@@ -5,126 +5,101 @@
 
 #include <algorithm>
 
+#include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/extension_set.h>
-#include <google/protobuf/wire_format_lite.h>
+#include <google/protobuf/wire_format_lite_inl.h>
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/generated_message_reflection.h>
 #include <google/protobuf/reflection_ops.h>
 #include <google/protobuf/wire_format.h>
+// This is a temporary google only hack
+#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+#include "third_party/protobuf/version.h"
+#endif
 // @@protoc_insertion_point(includes)
-#include <google/protobuf/port_def.inc>
-extern PROTOBUF_INTERNAL_EXPORT_linear_5fmodel_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_DenseInnerTableProto_linear_5fmodel_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_linear_5fmodel_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_SparseBinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_linear_5fmodel_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_linear_5fmodel_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SparseInnerTableProto_linear_5fmodel_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_linear_5fmodel_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_SparseInnerTableProto_TableEntry_DoNotUse_linear_5fmodel_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_linear_5fmodel_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SparseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto;
+
+namespace protobuf_linear_5fmodel_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_linear_5fmodel_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_DenseInnerTableProto;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_linear_5fmodel_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_SparseBinomialPerceptronProto_TableEntry_DoNotUse;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_linear_5fmodel_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_SparseInnerTableProto_TableEntry_DoNotUse;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_linear_5fmodel_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_linear_5fmodel_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_SparseInnerTableProto;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_linear_5fmodel_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_SparseMultinomialPerceptronProto_TableEntry_DoNotUse;
+}  // namespace protobuf_linear_5fmodel_2eproto
 namespace perceptronix {
 class DenseBinomialPerceptronProtoDefaultTypeInternal {
  public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<DenseBinomialPerceptronProto> _instance;
+  ::google::protobuf::internal::ExplicitlyConstructed<DenseBinomialPerceptronProto>
+      _instance;
 } _DenseBinomialPerceptronProto_default_instance_;
 class SparseBinomialPerceptronProto_TableEntry_DoNotUseDefaultTypeInternal {
  public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SparseBinomialPerceptronProto_TableEntry_DoNotUse> _instance;
+  ::google::protobuf::internal::ExplicitlyConstructed<SparseBinomialPerceptronProto_TableEntry_DoNotUse>
+      _instance;
 } _SparseBinomialPerceptronProto_TableEntry_DoNotUse_default_instance_;
 class SparseBinomialPerceptronProtoDefaultTypeInternal {
  public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SparseBinomialPerceptronProto> _instance;
+  ::google::protobuf::internal::ExplicitlyConstructed<SparseBinomialPerceptronProto>
+      _instance;
 } _SparseBinomialPerceptronProto_default_instance_;
 class DenseInnerTableProtoDefaultTypeInternal {
  public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<DenseInnerTableProto> _instance;
+  ::google::protobuf::internal::ExplicitlyConstructed<DenseInnerTableProto>
+      _instance;
 } _DenseInnerTableProto_default_instance_;
 class SparseInnerTableProto_TableEntry_DoNotUseDefaultTypeInternal {
  public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SparseInnerTableProto_TableEntry_DoNotUse> _instance;
+  ::google::protobuf::internal::ExplicitlyConstructed<SparseInnerTableProto_TableEntry_DoNotUse>
+      _instance;
 } _SparseInnerTableProto_TableEntry_DoNotUse_default_instance_;
 class SparseInnerTableProtoDefaultTypeInternal {
  public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SparseInnerTableProto> _instance;
+  ::google::protobuf::internal::ExplicitlyConstructed<SparseInnerTableProto>
+      _instance;
 } _SparseInnerTableProto_default_instance_;
 class DenseMultinomialPerceptronProtoDefaultTypeInternal {
  public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<DenseMultinomialPerceptronProto> _instance;
+  ::google::protobuf::internal::ExplicitlyConstructed<DenseMultinomialPerceptronProto>
+      _instance;
 } _DenseMultinomialPerceptronProto_default_instance_;
 class SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUseDefaultTypeInternal {
  public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse> _instance;
+  ::google::protobuf::internal::ExplicitlyConstructed<SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse>
+      _instance;
 } _SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse_default_instance_;
 class SparseDenseMultinomialPerceptronProtoDefaultTypeInternal {
  public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SparseDenseMultinomialPerceptronProto> _instance;
+  ::google::protobuf::internal::ExplicitlyConstructed<SparseDenseMultinomialPerceptronProto>
+      _instance;
 } _SparseDenseMultinomialPerceptronProto_default_instance_;
 class SparseMultinomialPerceptronProto_TableEntry_DoNotUseDefaultTypeInternal {
  public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SparseMultinomialPerceptronProto_TableEntry_DoNotUse> _instance;
+  ::google::protobuf::internal::ExplicitlyConstructed<SparseMultinomialPerceptronProto_TableEntry_DoNotUse>
+      _instance;
 } _SparseMultinomialPerceptronProto_TableEntry_DoNotUse_default_instance_;
 class SparseMultinomialPerceptronProtoDefaultTypeInternal {
  public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SparseMultinomialPerceptronProto> _instance;
+  ::google::protobuf::internal::ExplicitlyConstructed<SparseMultinomialPerceptronProto>
+      _instance;
 } _SparseMultinomialPerceptronProto_default_instance_;
 }  // namespace perceptronix
-static void InitDefaultsscc_info_DenseBinomialPerceptronProto_linear_5fmodel_2eproto() {
+namespace protobuf_linear_5fmodel_2eproto {
+static void InitDefaultsDenseBinomialPerceptronProto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::perceptronix::_DenseBinomialPerceptronProto_default_instance_;
     new (ptr) ::perceptronix::DenseBinomialPerceptronProto();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
   ::perceptronix::DenseBinomialPerceptronProto::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_DenseBinomialPerceptronProto_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_DenseBinomialPerceptronProto_linear_5fmodel_2eproto}, {}};
+::google::protobuf::internal::SCCInfo<0> scc_info_DenseBinomialPerceptronProto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsDenseBinomialPerceptronProto}, {}};
 
-static void InitDefaultsscc_info_DenseInnerTableProto_linear_5fmodel_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::perceptronix::_DenseInnerTableProto_default_instance_;
-    new (ptr) ::perceptronix::DenseInnerTableProto();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::perceptronix::DenseInnerTableProto::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_DenseInnerTableProto_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_DenseInnerTableProto_linear_5fmodel_2eproto}, {}};
-
-static void InitDefaultsscc_info_DenseMultinomialPerceptronProto_linear_5fmodel_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::perceptronix::_DenseMultinomialPerceptronProto_default_instance_;
-    new (ptr) ::perceptronix::DenseMultinomialPerceptronProto();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::perceptronix::DenseMultinomialPerceptronProto::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_DenseMultinomialPerceptronProto_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_DenseMultinomialPerceptronProto_linear_5fmodel_2eproto}, {
-      &scc_info_DenseInnerTableProto_linear_5fmodel_2eproto.base,}};
-
-static void InitDefaultsscc_info_SparseBinomialPerceptronProto_linear_5fmodel_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::perceptronix::_SparseBinomialPerceptronProto_default_instance_;
-    new (ptr) ::perceptronix::SparseBinomialPerceptronProto();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::perceptronix::SparseBinomialPerceptronProto::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SparseBinomialPerceptronProto_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_SparseBinomialPerceptronProto_linear_5fmodel_2eproto}, {
-      &scc_info_SparseBinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto.base,}};
-
-static void InitDefaultsscc_info_SparseBinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto() {
+static void InitDefaultsSparseBinomialPerceptronProto_TableEntry_DoNotUse() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
@@ -134,55 +109,39 @@ static void InitDefaultsscc_info_SparseBinomialPerceptronProto_TableEntry_DoNotU
   ::perceptronix::SparseBinomialPerceptronProto_TableEntry_DoNotUse::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_SparseBinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_SparseBinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto}, {}};
+::google::protobuf::internal::SCCInfo<0> scc_info_SparseBinomialPerceptronProto_TableEntry_DoNotUse =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsSparseBinomialPerceptronProto_TableEntry_DoNotUse}, {}};
 
-static void InitDefaultsscc_info_SparseDenseMultinomialPerceptronProto_linear_5fmodel_2eproto() {
+static void InitDefaultsSparseBinomialPerceptronProto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::perceptronix::_SparseDenseMultinomialPerceptronProto_default_instance_;
-    new (ptr) ::perceptronix::SparseDenseMultinomialPerceptronProto();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+    void* ptr = &::perceptronix::_SparseBinomialPerceptronProto_default_instance_;
+    new (ptr) ::perceptronix::SparseBinomialPerceptronProto();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::perceptronix::SparseDenseMultinomialPerceptronProto::InitAsDefaultInstance();
+  ::perceptronix::SparseBinomialPerceptronProto::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_SparseDenseMultinomialPerceptronProto_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_SparseDenseMultinomialPerceptronProto_linear_5fmodel_2eproto}, {
-      &scc_info_DenseInnerTableProto_linear_5fmodel_2eproto.base,
-      &scc_info_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto.base,}};
+::google::protobuf::internal::SCCInfo<1> scc_info_SparseBinomialPerceptronProto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsSparseBinomialPerceptronProto}, {
+      &protobuf_linear_5fmodel_2eproto::scc_info_SparseBinomialPerceptronProto_TableEntry_DoNotUse.base,}};
 
-static void InitDefaultsscc_info_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto() {
+static void InitDefaultsDenseInnerTableProto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::perceptronix::_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse_default_instance_;
-    new (ptr) ::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse();
+    void* ptr = &::perceptronix::_DenseInnerTableProto_default_instance_;
+    new (ptr) ::perceptronix::DenseInnerTableProto();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::InitAsDefaultInstance();
+  ::perceptronix::DenseInnerTableProto::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto}, {
-      &scc_info_DenseInnerTableProto_linear_5fmodel_2eproto.base,}};
+::google::protobuf::internal::SCCInfo<0> scc_info_DenseInnerTableProto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsDenseInnerTableProto}, {}};
 
-static void InitDefaultsscc_info_SparseInnerTableProto_linear_5fmodel_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::perceptronix::_SparseInnerTableProto_default_instance_;
-    new (ptr) ::perceptronix::SparseInnerTableProto();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::perceptronix::SparseInnerTableProto::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SparseInnerTableProto_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_SparseInnerTableProto_linear_5fmodel_2eproto}, {
-      &scc_info_SparseInnerTableProto_TableEntry_DoNotUse_linear_5fmodel_2eproto.base,}};
-
-static void InitDefaultsscc_info_SparseInnerTableProto_TableEntry_DoNotUse_linear_5fmodel_2eproto() {
+static void InitDefaultsSparseInnerTableProto_TableEntry_DoNotUse() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
@@ -192,26 +151,70 @@ static void InitDefaultsscc_info_SparseInnerTableProto_TableEntry_DoNotUse_linea
   ::perceptronix::SparseInnerTableProto_TableEntry_DoNotUse::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_SparseInnerTableProto_TableEntry_DoNotUse_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_SparseInnerTableProto_TableEntry_DoNotUse_linear_5fmodel_2eproto}, {}};
+::google::protobuf::internal::SCCInfo<0> scc_info_SparseInnerTableProto_TableEntry_DoNotUse =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsSparseInnerTableProto_TableEntry_DoNotUse}, {}};
 
-static void InitDefaultsscc_info_SparseMultinomialPerceptronProto_linear_5fmodel_2eproto() {
+static void InitDefaultsSparseInnerTableProto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::perceptronix::_SparseMultinomialPerceptronProto_default_instance_;
-    new (ptr) ::perceptronix::SparseMultinomialPerceptronProto();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+    void* ptr = &::perceptronix::_SparseInnerTableProto_default_instance_;
+    new (ptr) ::perceptronix::SparseInnerTableProto();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::perceptronix::SparseMultinomialPerceptronProto::InitAsDefaultInstance();
+  ::perceptronix::SparseInnerTableProto::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_SparseMultinomialPerceptronProto_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_SparseMultinomialPerceptronProto_linear_5fmodel_2eproto}, {
-      &scc_info_SparseInnerTableProto_linear_5fmodel_2eproto.base,
-      &scc_info_SparseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto.base,}};
+::google::protobuf::internal::SCCInfo<1> scc_info_SparseInnerTableProto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsSparseInnerTableProto}, {
+      &protobuf_linear_5fmodel_2eproto::scc_info_SparseInnerTableProto_TableEntry_DoNotUse.base,}};
 
-static void InitDefaultsscc_info_SparseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto() {
+static void InitDefaultsDenseMultinomialPerceptronProto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::perceptronix::_DenseMultinomialPerceptronProto_default_instance_;
+    new (ptr) ::perceptronix::DenseMultinomialPerceptronProto();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::perceptronix::DenseMultinomialPerceptronProto::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<1> scc_info_DenseMultinomialPerceptronProto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsDenseMultinomialPerceptronProto}, {
+      &protobuf_linear_5fmodel_2eproto::scc_info_DenseInnerTableProto.base,}};
+
+static void InitDefaultsSparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::perceptronix::_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse_default_instance_;
+    new (ptr) ::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse();
+  }
+  ::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<1> scc_info_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsSparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse}, {
+      &protobuf_linear_5fmodel_2eproto::scc_info_DenseInnerTableProto.base,}};
+
+static void InitDefaultsSparseDenseMultinomialPerceptronProto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::perceptronix::_SparseDenseMultinomialPerceptronProto_default_instance_;
+    new (ptr) ::perceptronix::SparseDenseMultinomialPerceptronProto();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::perceptronix::SparseDenseMultinomialPerceptronProto::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<2> scc_info_SparseDenseMultinomialPerceptronProto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsSparseDenseMultinomialPerceptronProto}, {
+      &protobuf_linear_5fmodel_2eproto::scc_info_DenseInnerTableProto.base,
+      &protobuf_linear_5fmodel_2eproto::scc_info_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse.base,}};
+
+static void InitDefaultsSparseMultinomialPerceptronProto_TableEntry_DoNotUse() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
@@ -221,128 +224,156 @@ static void InitDefaultsscc_info_SparseMultinomialPerceptronProto_TableEntry_DoN
   ::perceptronix::SparseMultinomialPerceptronProto_TableEntry_DoNotUse::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SparseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_SparseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto}, {
-      &scc_info_SparseInnerTableProto_linear_5fmodel_2eproto.base,}};
+::google::protobuf::internal::SCCInfo<1> scc_info_SparseMultinomialPerceptronProto_TableEntry_DoNotUse =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsSparseMultinomialPerceptronProto_TableEntry_DoNotUse}, {
+      &protobuf_linear_5fmodel_2eproto::scc_info_SparseInnerTableProto.base,}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_linear_5fmodel_2eproto[11];
-static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_linear_5fmodel_2eproto = nullptr;
-static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_linear_5fmodel_2eproto = nullptr;
+static void InitDefaultsSparseMultinomialPerceptronProto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_linear_5fmodel_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  PROTOBUF_FIELD_OFFSET(::perceptronix::DenseBinomialPerceptronProto, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::DenseBinomialPerceptronProto, _internal_metadata_),
+  {
+    void* ptr = &::perceptronix::_SparseMultinomialPerceptronProto_default_instance_;
+    new (ptr) ::perceptronix::SparseMultinomialPerceptronProto();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::perceptronix::SparseMultinomialPerceptronProto::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<2> scc_info_SparseMultinomialPerceptronProto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsSparseMultinomialPerceptronProto}, {
+      &protobuf_linear_5fmodel_2eproto::scc_info_SparseInnerTableProto.base,
+      &protobuf_linear_5fmodel_2eproto::scc_info_SparseMultinomialPerceptronProto_TableEntry_DoNotUse.base,}};
+
+void InitDefaults() {
+  ::google::protobuf::internal::InitSCC(&scc_info_DenseBinomialPerceptronProto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SparseBinomialPerceptronProto_TableEntry_DoNotUse.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SparseBinomialPerceptronProto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_DenseInnerTableProto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SparseInnerTableProto_TableEntry_DoNotUse.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SparseInnerTableProto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_DenseMultinomialPerceptronProto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SparseDenseMultinomialPerceptronProto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SparseMultinomialPerceptronProto_TableEntry_DoNotUse.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SparseMultinomialPerceptronProto.base);
+}
+
+::google::protobuf::Metadata file_level_metadata[11];
+
+const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::DenseBinomialPerceptronProto, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::DenseBinomialPerceptronProto, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::perceptronix::DenseBinomialPerceptronProto, metadata_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::DenseBinomialPerceptronProto, bias_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::DenseBinomialPerceptronProto, table_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::DenseBinomialPerceptronProto, metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::DenseBinomialPerceptronProto, bias_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::DenseBinomialPerceptronProto, table_),
   0,
   1,
   ~0u,
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto_TableEntry_DoNotUse, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto_TableEntry_DoNotUse, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto_TableEntry_DoNotUse, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto_TableEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto_TableEntry_DoNotUse, key_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto_TableEntry_DoNotUse, value_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto_TableEntry_DoNotUse, key_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto_TableEntry_DoNotUse, value_),
   0,
   1,
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto, metadata_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto, bias_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto, table_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto, metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto, bias_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseBinomialPerceptronProto, table_),
   0,
   1,
   ~0u,
-  PROTOBUF_FIELD_OFFSET(::perceptronix::DenseInnerTableProto, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::DenseInnerTableProto, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::DenseInnerTableProto, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::DenseInnerTableProto, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::perceptronix::DenseInnerTableProto, table_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::DenseInnerTableProto, table_),
   ~0u,
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseInnerTableProto_TableEntry_DoNotUse, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseInnerTableProto_TableEntry_DoNotUse, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseInnerTableProto_TableEntry_DoNotUse, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseInnerTableProto_TableEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseInnerTableProto_TableEntry_DoNotUse, key_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseInnerTableProto_TableEntry_DoNotUse, value_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseInnerTableProto_TableEntry_DoNotUse, key_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseInnerTableProto_TableEntry_DoNotUse, value_),
   0,
   1,
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseInnerTableProto, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseInnerTableProto, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseInnerTableProto, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseInnerTableProto, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseInnerTableProto, table_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseInnerTableProto, table_),
   ~0u,
-  PROTOBUF_FIELD_OFFSET(::perceptronix::DenseMultinomialPerceptronProto, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::DenseMultinomialPerceptronProto, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::DenseMultinomialPerceptronProto, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::DenseMultinomialPerceptronProto, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::perceptronix::DenseMultinomialPerceptronProto, metadata_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::DenseMultinomialPerceptronProto, inner_size_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::DenseMultinomialPerceptronProto, bias_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::DenseMultinomialPerceptronProto, table_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::DenseMultinomialPerceptronProto, metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::DenseMultinomialPerceptronProto, inner_size_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::DenseMultinomialPerceptronProto, bias_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::DenseMultinomialPerceptronProto, table_),
   0,
   2,
   1,
   ~0u,
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse, key_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse, value_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse, key_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse, value_),
   0,
   1,
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto, metadata_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto, inner_size_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto, bias_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto, table_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto, metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto, inner_size_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto, bias_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseDenseMultinomialPerceptronProto, table_),
   0,
   2,
   1,
   ~0u,
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto_TableEntry_DoNotUse, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto_TableEntry_DoNotUse, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto_TableEntry_DoNotUse, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto_TableEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto_TableEntry_DoNotUse, key_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto_TableEntry_DoNotUse, value_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto_TableEntry_DoNotUse, key_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto_TableEntry_DoNotUse, value_),
   0,
   1,
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto, metadata_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto, inner_size_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto, bias_),
-  PROTOBUF_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto, table_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto, metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto, inner_size_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto, bias_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::perceptronix::SparseMultinomialPerceptronProto, table_),
   0,
   2,
   1,
   ~0u,
 };
-static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 8, sizeof(::perceptronix::DenseBinomialPerceptronProto)},
   { 11, 18, sizeof(::perceptronix::SparseBinomialPerceptronProto_TableEntry_DoNotUse)},
   { 20, 28, sizeof(::perceptronix::SparseBinomialPerceptronProto)},
@@ -356,118 +387,125 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 98, 107, sizeof(::perceptronix::SparseMultinomialPerceptronProto)},
 };
 
-static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::perceptronix::_DenseBinomialPerceptronProto_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::perceptronix::_SparseBinomialPerceptronProto_TableEntry_DoNotUse_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::perceptronix::_SparseBinomialPerceptronProto_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::perceptronix::_DenseInnerTableProto_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::perceptronix::_SparseInnerTableProto_TableEntry_DoNotUse_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::perceptronix::_SparseInnerTableProto_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::perceptronix::_DenseMultinomialPerceptronProto_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::perceptronix::_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::perceptronix::_SparseDenseMultinomialPerceptronProto_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::perceptronix::_SparseMultinomialPerceptronProto_TableEntry_DoNotUse_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::perceptronix::_SparseMultinomialPerceptronProto_default_instance_),
+static ::google::protobuf::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::google::protobuf::Message*>(&::perceptronix::_DenseBinomialPerceptronProto_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::perceptronix::_SparseBinomialPerceptronProto_TableEntry_DoNotUse_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::perceptronix::_SparseBinomialPerceptronProto_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::perceptronix::_DenseInnerTableProto_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::perceptronix::_SparseInnerTableProto_TableEntry_DoNotUse_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::perceptronix::_SparseInnerTableProto_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::perceptronix::_DenseMultinomialPerceptronProto_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::perceptronix::_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::perceptronix::_SparseDenseMultinomialPerceptronProto_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::perceptronix::_SparseMultinomialPerceptronProto_TableEntry_DoNotUse_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::perceptronix::_SparseMultinomialPerceptronProto_default_instance_),
 };
 
-const char descriptor_table_protodef_linear_5fmodel_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\022linear_model.proto\022\014perceptronix\"O\n\034De"
-  "nseBinomialPerceptronProto\022\022\n\010metadata\030\001"
-  " \001(\t:\000\022\014\n\004bias\030\002 \002(\002\022\r\n\005table\030\003 \003(\002\"\266\001\n\035"
-  "SparseBinomialPerceptronProto\022\022\n\010metadat"
-  "a\030\001 \001(\t:\000\022\014\n\004bias\030\002 \002(\002\022E\n\005table\030\003 \003(\01326"
-  ".perceptronix.SparseBinomialPerceptronPr"
-  "oto.TableEntry\032,\n\nTableEntry\022\013\n\003key\030\001 \001("
-  "\t\022\r\n\005value\030\002 \001(\002:\0028\001\"%\n\024DenseInnerTableP"
-  "roto\022\r\n\005table\030\001 \003(\002\"\204\001\n\025SparseInnerTable"
-  "Proto\022=\n\005table\030\001 \003(\0132..perceptronix.Spar"
-  "seInnerTableProto.TableEntry\032,\n\nTableEnt"
-  "ry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\002:\0028\001\"\256\001\n\037D"
-  "enseMultinomialPerceptronProto\022\022\n\010metada"
-  "ta\030\001 \001(\t:\000\022\022\n\ninner_size\030\002 \002(\r\0220\n\004bias\030\003"
-  " \002(\0132\".perceptronix.DenseInnerTableProto"
-  "\0221\n\005table\030\004 \003(\0132\".perceptronix.DenseInne"
-  "rTableProto\"\242\002\n%SparseDenseMultinomialPe"
-  "rceptronProto\022\022\n\010metadata\030\001 \001(\t:\000\022\022\n\ninn"
-  "er_size\030\002 \002(\r\0220\n\004bias\030\003 \002(\0132\".perceptron"
-  "ix.DenseInnerTableProto\022M\n\005table\030\004 \003(\0132>"
-  ".perceptronix.SparseDenseMultinomialPerc"
-  "eptronProto.TableEntry\032P\n\nTableEntry\022\013\n\003"
-  "key\030\001 \001(\t\0221\n\005value\030\002 \001(\0132\".perceptronix."
-  "DenseInnerTableProto:\0028\001\"\232\002\n SparseMulti"
-  "nomialPerceptronProto\022\022\n\010metadata\030\001 \001(\t:"
-  "\000\022\022\n\ninner_size\030\002 \002(\r\0221\n\004bias\030\003 \002(\0132#.pe"
-  "rceptronix.SparseInnerTableProto\022H\n\005tabl"
-  "e\030\004 \003(\01329.perceptronix.SparseMultinomial"
-  "PerceptronProto.TableEntry\032Q\n\nTableEntry"
-  "\022\013\n\003key\030\001 \001(\t\0222\n\005value\030\002 \001(\0132#.perceptro"
-  "nix.SparseInnerTableProto:\0028\001"
-  ;
-static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_linear_5fmodel_2eproto_deps[1] = {
-};
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_linear_5fmodel_2eproto_sccs[11] = {
-  &scc_info_DenseBinomialPerceptronProto_linear_5fmodel_2eproto.base,
-  &scc_info_DenseInnerTableProto_linear_5fmodel_2eproto.base,
-  &scc_info_DenseMultinomialPerceptronProto_linear_5fmodel_2eproto.base,
-  &scc_info_SparseBinomialPerceptronProto_linear_5fmodel_2eproto.base,
-  &scc_info_SparseBinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto.base,
-  &scc_info_SparseDenseMultinomialPerceptronProto_linear_5fmodel_2eproto.base,
-  &scc_info_SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto.base,
-  &scc_info_SparseInnerTableProto_linear_5fmodel_2eproto.base,
-  &scc_info_SparseInnerTableProto_TableEntry_DoNotUse_linear_5fmodel_2eproto.base,
-  &scc_info_SparseMultinomialPerceptronProto_linear_5fmodel_2eproto.base,
-  &scc_info_SparseMultinomialPerceptronProto_TableEntry_DoNotUse_linear_5fmodel_2eproto.base,
-};
-static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_linear_5fmodel_2eproto_once;
-static bool descriptor_table_linear_5fmodel_2eproto_initialized = false;
-const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_linear_5fmodel_2eproto = {
-  &descriptor_table_linear_5fmodel_2eproto_initialized, descriptor_table_protodef_linear_5fmodel_2eproto, "linear_model.proto", 1229,
-  &descriptor_table_linear_5fmodel_2eproto_once, descriptor_table_linear_5fmodel_2eproto_sccs, descriptor_table_linear_5fmodel_2eproto_deps, 11, 0,
-  schemas, file_default_instances, TableStruct_linear_5fmodel_2eproto::offsets,
-  file_level_metadata_linear_5fmodel_2eproto, 11, file_level_enum_descriptors_linear_5fmodel_2eproto, file_level_service_descriptors_linear_5fmodel_2eproto,
-};
+void protobuf_AssignDescriptors() {
+  AddDescriptors();
+  AssignDescriptors(
+      "linear_model.proto", schemas, file_default_instances, TableStruct::offsets,
+      file_level_metadata, NULL, NULL);
+}
 
-// Force running AddDescriptors() at dynamic initialization time.
-static bool dynamic_init_dummy_linear_5fmodel_2eproto = (  ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_linear_5fmodel_2eproto), true);
+void protobuf_AssignDescriptorsOnce() {
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
+}
+
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
+void protobuf_RegisterTypes(const ::std::string&) {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 11);
+}
+
+void AddDescriptorsImpl() {
+  InitDefaults();
+  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+      "\n\022linear_model.proto\022\014perceptronix\"O\n\034De"
+      "nseBinomialPerceptronProto\022\022\n\010metadata\030\001"
+      " \001(\t:\000\022\014\n\004bias\030\002 \002(\002\022\r\n\005table\030\003 \003(\002\"\266\001\n\035"
+      "SparseBinomialPerceptronProto\022\022\n\010metadat"
+      "a\030\001 \001(\t:\000\022\014\n\004bias\030\002 \002(\002\022E\n\005table\030\003 \003(\01326"
+      ".perceptronix.SparseBinomialPerceptronPr"
+      "oto.TableEntry\032,\n\nTableEntry\022\013\n\003key\030\001 \001("
+      "\t\022\r\n\005value\030\002 \001(\002:\0028\001\"%\n\024DenseInnerTableP"
+      "roto\022\r\n\005table\030\001 \003(\002\"\204\001\n\025SparseInnerTable"
+      "Proto\022=\n\005table\030\001 \003(\0132..perceptronix.Spar"
+      "seInnerTableProto.TableEntry\032,\n\nTableEnt"
+      "ry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\002:\0028\001\"\256\001\n\037D"
+      "enseMultinomialPerceptronProto\022\022\n\010metada"
+      "ta\030\001 \001(\t:\000\022\022\n\ninner_size\030\002 \002(\r\0220\n\004bias\030\003"
+      " \002(\0132\".perceptronix.DenseInnerTableProto"
+      "\0221\n\005table\030\004 \003(\0132\".perceptronix.DenseInne"
+      "rTableProto\"\242\002\n%SparseDenseMultinomialPe"
+      "rceptronProto\022\022\n\010metadata\030\001 \001(\t:\000\022\022\n\ninn"
+      "er_size\030\002 \002(\r\0220\n\004bias\030\003 \002(\0132\".perceptron"
+      "ix.DenseInnerTableProto\022M\n\005table\030\004 \003(\0132>"
+      ".perceptronix.SparseDenseMultinomialPerc"
+      "eptronProto.TableEntry\032P\n\nTableEntry\022\013\n\003"
+      "key\030\001 \001(\t\0221\n\005value\030\002 \001(\0132\".perceptronix."
+      "DenseInnerTableProto:\0028\001\"\232\002\n SparseMulti"
+      "nomialPerceptronProto\022\022\n\010metadata\030\001 \001(\t:"
+      "\000\022\022\n\ninner_size\030\002 \002(\r\0221\n\004bias\030\003 \002(\0132#.pe"
+      "rceptronix.SparseInnerTableProto\022H\n\005tabl"
+      "e\030\004 \003(\01329.perceptronix.SparseMultinomial"
+      "PerceptronProto.TableEntry\032Q\n\nTableEntry"
+      "\022\013\n\003key\030\001 \001(\t\0222\n\005value\030\002 \001(\0132#.perceptro"
+      "nix.SparseInnerTableProto:\0028\001"
+  };
+  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
+      descriptor, 1229);
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
+    "linear_model.proto", &protobuf_RegisterTypes);
+}
+
+void AddDescriptors() {
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
+}
+// Force AddDescriptors() to be called at dynamic initialization time.
+struct StaticDescriptorInitializer {
+  StaticDescriptorInitializer() {
+    AddDescriptors();
+  }
+} static_descriptor_initializer;
+}  // namespace protobuf_linear_5fmodel_2eproto
 namespace perceptronix {
 
 // ===================================================================
 
 void DenseBinomialPerceptronProto::InitAsDefaultInstance() {
 }
-class DenseBinomialPerceptronProto::_Internal {
- public:
-  using HasBits = decltype(std::declval<DenseBinomialPerceptronProto>()._has_bits_);
-  static void set_has_metadata(HasBits* has_bits) {
-    (*has_bits)[0] |= 1u;
-  }
-  static void set_has_bias(HasBits* has_bits) {
-    (*has_bits)[0] |= 2u;
-  }
-};
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int DenseBinomialPerceptronProto::kMetadataFieldNumber;
+const int DenseBinomialPerceptronProto::kBiasFieldNumber;
+const int DenseBinomialPerceptronProto::kTableFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 DenseBinomialPerceptronProto::DenseBinomialPerceptronProto()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_linear_5fmodel_2eproto::scc_info_DenseBinomialPerceptronProto.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:perceptronix.DenseBinomialPerceptronProto)
 }
 DenseBinomialPerceptronProto::DenseBinomialPerceptronProto(const DenseBinomialPerceptronProto& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
       _has_bits_(from._has_bits_),
       table_(from.table_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_metadata()) {
-    metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
+  metadata_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_metadata()) {
+    metadata_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.metadata_);
   }
   bias_ = from.bias_;
   // @@protoc_insertion_point(copy_constructor:perceptronix.DenseBinomialPerceptronProto)
 }
 
 void DenseBinomialPerceptronProto::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_DenseBinomialPerceptronProto_linear_5fmodel_2eproto.base);
-  metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  metadata_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   bias_ = 0;
 }
 
@@ -477,21 +515,26 @@ DenseBinomialPerceptronProto::~DenseBinomialPerceptronProto() {
 }
 
 void DenseBinomialPerceptronProto::SharedDtor() {
-  metadata_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  metadata_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void DenseBinomialPerceptronProto::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const ::google::protobuf::Descriptor* DenseBinomialPerceptronProto::descriptor() {
+  ::protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
 const DenseBinomialPerceptronProto& DenseBinomialPerceptronProto::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_DenseBinomialPerceptronProto_linear_5fmodel_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&protobuf_linear_5fmodel_2eproto::scc_info_DenseBinomialPerceptronProto.base);
   return *internal_default_instance();
 }
 
 
 void DenseBinomialPerceptronProto::Clear() {
 // @@protoc_insertion_point(message_clear_start:perceptronix.DenseBinomialPerceptronProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -505,101 +548,151 @@ void DenseBinomialPerceptronProto::Clear() {
   _internal_metadata_.Clear();
 }
 
-const char* DenseBinomialPerceptronProto::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
+bool DenseBinomialPerceptronProto::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:perceptronix.DenseBinomialPerceptronProto)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional string metadata = 1 [default = ""];
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          auto str = _internal_mutable_metadata();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          #ifndef NDEBUG
-          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "perceptronix.DenseBinomialPerceptronProto.metadata");
-          #endif  // !NDEBUG
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_metadata()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->metadata().data(), static_cast<int>(this->metadata().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "perceptronix.DenseBinomialPerceptronProto.metadata");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // required float bias = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 21)) {
-          _Internal::set_has_bias(&has_bits);
-          bias_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else goto handle_unusual;
-        continue;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(21u /* 21 & 0xFF */)) {
+          set_has_bias();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &bias_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // repeated float table = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            _internal_add_table(::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr));
-            ptr += sizeof(float);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<29>(ptr));
-        } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedFloatParser(_internal_mutable_table(), ptr, ctx);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(29u /* 29 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 1, 29u, input, this->mutable_table())));
+        } else if (
+            static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, this->mutable_table())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
+        if (tag == 0) {
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
       }
-    }  // switch
-  }  // while
+    }
+  }
 success:
-  _has_bits_.Or(has_bits);
-  return ptr;
+  // @@protoc_insertion_point(parse_success:perceptronix.DenseBinomialPerceptronProto)
+  return true;
 failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
+  // @@protoc_insertion_point(parse_failure:perceptronix.DenseBinomialPerceptronProto)
+  return false;
+#undef DO_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* DenseBinomialPerceptronProto::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:perceptronix.DenseBinomialPerceptronProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void DenseBinomialPerceptronProto::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:perceptronix.DenseBinomialPerceptronProto)
+  ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // optional string metadata = 1 [default = ""];
   if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_metadata().data(), static_cast<int>(this->_internal_metadata().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->metadata().data(), static_cast<int>(this->metadata().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
       "perceptronix.DenseBinomialPerceptronProto.metadata");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_metadata(), target);
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->metadata(), output);
   }
 
   // required float bias = 2;
   if (cached_has_bits & 0x00000002u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->_internal_bias(), target);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->bias(), output);
   }
 
   // repeated float table = 3;
-  for (int i = 0, n = this->_internal_table_size(); i < n; i++) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->_internal_table(i), target);
+  for (int i = 0, n = this->table_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(
+      3, this->table(i), output);
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:perceptronix.DenseBinomialPerceptronProto)
+}
+
+::google::protobuf::uint8* DenseBinomialPerceptronProto::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:perceptronix.DenseBinomialPerceptronProto)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // optional string metadata = 1 [default = ""];
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->metadata().data(), static_cast<int>(this->metadata().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "perceptronix.DenseBinomialPerceptronProto.metadata");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->metadata(), target);
+  }
+
+  // required float bias = 2;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->bias(), target);
+  }
+
+  // repeated float table = 3;
+  target = ::google::protobuf::internal::WireFormatLite::
+    WriteFloatToArray(3, this->table_, target);
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:perceptronix.DenseBinomialPerceptronProto)
   return target;
@@ -609,49 +702,45 @@ size_t DenseBinomialPerceptronProto::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:perceptronix.DenseBinomialPerceptronProto)
   size_t total_size = 0;
 
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
   // required float bias = 2;
-  if (_internal_has_bias()) {
+  if (has_bias()) {
     total_size += 1 + 4;
   }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
   // repeated float table = 3;
   {
-    unsigned int count = static_cast<unsigned int>(this->_internal_table_size());
+    unsigned int count = static_cast<unsigned int>(this->table_size());
     size_t data_size = 4UL * count;
     total_size += 1 *
-                  ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_table_size());
+                  ::google::protobuf::internal::FromIntSize(this->table_size());
     total_size += data_size;
   }
 
   // optional string metadata = 1 [default = ""];
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
+  if (has_metadata()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_metadata());
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->metadata());
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
-  }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void DenseBinomialPerceptronProto::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+void DenseBinomialPerceptronProto::MergeFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:perceptronix.DenseBinomialPerceptronProto)
   GOOGLE_DCHECK_NE(&from, this);
   const DenseBinomialPerceptronProto* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<DenseBinomialPerceptronProto>(
+      ::google::protobuf::internal::DynamicCastToGenerated<const DenseBinomialPerceptronProto>(
           &from);
-  if (source == nullptr) {
+  if (source == NULL) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:perceptronix.DenseBinomialPerceptronProto)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:perceptronix.DenseBinomialPerceptronProto)
     MergeFrom(*source);
@@ -662,15 +751,15 @@ void DenseBinomialPerceptronProto::MergeFrom(const DenseBinomialPerceptronProto&
 // @@protoc_insertion_point(class_specific_merge_from_start:perceptronix.DenseBinomialPerceptronProto)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   table_.MergeFrom(from.table_);
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
+  if (cached_has_bits & 3u) {
     if (cached_has_bits & 0x00000001u) {
-      _has_bits_[0] |= 0x00000001u;
-      metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
+      set_has_metadata();
+      metadata_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.metadata_);
     }
     if (cached_has_bits & 0x00000002u) {
       bias_ = from.bias_;
@@ -679,7 +768,7 @@ void DenseBinomialPerceptronProto::MergeFrom(const DenseBinomialPerceptronProto&
   }
 }
 
-void DenseBinomialPerceptronProto::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+void DenseBinomialPerceptronProto::CopyFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:perceptronix.DenseBinomialPerceptronProto)
   if (&from == this) return;
   Clear();
@@ -698,35 +787,40 @@ bool DenseBinomialPerceptronProto::IsInitialized() const {
   return true;
 }
 
+void DenseBinomialPerceptronProto::Swap(DenseBinomialPerceptronProto* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
 void DenseBinomialPerceptronProto::InternalSwap(DenseBinomialPerceptronProto* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   table_.InternalSwap(&other->table_);
-  metadata_.Swap(&other->metadata_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+  metadata_.Swap(&other->metadata_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(bias_, other->bias_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata DenseBinomialPerceptronProto::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata DenseBinomialPerceptronProto::GetMetadata() const {
+  protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 
 // ===================================================================
 
 SparseBinomialPerceptronProto_TableEntry_DoNotUse::SparseBinomialPerceptronProto_TableEntry_DoNotUse() {}
-SparseBinomialPerceptronProto_TableEntry_DoNotUse::SparseBinomialPerceptronProto_TableEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-    : SuperType(arena) {}
+SparseBinomialPerceptronProto_TableEntry_DoNotUse::SparseBinomialPerceptronProto_TableEntry_DoNotUse(::google::protobuf::Arena* arena) : SuperType(arena) {}
 void SparseBinomialPerceptronProto_TableEntry_DoNotUse::MergeFrom(const SparseBinomialPerceptronProto_TableEntry_DoNotUse& other) {
   MergeFromInternal(other);
 }
-::PROTOBUF_NAMESPACE_ID::Metadata SparseBinomialPerceptronProto_TableEntry_DoNotUse::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata SparseBinomialPerceptronProto_TableEntry_DoNotUse::GetMetadata() const {
+  ::protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[1];
 }
 void SparseBinomialPerceptronProto_TableEntry_DoNotUse::MergeFrom(
-    const ::PROTOBUF_NAMESPACE_ID::Message& other) {
-  ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom(other);
+    const ::google::protobuf::Message& other) {
+  ::google::protobuf::Message::MergeFrom(other);
 }
 
 
@@ -734,39 +828,35 @@ void SparseBinomialPerceptronProto_TableEntry_DoNotUse::MergeFrom(
 
 void SparseBinomialPerceptronProto::InitAsDefaultInstance() {
 }
-class SparseBinomialPerceptronProto::_Internal {
- public:
-  using HasBits = decltype(std::declval<SparseBinomialPerceptronProto>()._has_bits_);
-  static void set_has_metadata(HasBits* has_bits) {
-    (*has_bits)[0] |= 1u;
-  }
-  static void set_has_bias(HasBits* has_bits) {
-    (*has_bits)[0] |= 2u;
-  }
-};
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int SparseBinomialPerceptronProto::kMetadataFieldNumber;
+const int SparseBinomialPerceptronProto::kBiasFieldNumber;
+const int SparseBinomialPerceptronProto::kTableFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 SparseBinomialPerceptronProto::SparseBinomialPerceptronProto()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_linear_5fmodel_2eproto::scc_info_SparseBinomialPerceptronProto.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:perceptronix.SparseBinomialPerceptronProto)
 }
 SparseBinomialPerceptronProto::SparseBinomialPerceptronProto(const SparseBinomialPerceptronProto& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   table_.MergeFrom(from.table_);
-  metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_metadata()) {
-    metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
+  metadata_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_metadata()) {
+    metadata_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.metadata_);
   }
   bias_ = from.bias_;
   // @@protoc_insertion_point(copy_constructor:perceptronix.SparseBinomialPerceptronProto)
 }
 
 void SparseBinomialPerceptronProto::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_SparseBinomialPerceptronProto_linear_5fmodel_2eproto.base);
-  metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  metadata_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   bias_ = 0;
 }
 
@@ -776,21 +866,26 @@ SparseBinomialPerceptronProto::~SparseBinomialPerceptronProto() {
 }
 
 void SparseBinomialPerceptronProto::SharedDtor() {
-  metadata_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  metadata_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void SparseBinomialPerceptronProto::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const ::google::protobuf::Descriptor* SparseBinomialPerceptronProto::descriptor() {
+  ::protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
 const SparseBinomialPerceptronProto& SparseBinomialPerceptronProto::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_SparseBinomialPerceptronProto_linear_5fmodel_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&protobuf_linear_5fmodel_2eproto::scc_info_SparseBinomialPerceptronProto.base);
   return *internal_default_instance();
 }
 
 
 void SparseBinomialPerceptronProto::Clear() {
 // @@protoc_insertion_point(message_clear_start:perceptronix.SparseBinomialPerceptronProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -804,133 +899,247 @@ void SparseBinomialPerceptronProto::Clear() {
   _internal_metadata_.Clear();
 }
 
-const char* SparseBinomialPerceptronProto::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
+bool SparseBinomialPerceptronProto::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:perceptronix.SparseBinomialPerceptronProto)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional string metadata = 1 [default = ""];
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          auto str = _internal_mutable_metadata();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          #ifndef NDEBUG
-          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "perceptronix.SparseBinomialPerceptronProto.metadata");
-          #endif  // !NDEBUG
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_metadata()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->metadata().data(), static_cast<int>(this->metadata().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "perceptronix.SparseBinomialPerceptronProto.metadata");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // required float bias = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 21)) {
-          _Internal::set_has_bias(&has_bits);
-          bias_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else goto handle_unusual;
-        continue;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(21u /* 21 & 0xFF */)) {
+          set_has_bias();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &bias_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // map<string, float> table = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            ptr = ctx->ParseMessage(&table_, ptr);
-            CHK_(ptr);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
-        } else goto handle_unusual;
-        continue;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          SparseBinomialPerceptronProto_TableEntry_DoNotUse::Parser< ::google::protobuf::internal::MapField<
+              SparseBinomialPerceptronProto_TableEntry_DoNotUse,
+              ::std::string, float,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT,
+              0 >,
+            ::google::protobuf::Map< ::std::string, float > > parser(&table_);
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+              input, &parser));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            parser.key().data(), static_cast<int>(parser.key().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "perceptronix.SparseBinomialPerceptronProto.TableEntry.key");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
+        if (tag == 0) {
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
       }
-    }  // switch
-  }  // while
+    }
+  }
 success:
-  _has_bits_.Or(has_bits);
-  return ptr;
+  // @@protoc_insertion_point(parse_success:perceptronix.SparseBinomialPerceptronProto)
+  return true;
 failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
+  // @@protoc_insertion_point(parse_failure:perceptronix.SparseBinomialPerceptronProto)
+  return false;
+#undef DO_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* SparseBinomialPerceptronProto::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:perceptronix.SparseBinomialPerceptronProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void SparseBinomialPerceptronProto::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:perceptronix.SparseBinomialPerceptronProto)
+  ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // optional string metadata = 1 [default = ""];
   if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_metadata().data(), static_cast<int>(this->_internal_metadata().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->metadata().data(), static_cast<int>(this->metadata().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
       "perceptronix.SparseBinomialPerceptronProto.metadata");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_metadata(), target);
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->metadata(), output);
   }
 
   // required float bias = 2;
   if (cached_has_bits & 0x00000002u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->_internal_bias(), target);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->bias(), output);
   }
 
   // map<string, float> table = 3;
-  if (!this->_internal_table().empty()) {
-    typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_pointer
+  if (!this->table().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, float >::const_pointer
         ConstPtr;
     typedef ConstPtr SortItem;
-    typedef ::PROTOBUF_NAMESPACE_ID::internal::CompareByDerefFirst<SortItem> Less;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
     struct Utf8Check {
       static void Check(ConstPtr p) {
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
+        ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
           p->first.data(), static_cast<int>(p->first.length()),
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+          ::google::protobuf::internal::WireFormat::SERIALIZE,
           "perceptronix.SparseBinomialPerceptronProto.TableEntry.key");
       }
     };
 
-    if (stream->IsSerializationDeterministic() &&
-        this->_internal_table().size() > 1) {
+    if (output->IsSerializationDeterministic() &&
+        this->table().size() > 1) {
       ::std::unique_ptr<SortItem[]> items(
-          new SortItem[this->_internal_table().size()]);
-      typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::size_type size_type;
+          new SortItem[this->table().size()]);
+      typedef ::google::protobuf::Map< ::std::string, float >::size_type size_type;
       size_type n = 0;
-      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_iterator
-          it = this->_internal_table().begin();
-          it != this->_internal_table().end(); ++it, ++n) {
+      for (::google::protobuf::Map< ::std::string, float >::const_iterator
+          it = this->table().begin();
+          it != this->table().end(); ++it, ++n) {
         items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
       }
       ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<SparseBinomialPerceptronProto_TableEntry_DoNotUse> entry;
       for (size_type i = 0; i < n; i++) {
-        target = SparseBinomialPerceptronProto_TableEntry_DoNotUse::Funcs::InternalSerialize(3, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, target, stream);
-        Utf8Check::Check(&(*items[static_cast<ptrdiff_t>(i)]));
+        entry.reset(table_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            3, *entry, output);
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
       }
     } else {
-      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_iterator
-          it = this->_internal_table().begin();
-          it != this->_internal_table().end(); ++it) {
-        target = SparseBinomialPerceptronProto_TableEntry_DoNotUse::Funcs::InternalSerialize(3, it->first, it->second, target, stream);
-        Utf8Check::Check(&(*it));
+      ::std::unique_ptr<SparseBinomialPerceptronProto_TableEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, float >::const_iterator
+          it = this->table().begin();
+          it != this->table().end(); ++it) {
+        entry.reset(table_.NewEntryWrapper(
+            it->first, it->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            3, *entry, output);
+        Utf8Check::Check(&*it);
       }
     }
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:perceptronix.SparseBinomialPerceptronProto)
+}
+
+::google::protobuf::uint8* SparseBinomialPerceptronProto::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:perceptronix.SparseBinomialPerceptronProto)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // optional string metadata = 1 [default = ""];
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->metadata().data(), static_cast<int>(this->metadata().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "perceptronix.SparseBinomialPerceptronProto.metadata");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->metadata(), target);
+  }
+
+  // required float bias = 2;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->bias(), target);
+  }
+
+  // map<string, float> table = 3;
+  if (!this->table().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, float >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormat::SERIALIZE,
+          "perceptronix.SparseBinomialPerceptronProto.TableEntry.key");
+      }
+    };
+
+    if (deterministic &&
+        this->table().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->table().size()]);
+      typedef ::google::protobuf::Map< ::std::string, float >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, float >::const_iterator
+          it = this->table().begin();
+          it != this->table().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<SparseBinomialPerceptronProto_TableEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(table_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       3, *entry, deterministic, target);
+;
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<SparseBinomialPerceptronProto_TableEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, float >::const_iterator
+          it = this->table().begin();
+          it != this->table().end(); ++it) {
+        entry.reset(table_.NewEntryWrapper(
+            it->first, it->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       3, *entry, deterministic, target);
+;
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:perceptronix.SparseBinomialPerceptronProto)
   return target;
@@ -940,49 +1149,50 @@ size_t SparseBinomialPerceptronProto::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:perceptronix.SparseBinomialPerceptronProto)
   size_t total_size = 0;
 
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
   // required float bias = 2;
-  if (_internal_has_bias()) {
+  if (has_bias()) {
     total_size += 1 + 4;
   }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
   // map<string, float> table = 3;
   total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_table_size());
-  for (::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_iterator
-      it = this->_internal_table().begin();
-      it != this->_internal_table().end(); ++it) {
-    total_size += SparseBinomialPerceptronProto_TableEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
+      ::google::protobuf::internal::FromIntSize(this->table_size());
+  {
+    ::std::unique_ptr<SparseBinomialPerceptronProto_TableEntry_DoNotUse> entry;
+    for (::google::protobuf::Map< ::std::string, float >::const_iterator
+        it = this->table().begin();
+        it != this->table().end(); ++it) {
+      entry.reset(table_.NewEntryWrapper(it->first, it->second));
+      total_size += ::google::protobuf::internal::WireFormatLite::
+          MessageSizeNoVirtual(*entry);
+    }
   }
 
   // optional string metadata = 1 [default = ""];
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
+  if (has_metadata()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_metadata());
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->metadata());
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
-  }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void SparseBinomialPerceptronProto::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+void SparseBinomialPerceptronProto::MergeFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:perceptronix.SparseBinomialPerceptronProto)
   GOOGLE_DCHECK_NE(&from, this);
   const SparseBinomialPerceptronProto* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<SparseBinomialPerceptronProto>(
+      ::google::protobuf::internal::DynamicCastToGenerated<const SparseBinomialPerceptronProto>(
           &from);
-  if (source == nullptr) {
+  if (source == NULL) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:perceptronix.SparseBinomialPerceptronProto)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:perceptronix.SparseBinomialPerceptronProto)
     MergeFrom(*source);
@@ -993,15 +1203,15 @@ void SparseBinomialPerceptronProto::MergeFrom(const SparseBinomialPerceptronProt
 // @@protoc_insertion_point(class_specific_merge_from_start:perceptronix.SparseBinomialPerceptronProto)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   table_.MergeFrom(from.table_);
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
+  if (cached_has_bits & 3u) {
     if (cached_has_bits & 0x00000001u) {
-      _has_bits_[0] |= 0x00000001u;
-      metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
+      set_has_metadata();
+      metadata_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.metadata_);
     }
     if (cached_has_bits & 0x00000002u) {
       bias_ = from.bias_;
@@ -1010,7 +1220,7 @@ void SparseBinomialPerceptronProto::MergeFrom(const SparseBinomialPerceptronProt
   }
 }
 
-void SparseBinomialPerceptronProto::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+void SparseBinomialPerceptronProto::CopyFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:perceptronix.SparseBinomialPerceptronProto)
   if (&from == this) return;
   Clear();
@@ -1029,18 +1239,23 @@ bool SparseBinomialPerceptronProto::IsInitialized() const {
   return true;
 }
 
+void SparseBinomialPerceptronProto::Swap(SparseBinomialPerceptronProto* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
 void SparseBinomialPerceptronProto::InternalSwap(SparseBinomialPerceptronProto* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   table_.Swap(&other->table_);
-  metadata_.Swap(&other->metadata_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+  metadata_.Swap(&other->metadata_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(bias_, other->bias_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata SparseBinomialPerceptronProto::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata SparseBinomialPerceptronProto::GetMetadata() const {
+  protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 
@@ -1048,19 +1263,20 @@ void SparseBinomialPerceptronProto::InternalSwap(SparseBinomialPerceptronProto* 
 
 void DenseInnerTableProto::InitAsDefaultInstance() {
 }
-class DenseInnerTableProto::_Internal {
- public:
-  using HasBits = decltype(std::declval<DenseInnerTableProto>()._has_bits_);
-};
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int DenseInnerTableProto::kTableFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 DenseInnerTableProto::DenseInnerTableProto()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_linear_5fmodel_2eproto::scc_info_DenseInnerTableProto.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:perceptronix.DenseInnerTableProto)
 }
 DenseInnerTableProto::DenseInnerTableProto(const DenseInnerTableProto& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
       _has_bits_(from._has_bits_),
       table_(from.table_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -1081,15 +1297,20 @@ void DenseInnerTableProto::SharedDtor() {
 void DenseInnerTableProto::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const ::google::protobuf::Descriptor* DenseInnerTableProto::descriptor() {
+  ::protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
 const DenseInnerTableProto& DenseInnerTableProto::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_DenseInnerTableProto_linear_5fmodel_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&protobuf_linear_5fmodel_2eproto::scc_info_DenseInnerTableProto.base);
   return *internal_default_instance();
 }
 
 
 void DenseInnerTableProto::Clear() {
 // @@protoc_insertion_point(message_clear_start:perceptronix.DenseInnerTableProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -1098,63 +1319,88 @@ void DenseInnerTableProto::Clear() {
   _internal_metadata_.Clear();
 }
 
-const char* DenseInnerTableProto::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
+bool DenseInnerTableProto::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:perceptronix.DenseInnerTableProto)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // repeated float table = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 13)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            _internal_add_table(::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr));
-            ptr += sizeof(float);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<13>(ptr));
-        } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedFloatParser(_internal_mutable_table(), ptr, ctx);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(13u /* 13 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 1, 13u, input, this->mutable_table())));
+        } else if (
+            static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, this->mutable_table())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
+        if (tag == 0) {
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
       }
-    }  // switch
-  }  // while
+    }
+  }
 success:
-  return ptr;
+  // @@protoc_insertion_point(parse_success:perceptronix.DenseInnerTableProto)
+  return true;
 failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
+  // @@protoc_insertion_point(parse_failure:perceptronix.DenseInnerTableProto)
+  return false;
+#undef DO_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* DenseInnerTableProto::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:perceptronix.DenseInnerTableProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void DenseInnerTableProto::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:perceptronix.DenseInnerTableProto)
+  ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // repeated float table = 1;
-  for (int i = 0, n = this->_internal_table_size(); i < n; i++) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(1, this->_internal_table(i), target);
+  for (int i = 0, n = this->table_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(
+      1, this->table(i), output);
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:perceptronix.DenseInnerTableProto)
+}
+
+::google::protobuf::uint8* DenseInnerTableProto::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:perceptronix.DenseInnerTableProto)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated float table = 1;
+  target = ::google::protobuf::internal::WireFormatLite::
+    WriteFloatToArray(1, this->table_, target);
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:perceptronix.DenseInnerTableProto)
   return target;
@@ -1164,37 +1410,34 @@ size_t DenseInnerTableProto::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:perceptronix.DenseInnerTableProto)
   size_t total_size = 0;
 
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
   // repeated float table = 1;
   {
-    unsigned int count = static_cast<unsigned int>(this->_internal_table_size());
+    unsigned int count = static_cast<unsigned int>(this->table_size());
     size_t data_size = 4UL * count;
     total_size += 1 *
-                  ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_table_size());
+                  ::google::protobuf::internal::FromIntSize(this->table_size());
     total_size += data_size;
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
-  }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void DenseInnerTableProto::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+void DenseInnerTableProto::MergeFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:perceptronix.DenseInnerTableProto)
   GOOGLE_DCHECK_NE(&from, this);
   const DenseInnerTableProto* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<DenseInnerTableProto>(
+      ::google::protobuf::internal::DynamicCastToGenerated<const DenseInnerTableProto>(
           &from);
-  if (source == nullptr) {
+  if (source == NULL) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:perceptronix.DenseInnerTableProto)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:perceptronix.DenseInnerTableProto)
     MergeFrom(*source);
@@ -1205,13 +1448,13 @@ void DenseInnerTableProto::MergeFrom(const DenseInnerTableProto& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:perceptronix.DenseInnerTableProto)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   table_.MergeFrom(from.table_);
 }
 
-void DenseInnerTableProto::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+void DenseInnerTableProto::CopyFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:perceptronix.DenseInnerTableProto)
   if (&from == this) return;
   Clear();
@@ -1229,32 +1472,37 @@ bool DenseInnerTableProto::IsInitialized() const {
   return true;
 }
 
+void DenseInnerTableProto::Swap(DenseInnerTableProto* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
 void DenseInnerTableProto::InternalSwap(DenseInnerTableProto* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   table_.InternalSwap(&other->table_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata DenseInnerTableProto::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata DenseInnerTableProto::GetMetadata() const {
+  protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 
 // ===================================================================
 
 SparseInnerTableProto_TableEntry_DoNotUse::SparseInnerTableProto_TableEntry_DoNotUse() {}
-SparseInnerTableProto_TableEntry_DoNotUse::SparseInnerTableProto_TableEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-    : SuperType(arena) {}
+SparseInnerTableProto_TableEntry_DoNotUse::SparseInnerTableProto_TableEntry_DoNotUse(::google::protobuf::Arena* arena) : SuperType(arena) {}
 void SparseInnerTableProto_TableEntry_DoNotUse::MergeFrom(const SparseInnerTableProto_TableEntry_DoNotUse& other) {
   MergeFromInternal(other);
 }
-::PROTOBUF_NAMESPACE_ID::Metadata SparseInnerTableProto_TableEntry_DoNotUse::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata SparseInnerTableProto_TableEntry_DoNotUse::GetMetadata() const {
+  ::protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[4];
 }
 void SparseInnerTableProto_TableEntry_DoNotUse::MergeFrom(
-    const ::PROTOBUF_NAMESPACE_ID::Message& other) {
-  ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom(other);
+    const ::google::protobuf::Message& other) {
+  ::google::protobuf::Message::MergeFrom(other);
 }
 
 
@@ -1262,19 +1510,20 @@ void SparseInnerTableProto_TableEntry_DoNotUse::MergeFrom(
 
 void SparseInnerTableProto::InitAsDefaultInstance() {
 }
-class SparseInnerTableProto::_Internal {
- public:
-  using HasBits = decltype(std::declval<SparseInnerTableProto>()._has_bits_);
-};
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int SparseInnerTableProto::kTableFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 SparseInnerTableProto::SparseInnerTableProto()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_linear_5fmodel_2eproto::scc_info_SparseInnerTableProto.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:perceptronix.SparseInnerTableProto)
 }
 SparseInnerTableProto::SparseInnerTableProto(const SparseInnerTableProto& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   table_.MergeFrom(from.table_);
@@ -1282,7 +1531,6 @@ SparseInnerTableProto::SparseInnerTableProto(const SparseInnerTableProto& from)
 }
 
 void SparseInnerTableProto::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_SparseInnerTableProto_linear_5fmodel_2eproto.base);
 }
 
 SparseInnerTableProto::~SparseInnerTableProto() {
@@ -1296,15 +1544,20 @@ void SparseInnerTableProto::SharedDtor() {
 void SparseInnerTableProto::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const ::google::protobuf::Descriptor* SparseInnerTableProto::descriptor() {
+  ::protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
 const SparseInnerTableProto& SparseInnerTableProto::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_SparseInnerTableProto_linear_5fmodel_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&protobuf_linear_5fmodel_2eproto::scc_info_SparseInnerTableProto.base);
   return *internal_default_instance();
 }
 
 
 void SparseInnerTableProto::Clear() {
 // @@protoc_insertion_point(message_clear_start:perceptronix.SparseInnerTableProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -1313,95 +1566,184 @@ void SparseInnerTableProto::Clear() {
   _internal_metadata_.Clear();
 }
 
-const char* SparseInnerTableProto::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
+bool SparseInnerTableProto::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:perceptronix.SparseInnerTableProto)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // map<string, float> table = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            ptr = ctx->ParseMessage(&table_, ptr);
-            CHK_(ptr);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
-        } else goto handle_unusual;
-        continue;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          SparseInnerTableProto_TableEntry_DoNotUse::Parser< ::google::protobuf::internal::MapField<
+              SparseInnerTableProto_TableEntry_DoNotUse,
+              ::std::string, float,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT,
+              0 >,
+            ::google::protobuf::Map< ::std::string, float > > parser(&table_);
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+              input, &parser));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            parser.key().data(), static_cast<int>(parser.key().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "perceptronix.SparseInnerTableProto.TableEntry.key");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
+        if (tag == 0) {
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
       }
-    }  // switch
-  }  // while
+    }
+  }
 success:
-  return ptr;
+  // @@protoc_insertion_point(parse_success:perceptronix.SparseInnerTableProto)
+  return true;
 failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
+  // @@protoc_insertion_point(parse_failure:perceptronix.SparseInnerTableProto)
+  return false;
+#undef DO_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* SparseInnerTableProto::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:perceptronix.SparseInnerTableProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void SparseInnerTableProto::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:perceptronix.SparseInnerTableProto)
+  ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // map<string, float> table = 1;
-  if (!this->_internal_table().empty()) {
-    typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_pointer
+  if (!this->table().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, float >::const_pointer
         ConstPtr;
     typedef ConstPtr SortItem;
-    typedef ::PROTOBUF_NAMESPACE_ID::internal::CompareByDerefFirst<SortItem> Less;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
     struct Utf8Check {
       static void Check(ConstPtr p) {
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
+        ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
           p->first.data(), static_cast<int>(p->first.length()),
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+          ::google::protobuf::internal::WireFormat::SERIALIZE,
           "perceptronix.SparseInnerTableProto.TableEntry.key");
       }
     };
 
-    if (stream->IsSerializationDeterministic() &&
-        this->_internal_table().size() > 1) {
+    if (output->IsSerializationDeterministic() &&
+        this->table().size() > 1) {
       ::std::unique_ptr<SortItem[]> items(
-          new SortItem[this->_internal_table().size()]);
-      typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::size_type size_type;
+          new SortItem[this->table().size()]);
+      typedef ::google::protobuf::Map< ::std::string, float >::size_type size_type;
       size_type n = 0;
-      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_iterator
-          it = this->_internal_table().begin();
-          it != this->_internal_table().end(); ++it, ++n) {
+      for (::google::protobuf::Map< ::std::string, float >::const_iterator
+          it = this->table().begin();
+          it != this->table().end(); ++it, ++n) {
         items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
       }
       ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<SparseInnerTableProto_TableEntry_DoNotUse> entry;
       for (size_type i = 0; i < n; i++) {
-        target = SparseInnerTableProto_TableEntry_DoNotUse::Funcs::InternalSerialize(1, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, target, stream);
-        Utf8Check::Check(&(*items[static_cast<ptrdiff_t>(i)]));
+        entry.reset(table_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            1, *entry, output);
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
       }
     } else {
-      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_iterator
-          it = this->_internal_table().begin();
-          it != this->_internal_table().end(); ++it) {
-        target = SparseInnerTableProto_TableEntry_DoNotUse::Funcs::InternalSerialize(1, it->first, it->second, target, stream);
-        Utf8Check::Check(&(*it));
+      ::std::unique_ptr<SparseInnerTableProto_TableEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, float >::const_iterator
+          it = this->table().begin();
+          it != this->table().end(); ++it) {
+        entry.reset(table_.NewEntryWrapper(
+            it->first, it->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            1, *entry, output);
+        Utf8Check::Check(&*it);
       }
     }
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:perceptronix.SparseInnerTableProto)
+}
+
+::google::protobuf::uint8* SparseInnerTableProto::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:perceptronix.SparseInnerTableProto)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // map<string, float> table = 1;
+  if (!this->table().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, float >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormat::SERIALIZE,
+          "perceptronix.SparseInnerTableProto.TableEntry.key");
+      }
+    };
+
+    if (deterministic &&
+        this->table().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->table().size()]);
+      typedef ::google::protobuf::Map< ::std::string, float >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, float >::const_iterator
+          it = this->table().begin();
+          it != this->table().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<SparseInnerTableProto_TableEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(table_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       1, *entry, deterministic, target);
+;
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<SparseInnerTableProto_TableEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, float >::const_iterator
+          it = this->table().begin();
+          it != this->table().end(); ++it) {
+        entry.reset(table_.NewEntryWrapper(
+            it->first, it->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       1, *entry, deterministic, target);
+;
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:perceptronix.SparseInnerTableProto)
   return target;
@@ -1411,37 +1753,39 @@ size_t SparseInnerTableProto::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:perceptronix.SparseInnerTableProto)
   size_t total_size = 0;
 
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
   // map<string, float> table = 1;
   total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_table_size());
-  for (::PROTOBUF_NAMESPACE_ID::Map< std::string, float >::const_iterator
-      it = this->_internal_table().begin();
-      it != this->_internal_table().end(); ++it) {
-    total_size += SparseInnerTableProto_TableEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
+      ::google::protobuf::internal::FromIntSize(this->table_size());
+  {
+    ::std::unique_ptr<SparseInnerTableProto_TableEntry_DoNotUse> entry;
+    for (::google::protobuf::Map< ::std::string, float >::const_iterator
+        it = this->table().begin();
+        it != this->table().end(); ++it) {
+      entry.reset(table_.NewEntryWrapper(it->first, it->second));
+      total_size += ::google::protobuf::internal::WireFormatLite::
+          MessageSizeNoVirtual(*entry);
+    }
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
-  }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void SparseInnerTableProto::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+void SparseInnerTableProto::MergeFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:perceptronix.SparseInnerTableProto)
   GOOGLE_DCHECK_NE(&from, this);
   const SparseInnerTableProto* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<SparseInnerTableProto>(
+      ::google::protobuf::internal::DynamicCastToGenerated<const SparseInnerTableProto>(
           &from);
-  if (source == nullptr) {
+  if (source == NULL) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:perceptronix.SparseInnerTableProto)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:perceptronix.SparseInnerTableProto)
     MergeFrom(*source);
@@ -1452,13 +1796,13 @@ void SparseInnerTableProto::MergeFrom(const SparseInnerTableProto& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:perceptronix.SparseInnerTableProto)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   table_.MergeFrom(from.table_);
 }
 
-void SparseInnerTableProto::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+void SparseInnerTableProto::CopyFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:perceptronix.SparseInnerTableProto)
   if (&from == this) return;
   Clear();
@@ -1476,15 +1820,20 @@ bool SparseInnerTableProto::IsInitialized() const {
   return true;
 }
 
+void SparseInnerTableProto::Swap(SparseInnerTableProto* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
 void SparseInnerTableProto::InternalSwap(SparseInnerTableProto* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   table_.Swap(&other->table_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata SparseInnerTableProto::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata SparseInnerTableProto::GetMetadata() const {
+  protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 
@@ -1494,52 +1843,41 @@ void DenseMultinomialPerceptronProto::InitAsDefaultInstance() {
   ::perceptronix::_DenseMultinomialPerceptronProto_default_instance_._instance.get_mutable()->bias_ = const_cast< ::perceptronix::DenseInnerTableProto*>(
       ::perceptronix::DenseInnerTableProto::internal_default_instance());
 }
-class DenseMultinomialPerceptronProto::_Internal {
- public:
-  using HasBits = decltype(std::declval<DenseMultinomialPerceptronProto>()._has_bits_);
-  static void set_has_metadata(HasBits* has_bits) {
-    (*has_bits)[0] |= 1u;
-  }
-  static void set_has_inner_size(HasBits* has_bits) {
-    (*has_bits)[0] |= 4u;
-  }
-  static const ::perceptronix::DenseInnerTableProto& bias(const DenseMultinomialPerceptronProto* msg);
-  static void set_has_bias(HasBits* has_bits) {
-    (*has_bits)[0] |= 2u;
-  }
-};
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int DenseMultinomialPerceptronProto::kMetadataFieldNumber;
+const int DenseMultinomialPerceptronProto::kInnerSizeFieldNumber;
+const int DenseMultinomialPerceptronProto::kBiasFieldNumber;
+const int DenseMultinomialPerceptronProto::kTableFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-const ::perceptronix::DenseInnerTableProto&
-DenseMultinomialPerceptronProto::_Internal::bias(const DenseMultinomialPerceptronProto* msg) {
-  return *msg->bias_;
-}
 DenseMultinomialPerceptronProto::DenseMultinomialPerceptronProto()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_linear_5fmodel_2eproto::scc_info_DenseMultinomialPerceptronProto.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:perceptronix.DenseMultinomialPerceptronProto)
 }
 DenseMultinomialPerceptronProto::DenseMultinomialPerceptronProto(const DenseMultinomialPerceptronProto& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
       _has_bits_(from._has_bits_),
       table_(from.table_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_metadata()) {
-    metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
+  metadata_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_metadata()) {
+    metadata_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.metadata_);
   }
-  if (from._internal_has_bias()) {
+  if (from.has_bias()) {
     bias_ = new ::perceptronix::DenseInnerTableProto(*from.bias_);
   } else {
-    bias_ = nullptr;
+    bias_ = NULL;
   }
   inner_size_ = from.inner_size_;
   // @@protoc_insertion_point(copy_constructor:perceptronix.DenseMultinomialPerceptronProto)
 }
 
 void DenseMultinomialPerceptronProto::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_DenseMultinomialPerceptronProto_linear_5fmodel_2eproto.base);
-  metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  metadata_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&bias_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&inner_size_) -
       reinterpret_cast<char*>(&bias_)) + sizeof(inner_size_));
@@ -1551,33 +1889,38 @@ DenseMultinomialPerceptronProto::~DenseMultinomialPerceptronProto() {
 }
 
 void DenseMultinomialPerceptronProto::SharedDtor() {
-  metadata_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  metadata_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete bias_;
 }
 
 void DenseMultinomialPerceptronProto::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const ::google::protobuf::Descriptor* DenseMultinomialPerceptronProto::descriptor() {
+  ::protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
 const DenseMultinomialPerceptronProto& DenseMultinomialPerceptronProto::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_DenseMultinomialPerceptronProto_linear_5fmodel_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&protobuf_linear_5fmodel_2eproto::scc_info_DenseMultinomialPerceptronProto.base);
   return *internal_default_instance();
 }
 
 
 void DenseMultinomialPerceptronProto::Clear() {
 // @@protoc_insertion_point(message_clear_start:perceptronix.DenseMultinomialPerceptronProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   table_.Clear();
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
+  if (cached_has_bits & 3u) {
     if (cached_has_bits & 0x00000001u) {
       metadata_.ClearNonDefaultToEmptyNoArena();
     }
     if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(bias_ != nullptr);
+      GOOGLE_DCHECK(bias_ != NULL);
       bias_->Clear();
     }
   }
@@ -1586,115 +1929,176 @@ void DenseMultinomialPerceptronProto::Clear() {
   _internal_metadata_.Clear();
 }
 
-const char* DenseMultinomialPerceptronProto::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
+bool DenseMultinomialPerceptronProto::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:perceptronix.DenseMultinomialPerceptronProto)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional string metadata = 1 [default = ""];
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          auto str = _internal_mutable_metadata();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          #ifndef NDEBUG
-          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "perceptronix.DenseMultinomialPerceptronProto.metadata");
-          #endif  // !NDEBUG
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_metadata()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->metadata().data(), static_cast<int>(this->metadata().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "perceptronix.DenseMultinomialPerceptronProto.metadata");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // required uint32 inner_size = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          _Internal::set_has_inner_size(&has_bits);
-          inner_size_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+          set_has_inner_size();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &inner_size_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // required .perceptronix.DenseInnerTableProto bias = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ctx->ParseMessage(_internal_mutable_bias(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_bias()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // repeated .perceptronix.DenseInnerTableProto table = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            ptr = ctx->ParseMessage(_internal_add_table(), ptr);
-            CHK_(ptr);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
-        } else goto handle_unusual;
-        continue;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_table()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
+        if (tag == 0) {
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
       }
-    }  // switch
-  }  // while
+    }
+  }
 success:
-  _has_bits_.Or(has_bits);
-  return ptr;
+  // @@protoc_insertion_point(parse_success:perceptronix.DenseMultinomialPerceptronProto)
+  return true;
 failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
+  // @@protoc_insertion_point(parse_failure:perceptronix.DenseMultinomialPerceptronProto)
+  return false;
+#undef DO_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* DenseMultinomialPerceptronProto::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:perceptronix.DenseMultinomialPerceptronProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void DenseMultinomialPerceptronProto::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:perceptronix.DenseMultinomialPerceptronProto)
+  ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // optional string metadata = 1 [default = ""];
   if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_metadata().data(), static_cast<int>(this->_internal_metadata().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->metadata().data(), static_cast<int>(this->metadata().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
       "perceptronix.DenseMultinomialPerceptronProto.metadata");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_metadata(), target);
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->metadata(), output);
   }
 
   // required uint32 inner_size = 2;
   if (cached_has_bits & 0x00000004u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_inner_size(), target);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->inner_size(), output);
   }
 
   // required .perceptronix.DenseInnerTableProto bias = 3;
   if (cached_has_bits & 0x00000002u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        3, _Internal::bias(this), target, stream);
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->_internal_bias(), output);
   }
 
   // repeated .perceptronix.DenseInnerTableProto table = 4;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->_internal_table_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(4, this->_internal_table(i), target, stream);
+      n = static_cast<unsigned int>(this->table_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4,
+      this->table(static_cast<int>(i)),
+      output);
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:perceptronix.DenseMultinomialPerceptronProto)
+}
+
+::google::protobuf::uint8* DenseMultinomialPerceptronProto::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:perceptronix.DenseMultinomialPerceptronProto)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // optional string metadata = 1 [default = ""];
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->metadata().data(), static_cast<int>(this->metadata().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "perceptronix.DenseMultinomialPerceptronProto.metadata");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->metadata(), target);
+  }
+
+  // required uint32 inner_size = 2;
+  if (cached_has_bits & 0x00000004u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->inner_size(), target);
+  }
+
+  // required .perceptronix.DenseInnerTableProto bias = 3;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        3, this->_internal_bias(), deterministic, target);
+  }
+
+  // repeated .perceptronix.DenseInnerTableProto table = 4;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->table_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        4, this->table(static_cast<int>(i)), deterministic, target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:perceptronix.DenseMultinomialPerceptronProto)
   return target;
@@ -1704,18 +2108,18 @@ size_t DenseMultinomialPerceptronProto::RequiredFieldsByteSizeFallback() const {
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:perceptronix.DenseMultinomialPerceptronProto)
   size_t total_size = 0;
 
-  if (_internal_has_bias()) {
+  if (has_bias()) {
     // required .perceptronix.DenseInnerTableProto bias = 3;
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
         *bias_);
   }
 
-  if (_internal_has_inner_size()) {
+  if (has_inner_size()) {
     // required uint32 inner_size = 2;
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->_internal_inner_size());
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->inner_size());
   }
 
   return total_size;
@@ -1724,57 +2128,57 @@ size_t DenseMultinomialPerceptronProto::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:perceptronix.DenseMultinomialPerceptronProto)
   size_t total_size = 0;
 
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
   if (((_has_bits_[0] & 0x00000006) ^ 0x00000006) == 0) {  // All required fields are present.
     // required .perceptronix.DenseInnerTableProto bias = 3;
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
         *bias_);
 
     // required uint32 inner_size = 2;
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->_internal_inner_size());
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->inner_size());
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
   // repeated .perceptronix.DenseInnerTableProto table = 4;
-  total_size += 1UL * this->_internal_table_size();
-  for (const auto& msg : this->table_) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  {
+    unsigned int count = static_cast<unsigned int>(this->table_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->table(static_cast<int>(i)));
+    }
   }
 
   // optional string metadata = 1 [default = ""];
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
+  if (has_metadata()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_metadata());
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->metadata());
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
-  }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void DenseMultinomialPerceptronProto::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+void DenseMultinomialPerceptronProto::MergeFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:perceptronix.DenseMultinomialPerceptronProto)
   GOOGLE_DCHECK_NE(&from, this);
   const DenseMultinomialPerceptronProto* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<DenseMultinomialPerceptronProto>(
+      ::google::protobuf::internal::DynamicCastToGenerated<const DenseMultinomialPerceptronProto>(
           &from);
-  if (source == nullptr) {
+  if (source == NULL) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:perceptronix.DenseMultinomialPerceptronProto)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:perceptronix.DenseMultinomialPerceptronProto)
     MergeFrom(*source);
@@ -1785,18 +2189,18 @@ void DenseMultinomialPerceptronProto::MergeFrom(const DenseMultinomialPerceptron
 // @@protoc_insertion_point(class_specific_merge_from_start:perceptronix.DenseMultinomialPerceptronProto)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   table_.MergeFrom(from.table_);
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 7u) {
     if (cached_has_bits & 0x00000001u) {
-      _has_bits_[0] |= 0x00000001u;
-      metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
+      set_has_metadata();
+      metadata_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.metadata_);
     }
     if (cached_has_bits & 0x00000002u) {
-      _internal_mutable_bias()->::perceptronix::DenseInnerTableProto::MergeFrom(from._internal_bias());
+      mutable_bias()->::perceptronix::DenseInnerTableProto::MergeFrom(from.bias());
     }
     if (cached_has_bits & 0x00000004u) {
       inner_size_ = from.inner_size_;
@@ -1805,7 +2209,7 @@ void DenseMultinomialPerceptronProto::MergeFrom(const DenseMultinomialPerceptron
   }
 }
 
-void DenseMultinomialPerceptronProto::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+void DenseMultinomialPerceptronProto::CopyFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:perceptronix.DenseMultinomialPerceptronProto)
   if (&from == this) return;
   Clear();
@@ -1824,36 +2228,41 @@ bool DenseMultinomialPerceptronProto::IsInitialized() const {
   return true;
 }
 
+void DenseMultinomialPerceptronProto::Swap(DenseMultinomialPerceptronProto* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
 void DenseMultinomialPerceptronProto::InternalSwap(DenseMultinomialPerceptronProto* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  table_.InternalSwap(&other->table_);
-  metadata_.Swap(&other->metadata_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+  CastToBase(&table_)->InternalSwap(CastToBase(&other->table_));
+  metadata_.Swap(&other->metadata_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(bias_, other->bias_);
   swap(inner_size_, other->inner_size_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata DenseMultinomialPerceptronProto::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata DenseMultinomialPerceptronProto::GetMetadata() const {
+  protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 
 // ===================================================================
 
 SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse() {}
-SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-    : SuperType(arena) {}
+SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse(::google::protobuf::Arena* arena) : SuperType(arena) {}
 void SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::MergeFrom(const SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse& other) {
   MergeFromInternal(other);
 }
-::PROTOBUF_NAMESPACE_ID::Metadata SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::GetMetadata() const {
+  ::protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[7];
 }
 void SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::MergeFrom(
-    const ::PROTOBUF_NAMESPACE_ID::Message& other) {
-  ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom(other);
+    const ::google::protobuf::Message& other) {
+  ::google::protobuf::Message::MergeFrom(other);
 }
 
 
@@ -1863,52 +2272,41 @@ void SparseDenseMultinomialPerceptronProto::InitAsDefaultInstance() {
   ::perceptronix::_SparseDenseMultinomialPerceptronProto_default_instance_._instance.get_mutable()->bias_ = const_cast< ::perceptronix::DenseInnerTableProto*>(
       ::perceptronix::DenseInnerTableProto::internal_default_instance());
 }
-class SparseDenseMultinomialPerceptronProto::_Internal {
- public:
-  using HasBits = decltype(std::declval<SparseDenseMultinomialPerceptronProto>()._has_bits_);
-  static void set_has_metadata(HasBits* has_bits) {
-    (*has_bits)[0] |= 1u;
-  }
-  static void set_has_inner_size(HasBits* has_bits) {
-    (*has_bits)[0] |= 4u;
-  }
-  static const ::perceptronix::DenseInnerTableProto& bias(const SparseDenseMultinomialPerceptronProto* msg);
-  static void set_has_bias(HasBits* has_bits) {
-    (*has_bits)[0] |= 2u;
-  }
-};
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int SparseDenseMultinomialPerceptronProto::kMetadataFieldNumber;
+const int SparseDenseMultinomialPerceptronProto::kInnerSizeFieldNumber;
+const int SparseDenseMultinomialPerceptronProto::kBiasFieldNumber;
+const int SparseDenseMultinomialPerceptronProto::kTableFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-const ::perceptronix::DenseInnerTableProto&
-SparseDenseMultinomialPerceptronProto::_Internal::bias(const SparseDenseMultinomialPerceptronProto* msg) {
-  return *msg->bias_;
-}
 SparseDenseMultinomialPerceptronProto::SparseDenseMultinomialPerceptronProto()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_linear_5fmodel_2eproto::scc_info_SparseDenseMultinomialPerceptronProto.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:perceptronix.SparseDenseMultinomialPerceptronProto)
 }
 SparseDenseMultinomialPerceptronProto::SparseDenseMultinomialPerceptronProto(const SparseDenseMultinomialPerceptronProto& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   table_.MergeFrom(from.table_);
-  metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_metadata()) {
-    metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
+  metadata_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_metadata()) {
+    metadata_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.metadata_);
   }
-  if (from._internal_has_bias()) {
+  if (from.has_bias()) {
     bias_ = new ::perceptronix::DenseInnerTableProto(*from.bias_);
   } else {
-    bias_ = nullptr;
+    bias_ = NULL;
   }
   inner_size_ = from.inner_size_;
   // @@protoc_insertion_point(copy_constructor:perceptronix.SparseDenseMultinomialPerceptronProto)
 }
 
 void SparseDenseMultinomialPerceptronProto::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_SparseDenseMultinomialPerceptronProto_linear_5fmodel_2eproto.base);
-  metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  metadata_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&bias_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&inner_size_) -
       reinterpret_cast<char*>(&bias_)) + sizeof(inner_size_));
@@ -1920,33 +2318,38 @@ SparseDenseMultinomialPerceptronProto::~SparseDenseMultinomialPerceptronProto() 
 }
 
 void SparseDenseMultinomialPerceptronProto::SharedDtor() {
-  metadata_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  metadata_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete bias_;
 }
 
 void SparseDenseMultinomialPerceptronProto::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const ::google::protobuf::Descriptor* SparseDenseMultinomialPerceptronProto::descriptor() {
+  ::protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
 const SparseDenseMultinomialPerceptronProto& SparseDenseMultinomialPerceptronProto::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_SparseDenseMultinomialPerceptronProto_linear_5fmodel_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&protobuf_linear_5fmodel_2eproto::scc_info_SparseDenseMultinomialPerceptronProto.base);
   return *internal_default_instance();
 }
 
 
 void SparseDenseMultinomialPerceptronProto::Clear() {
 // @@protoc_insertion_point(message_clear_start:perceptronix.SparseDenseMultinomialPerceptronProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   table_.Clear();
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
+  if (cached_has_bits & 3u) {
     if (cached_has_bits & 0x00000001u) {
       metadata_.ClearNonDefaultToEmptyNoArena();
     }
     if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(bias_ != nullptr);
+      GOOGLE_DCHECK(bias_ != NULL);
       bias_->Clear();
     }
   }
@@ -1955,148 +2358,272 @@ void SparseDenseMultinomialPerceptronProto::Clear() {
   _internal_metadata_.Clear();
 }
 
-const char* SparseDenseMultinomialPerceptronProto::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
+bool SparseDenseMultinomialPerceptronProto::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:perceptronix.SparseDenseMultinomialPerceptronProto)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional string metadata = 1 [default = ""];
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          auto str = _internal_mutable_metadata();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          #ifndef NDEBUG
-          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "perceptronix.SparseDenseMultinomialPerceptronProto.metadata");
-          #endif  // !NDEBUG
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_metadata()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->metadata().data(), static_cast<int>(this->metadata().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "perceptronix.SparseDenseMultinomialPerceptronProto.metadata");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // required uint32 inner_size = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          _Internal::set_has_inner_size(&has_bits);
-          inner_size_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+          set_has_inner_size();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &inner_size_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // required .perceptronix.DenseInnerTableProto bias = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ctx->ParseMessage(_internal_mutable_bias(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_bias()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // map<string, .perceptronix.DenseInnerTableProto> table = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            ptr = ctx->ParseMessage(&table_, ptr);
-            CHK_(ptr);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
-        } else goto handle_unusual;
-        continue;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::Parser< ::google::protobuf::internal::MapField<
+              SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse,
+              ::std::string, ::perceptronix::DenseInnerTableProto,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+              0 >,
+            ::google::protobuf::Map< ::std::string, ::perceptronix::DenseInnerTableProto > > parser(&table_);
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+              input, &parser));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            parser.key().data(), static_cast<int>(parser.key().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "perceptronix.SparseDenseMultinomialPerceptronProto.TableEntry.key");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
+        if (tag == 0) {
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
       }
-    }  // switch
-  }  // while
+    }
+  }
 success:
-  _has_bits_.Or(has_bits);
-  return ptr;
+  // @@protoc_insertion_point(parse_success:perceptronix.SparseDenseMultinomialPerceptronProto)
+  return true;
 failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
+  // @@protoc_insertion_point(parse_failure:perceptronix.SparseDenseMultinomialPerceptronProto)
+  return false;
+#undef DO_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* SparseDenseMultinomialPerceptronProto::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:perceptronix.SparseDenseMultinomialPerceptronProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void SparseDenseMultinomialPerceptronProto::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:perceptronix.SparseDenseMultinomialPerceptronProto)
+  ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // optional string metadata = 1 [default = ""];
   if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_metadata().data(), static_cast<int>(this->_internal_metadata().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->metadata().data(), static_cast<int>(this->metadata().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
       "perceptronix.SparseDenseMultinomialPerceptronProto.metadata");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_metadata(), target);
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->metadata(), output);
   }
 
   // required uint32 inner_size = 2;
   if (cached_has_bits & 0x00000004u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_inner_size(), target);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->inner_size(), output);
   }
 
   // required .perceptronix.DenseInnerTableProto bias = 3;
   if (cached_has_bits & 0x00000002u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        3, _Internal::bias(this), target, stream);
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->_internal_bias(), output);
   }
 
   // map<string, .perceptronix.DenseInnerTableProto> table = 4;
-  if (!this->_internal_table().empty()) {
-    typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::DenseInnerTableProto >::const_pointer
+  if (!this->table().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::perceptronix::DenseInnerTableProto >::const_pointer
         ConstPtr;
     typedef ConstPtr SortItem;
-    typedef ::PROTOBUF_NAMESPACE_ID::internal::CompareByDerefFirst<SortItem> Less;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
     struct Utf8Check {
       static void Check(ConstPtr p) {
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
+        ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
           p->first.data(), static_cast<int>(p->first.length()),
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+          ::google::protobuf::internal::WireFormat::SERIALIZE,
           "perceptronix.SparseDenseMultinomialPerceptronProto.TableEntry.key");
       }
     };
 
-    if (stream->IsSerializationDeterministic() &&
-        this->_internal_table().size() > 1) {
+    if (output->IsSerializationDeterministic() &&
+        this->table().size() > 1) {
       ::std::unique_ptr<SortItem[]> items(
-          new SortItem[this->_internal_table().size()]);
-      typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::DenseInnerTableProto >::size_type size_type;
+          new SortItem[this->table().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::perceptronix::DenseInnerTableProto >::size_type size_type;
       size_type n = 0;
-      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::DenseInnerTableProto >::const_iterator
-          it = this->_internal_table().begin();
-          it != this->_internal_table().end(); ++it, ++n) {
+      for (::google::protobuf::Map< ::std::string, ::perceptronix::DenseInnerTableProto >::const_iterator
+          it = this->table().begin();
+          it != this->table().end(); ++it, ++n) {
         items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
       }
       ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse> entry;
       for (size_type i = 0; i < n; i++) {
-        target = SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::InternalSerialize(4, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, target, stream);
-        Utf8Check::Check(&(*items[static_cast<ptrdiff_t>(i)]));
+        entry.reset(table_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            4, *entry, output);
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
       }
     } else {
-      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::DenseInnerTableProto >::const_iterator
-          it = this->_internal_table().begin();
-          it != this->_internal_table().end(); ++it) {
-        target = SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::InternalSerialize(4, it->first, it->second, target, stream);
-        Utf8Check::Check(&(*it));
+      ::std::unique_ptr<SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::perceptronix::DenseInnerTableProto >::const_iterator
+          it = this->table().begin();
+          it != this->table().end(); ++it) {
+        entry.reset(table_.NewEntryWrapper(
+            it->first, it->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            4, *entry, output);
+        Utf8Check::Check(&*it);
       }
     }
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:perceptronix.SparseDenseMultinomialPerceptronProto)
+}
+
+::google::protobuf::uint8* SparseDenseMultinomialPerceptronProto::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:perceptronix.SparseDenseMultinomialPerceptronProto)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // optional string metadata = 1 [default = ""];
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->metadata().data(), static_cast<int>(this->metadata().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "perceptronix.SparseDenseMultinomialPerceptronProto.metadata");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->metadata(), target);
+  }
+
+  // required uint32 inner_size = 2;
+  if (cached_has_bits & 0x00000004u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->inner_size(), target);
+  }
+
+  // required .perceptronix.DenseInnerTableProto bias = 3;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        3, this->_internal_bias(), deterministic, target);
+  }
+
+  // map<string, .perceptronix.DenseInnerTableProto> table = 4;
+  if (!this->table().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::perceptronix::DenseInnerTableProto >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormat::SERIALIZE,
+          "perceptronix.SparseDenseMultinomialPerceptronProto.TableEntry.key");
+      }
+    };
+
+    if (deterministic &&
+        this->table().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->table().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::perceptronix::DenseInnerTableProto >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::perceptronix::DenseInnerTableProto >::const_iterator
+          it = this->table().begin();
+          it != this->table().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(table_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       4, *entry, deterministic, target);
+;
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::perceptronix::DenseInnerTableProto >::const_iterator
+          it = this->table().begin();
+          it != this->table().end(); ++it) {
+        entry.reset(table_.NewEntryWrapper(
+            it->first, it->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       4, *entry, deterministic, target);
+;
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:perceptronix.SparseDenseMultinomialPerceptronProto)
   return target;
@@ -2106,18 +2633,18 @@ size_t SparseDenseMultinomialPerceptronProto::RequiredFieldsByteSizeFallback() c
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:perceptronix.SparseDenseMultinomialPerceptronProto)
   size_t total_size = 0;
 
-  if (_internal_has_bias()) {
+  if (has_bias()) {
     // required .perceptronix.DenseInnerTableProto bias = 3;
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
         *bias_);
   }
 
-  if (_internal_has_inner_size()) {
+  if (has_inner_size()) {
     // required uint32 inner_size = 2;
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->_internal_inner_size());
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->inner_size());
   }
 
   return total_size;
@@ -2126,59 +2653,60 @@ size_t SparseDenseMultinomialPerceptronProto::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:perceptronix.SparseDenseMultinomialPerceptronProto)
   size_t total_size = 0;
 
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
   if (((_has_bits_[0] & 0x00000006) ^ 0x00000006) == 0) {  // All required fields are present.
     // required .perceptronix.DenseInnerTableProto bias = 3;
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
         *bias_);
 
     // required uint32 inner_size = 2;
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->_internal_inner_size());
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->inner_size());
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
   // map<string, .perceptronix.DenseInnerTableProto> table = 4;
   total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_table_size());
-  for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::DenseInnerTableProto >::const_iterator
-      it = this->_internal_table().begin();
-      it != this->_internal_table().end(); ++it) {
-    total_size += SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
+      ::google::protobuf::internal::FromIntSize(this->table_size());
+  {
+    ::std::unique_ptr<SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse> entry;
+    for (::google::protobuf::Map< ::std::string, ::perceptronix::DenseInnerTableProto >::const_iterator
+        it = this->table().begin();
+        it != this->table().end(); ++it) {
+      entry.reset(table_.NewEntryWrapper(it->first, it->second));
+      total_size += ::google::protobuf::internal::WireFormatLite::
+          MessageSizeNoVirtual(*entry);
+    }
   }
 
   // optional string metadata = 1 [default = ""];
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
+  if (has_metadata()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_metadata());
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->metadata());
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
-  }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void SparseDenseMultinomialPerceptronProto::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+void SparseDenseMultinomialPerceptronProto::MergeFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:perceptronix.SparseDenseMultinomialPerceptronProto)
   GOOGLE_DCHECK_NE(&from, this);
   const SparseDenseMultinomialPerceptronProto* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<SparseDenseMultinomialPerceptronProto>(
+      ::google::protobuf::internal::DynamicCastToGenerated<const SparseDenseMultinomialPerceptronProto>(
           &from);
-  if (source == nullptr) {
+  if (source == NULL) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:perceptronix.SparseDenseMultinomialPerceptronProto)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:perceptronix.SparseDenseMultinomialPerceptronProto)
     MergeFrom(*source);
@@ -2189,18 +2717,18 @@ void SparseDenseMultinomialPerceptronProto::MergeFrom(const SparseDenseMultinomi
 // @@protoc_insertion_point(class_specific_merge_from_start:perceptronix.SparseDenseMultinomialPerceptronProto)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   table_.MergeFrom(from.table_);
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 7u) {
     if (cached_has_bits & 0x00000001u) {
-      _has_bits_[0] |= 0x00000001u;
-      metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
+      set_has_metadata();
+      metadata_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.metadata_);
     }
     if (cached_has_bits & 0x00000002u) {
-      _internal_mutable_bias()->::perceptronix::DenseInnerTableProto::MergeFrom(from._internal_bias());
+      mutable_bias()->::perceptronix::DenseInnerTableProto::MergeFrom(from.bias());
     }
     if (cached_has_bits & 0x00000004u) {
       inner_size_ = from.inner_size_;
@@ -2209,7 +2737,7 @@ void SparseDenseMultinomialPerceptronProto::MergeFrom(const SparseDenseMultinomi
   }
 }
 
-void SparseDenseMultinomialPerceptronProto::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+void SparseDenseMultinomialPerceptronProto::CopyFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:perceptronix.SparseDenseMultinomialPerceptronProto)
   if (&from == this) return;
   Clear();
@@ -2228,36 +2756,41 @@ bool SparseDenseMultinomialPerceptronProto::IsInitialized() const {
   return true;
 }
 
+void SparseDenseMultinomialPerceptronProto::Swap(SparseDenseMultinomialPerceptronProto* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
 void SparseDenseMultinomialPerceptronProto::InternalSwap(SparseDenseMultinomialPerceptronProto* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   table_.Swap(&other->table_);
-  metadata_.Swap(&other->metadata_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+  metadata_.Swap(&other->metadata_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(bias_, other->bias_);
   swap(inner_size_, other->inner_size_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata SparseDenseMultinomialPerceptronProto::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata SparseDenseMultinomialPerceptronProto::GetMetadata() const {
+  protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 
 // ===================================================================
 
 SparseMultinomialPerceptronProto_TableEntry_DoNotUse::SparseMultinomialPerceptronProto_TableEntry_DoNotUse() {}
-SparseMultinomialPerceptronProto_TableEntry_DoNotUse::SparseMultinomialPerceptronProto_TableEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-    : SuperType(arena) {}
+SparseMultinomialPerceptronProto_TableEntry_DoNotUse::SparseMultinomialPerceptronProto_TableEntry_DoNotUse(::google::protobuf::Arena* arena) : SuperType(arena) {}
 void SparseMultinomialPerceptronProto_TableEntry_DoNotUse::MergeFrom(const SparseMultinomialPerceptronProto_TableEntry_DoNotUse& other) {
   MergeFromInternal(other);
 }
-::PROTOBUF_NAMESPACE_ID::Metadata SparseMultinomialPerceptronProto_TableEntry_DoNotUse::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata SparseMultinomialPerceptronProto_TableEntry_DoNotUse::GetMetadata() const {
+  ::protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[9];
 }
 void SparseMultinomialPerceptronProto_TableEntry_DoNotUse::MergeFrom(
-    const ::PROTOBUF_NAMESPACE_ID::Message& other) {
-  ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom(other);
+    const ::google::protobuf::Message& other) {
+  ::google::protobuf::Message::MergeFrom(other);
 }
 
 
@@ -2267,52 +2800,41 @@ void SparseMultinomialPerceptronProto::InitAsDefaultInstance() {
   ::perceptronix::_SparseMultinomialPerceptronProto_default_instance_._instance.get_mutable()->bias_ = const_cast< ::perceptronix::SparseInnerTableProto*>(
       ::perceptronix::SparseInnerTableProto::internal_default_instance());
 }
-class SparseMultinomialPerceptronProto::_Internal {
- public:
-  using HasBits = decltype(std::declval<SparseMultinomialPerceptronProto>()._has_bits_);
-  static void set_has_metadata(HasBits* has_bits) {
-    (*has_bits)[0] |= 1u;
-  }
-  static void set_has_inner_size(HasBits* has_bits) {
-    (*has_bits)[0] |= 4u;
-  }
-  static const ::perceptronix::SparseInnerTableProto& bias(const SparseMultinomialPerceptronProto* msg);
-  static void set_has_bias(HasBits* has_bits) {
-    (*has_bits)[0] |= 2u;
-  }
-};
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int SparseMultinomialPerceptronProto::kMetadataFieldNumber;
+const int SparseMultinomialPerceptronProto::kInnerSizeFieldNumber;
+const int SparseMultinomialPerceptronProto::kBiasFieldNumber;
+const int SparseMultinomialPerceptronProto::kTableFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-const ::perceptronix::SparseInnerTableProto&
-SparseMultinomialPerceptronProto::_Internal::bias(const SparseMultinomialPerceptronProto* msg) {
-  return *msg->bias_;
-}
 SparseMultinomialPerceptronProto::SparseMultinomialPerceptronProto()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_linear_5fmodel_2eproto::scc_info_SparseMultinomialPerceptronProto.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:perceptronix.SparseMultinomialPerceptronProto)
 }
 SparseMultinomialPerceptronProto::SparseMultinomialPerceptronProto(const SparseMultinomialPerceptronProto& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   table_.MergeFrom(from.table_);
-  metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_metadata()) {
-    metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
+  metadata_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_metadata()) {
+    metadata_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.metadata_);
   }
-  if (from._internal_has_bias()) {
+  if (from.has_bias()) {
     bias_ = new ::perceptronix::SparseInnerTableProto(*from.bias_);
   } else {
-    bias_ = nullptr;
+    bias_ = NULL;
   }
   inner_size_ = from.inner_size_;
   // @@protoc_insertion_point(copy_constructor:perceptronix.SparseMultinomialPerceptronProto)
 }
 
 void SparseMultinomialPerceptronProto::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_SparseMultinomialPerceptronProto_linear_5fmodel_2eproto.base);
-  metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  metadata_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&bias_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&inner_size_) -
       reinterpret_cast<char*>(&bias_)) + sizeof(inner_size_));
@@ -2324,33 +2846,38 @@ SparseMultinomialPerceptronProto::~SparseMultinomialPerceptronProto() {
 }
 
 void SparseMultinomialPerceptronProto::SharedDtor() {
-  metadata_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  metadata_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete bias_;
 }
 
 void SparseMultinomialPerceptronProto::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const ::google::protobuf::Descriptor* SparseMultinomialPerceptronProto::descriptor() {
+  ::protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
 const SparseMultinomialPerceptronProto& SparseMultinomialPerceptronProto::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_SparseMultinomialPerceptronProto_linear_5fmodel_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&protobuf_linear_5fmodel_2eproto::scc_info_SparseMultinomialPerceptronProto.base);
   return *internal_default_instance();
 }
 
 
 void SparseMultinomialPerceptronProto::Clear() {
 // @@protoc_insertion_point(message_clear_start:perceptronix.SparseMultinomialPerceptronProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   table_.Clear();
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
+  if (cached_has_bits & 3u) {
     if (cached_has_bits & 0x00000001u) {
       metadata_.ClearNonDefaultToEmptyNoArena();
     }
     if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(bias_ != nullptr);
+      GOOGLE_DCHECK(bias_ != NULL);
       bias_->Clear();
     }
   }
@@ -2359,148 +2886,272 @@ void SparseMultinomialPerceptronProto::Clear() {
   _internal_metadata_.Clear();
 }
 
-const char* SparseMultinomialPerceptronProto::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
+bool SparseMultinomialPerceptronProto::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:perceptronix.SparseMultinomialPerceptronProto)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional string metadata = 1 [default = ""];
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          auto str = _internal_mutable_metadata();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          #ifndef NDEBUG
-          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "perceptronix.SparseMultinomialPerceptronProto.metadata");
-          #endif  // !NDEBUG
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_metadata()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->metadata().data(), static_cast<int>(this->metadata().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "perceptronix.SparseMultinomialPerceptronProto.metadata");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // required uint32 inner_size = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          _Internal::set_has_inner_size(&has_bits);
-          inner_size_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+          set_has_inner_size();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &inner_size_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // required .perceptronix.SparseInnerTableProto bias = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ctx->ParseMessage(_internal_mutable_bias(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_bias()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // map<string, .perceptronix.SparseInnerTableProto> table = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            ptr = ctx->ParseMessage(&table_, ptr);
-            CHK_(ptr);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
-        } else goto handle_unusual;
-        continue;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          SparseMultinomialPerceptronProto_TableEntry_DoNotUse::Parser< ::google::protobuf::internal::MapField<
+              SparseMultinomialPerceptronProto_TableEntry_DoNotUse,
+              ::std::string, ::perceptronix::SparseInnerTableProto,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+              0 >,
+            ::google::protobuf::Map< ::std::string, ::perceptronix::SparseInnerTableProto > > parser(&table_);
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+              input, &parser));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            parser.key().data(), static_cast<int>(parser.key().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "perceptronix.SparseMultinomialPerceptronProto.TableEntry.key");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
+        if (tag == 0) {
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
       }
-    }  // switch
-  }  // while
+    }
+  }
 success:
-  _has_bits_.Or(has_bits);
-  return ptr;
+  // @@protoc_insertion_point(parse_success:perceptronix.SparseMultinomialPerceptronProto)
+  return true;
 failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
+  // @@protoc_insertion_point(parse_failure:perceptronix.SparseMultinomialPerceptronProto)
+  return false;
+#undef DO_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* SparseMultinomialPerceptronProto::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:perceptronix.SparseMultinomialPerceptronProto)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void SparseMultinomialPerceptronProto::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:perceptronix.SparseMultinomialPerceptronProto)
+  ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // optional string metadata = 1 [default = ""];
   if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_metadata().data(), static_cast<int>(this->_internal_metadata().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->metadata().data(), static_cast<int>(this->metadata().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
       "perceptronix.SparseMultinomialPerceptronProto.metadata");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_metadata(), target);
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->metadata(), output);
   }
 
   // required uint32 inner_size = 2;
   if (cached_has_bits & 0x00000004u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_inner_size(), target);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->inner_size(), output);
   }
 
   // required .perceptronix.SparseInnerTableProto bias = 3;
   if (cached_has_bits & 0x00000002u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        3, _Internal::bias(this), target, stream);
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->_internal_bias(), output);
   }
 
   // map<string, .perceptronix.SparseInnerTableProto> table = 4;
-  if (!this->_internal_table().empty()) {
-    typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::SparseInnerTableProto >::const_pointer
+  if (!this->table().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::perceptronix::SparseInnerTableProto >::const_pointer
         ConstPtr;
     typedef ConstPtr SortItem;
-    typedef ::PROTOBUF_NAMESPACE_ID::internal::CompareByDerefFirst<SortItem> Less;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
     struct Utf8Check {
       static void Check(ConstPtr p) {
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
+        ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
           p->first.data(), static_cast<int>(p->first.length()),
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+          ::google::protobuf::internal::WireFormat::SERIALIZE,
           "perceptronix.SparseMultinomialPerceptronProto.TableEntry.key");
       }
     };
 
-    if (stream->IsSerializationDeterministic() &&
-        this->_internal_table().size() > 1) {
+    if (output->IsSerializationDeterministic() &&
+        this->table().size() > 1) {
       ::std::unique_ptr<SortItem[]> items(
-          new SortItem[this->_internal_table().size()]);
-      typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::SparseInnerTableProto >::size_type size_type;
+          new SortItem[this->table().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::perceptronix::SparseInnerTableProto >::size_type size_type;
       size_type n = 0;
-      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::SparseInnerTableProto >::const_iterator
-          it = this->_internal_table().begin();
-          it != this->_internal_table().end(); ++it, ++n) {
+      for (::google::protobuf::Map< ::std::string, ::perceptronix::SparseInnerTableProto >::const_iterator
+          it = this->table().begin();
+          it != this->table().end(); ++it, ++n) {
         items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
       }
       ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<SparseMultinomialPerceptronProto_TableEntry_DoNotUse> entry;
       for (size_type i = 0; i < n; i++) {
-        target = SparseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::InternalSerialize(4, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, target, stream);
-        Utf8Check::Check(&(*items[static_cast<ptrdiff_t>(i)]));
+        entry.reset(table_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            4, *entry, output);
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
       }
     } else {
-      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::SparseInnerTableProto >::const_iterator
-          it = this->_internal_table().begin();
-          it != this->_internal_table().end(); ++it) {
-        target = SparseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::InternalSerialize(4, it->first, it->second, target, stream);
-        Utf8Check::Check(&(*it));
+      ::std::unique_ptr<SparseMultinomialPerceptronProto_TableEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::perceptronix::SparseInnerTableProto >::const_iterator
+          it = this->table().begin();
+          it != this->table().end(); ++it) {
+        entry.reset(table_.NewEntryWrapper(
+            it->first, it->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            4, *entry, output);
+        Utf8Check::Check(&*it);
       }
     }
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:perceptronix.SparseMultinomialPerceptronProto)
+}
+
+::google::protobuf::uint8* SparseMultinomialPerceptronProto::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:perceptronix.SparseMultinomialPerceptronProto)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // optional string metadata = 1 [default = ""];
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->metadata().data(), static_cast<int>(this->metadata().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "perceptronix.SparseMultinomialPerceptronProto.metadata");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->metadata(), target);
+  }
+
+  // required uint32 inner_size = 2;
+  if (cached_has_bits & 0x00000004u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->inner_size(), target);
+  }
+
+  // required .perceptronix.SparseInnerTableProto bias = 3;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        3, this->_internal_bias(), deterministic, target);
+  }
+
+  // map<string, .perceptronix.SparseInnerTableProto> table = 4;
+  if (!this->table().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::perceptronix::SparseInnerTableProto >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormat::SERIALIZE,
+          "perceptronix.SparseMultinomialPerceptronProto.TableEntry.key");
+      }
+    };
+
+    if (deterministic &&
+        this->table().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->table().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::perceptronix::SparseInnerTableProto >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::perceptronix::SparseInnerTableProto >::const_iterator
+          it = this->table().begin();
+          it != this->table().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<SparseMultinomialPerceptronProto_TableEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(table_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       4, *entry, deterministic, target);
+;
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<SparseMultinomialPerceptronProto_TableEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::perceptronix::SparseInnerTableProto >::const_iterator
+          it = this->table().begin();
+          it != this->table().end(); ++it) {
+        entry.reset(table_.NewEntryWrapper(
+            it->first, it->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       4, *entry, deterministic, target);
+;
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:perceptronix.SparseMultinomialPerceptronProto)
   return target;
@@ -2510,18 +3161,18 @@ size_t SparseMultinomialPerceptronProto::RequiredFieldsByteSizeFallback() const 
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:perceptronix.SparseMultinomialPerceptronProto)
   size_t total_size = 0;
 
-  if (_internal_has_bias()) {
+  if (has_bias()) {
     // required .perceptronix.SparseInnerTableProto bias = 3;
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
         *bias_);
   }
 
-  if (_internal_has_inner_size()) {
+  if (has_inner_size()) {
     // required uint32 inner_size = 2;
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->_internal_inner_size());
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->inner_size());
   }
 
   return total_size;
@@ -2530,59 +3181,60 @@ size_t SparseMultinomialPerceptronProto::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:perceptronix.SparseMultinomialPerceptronProto)
   size_t total_size = 0;
 
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
   if (((_has_bits_[0] & 0x00000006) ^ 0x00000006) == 0) {  // All required fields are present.
     // required .perceptronix.SparseInnerTableProto bias = 3;
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
         *bias_);
 
     // required uint32 inner_size = 2;
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->_internal_inner_size());
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->inner_size());
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
   // map<string, .perceptronix.SparseInnerTableProto> table = 4;
   total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_table_size());
-  for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::perceptronix::SparseInnerTableProto >::const_iterator
-      it = this->_internal_table().begin();
-      it != this->_internal_table().end(); ++it) {
-    total_size += SparseMultinomialPerceptronProto_TableEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
+      ::google::protobuf::internal::FromIntSize(this->table_size());
+  {
+    ::std::unique_ptr<SparseMultinomialPerceptronProto_TableEntry_DoNotUse> entry;
+    for (::google::protobuf::Map< ::std::string, ::perceptronix::SparseInnerTableProto >::const_iterator
+        it = this->table().begin();
+        it != this->table().end(); ++it) {
+      entry.reset(table_.NewEntryWrapper(it->first, it->second));
+      total_size += ::google::protobuf::internal::WireFormatLite::
+          MessageSizeNoVirtual(*entry);
+    }
   }
 
   // optional string metadata = 1 [default = ""];
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
+  if (has_metadata()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_metadata());
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->metadata());
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
-  }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void SparseMultinomialPerceptronProto::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+void SparseMultinomialPerceptronProto::MergeFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:perceptronix.SparseMultinomialPerceptronProto)
   GOOGLE_DCHECK_NE(&from, this);
   const SparseMultinomialPerceptronProto* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<SparseMultinomialPerceptronProto>(
+      ::google::protobuf::internal::DynamicCastToGenerated<const SparseMultinomialPerceptronProto>(
           &from);
-  if (source == nullptr) {
+  if (source == NULL) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:perceptronix.SparseMultinomialPerceptronProto)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:perceptronix.SparseMultinomialPerceptronProto)
     MergeFrom(*source);
@@ -2593,18 +3245,18 @@ void SparseMultinomialPerceptronProto::MergeFrom(const SparseMultinomialPerceptr
 // @@protoc_insertion_point(class_specific_merge_from_start:perceptronix.SparseMultinomialPerceptronProto)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   table_.MergeFrom(from.table_);
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 7u) {
     if (cached_has_bits & 0x00000001u) {
-      _has_bits_[0] |= 0x00000001u;
-      metadata_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.metadata_);
+      set_has_metadata();
+      metadata_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.metadata_);
     }
     if (cached_has_bits & 0x00000002u) {
-      _internal_mutable_bias()->::perceptronix::SparseInnerTableProto::MergeFrom(from._internal_bias());
+      mutable_bias()->::perceptronix::SparseInnerTableProto::MergeFrom(from.bias());
     }
     if (cached_has_bits & 0x00000004u) {
       inner_size_ = from.inner_size_;
@@ -2613,7 +3265,7 @@ void SparseMultinomialPerceptronProto::MergeFrom(const SparseMultinomialPerceptr
   }
 }
 
-void SparseMultinomialPerceptronProto::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+void SparseMultinomialPerceptronProto::CopyFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:perceptronix.SparseMultinomialPerceptronProto)
   if (&from == this) return;
   Clear();
@@ -2632,59 +3284,65 @@ bool SparseMultinomialPerceptronProto::IsInitialized() const {
   return true;
 }
 
+void SparseMultinomialPerceptronProto::Swap(SparseMultinomialPerceptronProto* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
 void SparseMultinomialPerceptronProto::InternalSwap(SparseMultinomialPerceptronProto* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   table_.Swap(&other->table_);
-  metadata_.Swap(&other->metadata_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+  metadata_.Swap(&other->metadata_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(bias_, other->bias_);
   swap(inner_size_, other->inner_size_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata SparseMultinomialPerceptronProto::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata SparseMultinomialPerceptronProto::GetMetadata() const {
+  protobuf_linear_5fmodel_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_linear_5fmodel_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace perceptronix
-PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::perceptronix::DenseBinomialPerceptronProto* Arena::CreateMaybeMessage< ::perceptronix::DenseBinomialPerceptronProto >(Arena* arena) {
+namespace google {
+namespace protobuf {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::perceptronix::DenseBinomialPerceptronProto* Arena::CreateMaybeMessage< ::perceptronix::DenseBinomialPerceptronProto >(Arena* arena) {
   return Arena::CreateInternal< ::perceptronix::DenseBinomialPerceptronProto >(arena);
 }
-template<> PROTOBUF_NOINLINE ::perceptronix::SparseBinomialPerceptronProto_TableEntry_DoNotUse* Arena::CreateMaybeMessage< ::perceptronix::SparseBinomialPerceptronProto_TableEntry_DoNotUse >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::perceptronix::SparseBinomialPerceptronProto_TableEntry_DoNotUse* Arena::CreateMaybeMessage< ::perceptronix::SparseBinomialPerceptronProto_TableEntry_DoNotUse >(Arena* arena) {
   return Arena::CreateInternal< ::perceptronix::SparseBinomialPerceptronProto_TableEntry_DoNotUse >(arena);
 }
-template<> PROTOBUF_NOINLINE ::perceptronix::SparseBinomialPerceptronProto* Arena::CreateMaybeMessage< ::perceptronix::SparseBinomialPerceptronProto >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::perceptronix::SparseBinomialPerceptronProto* Arena::CreateMaybeMessage< ::perceptronix::SparseBinomialPerceptronProto >(Arena* arena) {
   return Arena::CreateInternal< ::perceptronix::SparseBinomialPerceptronProto >(arena);
 }
-template<> PROTOBUF_NOINLINE ::perceptronix::DenseInnerTableProto* Arena::CreateMaybeMessage< ::perceptronix::DenseInnerTableProto >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::perceptronix::DenseInnerTableProto* Arena::CreateMaybeMessage< ::perceptronix::DenseInnerTableProto >(Arena* arena) {
   return Arena::CreateInternal< ::perceptronix::DenseInnerTableProto >(arena);
 }
-template<> PROTOBUF_NOINLINE ::perceptronix::SparseInnerTableProto_TableEntry_DoNotUse* Arena::CreateMaybeMessage< ::perceptronix::SparseInnerTableProto_TableEntry_DoNotUse >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::perceptronix::SparseInnerTableProto_TableEntry_DoNotUse* Arena::CreateMaybeMessage< ::perceptronix::SparseInnerTableProto_TableEntry_DoNotUse >(Arena* arena) {
   return Arena::CreateInternal< ::perceptronix::SparseInnerTableProto_TableEntry_DoNotUse >(arena);
 }
-template<> PROTOBUF_NOINLINE ::perceptronix::SparseInnerTableProto* Arena::CreateMaybeMessage< ::perceptronix::SparseInnerTableProto >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::perceptronix::SparseInnerTableProto* Arena::CreateMaybeMessage< ::perceptronix::SparseInnerTableProto >(Arena* arena) {
   return Arena::CreateInternal< ::perceptronix::SparseInnerTableProto >(arena);
 }
-template<> PROTOBUF_NOINLINE ::perceptronix::DenseMultinomialPerceptronProto* Arena::CreateMaybeMessage< ::perceptronix::DenseMultinomialPerceptronProto >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::perceptronix::DenseMultinomialPerceptronProto* Arena::CreateMaybeMessage< ::perceptronix::DenseMultinomialPerceptronProto >(Arena* arena) {
   return Arena::CreateInternal< ::perceptronix::DenseMultinomialPerceptronProto >(arena);
 }
-template<> PROTOBUF_NOINLINE ::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse* Arena::CreateMaybeMessage< ::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse* Arena::CreateMaybeMessage< ::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse >(Arena* arena) {
   return Arena::CreateInternal< ::perceptronix::SparseDenseMultinomialPerceptronProto_TableEntry_DoNotUse >(arena);
 }
-template<> PROTOBUF_NOINLINE ::perceptronix::SparseDenseMultinomialPerceptronProto* Arena::CreateMaybeMessage< ::perceptronix::SparseDenseMultinomialPerceptronProto >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::perceptronix::SparseDenseMultinomialPerceptronProto* Arena::CreateMaybeMessage< ::perceptronix::SparseDenseMultinomialPerceptronProto >(Arena* arena) {
   return Arena::CreateInternal< ::perceptronix::SparseDenseMultinomialPerceptronProto >(arena);
 }
-template<> PROTOBUF_NOINLINE ::perceptronix::SparseMultinomialPerceptronProto_TableEntry_DoNotUse* Arena::CreateMaybeMessage< ::perceptronix::SparseMultinomialPerceptronProto_TableEntry_DoNotUse >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::perceptronix::SparseMultinomialPerceptronProto_TableEntry_DoNotUse* Arena::CreateMaybeMessage< ::perceptronix::SparseMultinomialPerceptronProto_TableEntry_DoNotUse >(Arena* arena) {
   return Arena::CreateInternal< ::perceptronix::SparseMultinomialPerceptronProto_TableEntry_DoNotUse >(arena);
 }
-template<> PROTOBUF_NOINLINE ::perceptronix::SparseMultinomialPerceptronProto* Arena::CreateMaybeMessage< ::perceptronix::SparseMultinomialPerceptronProto >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::perceptronix::SparseMultinomialPerceptronProto* Arena::CreateMaybeMessage< ::perceptronix::SparseMultinomialPerceptronProto >(Arena* arena) {
   return Arena::CreateInternal< ::perceptronix::SparseMultinomialPerceptronProto >(arena);
 }
-PROTOBUF_NAMESPACE_CLOSE
+}  // namespace protobuf
+}  // namespace google
 
 // @@protoc_insertion_point(global_scope)
-#include <google/protobuf/port_undef.inc>
