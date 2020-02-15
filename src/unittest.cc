@@ -10,7 +10,8 @@
 #include "binomial_model.h"
 #include "multinomial_model.h"
 
-using namespace perceptronix;
+namespace perceptronix {
+namespace {
 
 // BINOMIAL PERCEPTRON STUFF.
 
@@ -164,10 +165,14 @@ void TestStructured() {
   AssertStructured(dense_ys, dense_yhats);
 }
 
-int main(void) {
-  TestBinomial();
-  TestMultinomial();
-  TestStructured();
+}  // namespace
+}  // namespace perceptronix
+
+int main() {
+
+  perceptronix::TestBinomial();
+  perceptronix::TestMultinomial();
+  perceptronix::TestStructured();
 
   std::cout << "Success!" << std::endl;
 
