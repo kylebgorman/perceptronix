@@ -1,7 +1,7 @@
 """Unit tests for case detection and application."""
 
 
-import case
+from case_restorer import case
 
 import unittest
 

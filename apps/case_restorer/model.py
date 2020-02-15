@@ -37,13 +37,13 @@ class CaseRestorer(object):
         self,
         nfeats: int = 0x1000,
         order: int = 2,
-        mpt: case.MixedPatternTable = {},
+        mpt: case.MixedPatternTable = None,
     ):
         self._classifier = \
             perceptronix.SparseDenseMultinomialSequentialClassifier(
                 nfeats, len(case.TokenCase), order
             )
-        self._mpt = mpt
+        self._mpt = {} if mpt is None else mpt
 
     # (De)serialization methods, overwritten to handle MPT, stored in the
     # metadata.
@@ -51,12 +51,10 @@ class CaseRestorer(object):
     @classmethod
     def read(cls, filename: str, order: int):
         """Reads case restorer model from serialized model file."""
-        (
-            classifier,
-            metadata,
-        ) = perceptronix.SparseDenseMultinomialSequentialClassifier.read(
-            filename, order
-        )
+        (classifier, metadata) = \
+            perceptronix.SparseDenseMultinomialSequentialClassifier.read(
+                filename, order
+            )
         new = cls.__new__(cls)
         new._classifier = classifier
         new._mpt = json.loads(metadata)
@@ -75,7 +73,7 @@ class CaseRestorer(object):
 
     @staticmethod
     def tagged_sentences_from_file(
-        filename: str
+        filename: str,
     ) -> Iterator[Tuple[Tokens, Tags, Patterns]]:
         for tokens in CaseRestorer.sentences_from_file(filename):
             (tags, patterns) = zip(*(case.get_tc(token) for token in tokens))
