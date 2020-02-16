@@ -55,8 +55,7 @@ Python
 ------
 
 Each of the above classifiers has a correspondent type in the Python API. Take a
-look at `applications/sentence_tokenizer/sentence_tokenizer.py` for a worked
-example.
+look at `apps/sentence_tokenizer/model.py` for a worked example.
 
 Design
 ======
