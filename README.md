@@ -1,4 +1,4 @@
-Perceptronix: Linear model template library for C++11
+Perceptronix: Linear model template library for C++
 
 This library provides C++ classes for linear classifiers for binary-valued
 (i.e., nominal, "one-hot") features, such as encountered in natural language
@@ -70,16 +70,17 @@ An averaged weight consists of:
 -   The true weight (`weight_`), used for inference *during training*, and
     updated using the perceptron learning rule
 -   The summed weight (`summed_weight_`), which may or may not be "fresh"
--   A timestamp (`time_`) indicating when the averaged weight was last updated
+-   A timestamp (`time_`) indicating when the averaged weight was last
+    "freshened"
 
-At `time`, the time elapsed since the summed weight was last "freshened" is
-given by `time - time_`.
+At `time`, the time elapsed since the summed weight was last freshened is given
+by `time - time_`.
 
-The summed weight is "freshened" by adding to it the true weight multiplied by
-the time elapsed since timestamp.
+The summed weight is freshened by adding to it the true weight multiplied by the
+time elapsed since timestamp.
 
-The weight is averaged by freshening the summed weight then dividing it by the
-current time.
+At averaging time, weights are freshened and then the summed weight is divided
+by the current time.
 
 Tables
 ------
@@ -133,13 +134,13 @@ constructor argument, which is used to reserve memory for inner tables.
 Dependencies
 ============
 
-The library depends on C++11 and protobuf 3.0 or greater. It should compile with
+The library depends on C++14 and protobuf 3.0 or greater. It should compile with
 `g++` or `clang++`. Users may also need the protobuf compilation tool `protoc`,
 which is sometimes distributed separately from protobuf itself.
 
 The Python wrapper and applications are written for Python 3.7+. Compiling the
 wrapper requires Cython, and the applications require the `nlup` and `regex`
-Python libraries, both of which are available from PyPI.
+Python libraries, all of which are available from PyPI.
 
 Author
 ======
@@ -151,7 +152,7 @@ License
 
 See `LICENSE`.
 
-Perceptronix: Linear model template library for C++11
+Perceptronix: Linear model template library for C++
 
 This library provides C++ classes for linear classifiers for binary-valued
 (i.e., nominal, "one-hot") features, such as encountered in natural language
@@ -208,8 +209,7 @@ Python
 ------
 
 Each of the above classifiers has a correspondent type in the Python API. Take a
-look at `applications/sentence_tokenizer/sentence_tokenizer.py` for a worked
-example.
+look at `apps/sentence_tokenizer/model.py` for a worked example.
 
 Design
 ======
@@ -224,16 +224,17 @@ An averaged weight consists of:
 -   The true weight (`weight_`), used for inference *during training*, and
     updated using the perceptron learning rule
 -   The summed weight (`summed_weight_`), which may or may not be "fresh"
--   A timestamp (`time_`) indicating when the averaged weight was last updated
+-   A timestamp (`time_`) indicating when the averaged weight was last
+    "freshened"
 
-At `time`, the time elapsed since the summed weight was last "freshened" is
-given by `time - time_`.
+At `time`, the time elapsed since the summed weight was last freshened is given
+by `time - time_`.
 
-The summed weight is "freshened" by adding to it the true weight multiplied by
-the time elapsed since timestamp.
+The summed weight is freshened by adding to it the true weight multiplied by the
+time elapsed since timestamp.
 
-The weight is averaged by freshening the summed weight then dividing it by the
-current time.
+At averaging time, weights are freshened and then the summed weight is divided
+by the current time.
 
 Tables
 ------
@@ -287,13 +288,13 @@ constructor argument, which is used to reserve memory for inner tables.
 Dependencies
 ============
 
-The library depends on C++11 and protobuf 3.0 or greater. It should compile with
+The library depends on C++14 and protobuf 3.0 or greater. It should compile with
 `g++` or `clang++`. Users may also need the protobuf compilation tool `protoc`,
 which is sometimes distributed separately from protobuf itself.
 
 The Python wrapper and applications are written for Python 3.7+. Compiling the
 wrapper requires Cython, and the applications require the `nlup` and `regex`
-Python libraries, both of which are available from PyPI.
+Python libraries, all of which are available from PyPI.
 
 Author
 ======
