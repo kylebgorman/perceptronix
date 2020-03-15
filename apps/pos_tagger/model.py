@@ -34,7 +34,7 @@ class POSTagger(object):
     def __init__(
         self, nfeats: int = 0x1000, nlabels: int = 0x20, order: int = 2
     ):
-        self._classifier = perceptronix.SparseMultinomialSequentialClassifier(
+        self._classifier = perceptronix.SparseMultinomialSequentialModel(
             nfeats, nlabels, order
         )
 
@@ -44,7 +44,7 @@ class POSTagger(object):
         (
             classifier,
             metadata,
-        ) = perceptronix.SparseMultinomialSequentialClassifier.read(
+        ) = perceptronix.SparseMultinomialSequentialModel.read(
             filename, order
         )
         if metadata:

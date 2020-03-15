@@ -40,7 +40,7 @@ class CaseRestorer(object):
         mpt: case.MixedPatternTable = None,
     ):
         self._classifier = \
-            perceptronix.SparseDenseMultinomialSequentialClassifier(
+            perceptronix.SparseDenseMultinomialSequentialModel(
                 nfeats, len(case.TokenCase), order
             )
         self._mpt = {} if mpt is None else mpt
@@ -52,7 +52,7 @@ class CaseRestorer(object):
     def read(cls, filename: str, order: int):
         """Reads case restorer model from serialized model file."""
         (classifier, metadata) = \
-            perceptronix.SparseDenseMultinomialSequentialClassifier.read(
+            perceptronix.SparseDenseMultinomialSequentialModel.read(
                 filename, order
             )
         new = cls.__new__(cls)

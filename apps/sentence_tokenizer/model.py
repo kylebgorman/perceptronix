@@ -30,12 +30,12 @@ class SentenceTokenizer(object):
     ):
         self._candidate_regex = regex.compile(candidate_regex)
         self._max_context = max_context
-        self._classifier = perceptronix.SparseBinomialClassifier(nfeats)
+        self._classifier = perceptronix.SparseBinomialModel(nfeats)
 
     @classmethod
     def read(cls, filename: str, candidate_regex: str, max_context: int):
         """Reads sentence tokenizer model from serialized model file."""
-        (classifier, metadata) = perceptronix.SparseBinomialClassifier.read(
+        (classifier, metadata) = perceptronix.SparseBinomialModel.read(
             filename
         )
         # TODO(kbg): Consider storing the candidate regex and max context

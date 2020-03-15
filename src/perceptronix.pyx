@@ -1,4 +1,4 @@
-#cython: language-level=3, c_string_type=str
+#cython: language_level=3, c_string_type=str, c_string_encoding=utf8
 """Python interface to Perceptronix.
 
 Each instance is initially an averaging model; calling the instance method
@@ -10,9 +10,13 @@ averaging model's memory.
 from cython.operator cimport address as addr
 from cython.operator cimport dereference as deref
 
+cimport cperceptronix as cc
+
+from libcpp cimport bool
 from libcpp.memory cimport make_unique
 from libcpp.memory cimport unique_ptr
 from libcpp.string cimport string
+from libcpp.vector cimport vector
 
 
 # Helper for converting strings.
@@ -54,10 +58,10 @@ class PerceptronixOpError(RuntimeError):
 # User-facing classes.
 
 
-cdef class DenseBinomialClassifier(object):
+cdef class DenseBinomialModel(object):
 
     """
-    DenseBinomialClassifier(nfeats)
+    DenseBinomialModel(nfeats)
 
     Args:
         nfeats: Maximum number of unique features.
@@ -71,10 +75,10 @@ cdef class DenseBinomialClassifier(object):
     non-negative integers.
     """
 
-    cdef unique_ptr[DenseBinomialModel] _model
+    cdef unique_ptr[cc.DenseBinomialModel] _model
 
     def __init__(self, size_t nfeats):
-        self._model = make_unique[DenseBinomialModel](nfeats)
+        self._model = make_unique[cc.DenseBinomialModel](nfeats)
 
     def __repr__(self):
         return f"<{self.__class__.__name__} at 0x{id(self):x}>"
@@ -82,7 +86,7 @@ cdef class DenseBinomialClassifier(object):
     @classmethod
     def read(cls, filename):
         """
-        DenseBinomialClassifier.read(filename)
+        DenseBinomialModel.read(filename)
 
         Creates instance by deserializing model on disk.
 
@@ -95,10 +99,10 @@ cdef class DenseBinomialClassifier(object):
         Raises:
             PerceptronixIOError: Read failed.
         """
-        cdef DenseBinomialClassifier result = cls.__new__(cls)
+        cdef DenseBinomialModel result = cls.__new__(cls)
         cdef string metadata
-        result._model.reset(DenseBinomialModel.Read(tobytes(filename),
-                                                    addr(metadata)))
+        result._model.reset(cc.DenseBinomialModel.Read(tobytes(filename),
+                                                       addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError(f"Read failed: {filename}")
         return (result, metadata.decode("utf8"))
@@ -181,10 +185,10 @@ cdef class DenseBinomialClassifier(object):
         return self._model.get().Predict(fvector)
 
 
-cdef class SparseBinomialClassifier(object):
+cdef class SparseBinomialModel(object):
 
     """
-    SparseBinomialClassifier(nfeats)
+    SparseBinomialModel(nfeats)
 
     Args:
         nfeats: Hint for the number of unique features.
@@ -192,17 +196,17 @@ cdef class SparseBinomialClassifier(object):
     Binomial linear classifier backed by a hash table of weights.
 
     This class provides a more flexible binomial linear classifier than
-    DenseBinomialClassifier. At construction time, clients specify a hint for
+    DenseBinomialModel. At construction time, clients specify a hint for
     the number of features, which is used to compute the initial size for the
-    hash table; unlike DenseBinomialClassifier, however, this is not a hard
+    hash table; unlike DenseBinomialModel, however, this is not a hard
     constraint. During training and inference, users pass features as iterables
     of strings.
     """
 
-    cdef unique_ptr[SparseBinomialModel] _model
+    cdef unique_ptr[cc.SparseBinomialModel] _model
 
     def __init__(self, size_t nfeats):
-        self._model = make_unique[SparseBinomialModel](nfeats)
+        self._model = make_unique[cc.SparseBinomialModel](nfeats)
 
     def __repr__(self):
         return f"<{self.__class__.__name__} at 0x{id(self):x}>"
@@ -210,7 +214,7 @@ cdef class SparseBinomialClassifier(object):
     @classmethod
     def read(cls, filename):
         """
-        SparseBinomialClassifier.read(filename)
+        SparseBinomialModel.read(filename)
 
         Creates instance by deserializing model on disk.
 
@@ -223,10 +227,10 @@ cdef class SparseBinomialClassifier(object):
         Raises:
             PerceptronixIOError: Read failed.
         """
-        cdef SparseBinomialClassifier result = cls.__new__(cls)
+        cdef SparseBinomialModel result = cls.__new__(cls)
         cdef string metadata
-        result._model.reset(SparseBinomialModel.Read(tobytes(filename),
-                                                     addr(metadata)))
+        result._model.reset(cc.SparseBinomialModel.Read(tobytes(filename),
+                                                        addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError(f"Read failed: {filename}")
         return (result, metadata.decode("utf8"))
@@ -307,10 +311,10 @@ cdef class SparseBinomialClassifier(object):
         return self._model.get().Predict(fvector)
 
 
-cdef class SparseBinomialSequentialClassifier:
+cdef class SparseBinomialSequentialModel:
 
     """
-    SparseBinomialSequentialClassifier(nfeats, order)
+    SparseBinomialSequentialModel(nfeats, order)
 
     Args:
         nfeats: Hint for the number of unique features.
@@ -320,10 +324,11 @@ cdef class SparseBinomialSequentialClassifier:
     sequential decoding.
     """
 
-    cdef unique_ptr[SparseBinomialSequentialModel] _model
+    cdef unique_ptr[cc.SparseBinomialSequentialModel] _model
 
     def __init__(self, size_t nfeats, size_t order):
-        self._model = make_unique[SparseBinomialSequentialModel](nfeats, order)
+        self._model = make_unique[cc.SparseBinomialSequentialModel](nfeats,
+                                                                    order)
 
     def __repr__(self):
         return f"<{self.__class__.__name__} at 0x{id(self):x}>"
@@ -331,7 +336,7 @@ cdef class SparseBinomialSequentialClassifier:
     @classmethod
     def read(cls, filename, size_t order):
         """
-        SparseBinomialSequentialClassifier.read(filename, order)
+        SparseBinomialSequentialModel.read(filename, order)
 
         Creates instance by deserialization model on disk.
 
@@ -345,12 +350,12 @@ cdef class SparseBinomialSequentialClassifier:
         Raises:
             PerceptronixIOError: Read failed.
         """
-        cdef SparseBinomialSequentialClassifier result = cls.__new__(cls)
+        cdef SparseBinomialSequentialModel result = cls.__new__(cls)
         cdef string metadata
         result._model.reset(
-            SparseBinomialSequentialModel.Read(tobytes(filename),
-                                               order,
-                                               addr(metadata)))
+            cc.SparseBinomialSequentialModel.Read(tobytes(filename),
+                                                  order,
+                                                  addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError(f"Read failed: {filename}")
         return (result, metadata.decode("utf8"))
@@ -435,10 +440,10 @@ cdef class SparseBinomialSequentialClassifier:
         return yhats
 
 
-cdef class DenseMultinomialClassifier(object):
+cdef class DenseMultinomialModel(object):
 
     """
-    DenseMultiomialClassifier(nfeats, nlabels)
+    DenseMultiomialModel(nfeats, nlabels)
 
     Args:
         nfeats: Maximum number of unique features.
@@ -453,10 +458,10 @@ cdef class DenseMultinomialClassifier(object):
     of non-negative integers and labels as non-negative integers.
     """
 
-    cdef unique_ptr[DenseMultinomialModel] _model
+    cdef unique_ptr[cc.DenseMultinomialModel] _model
 
     def __init__(self, size_t nlabels, size_t nfeats):
-        self._model = make_unique[DenseMultinomialModel](nlabels, nfeats)
+        self._model = make_unique[cc.DenseMultinomialModel](nlabels, nfeats)
 
     def __repr__(self):
         return f"<{self.__class__.__name__} at 0x{id(self):x}>"
@@ -464,7 +469,7 @@ cdef class DenseMultinomialClassifier(object):
     @classmethod
     def read(cls, filename):
         """
-        DenseMultinomialClassifier.read(filename)
+        DenseMultinomialModel.read(filename)
 
         Creates instance by deserializing model on disk.
 
@@ -477,10 +482,10 @@ cdef class DenseMultinomialClassifier(object):
         Raises:
             PerceptronixIOError: Read failed.
         """
-        cdef DenseMultinomialClassifier result = cls.__new__(cls)
+        cdef DenseMultinomialModel result = cls.__new__(cls)
         cdef string metadata
         result._model.reset(
-            DenseMultinomialModel.Read(tobytes(filename), addr(metadata)))
+            cc.DenseMultinomialModel.Read(tobytes(filename), addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError(f"Read failed: {filename}")
         return (result, metadata.decode("utf8"))
@@ -564,10 +569,10 @@ cdef class DenseMultinomialClassifier(object):
         return self._model.get().Predict(fvector)
 
 
-cdef class SparseDenseMultinomialClassifier(object):
+cdef class SparseDenseMultinomialModel(object):
 
     """
-    SparseDenseMultinomialClassifier(nfeats, nlabels)
+    SparseDenseMultinomialModel(nfeats, nlabels)
 
     Args:
         nfeats: Hint for the number of unique features.
@@ -577,21 +582,22 @@ cdef class SparseDenseMultinomialClassifier(object):
     fixed-size arrays of weights.
 
     This class provides a more flexible multinomial linear classifier than
-    DenseMultinomialClassifier, but more restrictive (and probably more
-    performant) than SparseMultinomialClassifier. At construction time, clients
+    DenseMultinomialModel, but more restrictive (and probably more
+    performant) than SparseMultinomialModel. At construction time, clients
     specify a hint for the number of features and a maximum number of labels.
     The former is used to compute the initial size for the outer hash table;
-    Like SparseMultinomialClassifier, this is not a hard constraint. The latter
+    Like SparseMultinomialModel, this is not a hard constraint. The latter
     is used to compute the max size for the inner array of weights; like
-    DenseMultinomialClassifier but unlike SparseMultinomialClassifier, this _is_
+    DenseMultinomialModel but unlike SparseMultinomialModel, this _is_
     a hard constraint. During training and inference, users pass features as
     iterables of strings and labels as non-negative integers.
     """
 
-    cdef unique_ptr[SparseDenseMultinomialModel] _model
+    cdef unique_ptr[cc.SparseDenseMultinomialModel] _model
 
     def __init__(self, size_t nlabels, size_t nfeats):
-        self._model = make_unique[SparseDenseMultinomialModel](nlabels, nfeats)
+        self._model = make_unique[cc.SparseDenseMultinomialModel](nlabels,
+                                                                  nfeats)
 
     def __repr__(self):
         return f"<{self.__class__.__name__} at 0x{id(self):x}>"
@@ -599,7 +605,7 @@ cdef class SparseDenseMultinomialClassifier(object):
     @classmethod
     def read(cls, filename):
         """
-        SparseDenseMultinomialClassifier.read(filename)
+        SparseDenseMultinomialModel.read(filename)
 
         Creates instance by deserializing model on disk.
 
@@ -612,10 +618,11 @@ cdef class SparseDenseMultinomialClassifier(object):
         Raises:
             PerceptronixIOError: Read failed.
         """
-        cdef SparseDenseMultinomialClassifier result = cls.__new__(cls)
+        cdef SparseDenseMultinomialModel result = cls.__new__(cls)
         cdef string metadata
-        result._model.reset(SparseDenseMultinomialModel.Read(tobytes(filename),
-                                                             addr(metadata)))
+        result._model.reset(cc.SparseDenseMultinomialModel.Read(
+            tobytes(filename),
+            addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError(f"Read failed: {filename}")
         return (result, metadata.decode("utf8"))
@@ -697,10 +704,10 @@ cdef class SparseDenseMultinomialClassifier(object):
         return self._model.get().Predict(fvector)
 
 
-cdef class SparseDenseMultinomialSequentialClassifier:
+cdef class SparseDenseMultinomialSequentialModel:
 
     """
-    SparseDenseMultinomialSequentialClassifier(nfeats, nlabels, order)
+    SparseDenseMultinomialSequentialModel(nfeats, nlabels, order)
 
     Args:
         nfeats: Hint for the number of unique features.
@@ -711,16 +718,16 @@ cdef class SparseDenseMultinomialSequentialClassifier:
     fixed-size arrays of weights and greedy sequential decoding.
     """
 
-    cdef unique_ptr[SparseDenseMultinomialSequentialModel] _model
+    cdef unique_ptr[cc.SparseDenseMultinomialSequentialModel] _model
 
     def __init__(self, size_t nfeats, size_t nlabels, size_t order):
-        self._model = make_unique[SparseDenseMultinomialSequentialModel](
+        self._model = make_unique[cc.SparseDenseMultinomialSequentialModel](
             nfeats, nlabels, order)
 
     @classmethod
     def read(cls, filename, size_t order):
         """
-        SparseDenseMultinomialSequentialClassifier.read(filename, order)
+        SparseDenseMultinomialSequentialModel.read(filename, order)
 
         Creates instance by deserialization model on disk.
 
@@ -734,13 +741,13 @@ cdef class SparseDenseMultinomialSequentialClassifier:
         Raises:
             PerceptronixIOError: Read failed.
         """
-        cdef SparseDenseMultinomialSequentialClassifier result \
+        cdef SparseDenseMultinomialSequentialModel result \
             = cls.__new__(cls)
         cdef string metadata
         result._model.reset(
-            SparseDenseMultinomialSequentialModel.Read(tobytes(filename),
-                                                       order,
-                                                       addr(metadata)))
+            cc.SparseDenseMultinomialSequentialModel.Read(tobytes(filename),
+                                                          order,
+                                                          addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError(f"Read failed: {filename}")
         return (result, metadata.decode("utf8"))
@@ -820,10 +827,10 @@ cdef class SparseDenseMultinomialSequentialClassifier:
         return yhats
 
 
-cdef class SparseMultinomialClassifier(object):
+cdef class SparseMultinomialModel(object):
 
     """
-    SparseMultinomialClassifier(nfeats, nlabels)
+    SparseMultinomialModel(nfeats, nlabels)
 
     Args:
         nfeats: Hint for the number of unique features.
@@ -832,17 +839,17 @@ cdef class SparseMultinomialClassifier(object):
     Multinomial linear classifier backed by a nested hash tables of weights.
 
     This class provides a more flexible multinomial linear classifier than
-    DenseMultinomialClassifier. At construction time, clients specify an
+    DenseMultinomialModel. At construction time, clients specify an
     hint for the number of features and labels, which is used to compute the
-    initial sizes for the nested hash tables; unlike DenseBinomialClassifier,
+    initial sizes for the nested hash tables; unlike DenseBinomialModel,
     neither are hard constraints. During training and inference, users pass
     features as iterables of strings and labels as strings.
     """
 
-    cdef unique_ptr[SparseMultinomialModel] _model
+    cdef unique_ptr[cc.SparseMultinomialModel] _model
 
     def __init__(self, size_t nlabels, size_t nfeats):
-        self._model = make_unique[SparseMultinomialModel](nlabels, nfeats)
+        self._model = make_unique[cc.SparseMultinomialModel](nlabels, nfeats)
 
     def __repr__(self):
         return f"<{self.__class__.__name__} at 0x{id(self):x}>"
@@ -850,7 +857,7 @@ cdef class SparseMultinomialClassifier(object):
     @classmethod
     def read(cls, filename):
         """
-        SparseMutinomialClassifier.read(filename)
+        SparseMutinomialModel.read(filename)
 
         Creates instance by deserializing model on disk.
 
@@ -863,10 +870,10 @@ cdef class SparseMultinomialClassifier(object):
         Raises:
             PerceptronixIOError: Read failed.
         """
-        cdef SparseMultinomialClassifier result = cls.__new__(cls)
+        cdef SparseMultinomialModel result = cls.__new__(cls)
         cdef string metadata
-        result._model.reset(SparseMultinomialModel.Read(tobytes(filename),
-                                                        addr(metadata)))
+        result._model.reset(cc.SparseMultinomialModel.Read(tobytes(filename),
+                                                           addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError(f"Read failed: {filename}")
         return (result, metadata.decode("utf8"))
@@ -949,10 +956,10 @@ cdef class SparseMultinomialClassifier(object):
         return self._model.get().Predict(fvector)
 
 
-cdef class SparseMultinomialSequentialClassifier:
+cdef class SparseMultinomialSequentialModel:
 
     """
-    SparseMultinomialSequentialClassifier(nfeats, nlabels, order)
+    SparseMultinomialSequentialModel(nfeats, nlabels, order)
 
     Args:
         nfeats: Hint for the number of unique features.
@@ -963,17 +970,17 @@ cdef class SparseMultinomialSequentialClassifier:
     greedy sequential decoding.
     """
 
-    cdef unique_ptr[SparseMultinomialSequentialModel] _model
+    cdef unique_ptr[cc.SparseMultinomialSequentialModel] _model
 
     def __init__(self, size_t nfeats, size_t nlabels, size_t order):
-        self._model = make_unique[SparseMultinomialSequentialModel](nfeats,
-                                                                    nlabels,
-                                                                    order)
+        self._model = make_unique[cc.SparseMultinomialSequentialModel](nfeats,
+                                                                       nlabels,
+                                                                       order)
 
     @classmethod
     def read(cls, filename, size_t order):
         """
-        SparseMultinomialSequentialClassifier.read(filename, order)
+        SparseMultinomialSequentialModel.read(filename, order)
 
         Creates instance by deserialization model on disk.
 
@@ -987,9 +994,9 @@ cdef class SparseMultinomialSequentialClassifier:
         Raises:
             PerceptronixIOError: Read failed.
         """
-        cdef SparseMultinomialSequentialClassifier result = cls.__new__(cls)
+        cdef SparseMultinomialSequentialModel result = cls.__new__(cls)
         cdef string metadata
-        result._model.reset(SparseMultinomialSequentialModel.Read(
+        result._model.reset(cc.SparseMultinomialSequentialModel.Read(
             tobytes(filename), order, addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError(f"Read failed: {filename}")
