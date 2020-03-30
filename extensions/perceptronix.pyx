@@ -105,7 +105,7 @@ cdef class DenseBinomialModel(object):
                                                        addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError(f"Read failed: {filename}")
-        return (result, metadata.decode("utf8"))
+        return (result, metadata)
 
     cpdef void write(self, filename, metadata) except *:
         """
@@ -233,7 +233,7 @@ cdef class SparseBinomialModel(object):
                                                         addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError(f"Read failed: {filename}")
-        return (result, metadata.decode("utf8"))
+        return (result, metadata)
 
     cpdef void write(self, filename, metadata=b"") except *:
         """
@@ -358,7 +358,7 @@ cdef class SparseBinomialSequentialModel:
                                                   addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError(f"Read failed: {filename}")
-        return (result, metadata.decode("utf8"))
+        return (result, metadata)
 
     cpdef void write(self, filename, metadata) except *:
         """
@@ -488,7 +488,7 @@ cdef class DenseMultinomialModel(object):
             cc.DenseMultinomialModel.Read(tobytes(filename), addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError(f"Read failed: {filename}")
-        return (result, metadata.decode("utf8"))
+        return (result, metadata)
 
     cpdef void write(self, filename, metadata) except *:
         """
@@ -625,7 +625,7 @@ cdef class SparseDenseMultinomialModel(object):
             addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError(f"Read failed: {filename}")
-        return (result, metadata.decode("utf8"))
+        return (result, metadata)
 
     cpdef void write(self, filename, metadata=b"") except *:
         """
@@ -750,7 +750,7 @@ cdef class SparseDenseMultinomialSequentialModel:
                                                           addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError(f"Read failed: {filename}")
-        return (result, metadata.decode("utf8"))
+        return (result, metadata)
 
     cpdef void write(self, filename, metadata) except *:
         """
@@ -876,7 +876,7 @@ cdef class SparseMultinomialModel(object):
                                                            addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError(f"Read failed: {filename}")
-        return (result, metadata.decode("utf8"))
+        return (result, metadata)
 
     cpdef void write(self, filename, metadata=b"") except *:
         """
@@ -1000,7 +1000,7 @@ cdef class SparseMultinomialSequentialModel:
             tobytes(filename), order, addr(metadata)))
         if result._model.get() == NULL:
             raise PerceptronixIOError(f"Read failed: {filename}")
-        return (result, metadata.decode("utf8"))
+        return (result, metadata)
 
     cpdef void write(self, filename, metadata=b"") except *:
         """
