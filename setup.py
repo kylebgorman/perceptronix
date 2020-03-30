@@ -5,9 +5,9 @@ from Cython.Build import cythonize
 
 
 extension = Extension(
-    "perceptronix",
+    "_perceptronix",
     sources=[
-        "extensions/perceptronix.pyx",
+        "extensions/_perceptronix.pyx",
         "extensions/binomial_perceptron.cc",
         "extensions/linear_model.pb.cc",
         "extensions/multinomial_perceptron.cc",
@@ -18,7 +18,7 @@ extension = Extension(
 )
 
 
-__version__ = "0.7.2"
+__version__ = "0.7.3"
 
 
 setup(
@@ -38,7 +38,8 @@ setup(
     ],
     license="Apache 2.0",
     python_requires=">=3.6",
-    zip_safe=False,
     install_requires=["Cython >= 0.29"],
     ext_modules=cythonize([extension]),
+    packages=["perceptronix"],
+    zip_safe=False,
 )
