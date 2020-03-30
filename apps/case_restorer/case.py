@@ -142,7 +142,7 @@ def apply_tc(nunistr: str, tc: TokenCase, pattern: Pattern = None) -> str:
 
     Args:
         nunistr: A Unicode string to be cased.
-        tc: A Tokencase indicating the casing to be applied.
+        tc: A TokenCase indicating the casing to be applied.
         pattern: An iterable of CharCase characters representing the specifics
             of the `MIXED` TokenCase, when the `tc` argument is `MIXED`.
 
