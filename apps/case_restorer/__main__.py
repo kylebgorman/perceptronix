@@ -1,10 +1,12 @@
 """Case restorer main."""
 
 import argparse
+import collections
 import logging
 import random
+import operator
 
-from typing import List, Tuple
+from typing import Counter, DefaultDict, List, Tuple
 
 import nlup
 
@@ -20,14 +22,20 @@ Sentences = List[Tuple[Tokens, Tags]]
 
 def _read_data(filename: str) -> Tuple[Sentences, MixedPatternTable]:
     data = []
-    mixed_patterns: MixedPatternTable = {}
+    mixed_pattern_counts: DefaultDict[str, Counter] = collections.defaultdict(
+        collections.Counter
+    )
     gen = CaseRestorer.tagged_sentences_from_file(filename)
     for (tokens, tags, patterns) in gen:
         vectors = CaseRestorer.extract_emission_features(tokens)
         data.append((vectors, tags))
         for (token, pattern) in zip(tokens, patterns):
             if pattern is not None:
-                mixed_patterns[token] = pattern
+                mixed_pattern_counts[token][tuple(pattern)] += 1
+    mixed_patterns = {
+        token: list(max(inner.items(), key=operator.itemgetter(1))[0])
+        for (token, inner) in mixed_pattern_counts.items()
+    }
     return (data, mixed_patterns)
 
 
