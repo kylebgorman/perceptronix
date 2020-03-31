@@ -91,7 +91,7 @@ if args.train:
         logging.info(
             "Resubstitution accuracy: %.4f", train_correct / len(train_data)
         )
-        if args.dev:
+        if dev_data:
             dev_correct = 0
             for (vector, boundary) in dev_data:
                 dev_correct += model.evaluate(vector, boundary)

@@ -18,7 +18,7 @@ extension = Extension(
 )
 
 
-__version__ = "0.7.3"
+__version__ = "0.7.4"
 
 
 setup(
@@ -41,5 +41,6 @@ setup(
     install_requires=["Cython >= 0.29"],
     ext_modules=cythonize([extension]),
     packages=["perceptronix"],
+    package_data={"perceptronix": ["__init__.pyi", "py.typed"]},
     zip_safe=False,
 )

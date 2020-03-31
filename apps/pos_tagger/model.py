@@ -162,7 +162,7 @@ class POSTagger(object):
 
     def predict(self, vectors: Vectors) -> Iterator[str]:
         for tag in self._classifier.predict(vectors):
-            yield tag.decode("utf8")
+            yield tag
 
     def evaluate(self, vectors: Vectors, tags: Tags) -> int:
         return sum(
