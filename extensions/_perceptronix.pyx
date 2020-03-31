@@ -460,8 +460,8 @@ cdef class DenseMultinomialModel(object):
 
     cdef unique_ptr[cc.DenseMultinomialModel] _model
 
-    def __init__(self, size_t nlabels, size_t nfeats):
-        self._model = make_unique[cc.DenseMultinomialModel](nlabels, nfeats)
+    def __init__(self, size_t nfeats, size_t nlabels):
+        self._model = make_unique[cc.DenseMultinomialModel](nfeats, nlabels)
 
     def __repr__(self):
         return f"<{self.__class__.__name__} at 0x{id(self):x}>"
@@ -595,9 +595,9 @@ cdef class SparseDenseMultinomialModel(object):
 
     cdef unique_ptr[cc.SparseDenseMultinomialModel] _model
 
-    def __init__(self, size_t nlabels, size_t nfeats):
-        self._model = make_unique[cc.SparseDenseMultinomialModel](nlabels,
-                                                                  nfeats)
+    def __init__(self, size_t nfeats, size_t nlabels):
+        self._model = make_unique[cc.SparseDenseMultinomialModel](nfeats,
+                                                                  nlabels)
 
     def __repr__(self):
         return f"<{self.__class__.__name__} at 0x{id(self):x}>"
@@ -848,8 +848,8 @@ cdef class SparseMultinomialModel(object):
 
     cdef unique_ptr[cc.SparseMultinomialModel] _model
 
-    def __init__(self, size_t nlabels, size_t nfeats):
-        self._model = make_unique[cc.SparseMultinomialModel](nlabels, nfeats)
+    def __init__(self, size_t nfeats, size_t nlabels):
+        self._model = make_unique[cc.SparseMultinomialModel](nfeats, nlabels)
 
     def __repr__(self):
         return f"<{self.__class__.__name__} at 0x{id(self):x}>"
