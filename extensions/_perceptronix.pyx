@@ -660,7 +660,7 @@ cdef class SparseDenseMultinomialModel(object):
             label: The non-negative integer label for the observation.
 
         Returns:
-            Whetehr the instance was correctly classified.
+            Whether the instance was correctly classified.
 
         Raises:
             PerceptronixOpError: Model already averaged.
