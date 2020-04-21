@@ -40,13 +40,9 @@ class MultinomialPerceptronBaseTpl {
     inner->AddWeights(table_[f]);
   }
 
-  void Score(const FeatureBundle &fb, InnerTable *inner) const {
-    for (const auto &f : fb) Score(f, inner);
-  }
-
   InnerTable Score(const FeatureBundle &fb) const {
     InnerTable inner(bias_);
-    Score(fb, &inner);
+    for (const auto &f : fb) Score(f, &inner);
     return inner;
   }
 

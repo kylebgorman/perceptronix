@@ -30,13 +30,9 @@ class BinomialPerceptronBaseTpl {
 
   void Score(Feature f, Weight *weight) const { *weight += table_[f]; }
 
-  void Score(const FeatureBundle &fb, Weight *weight) const {
-    for (const auto &f : fb) Score(f, weight);
-  }
-
   Weight Score(const FeatureBundle &fb) const {
     Weight weight(bias_);
-    Score(fb, &weight);
+    for (const auto &f : fb) Score(f, &weight);
     return weight;
   }
 
@@ -79,11 +75,12 @@ class BinomialAveragingPerceptronTpl
   // Same as above but with optional (useless) yhat argument.
   void Update(const FeatureBundle &fb, bool y, bool) { Update(fb, y); }
 
-  // Predicts a single example, and updates if it is incorrectly labeled,
-  // then updates the timer and returns a boolean indicating success or
-  // failure (which callers may safely choose to ignore).
+  // Predicts a single example, updates if it is incorrectly labeled; then
+  // updates the timer and returns a boolean indicating success or failure
+  // (which callers may safely choose to ignore).
   bool Train(const FeatureBundle &fb, bool y) {
-    bool success = (Predict(fb) == y);
+    const bool yhat = Predict(fb);
+    const bool success = yhat == y;
     if (!success) Update(fb, y);
     Tick();
     return success;
@@ -95,12 +92,6 @@ class BinomialAveragingPerceptronTpl
   uint64_t Time() const { return time_; }
 
  private:
-  // Update a single feature given the correct label.
-  void Update(Feature f, bool y) { table_[f].Update(y ? +1 : -1, time_); }
-
-  // Same as above but with optional (useless) yhat argument.
-  void Update(Feature f, bool y, bool) { Update(f, y); }
-
   const float c_;
   uint64_t time_;
 };
