@@ -43,11 +43,11 @@ argparser.add_argument(
     "-v", "--verbose", action="store_true", help="enable verbose output"
 )
 input_group = argparser.add_mutually_exclusive_group(required=True)
-input_group.add_argument("-t", "--train", help="input text training data")
-input_group.add_argument("-r", "--read", help="input serialized model")
+input_group.add_argument("--train", help="input text training data")
+input_group.add_argument("--read", help="input serialized model")
 output_group = argparser.add_mutually_exclusive_group(required=True)
-output_group.add_argument("-s", "--tokenize", help="output tokenized text")
-output_group.add_argument("-w", "--write", help="output serialized model")
+output_group.add_argument("--tokenize", help="output tokenized text")
+output_group.add_argument("--write", help="output serialized model")
 # Other options.
 argparser.add_argument(
     "--boundary_regex",

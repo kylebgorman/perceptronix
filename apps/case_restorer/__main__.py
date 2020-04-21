@@ -51,14 +51,14 @@ verbosity_group.add_argument(
     "-v", "--verbose", action="store_true", help="enable verbose output"
 )
 input_group = argparser.add_mutually_exclusive_group(required=True)
-input_group.add_argument("-r", "--read", help="input serialized model")
-input_group.add_argument("-t", "--train", help="input tokenized training data")
-argparser.add_argument("-d", "--dev", help="input tokenized development data")
+input_group.add_argument("--read", help="input serialized model")
+input_group.add_argument("--train", help="input tokenized training data")
+argparser.add_argument("--dev", help="input tokenized development data")
 output_group = argparser.add_mutually_exclusive_group(required=True)
 output_group.add_argument(
-    "-p", "--predict", help="output cased text from tokenized training_data"
+    "--predict", help="output cased text from tokenized training_data"
 )
-output_group.add_argument("-w", "--write", help="output serialized model")
+output_group.add_argument("--write", help="output serialized model")
 argparser.add_argument(
     "--nfeats",
     type=int,

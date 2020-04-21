@@ -32,14 +32,14 @@ argparser.add_argument(
     "-v", "--verbose", action="store_true", help="enable verbose output"
 )
 input_group = argparser.add_mutually_exclusive_group(required=True)
-input_group.add_argument("-r", "--read", help="input serialized model")
-input_group.add_argument("-t", "--train", help="input text training data")
-argparser.add_argument("-d", "--dev", help="input development training data")
+input_group.add_argument("--read", help="input serialized model")
+input_group.add_argument("--train", help="input text training data")
+argparser.add_argument("--dev", help="input development training data")
 output_group = argparser.add_mutually_exclusive_group(required=True)
 output_group.add_argument(
-    "-p", "--predict", help="output tokenized text from untokenized train_data"
+    "--predict", help="output tokenized text from untokenized train_data"
 )
-output_group.add_argument("-w", "--write", help="output serialized model")
+output_group.add_argument("--write", help="output serialized model")
 argparser.add_argument(
     "--candidate_regex",
     default=CANDIDATE_REGEX,
