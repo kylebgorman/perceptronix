@@ -76,9 +76,9 @@ argparser.add_argument(
 )
 argparser.add_argument(
     "-c",
-    type=float,
-    default=0.0,
-    help="margin coefficient (default: %(default)s)",
+    type=int,
+    default=0,
+    help="margin constant (default: %(default)s)",
 )
 argparser.add_argument("--seed", type=int, default=0, help="random seed")
 args = argparser.parse_args()

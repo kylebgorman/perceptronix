@@ -36,13 +36,9 @@ class MultinomialPerceptronBaseTpl {
     return inner.ArgMax();
   }
 
-  void Score(Feature f, InnerTable *inner) const {
-    inner->AddWeights(table_[f]);
-  }
-
   InnerTable Score(const FeatureBundle &fb) const {
     InnerTable inner(bias_);
-    for (const auto &f : fb) Score(f, &inner);
+    for (const auto &f : fb) inner.AddWeights(table_[f]);
     return inner;
   }
 
@@ -61,13 +57,14 @@ class MultinomialAveragingPerceptronTpl
     : public MultinomialPerceptronBaseTpl<OuterTableTpl, AveragingWeight> {
  public:
   using Base = MultinomialPerceptronBaseTpl<OuterTableTpl, AveragingWeight>;
+  using InnerTable = typename Base::InnerTable;
   using Feature = typename Base::Feature;
   using FeatureBundle = typename Base::FeatureBundle;
   using Label = typename Base::Label;
 
   friend class MultinomialPerceptronBaseTpl<OuterTableTpl, Weight>;
 
-  MultinomialAveragingPerceptronTpl(size_t nfeats, size_t nlabels, float c = 0.)
+  MultinomialAveragingPerceptronTpl(size_t nfeats, size_t nlabels, int c = 0)
       : Base(nfeats, nlabels), c_(c), time_(0) {}
 
   using Base::Predict;
@@ -76,23 +73,23 @@ class MultinomialAveragingPerceptronTpl
   using Base::bias_;
   using Base::table_;
 
-  // Predicts a single example, updates if it is incorrectly labeled; then
-  // updates the timer and returns a boolean indicating success or failure
-  // (which callers may safely choose to ignore).
+  // Predicts a single example, updates, and then returns a boolean indicating
+  // success or failure (which callers may safely choose to ignore).
   bool Train(const FeatureBundle &fb, Label y) {
-    const auto yhat = Predict(fb);
-    const bool success = yhat == y;
-    if (!success) Update(fb, y, yhat);
+    const auto scores = Score(fb);
+    const Label yhat = scores.ArgMax();
+    // We update if:
+    // * there is a misclassification, or
+    // * if C has a non-default value and the margin is less than C.
+    if (y != yhat || (c_ && scores.Margin().Get() < c_)) Update(fb, y, yhat);
     Tick();
-    return success;
+    return y == yhat;
   }
 
-  // Updates a single feature given correct and incorrect labels.
-  void Update(const Feature &f, Label y, Label yhat) {
-    auto &ref = table_[f];
-    ref[y].Update(+1, time_);
-    ref[yhat].Update(-1, time_);
-  }
+  // Advances the clock; invoked automatically by Train.
+  void Tick(uint64_t step = 1) { time_ += step; }
+
+  uint64_t Time() const { return time_; }
 
   // Updates many features given correct and incorrect labels.
   void Update(const FeatureBundle &fb, Label y, Label yhat) {
@@ -105,13 +102,8 @@ class MultinomialAveragingPerceptronTpl
     }
   }
 
-  // Advances the clock; invoked automatically by Train.
-  void Tick(uint64_t step = 1) { time_ += step; }
-
-  uint64_t Time() const { return time_; }
-
  private:
-  const float c_;
+  const int c_;
   uint64_t time_;
 };
 

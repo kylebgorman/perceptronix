@@ -4,13 +4,13 @@
 
 set -euo pipefail
 
-python -m case_restorer -v \
+python -m case_restorer -v -c1 \
     --train=../../perceptronix_data/wsj.tok \
     --write=case_restorer.pb &
-python -m pos_tagger -v \
+python -m pos_tagger -v -c1 \
     --train=../../perceptronix_data/wsj.vertical_tagged \
     --write=pos_tagger.pb &
-python -m sentence_tokenizer -v \
+python -m sentence_tokenizer -v -c1 \
     --train=../../perceptronix_data/wsj.txt \
     --write=sentence_tokenizer.pb &
 wait

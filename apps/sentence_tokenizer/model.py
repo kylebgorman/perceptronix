@@ -30,7 +30,7 @@ class SentenceTokenizer(object):
         candidate_regex: str,
         max_context: int,
         nfeats: int = 0x1000,
-        c: float = 0.0,
+        c: int = 0,
     ):
         self._candidate_regex = regex.compile(candidate_regex)
         self._max_context = max_context

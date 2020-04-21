@@ -31,6 +31,8 @@ class DenseInnerTableTpl {
 
   const Weight &operator[](Feature f) const { return table_[f]; }
 
+  size_t Size() const { return table_.size(); }
+
   Iterator begin() { return std::begin(table_); }
 
   const Iterator cbegin() const { return std::begin(table_); }
@@ -39,10 +41,16 @@ class DenseInnerTableTpl {
 
   const Iterator cend() const { return std::end(table_); }
 
-  size_t Size() const { return table_.size(); }
+  auto ArgMax() const { return std::distance(cbegin(), Max()); }
 
-  auto ArgMax() const {
-    return std::distance(cbegin(), std::max_element(cbegin(), cend()));
+  auto Max() const { return std::max_element(cbegin(), cend()); }
+
+  auto Margin() const {
+    const auto max = Max();
+    static auto cmp = [&max](const Weight &lhs, const Weight &rhs) {
+       return rhs != *max && lhs < rhs;
+    };
+    return *max - *std::max_element(cbegin(), cend(), cmp);
   }
 
   void AddWeights(const DenseInnerTableTpl<Weight> &weights) {
@@ -72,7 +80,7 @@ class SparseInnerTableTpl {
 
   const Weight &operator[](Feature f) const {
     auto it = table_.find(f);
-    if (it == table_.cend()) return default_weight_;
+    if (it == table_.cend()) return kDefaultWeight;
     return it->second;
   }
 
@@ -86,13 +94,29 @@ class SparseInnerTableTpl {
 
   ConstIterator cend() const { return table_.cend(); }
 
-  Feature ArgMax() const {
+  auto ArgMax() const {
     // The empty string is used as a place-keeper.
     if (table_.empty()) return Feature();
-    static auto cmp = [](const Pair &lhs, const Pair &rhs) {
+    constexpr static auto cmp = [](const Pair &lhs, const Pair &rhs){
       return lhs.second < rhs.second;
     };
     return std::max_element(cbegin(), cend(), cmp)->first;
+  }
+
+  auto Max() const {
+    if (table_.empty()) return kDefaultWeight;
+    constexpr static auto cmp = [](const Pair &lhs, const Pair &rhs){
+      return lhs.second < rhs.second;
+    };
+    return std::max_element(cbegin(), cend(), cmp)->second;
+  }
+
+  auto Margin() const {
+    const auto max = Max();
+    static auto cmp = [&max](const Pair &lhs, const Pair &rhs) {
+       return lhs.second != max && lhs.second < rhs.second;
+    };
+    return max - std::max_element(cbegin(), cend(), cmp)->second;
   }
 
   void AddWeights(const SparseInnerTableTpl<Weight> &weights) {
@@ -105,11 +129,11 @@ class SparseInnerTableTpl {
  private:
   Table table_;
 
-  static const Weight default_weight_;
+  static const Weight kDefaultWeight;
 };
 
 template <class Weight>
-const Weight SparseInnerTableTpl<Weight>::default_weight_ = Weight();
+const Weight SparseInnerTableTpl<Weight>::kDefaultWeight{};
 
 // Outer table using arrays.
 
@@ -165,7 +189,7 @@ class SparseDenseOuterTableTpl {
   InnerTable &operator[](Feature f) {
     auto it = table_.find(f);
     if (it == table_.end()) {
-      table_.emplace(f, std::move(InnerTable(InnerSize())));
+      table_.emplace(f, InnerSize());
       return table_[f];
     }
     return it->second;
@@ -173,7 +197,7 @@ class SparseDenseOuterTableTpl {
 
   const InnerTable &operator[](Feature f) const {
     auto it = table_.find(f);
-    if (it == table_.cend()) return default_inner_table_;
+    if (it == table_.cend()) return kDefaultInnerTable;
     return it->second;
   }
 
@@ -193,13 +217,12 @@ class SparseDenseOuterTableTpl {
   Table table_;
   size_t nlabels_;
 
-  static const InnerTable default_inner_table_;
+  static const InnerTable kDefaultInnerTable;
 };
 
 template <class Weight>
 const typename SparseDenseOuterTableTpl<Weight>::InnerTable
-    SparseDenseOuterTableTpl<Weight>::default_inner_table_ =
-        SparseDenseOuterTableTpl<Weight>::InnerTable();
+    SparseDenseOuterTableTpl<Weight>::kDefaultInnerTable{};
 
 // Outer table using hash tables.
 
@@ -221,7 +244,7 @@ class SparseOuterTableTpl {
   InnerTable &operator[](Feature f) {
     auto it = table_.find(f);
     if (it == table_.end()) {
-      table_.emplace(f, std::move(InnerTable(InnerSize())));
+      table_.emplace(f, InnerSize());
       return table_[f];
     }
     return it->second;
@@ -229,7 +252,7 @@ class SparseOuterTableTpl {
 
   const InnerTable &operator[](Feature f) const {
     auto it = table_.find(f);
-    if (it == table_.cend()) return default_inner_table_;
+    if (it == table_.cend()) return kDefaultInnerTable;
     return it->second;
   }
 
@@ -249,13 +272,12 @@ class SparseOuterTableTpl {
   Table table_;
   size_t nlabels_;
 
-  static const InnerTable default_inner_table_;
+  static const InnerTable kDefaultInnerTable;
 };
 
 template <class Weight>
 const typename SparseOuterTableTpl<Weight>::InnerTable
-    SparseOuterTableTpl<Weight>::default_inner_table_ =
-        SparseOuterTableTpl<Weight>::InnerTable();
+    SparseOuterTableTpl<Weight>::kDefaultInnerTable{};
 
 }  // namespace perceptronix
 

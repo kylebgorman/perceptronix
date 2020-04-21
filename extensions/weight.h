@@ -36,6 +36,14 @@ class WeightTpl {
 
   void Update(WeightType tau) { weight_ += tau; }
 
+  bool operator==(const WeightTpl<T> &rhs) const {
+    return weight_ == rhs.weight_;
+  }
+
+  bool operator!=(const WeightTpl<T> &rhs) const {
+    return weight_ != rhs.weight_;
+  }
+
   bool operator<(const WeightTpl<T> &rhs) const {
     return weight_ < rhs.weight_;
   }

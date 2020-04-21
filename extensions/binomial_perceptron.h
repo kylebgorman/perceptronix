@@ -5,6 +5,7 @@
 // with binary features.
 
 #include <cassert>
+#include <cmath>
 #include <cstdint>
 
 #include <fstream>
@@ -28,11 +29,9 @@ class BinomialPerceptronBaseTpl {
     assert(nfeats > 0);
   }
 
-  void Score(Feature f, Weight *weight) const { *weight += table_[f]; }
-
   Weight Score(const FeatureBundle &fb) const {
     Weight weight(bias_);
-    for (const auto &f : fb) Score(f, &weight);
+    for (const auto &f : fb) weight += table_[f];
     return weight;
   }
 
@@ -62,28 +61,20 @@ class BinomialAveragingPerceptronTpl
 
   friend class BinomialPerceptronBaseTpl<InnerTableTpl, Weight>;
 
-  explicit BinomialAveragingPerceptronTpl(size_t nfeats, float c = 0.)
+  explicit BinomialAveragingPerceptronTpl(size_t nfeats, int c = 0)
       : Base(nfeats), c_(c), time_(0) {}
 
-  // Updates many features given the correct label.
-  void Update(const FeatureBundle &fb, bool y) {
-    const auto tau = y ? +1 : -1;
-    bias_.Update(tau, time_);
-    for (const auto &f : fb) table_[f].Update(tau, time_);
-  }
-
-  // Same as above but with optional (useless) yhat argument.
-  void Update(const FeatureBundle &fb, bool y, bool) { Update(fb, y); }
-
-  // Predicts a single example, updates if it is incorrectly labeled; then
-  // updates the timer and returns a boolean indicating success or failure
-  // (which callers may safely choose to ignore).
-  bool Train(const FeatureBundle &fb, bool y) {
-    const bool yhat = Predict(fb);
-    const bool success = yhat == y;
-    if (!success) Update(fb, y);
+  // Predicts a single example, updates, and then returns a boolean indicating
+  // success or failure (which callers may safely choose to ignore).
+  bool Train(const FeatureBundle &fb, Label y) {
+    const auto score = Score(fb);
+    const bool yhat = score.Get() > 0;
+    // We update if:
+    // * there is a misclassification, or
+    // * if C has a non-default value and the margin is less than C.
+    if (y != yhat || (c_ && std::abs(score.Get()) < c_)) Update(fb, y, yhat);
     Tick();
-    return success;
+    return y == yhat;
   }
 
   // Advances the clock; invoked automatically by Train.
@@ -91,8 +82,15 @@ class BinomialAveragingPerceptronTpl
 
   uint64_t Time() const { return time_; }
 
+  // Updates many features given correct and incorrect labels.
+  void Update(const FeatureBundle &fb, Label y, Label yhat) {
+    const auto tau = y ? +1 : -1;
+    bias_.Update(tau, time_);
+    for (const auto &f : fb) table_[f].Update(tau, time_);
+  }
+
  private:
-  const float c_;
+  const int c_;
   uint64_t time_;
 };
 

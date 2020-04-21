@@ -22,7 +22,7 @@ constexpr size_t F = static_cast<size_t>(DFeat::__SIZE__);
 void TestBinomial() {
   using DenseFeature = DenseBinomialModel::Feature;
 
-  DenseBinomialModel dbm(F);
+  DenseBinomialModel dbm(F, .8);
   dbm.Train({static_cast<DenseFeature>(DFeat::GREEN)}, false);
   dbm.Train({static_cast<DenseFeature>(DFeat::GREEN)}, true);
   dbm.Train({static_cast<DenseFeature>(DFeat::RED)}, false);
@@ -170,9 +170,9 @@ void TestStructured() {
 
 int main() {
 
-  perceptronix::TestBinomial();
-  perceptronix::TestMultinomial();
-  perceptronix::TestStructured();
+  ::perceptronix::TestBinomial();
+  ::perceptronix::TestMultinomial();
+  ::perceptronix::TestStructured();
 
   std::cout << "Success!" << std::endl;
 

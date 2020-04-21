@@ -36,7 +36,7 @@ class POSTagger(object):
         nfeats: int = 0x1000,
         nlabels: int = 0x20,
         order: int = 2,
-        c: float = 0.0,
+        c: int = 0,
     ):
         self._classifier = perceptronix.SparseMultinomialSequentialModel(
             nfeats, nlabels, order, c

@@ -37,7 +37,7 @@ class CaseRestorer(object):
         self,
         nfeats: int = 0x1000,
         order: int = 2,
-        c: float = 0.0,
+        c: int = 0,
         mpt: case.MixedPatternTable = None,
     ):
         self._classifier = perceptronix.SparseDenseMultinomialSequentialModel(

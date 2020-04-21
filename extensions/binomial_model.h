@@ -35,7 +35,7 @@ class BinomialModel {
                    typename AveragingPerceptron::FeatureBundle>::value,
       "FeatureBundle must be same type");
 
-  explicit BinomialModel(size_t nfeats, float c = 0.)
+  explicit BinomialModel(size_t nfeats, int c = 0)
       : aperceptron_(new AveragingPerceptron(nfeats, c)) {}
 
   // Deserialization.
@@ -56,6 +56,7 @@ class BinomialModel {
     assert(Averaged());
     return perceptron_->Write(ostrm, metadata);
   }
+
   bool Write(const std::string &filename,
              const std::string &metadata = "") const {
     assert(Averaged());
@@ -124,7 +125,7 @@ class BinomialSequentialModel
   using Base::aperceptron_;
   using Base::perceptron_;
 
-  BinomialSequentialModel(size_t nfeats, size_t order, float c = 0.)
+  BinomialSequentialModel(size_t nfeats, size_t order, int c = 0)
       : Base(nfeats, c),
         tf_(order),
         adecoder_(new AveragingDecoder(aperceptron_.get(), tf_)) {}

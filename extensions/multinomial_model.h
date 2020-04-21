@@ -35,7 +35,7 @@ class MultinomialModel {
                    typename AveragingPerceptron::FeatureBundle>::value,
       "FeatureBundle must be same type");
 
-  explicit MultinomialModel(size_t nfeats, size_t nlabels, float c = 0.)
+  explicit MultinomialModel(size_t nfeats, size_t nlabels, int c = 0)
       : aperceptron_(new AveragingPerceptron(nfeats, nlabels, c)) {}
 
   // Deserialization.
@@ -129,7 +129,7 @@ class MultinomialSequentialModel
   using Base::aperceptron_;
   using Base::perceptron_;
 
-  MultinomialSequentialModel(size_t nfeats, size_t nlabels, size_t order, float c = 0.)
+  MultinomialSequentialModel(size_t nfeats, size_t nlabels, size_t order, int c = 0)
       : Base(nfeats, nlabels, c),
         tf_(order),
         adecoder_(new AveragingDecoder(aperceptron_.get(), tf_)) {}
