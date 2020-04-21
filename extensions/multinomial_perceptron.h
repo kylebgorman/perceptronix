@@ -78,10 +78,8 @@ class MultinomialAveragingPerceptronTpl
   bool Train(const FeatureBundle &fb, Label y) {
     const auto scores = Score(fb);
     const Label yhat = scores.ArgMax();
-    // We update if:
-    // * there is a misclassification, or
-    // * if C has a non-default value and the margin is less than C.
-    if (y != yhat || (c_ && scores.Margin().Get() < c_)) Update(fb, y, yhat);
+    // TODO(kbg): Add margin update support.
+    if (y != yhat) Update(fb, y, yhat);
     Tick();
     return y == yhat;
   }

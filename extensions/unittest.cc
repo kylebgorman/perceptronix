@@ -22,7 +22,7 @@ constexpr size_t F = static_cast<size_t>(DFeat::__SIZE__);
 void TestBinomial() {
   using DenseFeature = DenseBinomialModel::Feature;
 
-  DenseBinomialModel dbm(F, .8);
+  DenseBinomialModel dbm(F, 1);
   dbm.Train({static_cast<DenseFeature>(DFeat::GREEN)}, false);
   dbm.Train({static_cast<DenseFeature>(DFeat::GREEN)}, true);
   dbm.Train({static_cast<DenseFeature>(DFeat::RED)}, false);
@@ -44,7 +44,7 @@ void TestBinomial() {
   assert(dbm2->Predict({static_cast<DenseFeature>(DFeat::GREEN),
                         static_cast<DenseFeature>(DFeat::RED)}));
 
-  SparseBinomialModel sbm(10);
+  SparseBinomialModel sbm(10, 1);
   sbm.Train({"green"}, true);
   sbm.Train({"green"}, true);
   sbm.Train({"red"}, true);
@@ -72,7 +72,7 @@ constexpr size_t N = static_cast<size_t>(Case::__SIZE__);
 void TestMultinomial() {
   using DenseFeature = DenseMultinomialModel::Feature;
 
-  DenseMultinomialModel dmm(F, N);
+  DenseMultinomialModel dmm(F, N, 1);
   dmm.Train({static_cast<DenseFeature>(DFeat::BLUE)},
             static_cast<DenseFeature>(Case::MIXED));
   dmm.Train({static_cast<DenseFeature>(DFeat::GREEN)},
@@ -109,7 +109,7 @@ void TestMultinomial() {
   assert(sdmm2->Predict({"blue", "green"}) ==
          static_cast<DenseFeature>(Case::MIXED));
 
-  SparseMultinomialModel smm(F, N);
+  SparseMultinomialModel smm(F, N, 1);
   smm.Train({"blue"}, "lower");
   smm.Train({"green"}, "lower");
   smm.Train({"green"}, "mixed");
@@ -133,7 +133,7 @@ void AssertStructured(const std::vector<Label> &ys,
 
 void TestStructured() {
   // Sparse binomial: word segmentation (space before?).
-  SparseBinomialSequentialModel sbsm(32, 2);
+  SparseBinomialSequentialModel sbsm(32, 2, 1);
   const std::vector<bool> binomial_ys = {false, true, true, true, false};
   const std::vector<std::vector<std::string>> evectors = {
       {"w=this", "*initial*"},
@@ -151,7 +151,7 @@ void TestStructured() {
 
   // Sparse-dense multinomial; case-restoration (reusing the evectors and
   // transition functor from above).
-  SparseDenseMultinomialSequentialModel sdmsm(32, N, 2);
+  SparseDenseMultinomialSequentialModel sdmsm(32, N, 2, 1);
   const std::vector<size_t> dense_ys = {
       static_cast<size_t>(Case::TITLE), static_cast<size_t>(Case::LOWER),
       static_cast<size_t>(Case::LOWER), static_cast<size_t>(Case::LOWER),

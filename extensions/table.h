@@ -41,17 +41,11 @@ class DenseInnerTableTpl {
 
   const Iterator cend() const { return std::end(table_); }
 
-  auto ArgMax() const { return std::distance(cbegin(), Max()); }
-
-  auto Max() const { return std::max_element(cbegin(), cend()); }
-
-  auto Margin() const {
-    const auto max = Max();
-    static auto cmp = [&max](const Weight &lhs, const Weight &rhs) {
-       return rhs != *max && lhs < rhs;
-    };
-    return *max - *std::max_element(cbegin(), cend(), cmp);
+  auto ArgMax() const {
+    return std::distance(cbegin(), std::max_element(cbegin(), cend()));
   }
+
+  auto Max() const { return *std::max_element(cbegin(), cend()); }
 
   void AddWeights(const DenseInnerTableTpl<Weight> &weights) {
     if (!weights.Size()) return;
@@ -109,14 +103,6 @@ class SparseInnerTableTpl {
       return lhs.second < rhs.second;
     };
     return std::max_element(cbegin(), cend(), cmp)->second;
-  }
-
-  auto Margin() const {
-    const auto max = Max();
-    static auto cmp = [&max](const Pair &lhs, const Pair &rhs) {
-       return lhs.second != max && lhs.second < rhs.second;
-    };
-    return max - std::max_element(cbegin(), cend(), cmp)->second;
   }
 
   void AddWeights(const SparseInnerTableTpl<Weight> &weights) {

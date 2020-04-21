@@ -509,7 +509,7 @@ cdef class DenseMultinomialModel(object):
             PerceptronixOpError: Must average model first.
             PerceptronixIOError: Write failed.
         """
-        if not self._averaged():
+        if not self._model.get().Averaged():
             raise PerceptronixOpError("Must average model first")
         if not self._model.get().Write(tobytes(filename), tobytes(metadata)):
             raise PerceptronixIOError(f"Write failed: {filename}")
@@ -535,7 +535,7 @@ cdef class DenseMultinomialModel(object):
         Raises:
             PerceptronixOpError: Model already averaged.
         """
-        if self._averaged():
+        if self._model.get().Averaged():
             raise PerceptronixOpError("Model already averaged")
         cdef vector[size_t] fvector = feats
         return self._model.get().Train(fvector, label)

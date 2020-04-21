@@ -69,10 +69,11 @@ class BinomialAveragingPerceptronTpl
   bool Train(const FeatureBundle &fb, Label y) {
     const auto score = Score(fb);
     const bool yhat = score.Get() > 0;
-    // We update if:
-    // * there is a misclassification, or
-    // * if C has a non-default value and the margin is less than C.
-    if (y != yhat || (c_ && std::abs(score.Get()) < c_)) Update(fb, y, yhat);
+    if (y != yhat) {
+      Update(fb, y, yhat);
+    } else if (c_ && static_cast<int>(std::abs(score.Get()) / fb.size()) < c_) {
+      Update(fb, y, yhat);
+    }
     Tick();
     return y == yhat;
   }
