@@ -77,7 +77,7 @@ class BinomialAveragingPerceptronTpl
   }
 
   // Same as above but with optional (useless) yhat argument.
-  void Update(const FeatureBundle &fb, bool y, bool yhat) { Update(fb, y); }
+  void Update(const FeatureBundle &fb, bool y, bool) { Update(fb, y); }
 
   // Predicts a single example, and updates if it is incorrectly labeled,
   // then updates the timer and returns a boolean indicating success or
