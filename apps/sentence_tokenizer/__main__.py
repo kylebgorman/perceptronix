@@ -6,8 +6,8 @@ import random
 
 from typing import List, Tuple
 
-import nlup
-import regex
+import nlup  # type: ignore
+import regex  # type: ignore
 
 from .model import SentenceTokenizer
 
@@ -63,6 +63,12 @@ argparser.add_argument(
     default=5,
     help="number of epochs (default: %(default)s)",
 )
+argparser.add_argument(
+    "-c",
+    type=float,
+    default=0.0,
+    help="margin coefficient (default: %(default)s)",
+)
 argparser.add_argument("--seed", type=int, default=0, help="random seed")
 args = argparser.parse_args()
 
@@ -75,7 +81,7 @@ else:
 # Input block.
 if args.train:
     model = SentenceTokenizer(
-        args.candidate_regex, args.max_context, args.nfeats
+        args.candidate_regex, args.max_context, args.nfeats, args.c
     )
     logging.info("Training model from %s", args.train)
     train_data = _read_data(args.train, model)

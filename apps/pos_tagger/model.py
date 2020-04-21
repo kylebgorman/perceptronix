@@ -32,10 +32,14 @@ class POSTagger(object):
     slots = ["_classifier"]
 
     def __init__(
-        self, nfeats: int = 0x1000, nlabels: int = 0x20, order: int = 2
+        self,
+        nfeats: int = 0x1000,
+        nlabels: int = 0x20,
+        order: int = 2,
+        c: float = 0.0,
     ):
         self._classifier = perceptronix.SparseMultinomialSequentialModel(
-            nfeats, nlabels, order
+            nfeats, nlabels, order, c
         )
 
     @classmethod
@@ -44,9 +48,7 @@ class POSTagger(object):
         (
             classifier,
             metadata,
-        ) = perceptronix.SparseMultinomialSequentialModel.read(
-            filename, order
-        )
+        ) = perceptronix.SparseMultinomialSequentialModel.read(filename, order)
         if metadata:
             logging.warning("Ignoring metadata string: %s", metadata)
         new = cls.__new__(cls)
@@ -73,7 +75,7 @@ class POSTagger(object):
 
     @staticmethod
     def tagged_sentences_from_file(
-        filename: str
+        filename: str,
     ) -> Iterator[Tuple[Tokens, Tags]]:
         tokens: Tokens = []
         tags: Tags = []

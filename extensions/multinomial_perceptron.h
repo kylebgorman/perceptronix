@@ -71,8 +71,8 @@ class MultinomialAveragingPerceptronTpl
 
   friend class MultinomialPerceptronBaseTpl<OuterTableTpl, Weight>;
 
-  MultinomialAveragingPerceptronTpl(size_t nfeats, size_t nlabels)
-      : Base(nfeats, nlabels), time_(0) {}
+  MultinomialAveragingPerceptronTpl(size_t nfeats, size_t nlabels, float c = 0.)
+      : Base(nfeats, nlabels), c_(c), time_(0) {}
 
   using Base::Predict;
   using Base::Score;
@@ -115,6 +115,7 @@ class MultinomialAveragingPerceptronTpl
   uint64_t Time() const { return time_; }
 
  private:
+  const float c_;
   uint64_t time_;
 };
 

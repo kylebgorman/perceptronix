@@ -13,7 +13,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
     cdef cppclass DenseBinomialModel:
 
-        DenseBinomialModel(size_t)
+        DenseBinomialModel(size_t, float)
 
         @staticmethod
         DenseBinomialModel *Read(const string &, string *)
@@ -31,7 +31,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
     cdef cppclass SparseBinomialModel:
 
-        SparseBinomialModel(size_t)
+        SparseBinomialModel(size_t, float)
 
         @staticmethod
         SparseBinomialModel *Read(const string &, string *)
@@ -49,7 +49,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
     cdef cppclass SparseBinomialSequentialModel:
 
-        SparseBinomialSequentialModel(size_t, size_t)
+        SparseBinomialSequentialModel(size_t, size_t, float)
 
         @staticmethod
         SparseBinomialSequentialModel *Read(const string &, size_t, string *)
@@ -67,7 +67,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
     cdef cppclass DenseMultinomialModel:
     
-        DenseMultinomialModel(size_t, size_t)
+        DenseMultinomialModel(size_t, size_t, float)
 
         @staticmethod
         DenseMultinomialModel *Read(const string &, string *)
@@ -85,7 +85,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
     cdef cppclass SparseDenseMultinomialModel:
     
-        SparseDenseMultinomialModel(size_t, size_t)
+        SparseDenseMultinomialModel(size_t, size_t, float)
 
         @staticmethod
         SparseDenseMultinomialModel *Read(const string &, string *)
@@ -103,7 +103,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
     cdef cppclass SparseDenseMultinomialSequentialModel:
 
-        SparseDenseMultinomialSequentialModel(size_t, size_t, size_t)
+        SparseDenseMultinomialSequentialModel(size_t, size_t, size_t, float)
 
         @staticmethod
         SparseDenseMultinomialSequentialModel *Read(const string &,
@@ -125,7 +125,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
     
     cdef cppclass SparseMultinomialModel:
     
-        SparseMultinomialModel(size_t, size_t)
+        SparseMultinomialModel(size_t, size_t, float)
 
         @staticmethod
         SparseMultinomialModel *Read(const string &, string *)
@@ -143,7 +143,7 @@ cdef extern from "perceptronix.h" namespace "perceptronix" nogil:
 
     cdef cppclass SparseMultinomialSequentialModel:
 
-        SparseMultinomialSequentialModel(size_t, size_t, size_t)
+        SparseMultinomialSequentialModel(size_t, size_t, size_t, float)
 
         @staticmethod
         SparseMultinomialSequentialModel *Read(const string &,

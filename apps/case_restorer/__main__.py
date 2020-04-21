@@ -8,7 +8,7 @@ import operator
 
 from typing import Counter, DefaultDict, List, Tuple
 
-import nlup
+import nlup  # type: ignore
 
 
 from .case import MixedPatternTable, TokenCase
@@ -74,6 +74,12 @@ argparser.add_argument(
 argparser.add_argument(
     "--order", type=int, default=2, help="model order (default: %(default)s)"
 )
+argparser.add_argument(
+    "-c",
+    type=float,
+    default=0.0,
+    help="margin coefficient (default: %(default)s)",
+)
 argparser.add_argument("--seed", type=int, default=0, help="random seed")
 args = argparser.parse_args()
 
@@ -91,7 +97,7 @@ if args.train:
     if args.dev:
         dev_sents = _read_data(args.dev)[0]
         dev_size = _data_size(dev_sents)
-    model = CaseRestorer(args.nfeats, args.order, train_mpt)
+    model = CaseRestorer(args.nfeats, args.order, args.c, train_mpt)
     random.seed(args.seed)
     for epoch in range(1, 1 + args.epochs):
         random.shuffle(train_sents)
@@ -106,7 +112,8 @@ if args.train:
         if args.dev:
             dev_correct = 0
             for (vectors, tags) in dev_sents:
-                dev_correct += model.evaluate(vectors, tags)
+                # TODO(kbg): Why is this raising a type error?
+                dev_correct += model.evaluate(vectors, tags)  # type: ignore
             logging.info("Development accuracy: %.4f", dev_correct / dev_size)
     logging.info("Averaging model...")
     model.average()

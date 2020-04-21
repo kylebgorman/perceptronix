@@ -4,7 +4,7 @@ import json
 
 from typing import Iterator, List, Tuple
 
-import nlup
+import nlup  # type: ignore
 import perceptronix
 
 from case_restorer import case
@@ -37,12 +37,12 @@ class CaseRestorer(object):
         self,
         nfeats: int = 0x1000,
         order: int = 2,
+        c: float = 0.0,
         mpt: case.MixedPatternTable = None,
     ):
-        self._classifier = \
-            perceptronix.SparseDenseMultinomialSequentialModel(
-                nfeats, len(case.TokenCase), order
-            )
+        self._classifier = perceptronix.SparseDenseMultinomialSequentialModel(
+            nfeats, len(case.TokenCase), order, c
+        )
         self._mpt = {} if mpt is None else mpt
 
     # (De)serialization methods, overwritten to handle MPT, stored in the
@@ -51,10 +51,12 @@ class CaseRestorer(object):
     @classmethod
     def read(cls, filename: str, order: int):
         """Reads case restorer model from serialized model file."""
-        (classifier, metadata) = \
-            perceptronix.SparseDenseMultinomialSequentialModel.read(
-                filename, order
-            )
+        (
+            classifier,
+            metadata,
+        ) = perceptronix.SparseDenseMultinomialSequentialModel.read(
+            filename, order
+        )
         new = cls.__new__(cls)
         new._classifier = classifier
         new._mpt = json.loads(metadata)

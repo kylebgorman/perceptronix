@@ -6,7 +6,7 @@ import random
 
 from typing import List, Tuple
 
-import nlup
+import nlup  # type: ignore
 
 from .model import POSTagger
 
@@ -14,8 +14,9 @@ Data = List[Tuple[List[str], List[str]]]
 
 
 def _read_data(filename: str) -> Data:
+    # TODO(kbg): Why is this raising a type error?
     return [
-        (POSTagger.extract_emission_features(tokens), tags)
+        (POSTagger.extract_emission_features(tokens), tags)  # type: ignore
         for (tokens, tags) in POSTagger.tagged_sentences_from_file(filename)
     ]
 
@@ -63,6 +64,12 @@ argparser.add_argument(
 argparser.add_argument(
     "--order", type=int, default=2, help="model order (default: %(default)s)"
 )
+argparser.add_argument(
+    "-c",
+    type=float,
+    default=0.0,
+    help="margin coefficient (default: %(default)s)",
+)
 argparser.add_argument("--seed", type=int, default=0, help="random seed")
 args = argparser.parse_args()
 
@@ -74,7 +81,7 @@ else:
 
 # Input block.
 if args.train:
-    model = POSTagger(args.nfeats, args.nlabels, args.order)
+    model = POSTagger(args.nfeats, args.nlabels, args.order, args.c)
     logging.info("Training model from %s", args.train)
     train_data = _read_data(args.train)
     train_size = _data_size(train_data)
@@ -95,7 +102,8 @@ if args.train:
         if args.dev:
             dev_correct = 0
             for (vectors, tags) in dev_data:
-                dev_correct += model.evaluate(vectors, tags)
+                # TODO(kbg): Why is this raising a typing error?
+                dev_correct += model.evaluate(vectors, tags)  # type: ignore
             logging.info("Development accuracy: %.4f", dev_correct / dev_size)
     logging.info("Averaging model...")
     model.average()

@@ -66,8 +66,8 @@ class BinomialAveragingPerceptronTpl
 
   friend class BinomialPerceptronBaseTpl<InnerTableTpl, Weight>;
 
-  explicit BinomialAveragingPerceptronTpl(size_t nfeats)
-      : Base(nfeats), time_(0) {}
+  explicit BinomialAveragingPerceptronTpl(size_t nfeats, float c = 0.)
+      : Base(nfeats), c_(c), time_(0) {}
 
   // Updates many features given the correct label.
   void Update(const FeatureBundle &fb, bool y) {
@@ -101,6 +101,7 @@ class BinomialAveragingPerceptronTpl
   // Same as above but with optional (useless) yhat argument.
   void Update(Feature f, bool y, bool) { Update(f, y); }
 
+  const float c_;
   uint64_t time_;
 };
 

@@ -1,6 +1,6 @@
 all: unittest
 
-CXXFLAGS += -std=c++14 -Wall -O3
+CPPFLAGS += -std=c++14 -Wall -O3
 
 linear_model.pb.h: linear_model.proto
 	protoc --cpp_out=. linear_model.proto
@@ -8,22 +8,22 @@ linear_model.pb.h: linear_model.proto
 linear_model.pb.cc: linear_model.pb.h
 
 linear_model.pb.o: linear_model.pb.h linear_model.pb.cc
-	g++ $(CXXFLAGS) -c linear_model.pb.cc
+	g++ $(CPPFLAGS) -c linear_model.pb.cc
 
 binomial_perceptron.o: binomial_perceptron.h binomial_perceptron.cc \
                        linear_model.pb.h linear_model.pb.cc table.h weight.h
-	g++ $(CXXFLAGS) -c binomial_perceptron.cc
+	g++ $(CPPFLAGS) -c binomial_perceptron.cc
 
 multinomial_perceptron.o: multinomial_perceptron.h multinomial_perceptron.cc \
                           linear_model.pb.h linear_model.pb.cc table.h weight.h
-	g++ $(CXXFLAGS) -c multinomial_perceptron.cc
+	g++ $(CPPFLAGS) -c multinomial_perceptron.cc
 
-unittest.o: unittest.cc binomial_model.h multinomial_model.h decoder.h
-	g++ $(CXXFLAGS) -c unittest.cc
+unittest.o: unittest.cc binomial_model.h decoder.h multinomial_model.h
+	g++ $(CPPFLAGS) -c unittest.cc
 
 unittest: unittest.o \
           linear_model.pb.o binomial_perceptron.o multinomial_perceptron.o
-	g++ $(CXXFLAGS) $(LDFLAGS) \
+	g++ $(CPPFLAGS) $(LDFLAGS) \
                 unittest.o \
                 linear_model.pb.o \
                 binomial_perceptron.o \

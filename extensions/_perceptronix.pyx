@@ -61,10 +61,11 @@ class PerceptronixOpError(RuntimeError):
 cdef class DenseBinomialModel(object):
 
     """
-    DenseBinomialModel(nfeats)
+    DenseBinomialModel(nfeats, c = 0.)
 
     Args:
         nfeats: Maximum number of unique features.
+        c: Margin coefficient (default: 0).
 
     Binomial linear classifier backed by a fixed-size contiguous array of
     weights.
@@ -77,8 +78,8 @@ cdef class DenseBinomialModel(object):
 
     cdef unique_ptr[cc.DenseBinomialModel] _model
 
-    def __init__(self, size_t nfeats):
-        self._model = make_unique[cc.DenseBinomialModel](nfeats)
+    def __init__(self, size_t nfeats, float c = 0.):
+        self._model = make_unique[cc.DenseBinomialModel](nfeats, c)
 
     def __repr__(self):
         return f"<{self.__class__.__name__} at 0x{id(self):x}>"
@@ -188,10 +189,11 @@ cdef class DenseBinomialModel(object):
 cdef class SparseBinomialModel(object):
 
     """
-    SparseBinomialModel(nfeats)
+    SparseBinomialModel(nfeats, c = 0.)
 
     Args:
         nfeats: Hint for the number of unique features.
+        c: Margin coefficient (default: 0).
 
     Binomial linear classifier backed by a hash table of weights.
 
@@ -205,8 +207,8 @@ cdef class SparseBinomialModel(object):
 
     cdef unique_ptr[cc.SparseBinomialModel] _model
 
-    def __init__(self, size_t nfeats):
-        self._model = make_unique[cc.SparseBinomialModel](nfeats)
+    def __init__(self, size_t nfeats, float c = 0.):
+        self._model = make_unique[cc.SparseBinomialModel](nfeats, c)
 
     def __repr__(self):
         return f"<{self.__class__.__name__} at 0x{id(self):x}>"
@@ -314,11 +316,12 @@ cdef class SparseBinomialModel(object):
 cdef class SparseBinomialSequentialModel:
 
     """
-    SparseBinomialSequentialModel(nfeats, order)
+    SparseBinomialSequentialModel(nfeats, order, c = 0.)
 
     Args:
         nfeats: Hint for the number of unique features.
         order: Model order (e.g., 1 implies bigram model).
+        c: Margin coefficient (default: 0).
         
     Binomial linear classifier backed by a hash table of weights and greedy
     sequential decoding.
@@ -326,9 +329,10 @@ cdef class SparseBinomialSequentialModel:
 
     cdef unique_ptr[cc.SparseBinomialSequentialModel] _model
 
-    def __init__(self, size_t nfeats, size_t order):
-        self._model = make_unique[cc.SparseBinomialSequentialModel](nfeats,
-                                                                    order)
+    def __init__(self, size_t nfeats, size_t order, float c = 0.):
+        self._model = make_unique[cc.SparseBinomialSequentialModel](
+            nfeats, order, c
+        )
 
     def __repr__(self):
         return f"<{self.__class__.__name__} at 0x{id(self):x}>"
@@ -443,11 +447,12 @@ cdef class SparseBinomialSequentialModel:
 cdef class DenseMultinomialModel(object):
 
     """
-    DenseMultiomialModel(nfeats, nlabels)
+    DenseMultiomialModel(nfeats, nlabels, c = 0.)
 
     Args:
         nfeats: Maximum number of unique features.
         nlabels: Maximum number of unique labels (i.e., classes).
+        c: Margin coefficient (default: 0).
 
     Multinomial linear classifier backed by fixed-size contiguous arrays of
     weights.
@@ -460,8 +465,8 @@ cdef class DenseMultinomialModel(object):
 
     cdef unique_ptr[cc.DenseMultinomialModel] _model
 
-    def __init__(self, size_t nfeats, size_t nlabels):
-        self._model = make_unique[cc.DenseMultinomialModel](nfeats, nlabels)
+    def __init__(self, size_t nfeats, size_t nlabels, float c = 0.):
+        self._model = make_unique[cc.DenseMultinomialModel](nfeats, nlabels, c)
 
     def __repr__(self):
         return f"<{self.__class__.__name__} at 0x{id(self):x}>"
@@ -572,11 +577,12 @@ cdef class DenseMultinomialModel(object):
 cdef class SparseDenseMultinomialModel(object):
 
     """
-    SparseDenseMultinomialModel(nfeats, nlabels)
+    SparseDenseMultinomialModel(nfeats, nlabels, c = 0.)
 
     Args:
         nfeats: Hint for the number of unique features.
         nlabels: Maximum number of unique labels (i.e., classes).
+        c: Margin coefficient (default: 0).
 
     Multinomial linear classifier backed by an outer hash table containing
     fixed-size arrays of weights.
@@ -595,9 +601,10 @@ cdef class SparseDenseMultinomialModel(object):
 
     cdef unique_ptr[cc.SparseDenseMultinomialModel] _model
 
-    def __init__(self, size_t nfeats, size_t nlabels):
-        self._model = make_unique[cc.SparseDenseMultinomialModel](nfeats,
-                                                                  nlabels)
+    def __init__(self, size_t nfeats, size_t nlabels, float c = 0.):
+        self._model = make_unique[cc.SparseDenseMultinomialModel](
+            nfeats, nlabels, c
+        )
 
     def __repr__(self):
         return f"<{self.__class__.__name__} at 0x{id(self):x}>"
@@ -707,12 +714,13 @@ cdef class SparseDenseMultinomialModel(object):
 cdef class SparseDenseMultinomialSequentialModel:
 
     """
-    SparseDenseMultinomialSequentialModel(nfeats, nlabels, order)
+    SparseDenseMultinomialSequentialModel(nfeats, nlabels, order, c = 0.)
 
     Args:
         nfeats: Hint for the number of unique features.
         nlabels: Maximum number of unique labels (i.e., classes).
         order: Model order (e.g., 1 implies bigram model).
+        c: Margin coefficient (default: 0).
 
     Multinomial linear classifier backed by an outer hash table containing
     fixed-size arrays of weights and greedy sequential decoding.
@@ -720,9 +728,14 @@ cdef class SparseDenseMultinomialSequentialModel:
 
     cdef unique_ptr[cc.SparseDenseMultinomialSequentialModel] _model
 
-    def __init__(self, size_t nfeats, size_t nlabels, size_t order):
+    def __init__(self,
+                 size_t nfeats,
+                 size_t nlabels,
+                 size_t order,
+                 float c = 0.):
         self._model = make_unique[cc.SparseDenseMultinomialSequentialModel](
-            nfeats, nlabels, order)
+            nfeats, nlabels, order, c
+        )
 
     @classmethod
     def read(cls, filename, size_t order):
@@ -830,11 +843,12 @@ cdef class SparseDenseMultinomialSequentialModel:
 cdef class SparseMultinomialModel(object):
 
     """
-    SparseMultinomialModel(nfeats, nlabels)
+    SparseMultinomialModel(nfeats, nlabels, c = 0.)
 
     Args:
         nfeats: Hint for the number of unique features.
         nlabels: Hint for the number of unique labels (i.e., classes).
+        c: Margin coefficient (default: 0).
 
     Multinomial linear classifier backed by a nested hash tables of weights.
 
@@ -848,8 +862,8 @@ cdef class SparseMultinomialModel(object):
 
     cdef unique_ptr[cc.SparseMultinomialModel] _model
 
-    def __init__(self, size_t nfeats, size_t nlabels):
-        self._model = make_unique[cc.SparseMultinomialModel](nfeats, nlabels)
+    def __init__(self, size_t nfeats, size_t nlabels, float c = 0.):
+        self._model = make_unique[cc.SparseMultinomialModel](nfeats, nlabels, c)
 
     def __repr__(self):
         return f"<{self.__class__.__name__} at 0x{id(self):x}>"
@@ -959,12 +973,13 @@ cdef class SparseMultinomialModel(object):
 cdef class SparseMultinomialSequentialModel:
 
     """
-    SparseMultinomialSequentialModel(nfeats, nlabels, order)
+    SparseMultinomialSequentialModel(nfeats, nlabels, order, c = 0.)
 
     Args:
         nfeats: Hint for the number of unique features.
         nlabels: Hint for the number of unique labels (i.e., classes).
         order: Model order (e.g., 1 implies bigram model).
+        c: Margin coefficient (default: 0).
 
     Multinomial linear classifier backed by a nested hash tables of weights and
     greedy sequential decoding.
@@ -972,10 +987,10 @@ cdef class SparseMultinomialSequentialModel:
 
     cdef unique_ptr[cc.SparseMultinomialSequentialModel] _model
 
-    def __init__(self, size_t nfeats, size_t nlabels, size_t order):
-        self._model = make_unique[cc.SparseMultinomialSequentialModel](nfeats,
-                                                                       nlabels,
-                                                                       order)
+    def __init__(self, size_t nfeats, size_t nlabels, size_t order, float c = 0.):
+        self._model = make_unique[cc.SparseMultinomialSequentialModel](
+            nfeats, nlabels, order, c
+        )
 
     @classmethod
     def read(cls, filename, size_t order):

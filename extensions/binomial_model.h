@@ -35,8 +35,8 @@ class BinomialModel {
                    typename AveragingPerceptron::FeatureBundle>::value,
       "FeatureBundle must be same type");
 
-  explicit BinomialModel(size_t nfeats)
-      : aperceptron_(new AveragingPerceptron(nfeats)) {}
+  explicit BinomialModel(size_t nfeats, float c = 0.)
+      : aperceptron_(new AveragingPerceptron(nfeats, c)) {}
 
   // Deserialization.
 
@@ -124,8 +124,8 @@ class BinomialSequentialModel
   using Base::aperceptron_;
   using Base::perceptron_;
 
-  BinomialSequentialModel(size_t nfeats, size_t order)
-      : Base(nfeats),
+  BinomialSequentialModel(size_t nfeats, size_t order, float c = 0.)
+      : Base(nfeats, c),
         tf_(order),
         adecoder_(new AveragingDecoder(aperceptron_.get(), tf_)) {}
 

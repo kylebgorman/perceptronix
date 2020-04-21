@@ -5,8 +5,8 @@ import logging
 
 from typing import Iterator, List
 
-import nlup
-import regex
+import nlup  # type: ignore
+import regex  # type: ignore
 import perceptronix
 
 
@@ -26,11 +26,15 @@ class SentenceTokenizer(object):
     slots = ["_candidate_regex", "_max_context", "_classifier"]
 
     def __init__(
-        self, candidate_regex: str, max_context: int, nfeats: int = 0x1000
+        self,
+        candidate_regex: str,
+        max_context: int,
+        nfeats: int = 0x1000,
+        c: float = 0.0,
     ):
         self._candidate_regex = regex.compile(candidate_regex)
         self._max_context = max_context
-        self._classifier = perceptronix.SparseBinomialModel(nfeats)
+        self._classifier = perceptronix.SparseBinomialModel(nfeats, c)
 
     @classmethod
     def read(cls, filename: str, candidate_regex: str, max_context: int):
@@ -110,7 +114,7 @@ class SentenceTokenizer(object):
                 continue
             vector = SentenceTokenizer.extract_features(candidate)
             if self.predict(vector):
-                yield text[start:candidate.left_index + 1]
+                yield text[start : candidate.left_index + 1]
                 start = candidate.right_index + 1
         yield text[start:].rstrip()
 
