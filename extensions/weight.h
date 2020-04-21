@@ -97,14 +97,14 @@ class AveragingWeightTpl : public WeightTpl<T> {
 
   using Base = WeightTpl<T>;
 
+  using Base::Get;
+
   // Extends the base constructor. All weights are averaged as if they were
   // initialized at 0 at time 0.
   explicit AveragingWeightTpl(WeightType weight = 0, uint64_t time = 0)
       : Base(weight), summed_weight_(weight), time_(time) {
     Freshen(time);
   }
-
-  using Base::Get;
 
   void Update(WeightType tau, uint64_t time) {
     Freshen(time);
@@ -134,6 +134,7 @@ class AveragingWeightTpl : public WeightTpl<T> {
 
 // This is naturally a float because it is produced by averaging.
 using Weight = WeightTpl<float>;
+
 // Whereas this is naturally integral.
 using AveragingWeight = AveragingWeightTpl<int32_t>;
 
