@@ -78,8 +78,14 @@ class MultinomialAveragingPerceptronTpl
   bool Train(const FeatureBundle &fb, Label y) {
     const auto scores = Score(fb);
     const Label yhat = scores.ArgMax();
-    // TODO(kbg): Add margin update support.
-    if (y != yhat) Update(fb, y, yhat);
+    if (y != yhat) {
+      Update(fb, y, yhat);
+    } else if (c_) {
+      const auto &yhat_score = scores[yhat];
+      const auto &y_score = scores[y];
+      const auto margin = yhat_score.Get() - y_score.Get();
+      if (static_cast<int>(margin / fb.size()) < c_) Update(fb, y, yhat);
+    }
     Tick();
     return y == yhat;
   }
