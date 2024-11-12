@@ -1,6 +1,6 @@
 all: unittest
 
-CPPFLAGS += -std=c++14 -Wall -O3
+CPPFLAGS += -std=c++17 -Wall -O3
 
 linear_model.pb.h: linear_model.proto
 	protoc --cpp_out=. linear_model.proto

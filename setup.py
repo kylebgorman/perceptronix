@@ -14,7 +14,7 @@ extension = Extension(
     ],
     libraries=["protobuf", "pthread"],
     language="c++",
-    extra_compile_args=["-std=c++14", "-funsigned-char"],
+    extra_compile_args=["-std=c++17", "-funsigned-char"],
 )
 
 
